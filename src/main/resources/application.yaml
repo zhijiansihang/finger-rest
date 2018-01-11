@@ -16,9 +16,9 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/sys
+    url: jdbc:mysql://rm-wz94f73g57lm69jezjo.mysql.rds.aliyuncs.com/finger
     username: root
-    password:
+    password: zjf123qwe!@#
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
