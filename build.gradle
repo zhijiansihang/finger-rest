@@ -1,0 +1,112 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		repositories {
+			maven {
+				url "http://49.4.160.163:8093/nexus/content/groups/public/"
+			}
+		}
+	}
+	dependencies {
+		classpath "gradle.plugin.at.comm_unity.gradle.plugins:jpamodelgen-plugin:1.1.4"
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: "at.comm_unity.gradle.plugins.jpamodelgen"
+
+apply plugin: 'idea'
+version = '1.0.0'  
+// JVM 版本号要求
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// java编译的时候缺省状态下会因为中文字符而失败
+[compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+jpaModelgen {
+	library = "org.hibernate:hibernate-jpamodelgen:4.3.8.Final"
+	jpaModelgenSourcesDir = "src/metamodel/java"
+
+}
+
+repositories {
+	mavenCentral()
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src/main/java'
+			srcDir 'src/metamodel/java'
+		}
+		resources {
+			srcDir 'src/main/resources'
+			srcDir "src/main/java"
+			excludes ["**/*.java"]
+		}
+	}
+}
+
+ext {
+	springCloudVersion = 'Dalston.SR3'
+}
+
+springBoot {
+	mainClass = 'com.shawn.FingerApplication'
+}
+
+dependencies {
+
+	compile('com.alibaba:druid-spring-boot-starter:1.1.2')
+	compile 'com.alibaba:fastjson:1.2.34'
+	compile('com.google.guava:guava:23.0')
+	compile('com.netflix.netflix-commons:netflix-commons-util:0.1.1')
+	compile('io.jsonwebtoken:jjwt:0.7.0')
+	compile('org.apache.commons:commons-lang3:3.6')
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1')
+
+	compile('org.springframework.cloud:spring-cloud-starter-security')
+
+	compile('org.springframework.cloud:spring-cloud-starter-zuul')
+
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+
+	compile('org.springframework.boot:spring-boot-starter-redis:1.4.1.RELEASE')
+	runtime('mysql:mysql-connector-java')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+
+}
+
+repositories {
+//	mavenLocal()
+	maven {
+		url "http://49.4.160.163:8093/nexus/content/groups/public/"
+	}
+	maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
+
+
+jar {
+	from('src/main/java') {
+		include '**/*.xml'
+	}
+}

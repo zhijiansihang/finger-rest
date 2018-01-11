@@ -1,0 +1,28 @@
+server:
+  port: 7031
+spring:
+  application:
+    name: platform-gateway
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
+        physical-strategy: com.shawn.sys.util.ImprovedNamingStrategy
+    show-sql: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/sys
+    username: root
+    password:
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:com/shawn/finger/dao/orcl/mapper/*.xml
+url:
+  filter:
+    permission: /hello/** = ANONYMOUS\n/permissions/refresh = ANONYMOUS\n/login = ANONYMOUS\n/** = USER
