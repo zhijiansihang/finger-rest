@@ -72,7 +72,7 @@ public class HelloWorldController {
      */
     @RequestMapping("/top10")
     @ResponseBody
-    public Response top(CmsVO  cmsVO) {
+    public Response top10(CmsVO  cmsVO) {
         CmsDOExample example = new CmsDOExample();
         example.createCriteria().andTypeCodeEqualTo(cmsVO.getTypeCode());
         example.setOrderByClause("id desc");
