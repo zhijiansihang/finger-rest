@@ -54,4 +54,13 @@ public class SharingProperties {
 
     private String staticServerLink;
 
+    @Override
+    public String toString() {
+        return "SharingProperties{" +
+                "openThirdpartyService=" + openThirdpartyService +
+                ", fileSystemRoot='" + fileSystemRoot + '\'' +
+                ", staticCmsAccessPathPrefix='" + staticCmsAccessPathPrefix + '\'' +
+                ", staticServerLink='" + staticServerLink + '\'' +
+                '}';
+    }
 }
