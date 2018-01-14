@@ -26,7 +26,6 @@ public class HelloWorldController {
     @ResponseBody
     public Response world() {
         logger.info("hello world");
-        userService.getById("1");
         return Response.success("aaa");
     }
 

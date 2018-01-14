@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringCloudApplication
 @ComponentScan("com.shawn")
-@MapperScan({"com.shawn.finger.dao"})
+@MapperScan({"com.shawn.finger.dao.mysql.mapper"})
 //强制使用cglib
 @EnableAspectJAutoProxy
 @ImportResource(locations = {"classpath:spring/application*.xml"}) //映入spring配置
