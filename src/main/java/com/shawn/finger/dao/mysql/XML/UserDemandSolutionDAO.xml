@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shawn.finger.dao.mysql.mapper.UserDemandSolutionDAO">
+  <resultMap id="BaseResultMap" type="com.shawn.finger.dao.mysql.model.UserDemandSolutionDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="demand_user_id" jdbcType="BIGINT" property="demandUserId" />
+    <result column="demand_id" jdbcType="BIGINT" property="demandId" />
+    <result column="solution_user_id" jdbcType="BIGINT" property="solutionUserId" />
+    <result column="solution_id" jdbcType="BIGINT" property="solutionId" />
+    <result column="is_read_demand" jdbcType="TINYINT" property="isReadDemand" />
+    <result column="is_operate_solution" jdbcType="TINYINT" property="isOperateSolution" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, demand_user_id, demand_id, solution_user_id, solution_id, is_read_demand, is_operate_solution, 
+    update_time, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.shawn.finger.dao.mysql.model.UserDemandSolutionDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_demand_solution
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertSelective" parameterType="com.shawn.finger.dao.mysql.model.UserDemandSolutionDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_demand_solution
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="demandUserId != null">
+        demand_user_id,
+      </if>
+      <if test="demandId != null">
+        demand_id,
+      </if>
+      <if test="solutionUserId != null">
+        solution_user_id,
+      </if>
+      <if test="solutionId != null">
+        solution_id,
+      </if>
+      <if test="isReadDemand != null">
+        is_read_demand,
+      </if>
+      <if test="isOperateSolution != null">
+        is_operate_solution,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="demandUserId != null">
+        #{demandUserId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null">
+        #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="solutionUserId != null">
+        #{solutionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="solutionId != null">
+        #{solutionId,jdbcType=BIGINT},
+      </if>
+      <if test="isReadDemand != null">
+        #{isReadDemand,jdbcType=TINYINT},
+      </if>
+      <if test="isOperateSolution != null">
+        #{isOperateSolution,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shawn.finger.dao.mysql.model.UserDemandSolutionDO">
+    update user_demand_solution
+    <set>
+      <if test="demandUserId != null">
+        demand_user_id = #{demandUserId,jdbcType=BIGINT},
+      </if>
+      <if test="demandId != null">
+        demand_id = #{demandId,jdbcType=BIGINT},
+      </if>
+      <if test="solutionUserId != null">
+        solution_user_id = #{solutionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="solutionId != null">
+        solution_id = #{solutionId,jdbcType=BIGINT},
+      </if>
+      <if test="isReadDemand != null">
+        is_read_demand = #{isReadDemand,jdbcType=TINYINT},
+      </if>
+      <if test="isOperateSolution != null">
+        is_operate_solution = #{isOperateSolution,jdbcType=TINYINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.shawn.finger.dao.mysql.model.UserDemandSolutionDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_demand_solution
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

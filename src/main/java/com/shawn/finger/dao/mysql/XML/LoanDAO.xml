@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shawn.finger.dao.mysql.mapper.LoanDAO">
+  <resultMap id="BaseResultMap" type="com.shawn.finger.dao.mysql.model.LoanDO">
+    <id column="loan_id" jdbcType="BIGINT" property="loanId" />
+    <result column="institution_user_id" jdbcType="BIGINT" property="institutionUserId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="loan_type" jdbcType="TINYINT" property="loanType" />
+    <result column="product_type" jdbcType="SMALLINT" property="productType" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="reserve_amount" jdbcType="DECIMAL" property="reserveAmount" />
+    <result column="loan_status" jdbcType="SMALLINT" property="loanStatus" />
+    <result column="is_display" jdbcType="TINYINT" property="isDisplay" />
+    <result column="location_size" jdbcType="INTEGER" property="locationSize" />
+    <result column="product_direction" jdbcType="VARCHAR" property="productDirection" />
+    <result column="safeguard_way" jdbcType="VARCHAR" property="safeguardWay" />
+    <result column="begin_amount" jdbcType="DECIMAL" property="beginAmount" />
+    <result column="earning_desc" jdbcType="VARCHAR" property="earningDesc" />
+    <result column="issuer" jdbcType="VARCHAR" property="issuer" />
+    <result column="fund_type" jdbcType="SMALLINT" property="fundType" />
+    <result column="servicing_way" jdbcType="SMALLINT" property="servicingWay" />
+    <result column="adaptation_deadline" jdbcType="SMALLINT" property="adaptationDeadline" />
+    <result column="investment_deadline" jdbcType="SMALLINT" property="investmentDeadline" />
+    <result column="distribution_region" jdbcType="VARCHAR" property="distributionRegion" />
+    <result column="ratio_type" jdbcType="SMALLINT" property="ratioType" />
+    <result column="bright_spot" jdbcType="VARCHAR" property="brightSpot" />
+    <result column="finance_introduce" jdbcType="VARCHAR" property="financeIntroduce" />
+    <result column="money_use" jdbcType="VARCHAR" property="moneyUse" />
+    <result column="repay_source" jdbcType="VARCHAR" property="repaySource" />
+    <result column="risk_control" jdbcType="VARCHAR" property="riskControl" />
+    <result column="product_desc" jdbcType="VARCHAR" property="productDesc" />
+    <result column="product_desc_files" jdbcType="VARCHAR" property="productDescFiles" />
+    <result column="risk_alert" jdbcType="VARCHAR" property="riskAlert" />
+    <result column="capital_type" jdbcType="VARCHAR" property="capitalType" />
+    <result column="organize_form" jdbcType="VARCHAR" property="organizeForm" />
+    <result column="manage_rate" jdbcType="DECIMAL" property="manageRate" />
+    <result column="review_code" jdbcType="VARCHAR" property="reviewCode" />
+    <result column="review_desc" jdbcType="VARCHAR" property="reviewDesc" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    loan_id, institution_user_id, title, loan_type, product_type, amount, reserve_amount, 
+    loan_status, is_display, location_size, product_direction, safeguard_way, begin_amount, 
+    earning_desc, issuer, fund_type, servicing_way, adaptation_deadline, investment_deadline, 
+    distribution_region, ratio_type, bright_spot, finance_introduce, money_use, repay_source, 
+    risk_control, product_desc, product_desc_files, risk_alert, capital_type, organize_form, 
+    manage_rate, review_code, review_desc, update_time, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.shawn.finger.dao.mysql.model.LoanDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from loan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertSelective" parameterType="com.shawn.finger.dao.mysql.model.LoanDO">
+    <selectKey keyProperty="loanId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into loan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="institutionUserId != null">
+        institution_user_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="loanType != null">
+        loan_type,
+      </if>
+      <if test="productType != null">
+        product_type,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="reserveAmount != null">
+        reserve_amount,
+      </if>
+      <if test="loanStatus != null">
+        loan_status,
+      </if>
+      <if test="isDisplay != null">
+        is_display,
+      </if>
+      <if test="locationSize != null">
+        location_size,
+      </if>
+      <if test="productDirection != null">
+        product_direction,
+      </if>
+      <if test="safeguardWay != null">
+        safeguard_way,
+      </if>
+      <if test="beginAmount != null">
+        begin_amount,
+      </if>
+      <if test="earningDesc != null">
+        earning_desc,
+      </if>
+      <if test="issuer != null">
+        issuer,
+      </if>
+      <if test="fundType != null">
+        fund_type,
+      </if>
+      <if test="servicingWay != null">
+        servicing_way,
+      </if>
+      <if test="adaptationDeadline != null">
+        adaptation_deadline,
+      </if>
+      <if test="investmentDeadline != null">
+        investment_deadline,
+      </if>
+      <if test="distributionRegion != null">
+        distribution_region,
+      </if>
+      <if test="ratioType != null">
+        ratio_type,
+      </if>
+      <if test="brightSpot != null">
+        bright_spot,
+      </if>
+      <if test="financeIntroduce != null">
+        finance_introduce,
+      </if>
+      <if test="moneyUse != null">
+        money_use,
+      </if>
+      <if test="repaySource != null">
+        repay_source,
+      </if>
+      <if test="riskControl != null">
+        risk_control,
+      </if>
+      <if test="productDesc != null">
+        product_desc,
+      </if>
+      <if test="productDescFiles != null">
+        product_desc_files,
+      </if>
+      <if test="riskAlert != null">
+        risk_alert,
+      </if>
+      <if test="capitalType != null">
+        capital_type,
+      </if>
+      <if test="organizeForm != null">
+        organize_form,
+      </if>
+      <if test="manageRate != null">
+        manage_rate,
+      </if>
+      <if test="reviewCode != null">
+        review_code,
+      </if>
+      <if test="reviewDesc != null">
+        review_desc,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="institutionUserId != null">
+        #{institutionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="loanType != null">
+        #{loanType,jdbcType=TINYINT},
+      </if>
+      <if test="productType != null">
+        #{productType,jdbcType=SMALLINT},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="reserveAmount != null">
+        #{reserveAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanStatus != null">
+        #{loanStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="isDisplay != null">
+        #{isDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="locationSize != null">
+        #{locationSize,jdbcType=INTEGER},
+      </if>
+      <if test="productDirection != null">
+        #{productDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="safeguardWay != null">
+        #{safeguardWay,jdbcType=VARCHAR},
+      </if>
+      <if test="beginAmount != null">
+        #{beginAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="earningDesc != null">
+        #{earningDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="issuer != null">
+        #{issuer,jdbcType=VARCHAR},
+      </if>
+      <if test="fundType != null">
+        #{fundType,jdbcType=SMALLINT},
+      </if>
+      <if test="servicingWay != null">
+        #{servicingWay,jdbcType=SMALLINT},
+      </if>
+      <if test="adaptationDeadline != null">
+        #{adaptationDeadline,jdbcType=SMALLINT},
+      </if>
+      <if test="investmentDeadline != null">
+        #{investmentDeadline,jdbcType=SMALLINT},
+      </if>
+      <if test="distributionRegion != null">
+        #{distributionRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="ratioType != null">
+        #{ratioType,jdbcType=SMALLINT},
+      </if>
+      <if test="brightSpot != null">
+        #{brightSpot,jdbcType=VARCHAR},
+      </if>
+      <if test="financeIntroduce != null">
+        #{financeIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyUse != null">
+        #{moneyUse,jdbcType=VARCHAR},
+      </if>
+      <if test="repaySource != null">
+        #{repaySource,jdbcType=VARCHAR},
+      </if>
+      <if test="riskControl != null">
+        #{riskControl,jdbcType=VARCHAR},
+      </if>
+      <if test="productDesc != null">
+        #{productDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescFiles != null">
+        #{productDescFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="riskAlert != null">
+        #{riskAlert,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalType != null">
+        #{capitalType,jdbcType=VARCHAR},
+      </if>
+      <if test="organizeForm != null">
+        #{organizeForm,jdbcType=VARCHAR},
+      </if>
+      <if test="manageRate != null">
+        #{manageRate,jdbcType=DECIMAL},
+      </if>
+      <if test="reviewCode != null">
+        #{reviewCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDesc != null">
+        #{reviewDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shawn.finger.dao.mysql.model.LoanDO">
+    update loan
+    <set>
+      <if test="institutionUserId != null">
+        institution_user_id = #{institutionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="loanType != null">
+        loan_type = #{loanType,jdbcType=TINYINT},
+      </if>
+      <if test="productType != null">
+        product_type = #{productType,jdbcType=SMALLINT},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="reserveAmount != null">
+        reserve_amount = #{reserveAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="loanStatus != null">
+        loan_status = #{loanStatus,jdbcType=SMALLINT},
+      </if>
+      <if test="isDisplay != null">
+        is_display = #{isDisplay,jdbcType=TINYINT},
+      </if>
+      <if test="locationSize != null">
+        location_size = #{locationSize,jdbcType=INTEGER},
+      </if>
+      <if test="productDirection != null">
+        product_direction = #{productDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="safeguardWay != null">
+        safeguard_way = #{safeguardWay,jdbcType=VARCHAR},
+      </if>
+      <if test="beginAmount != null">
+        begin_amount = #{beginAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="earningDesc != null">
+        earning_desc = #{earningDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="issuer != null">
+        issuer = #{issuer,jdbcType=VARCHAR},
+      </if>
+      <if test="fundType != null">
+        fund_type = #{fundType,jdbcType=SMALLINT},
+      </if>
+      <if test="servicingWay != null">
+        servicing_way = #{servicingWay,jdbcType=SMALLINT},
+      </if>
+      <if test="adaptationDeadline != null">
+        adaptation_deadline = #{adaptationDeadline,jdbcType=SMALLINT},
+      </if>
+      <if test="investmentDeadline != null">
+        investment_deadline = #{investmentDeadline,jdbcType=SMALLINT},
+      </if>
+      <if test="distributionRegion != null">
+        distribution_region = #{distributionRegion,jdbcType=VARCHAR},
+      </if>
+      <if test="ratioType != null">
+        ratio_type = #{ratioType,jdbcType=SMALLINT},
+      </if>
+      <if test="brightSpot != null">
+        bright_spot = #{brightSpot,jdbcType=VARCHAR},
+      </if>
+      <if test="financeIntroduce != null">
+        finance_introduce = #{financeIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyUse != null">
+        money_use = #{moneyUse,jdbcType=VARCHAR},
+      </if>
+      <if test="repaySource != null">
+        repay_source = #{repaySource,jdbcType=VARCHAR},
+      </if>
+      <if test="riskControl != null">
+        risk_control = #{riskControl,jdbcType=VARCHAR},
+      </if>
+      <if test="productDesc != null">
+        product_desc = #{productDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescFiles != null">
+        product_desc_files = #{productDescFiles,jdbcType=VARCHAR},
+      </if>
+      <if test="riskAlert != null">
+        risk_alert = #{riskAlert,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalType != null">
+        capital_type = #{capitalType,jdbcType=VARCHAR},
+      </if>
+      <if test="organizeForm != null">
+        organize_form = #{organizeForm,jdbcType=VARCHAR},
+      </if>
+      <if test="manageRate != null">
+        manage_rate = #{manageRate,jdbcType=DECIMAL},
+      </if>
+      <if test="reviewCode != null">
+        review_code = #{reviewCode,jdbcType=VARCHAR},
+      </if>
+      <if test="reviewDesc != null">
+        review_desc = #{reviewDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where loan_id = #{loanId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.shawn.finger.dao.mysql.model.LoanDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from loan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

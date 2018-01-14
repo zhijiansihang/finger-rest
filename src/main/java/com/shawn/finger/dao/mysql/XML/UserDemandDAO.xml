@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shawn.finger.dao.mysql.mapper.UserDemandDAO">
+  <resultMap id="BaseResultMap" type="com.shawn.finger.dao.mysql.model.UserDemandDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="money_situation" jdbcType="SMALLINT" property="moneySituation" />
+    <result column="earning_type" jdbcType="SMALLINT" property="earningType" />
+    <result column="expected_deadline" jdbcType="SMALLINT" property="expectedDeadline" />
+    <result column="additional_remarks" jdbcType="VARCHAR" property="additionalRemarks" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="is_closed" jdbcType="TINYINT" property="isClosed" />
+    <result column="last_batch_sid" jdbcType="BIGINT" property="lastBatchSid" />
+    <result column="match_solution_count" jdbcType="BIGINT" property="matchSolutionCount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, money_situation, earning_type, expected_deadline, additional_remarks, 
+    is_deleted, is_closed, last_batch_sid, match_solution_count, update_time, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.shawn.finger.dao.mysql.model.UserDemandDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_demand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertSelective" parameterType="com.shawn.finger.dao.mysql.model.UserDemandDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_demand
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="moneySituation != null">
+        money_situation,
+      </if>
+      <if test="earningType != null">
+        earning_type,
+      </if>
+      <if test="expectedDeadline != null">
+        expected_deadline,
+      </if>
+      <if test="additionalRemarks != null">
+        additional_remarks,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="isClosed != null">
+        is_closed,
+      </if>
+      <if test="lastBatchSid != null">
+        last_batch_sid,
+      </if>
+      <if test="matchSolutionCount != null">
+        match_solution_count,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="moneySituation != null">
+        #{moneySituation,jdbcType=SMALLINT},
+      </if>
+      <if test="earningType != null">
+        #{earningType,jdbcType=SMALLINT},
+      </if>
+      <if test="expectedDeadline != null">
+        #{expectedDeadline,jdbcType=SMALLINT},
+      </if>
+      <if test="additionalRemarks != null">
+        #{additionalRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="isClosed != null">
+        #{isClosed,jdbcType=TINYINT},
+      </if>
+      <if test="lastBatchSid != null">
+        #{lastBatchSid,jdbcType=BIGINT},
+      </if>
+      <if test="matchSolutionCount != null">
+        #{matchSolutionCount,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shawn.finger.dao.mysql.model.UserDemandDO">
+    update user_demand
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="moneySituation != null">
+        money_situation = #{moneySituation,jdbcType=SMALLINT},
+      </if>
+      <if test="earningType != null">
+        earning_type = #{earningType,jdbcType=SMALLINT},
+      </if>
+      <if test="expectedDeadline != null">
+        expected_deadline = #{expectedDeadline,jdbcType=SMALLINT},
+      </if>
+      <if test="additionalRemarks != null">
+        additional_remarks = #{additionalRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="isClosed != null">
+        is_closed = #{isClosed,jdbcType=TINYINT},
+      </if>
+      <if test="lastBatchSid != null">
+        last_batch_sid = #{lastBatchSid,jdbcType=BIGINT},
+      </if>
+      <if test="matchSolutionCount != null">
+        match_solution_count = #{matchSolutionCount,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.shawn.finger.dao.mysql.model.UserDemandDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_demand
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
