@@ -16,13 +16,36 @@ spring:
     show-sql: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://rm-wz94f73g57lm69jezjo.mysql.rds.aliyuncs.com/finger
+    url: jdbc:mysql://rm-wz94f73g57lm69jezjo.mysql.rds.aliyuncs.com/finger?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
     password: zjf123qwe!@#
+    druid:
+      validation-query: SELECT 1
+      connection-init-sqls: SELECT 1
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:com/shawn/finger/dao/orcl/mapper/*.xml
+  mapper-locations: classpath:com/shawn/finger/dao/orcl/mapper/*.xml,classpath*:com/shawn/finger/dao/mysql/XML/*.xml
 url:
   filter:
     permission: /hello/** = ANONYMOUS\n/permissions/refresh = ANONYMOUS\n/login = ANONYMOUS\n/** = USER
+logging:
+  level:
+    root: info
+custom:
+  sharing:
+    file-system-root: C:/nfs
+    static-server-link: http://127.0.0.1:10000
+    open-thirdparty-service: true
+#开启动态设置日志此处是不同通过校验loggers 权限 或者默认使用角色ACTUATOR
+endpoints:
+  loggers:
+    sensitive: false
+#短信签名:用户收到的短信前加【公司业务名称】
+sms:
+  aliyun:
+    message-signature:
+
+
+
+
