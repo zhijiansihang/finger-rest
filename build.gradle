@@ -62,7 +62,7 @@ ext {
 }
 
 springBoot {
-    mainClass = 'com.shawn.FingerApplication'
+    mainClass = 'com.zhijiansihang.FingerApplication'
 }
 
 dependencies {
@@ -97,7 +97,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-aop')
-    compile('org.springframework.boot:spring-boot-starter-redis')
+    compile('org.springframework.boot:spring-boot-starter-redis:1.4.1.RELEASE')
     runtime('mysql:mysql-connector-java')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 

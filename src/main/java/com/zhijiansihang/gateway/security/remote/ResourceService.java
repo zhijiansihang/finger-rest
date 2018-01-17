@@ -1,0 +1,20 @@
+package com.zhijiansihang.gateway.security.remote;
+
+import com.zhijiansihang.common.Response;
+import com.zhijiansihang.gateway.security.remote.vo.Resource;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
+
+/**
+ * 角色资源权限（鉴权）
+ * <p>
+ * Created by Shawn on 2017/9/12.
+ */
+//@FeignClient(name = "platform-sys"/*,fallback = UserAuthServiceHystrix.class*/)
+public interface ResourceService {
+
+    @RequestMapping(value = "/resource/get/all")
+    Response<List<Resource>> findAll();
+
+}

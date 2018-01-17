@@ -12,7 +12,7 @@ spring:
       ddl-auto: update
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
-        physical-strategy: com.shawn.sys.util.ImprovedNamingStrategy
+        physical-strategy: com.zhijiansihang.sys.util.ImprovedNamingStrategy
     show-sql: true
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
@@ -25,10 +25,10 @@ spring:
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:com/shawn/finger/dao/orcl/mapper/*.xml,classpath*:com/shawn/finger/dao/mysql/XML/*.xml
+  mapper-locations: classpath:com/zhijiansihang/finger/app/dao/orcl/mapper/*.xml,classpath*:com/zhijiansihang/finger/app/dao/mysql/XML/*.xml
 url:
   filter:
-    permission: /hello/** = ANONYMOUS\n/permissions/refresh = ANONYMOUS\n/login = ANONYMOUS\n/** = USER
+    permission: /app/** = ANONYMOUS\n/hello/** = ANONYMOUS\n/permissions/refresh = ANONYMOUS\n/login = ANONYMOUS\n/** = USER
 logging:
   level:
     root: info

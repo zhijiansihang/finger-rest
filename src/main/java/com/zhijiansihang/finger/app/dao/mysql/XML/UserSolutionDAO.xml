@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhijiansihang.finger.app.dao.mysql.mapper.UserSolutionDAO">
+  <resultMap id="BaseResultMap" type="com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDO">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="money_situation" jdbcType="SMALLINT" property="moneySituation" />
+    <result column="earning_type" jdbcType="SMALLINT" property="earningType" />
+    <result column="expected_deadline" jdbcType="SMALLINT" property="expectedDeadline" />
+    <result column="solution" jdbcType="VARCHAR" property="solution" />
+    <result column="risk_assessment_level" jdbcType="VARCHAR" property="riskAssessmentLevel" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="is_closed" jdbcType="TINYINT" property="isClosed" />
+    <result column="match_demand_count" jdbcType="BIGINT" property="matchDemandCount" />
+    <result column="read_count" jdbcType="BIGINT" property="readCount" />
+    <result column="adopt_count" jdbcType="BIGINT" property="adoptCount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, money_situation, earning_type, expected_deadline, solution, risk_assessment_level, 
+    create_time, is_deleted, is_closed, match_demand_count, read_count, adopt_count
+  </sql>
+  <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_solution
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertSelective" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDO">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user_solution
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="moneySituation != null">
+        money_situation,
+      </if>
+      <if test="earningType != null">
+        earning_type,
+      </if>
+      <if test="expectedDeadline != null">
+        expected_deadline,
+      </if>
+      <if test="solution != null">
+        solution,
+      </if>
+      <if test="riskAssessmentLevel != null">
+        risk_assessment_level,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+      <if test="isClosed != null">
+        is_closed,
+      </if>
+      <if test="matchDemandCount != null">
+        match_demand_count,
+      </if>
+      <if test="readCount != null">
+        read_count,
+      </if>
+      <if test="adoptCount != null">
+        adopt_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="moneySituation != null">
+        #{moneySituation,jdbcType=SMALLINT},
+      </if>
+      <if test="earningType != null">
+        #{earningType,jdbcType=SMALLINT},
+      </if>
+      <if test="expectedDeadline != null">
+        #{expectedDeadline,jdbcType=SMALLINT},
+      </if>
+      <if test="solution != null">
+        #{solution,jdbcType=VARCHAR},
+      </if>
+      <if test="riskAssessmentLevel != null">
+        #{riskAssessmentLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="isClosed != null">
+        #{isClosed,jdbcType=TINYINT},
+      </if>
+      <if test="matchDemandCount != null">
+        #{matchDemandCount,jdbcType=BIGINT},
+      </if>
+      <if test="readCount != null">
+        #{readCount,jdbcType=BIGINT},
+      </if>
+      <if test="adoptCount != null">
+        #{adoptCount,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDO">
+    update user_solution
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="moneySituation != null">
+        money_situation = #{moneySituation,jdbcType=SMALLINT},
+      </if>
+      <if test="earningType != null">
+        earning_type = #{earningType,jdbcType=SMALLINT},
+      </if>
+      <if test="expectedDeadline != null">
+        expected_deadline = #{expectedDeadline,jdbcType=SMALLINT},
+      </if>
+      <if test="solution != null">
+        solution = #{solution,jdbcType=VARCHAR},
+      </if>
+      <if test="riskAssessmentLevel != null">
+        risk_assessment_level = #{riskAssessmentLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=TINYINT},
+      </if>
+      <if test="isClosed != null">
+        is_closed = #{isClosed,jdbcType=TINYINT},
+      </if>
+      <if test="matchDemandCount != null">
+        match_demand_count = #{matchDemandCount,jdbcType=BIGINT},
+      </if>
+      <if test="readCount != null">
+        read_count = #{readCount,jdbcType=BIGINT},
+      </if>
+      <if test="adoptCount != null">
+        adopt_count = #{adoptCount,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDOExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user_solution
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
