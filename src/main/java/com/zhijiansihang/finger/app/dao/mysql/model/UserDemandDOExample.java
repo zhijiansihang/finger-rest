@@ -771,6 +771,66 @@ public class UserDemandDOExample {
             return (Criteria) this;
         }
 
+        public Criteria andSerialNumberIsNull() {
+            addCriterion("serial_number is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberIsNotNull() {
+            addCriterion("serial_number is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberEqualTo(Long value) {
+            addCriterion("serial_number =", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberNotEqualTo(Long value) {
+            addCriterion("serial_number <>", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberGreaterThan(Long value) {
+            addCriterion("serial_number >", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberGreaterThanOrEqualTo(Long value) {
+            addCriterion("serial_number >=", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberLessThan(Long value) {
+            addCriterion("serial_number <", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberLessThanOrEqualTo(Long value) {
+            addCriterion("serial_number <=", value, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberIn(List<Long> values) {
+            addCriterion("serial_number in", values, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberNotIn(List<Long> values) {
+            addCriterion("serial_number not in", values, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberBetween(Long value1, Long value2) {
+            addCriterion("serial_number between", value1, value2, "serialNumber");
+            return (Criteria) this;
+        }
+
+        public Criteria andSerialNumberNotBetween(Long value1, Long value2) {
+            addCriterion("serial_number not between", value1, value2, "serialNumber");
+            return (Criteria) this;
+        }
+
         public Criteria andUpdateTimeIsNull() {
             addCriterion("update_time is null");
             return (Criteria) this;

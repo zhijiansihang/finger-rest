@@ -59,7 +59,7 @@ public interface UserCollectionDAO {
         "from user_collection",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserCollectionDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserCollectionDAO.BaseResultMap")
     UserCollectionDO selectByPrimaryKey(Long id);
 
     /**

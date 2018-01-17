@@ -27,14 +27,14 @@ public interface UserDemandDAO {
         "earning_type, expected_deadline, ",
         "additional_remarks, is_deleted, ",
         "is_closed, last_batch_sid, ",
-        "match_solution_count, update_time, ",
-        "create_time)",
+        "match_solution_count, serial_number, ",
+        "update_time, create_time)",
         "values (#{userId,jdbcType=BIGINT}, #{moneySituation,jdbcType=SMALLINT}, ",
         "#{earningType,jdbcType=SMALLINT}, #{expectedDeadline,jdbcType=SMALLINT}, ",
         "#{additionalRemarks,jdbcType=VARCHAR}, #{isDeleted,jdbcType=TINYINT}, ",
         "#{isClosed,jdbcType=TINYINT}, #{lastBatchSid,jdbcType=BIGINT}, ",
-        "#{matchSolutionCount,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "#{matchSolutionCount,jdbcType=BIGINT}, #{serialNumber,jdbcType=BIGINT}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(UserDemandDO record);
@@ -64,11 +64,12 @@ public interface UserDemandDAO {
     @Select({
         "select",
         "id, user_id, money_situation, earning_type, expected_deadline, additional_remarks, ",
-        "is_deleted, is_closed, last_batch_sid, match_solution_count, update_time, create_time",
+        "is_deleted, is_closed, last_batch_sid, match_solution_count, serial_number, ",
+        "update_time, create_time",
         "from user_demand",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserDemandDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandDAO.BaseResultMap")
     UserDemandDO selectByPrimaryKey(Long id);
 
     /**
@@ -92,6 +93,7 @@ public interface UserDemandDAO {
           "is_closed = #{isClosed,jdbcType=TINYINT},",
           "last_batch_sid = #{lastBatchSid,jdbcType=BIGINT},",
           "match_solution_count = #{matchSolutionCount,jdbcType=BIGINT},",
+          "serial_number = #{serialNumber,jdbcType=BIGINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
         "where id = #{id,jdbcType=BIGINT}"

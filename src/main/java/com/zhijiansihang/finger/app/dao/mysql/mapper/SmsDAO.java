@@ -66,7 +66,7 @@ public interface SmsDAO {
         "from sms",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.SmsDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.SmsDAO.BaseResultMap")
     SmsDO selectByPrimaryKey(Long id);
 
     /**

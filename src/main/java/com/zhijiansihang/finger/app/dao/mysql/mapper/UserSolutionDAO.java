@@ -28,13 +28,15 @@ public interface UserSolutionDAO {
         "solution, risk_assessment_level, ",
         "create_time, is_deleted, ",
         "is_closed, match_demand_count, ",
-        "read_count, adopt_count)",
+        "read_count, adopt_count, ",
+        "serial_number)",
         "values (#{userId,jdbcType=BIGINT}, #{moneySituation,jdbcType=SMALLINT}, ",
         "#{earningType,jdbcType=SMALLINT}, #{expectedDeadline,jdbcType=SMALLINT}, ",
         "#{solution,jdbcType=VARCHAR}, #{riskAssessmentLevel,jdbcType=VARCHAR}, ",
         "#{createTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}, ",
         "#{isClosed,jdbcType=TINYINT}, #{matchDemandCount,jdbcType=BIGINT}, ",
-        "#{readCount,jdbcType=BIGINT}, #{adoptCount,jdbcType=BIGINT})"
+        "#{readCount,jdbcType=BIGINT}, #{adoptCount,jdbcType=BIGINT}, ",
+        "#{serialNumber,jdbcType=BIGINT})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(UserSolutionDO record);
@@ -64,11 +66,12 @@ public interface UserSolutionDAO {
     @Select({
         "select",
         "id, user_id, money_situation, earning_type, expected_deadline, solution, risk_assessment_level, ",
-        "create_time, is_deleted, is_closed, match_demand_count, read_count, adopt_count",
+        "create_time, is_deleted, is_closed, match_demand_count, read_count, adopt_count, ",
+        "serial_number",
         "from user_solution",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserSolutionDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserSolutionDAO.BaseResultMap")
     UserSolutionDO selectByPrimaryKey(Long id);
 
     /**
@@ -94,7 +97,8 @@ public interface UserSolutionDAO {
           "is_closed = #{isClosed,jdbcType=TINYINT},",
           "match_demand_count = #{matchDemandCount,jdbcType=BIGINT},",
           "read_count = #{readCount,jdbcType=BIGINT},",
-          "adopt_count = #{adoptCount,jdbcType=BIGINT}",
+          "adopt_count = #{adoptCount,jdbcType=BIGINT},",
+          "serial_number = #{serialNumber,jdbcType=BIGINT}",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserSolutionDO record);

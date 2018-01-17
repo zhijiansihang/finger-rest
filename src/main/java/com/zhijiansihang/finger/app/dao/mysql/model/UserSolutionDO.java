@@ -70,6 +70,11 @@ public class UserSolutionDO implements Serializable {
     private Long adoptCount;
 
     /**
+     * 方案编号
+     */
+    private Long serialNumber;
+
+    /**
      * user_solution
      */
     private static final long serialVersionUID = 1L;
@@ -283,6 +288,22 @@ public class UserSolutionDO implements Serializable {
     }
 
     /**
+     * 方案编号
+     * @return serial_number 方案编号
+     */
+    public Long getSerialNumber() {
+        return serialNumber;
+    }
+
+    /**
+     * 方案编号
+     * @param serialNumber 方案编号
+     */
+    public void setSerialNumber(Long serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    /**
      *
      * @mbg.generated
      */
@@ -305,6 +326,7 @@ public class UserSolutionDO implements Serializable {
         sb.append(", matchDemandCount=").append(matchDemandCount);
         sb.append(", readCount=").append(readCount);
         sb.append(", adoptCount=").append(adoptCount);
+        sb.append(", serialNumber=").append(serialNumber);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -59,7 +59,7 @@ public interface UserFriendDAO {
         "from user_friend",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserFriendDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserFriendDAO.BaseResultMap")
     UserFriendDO selectByPrimaryKey(Long id);
 
     /**

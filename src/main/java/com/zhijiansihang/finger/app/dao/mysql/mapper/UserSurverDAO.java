@@ -63,7 +63,7 @@ public interface UserSurverDAO {
         "from user_surver",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserSurverDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserSurverDAO.BaseResultMap")
     UserSurverDO selectByPrimaryKey(Long id);
 
     /**

@@ -66,7 +66,7 @@ public interface LoanInvestorFinanceDAO {
         "from loan_investor_finance",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.LoanInvestorFinanceDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.LoanInvestorFinanceDAO.BaseResultMap")
     LoanInvestorFinanceDO selectByPrimaryKey(Long id);
 
     /**

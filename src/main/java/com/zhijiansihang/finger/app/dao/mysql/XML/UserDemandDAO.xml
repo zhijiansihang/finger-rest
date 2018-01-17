@@ -12,6 +12,7 @@
     <result column="is_closed" jdbcType="TINYINT" property="isClosed" />
     <result column="last_batch_sid" jdbcType="BIGINT" property="lastBatchSid" />
     <result column="match_solution_count" jdbcType="BIGINT" property="matchSolutionCount" />
+    <result column="serial_number" jdbcType="BIGINT" property="serialNumber" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
@@ -46,7 +47,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, user_id, money_situation, earning_type, expected_deadline, additional_remarks, 
-    is_deleted, is_closed, last_batch_sid, match_solution_count, update_time, create_time
+    is_deleted, is_closed, last_batch_sid, match_solution_count, serial_number, update_time, 
+    create_time
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserDemandDOExample" resultMap="BaseResultMap">
     select
@@ -95,6 +97,9 @@
       <if test="matchSolutionCount != null">
         match_solution_count,
       </if>
+      <if test="serialNumber != null">
+        serial_number,
+      </if>
       <if test="updateTime != null">
         update_time,
       </if>
@@ -129,6 +134,9 @@
       </if>
       <if test="matchSolutionCount != null">
         #{matchSolutionCount,jdbcType=BIGINT},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=BIGINT},
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
@@ -167,6 +175,9 @@
       </if>
       <if test="matchSolutionCount != null">
         match_solution_count = #{matchSolutionCount,jdbcType=BIGINT},
+      </if>
+      <if test="serialNumber != null">
+        serial_number = #{serialNumber,jdbcType=BIGINT},
       </if>
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},

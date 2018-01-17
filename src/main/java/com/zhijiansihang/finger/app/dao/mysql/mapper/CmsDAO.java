@@ -3,7 +3,6 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDOExample;
 import java.util.List;
-import com.zhijiansihang.finger.app.vo.CmsVO;
 
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
@@ -74,7 +73,7 @@ public interface CmsDAO {
         "from cms",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.CmsDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO.BaseResultMap")
     CmsDO selectByPrimaryKey(Long id);
 
     /**
@@ -107,23 +106,4 @@ public interface CmsDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(CmsDO record);
-
-    @Select({
-            "select count(*)",
-            "from cms",
-            "where type_code = #{typeCode}",
-    })
-    int countByCmsVO(CmsVO cmsVO);
-
-    @Select({
-            "select",
-            "id, type_code, type_name, image_path, image_access_path, title, sub_title, content, ",
-            "href_link, is_front_display, is_deleted, location_size, create_time, create_by, ",
-            "update_time, update_by",
-            "from cms",
-            "where type_code = #{typeCode}",
-            "order by id desc"
-    })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.CmsDAO.BaseResultMap")
-    List<CmsDO> selectByCmsVO(CmsVO cmsVO, RowBounds rowBounds);
 }

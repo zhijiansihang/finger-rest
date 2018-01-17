@@ -26,15 +26,15 @@ public interface UserDAO {
         "insert into user (mobile, real_name, ",
         "id_card, nick_name, ",
         "passwd, is_name_auth, ",
-        "is_frozen, logo, ",
-        "roles, `source`, ",
+        "is_frozen, is_register_jg, ",
+        "logo, roles, `source`, ",
         "institution_user_id, risk_assessment_level, ",
         "update_time, create_time)",
         "values (#{mobile,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, ",
         "#{idCard,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, ",
         "#{passwd,jdbcType=VARCHAR}, #{isNameAuth,jdbcType=TINYINT}, ",
-        "#{isFrozen,jdbcType=TINYINT}, #{logo,jdbcType=VARCHAR}, ",
-        "#{roles,jdbcType=SMALLINT}, #{source,jdbcType=SMALLINT}, ",
+        "#{isFrozen,jdbcType=TINYINT}, #{isRegisterJg,jdbcType=TINYINT}, ",
+        "#{logo,jdbcType=VARCHAR}, #{roles,jdbcType=SMALLINT}, #{source,jdbcType=SMALLINT}, ",
         "#{institutionUserId,jdbcType=BIGINT}, #{riskAssessmentLevel,jdbcType=SMALLINT}, ",
         "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
@@ -66,12 +66,12 @@ public interface UserDAO {
     @Select({
         "select",
         "user_id, mobile, real_name, id_card, nick_name, passwd, is_name_auth, is_frozen, ",
-        "logo, roles, `source`, institution_user_id, risk_assessment_level, update_time, ",
-        "create_time",
+        "is_register_jg, logo, roles, `source`, institution_user_id, risk_assessment_level, ",
+        "update_time, create_time",
         "from user",
         "where user_id = #{userId,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO.BaseResultMap")
     UserDO selectByPrimaryKey(Long userId);
 
     /**
@@ -93,6 +93,7 @@ public interface UserDAO {
           "passwd = #{passwd,jdbcType=VARCHAR},",
           "is_name_auth = #{isNameAuth,jdbcType=TINYINT},",
           "is_frozen = #{isFrozen,jdbcType=TINYINT},",
+          "is_register_jg = #{isRegisterJg,jdbcType=TINYINT},",
           "logo = #{logo,jdbcType=VARCHAR},",
           "roles = #{roles,jdbcType=SMALLINT},",
           "`source` = #{source,jdbcType=SMALLINT},",

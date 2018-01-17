@@ -15,6 +15,7 @@
     <result column="match_demand_count" jdbcType="BIGINT" property="matchDemandCount" />
     <result column="read_count" jdbcType="BIGINT" property="readCount" />
     <result column="adopt_count" jdbcType="BIGINT" property="adoptCount" />
+    <result column="serial_number" jdbcType="BIGINT" property="serialNumber" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -47,7 +48,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, user_id, money_situation, earning_type, expected_deadline, solution, risk_assessment_level, 
-    create_time, is_deleted, is_closed, match_demand_count, read_count, adopt_count
+    create_time, is_deleted, is_closed, match_demand_count, read_count, adopt_count, 
+    serial_number
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDOExample" resultMap="BaseResultMap">
     select
@@ -105,6 +107,9 @@
       <if test="adoptCount != null">
         adopt_count,
       </if>
+      <if test="serialNumber != null">
+        serial_number,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -142,6 +147,9 @@
       </if>
       <if test="adoptCount != null">
         #{adoptCount,jdbcType=BIGINT},
+      </if>
+      <if test="serialNumber != null">
+        #{serialNumber,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -183,6 +191,9 @@
       </if>
       <if test="adoptCount != null">
         adopt_count = #{adoptCount,jdbcType=BIGINT},
+      </if>
+      <if test="serialNumber != null">
+        serial_number = #{serialNumber,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}

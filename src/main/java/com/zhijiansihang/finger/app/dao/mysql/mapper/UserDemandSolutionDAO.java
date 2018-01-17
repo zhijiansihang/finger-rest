@@ -64,7 +64,7 @@ public interface UserDemandSolutionDAO {
         "from user_demand_solution",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserDemandSolutionDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandSolutionDAO.BaseResultMap")
     UserDemandSolutionDO selectByPrimaryKey(Long id);
 
     /**

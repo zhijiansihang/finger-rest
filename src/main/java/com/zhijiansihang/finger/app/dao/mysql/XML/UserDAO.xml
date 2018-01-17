@@ -10,6 +10,7 @@
     <result column="passwd" jdbcType="VARCHAR" property="passwd" />
     <result column="is_name_auth" jdbcType="TINYINT" property="isNameAuth" />
     <result column="is_frozen" jdbcType="TINYINT" property="isFrozen" />
+    <result column="is_register_jg" jdbcType="TINYINT" property="isRegisterJg" />
     <result column="logo" jdbcType="VARCHAR" property="logo" />
     <result column="roles" jdbcType="SMALLINT" property="roles" />
     <result column="source" jdbcType="SMALLINT" property="source" />
@@ -49,7 +50,8 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, mobile, real_name, id_card, nick_name, passwd, is_name_auth, is_frozen, 
-    logo, roles, `source`, institution_user_id, risk_assessment_level, update_time, create_time
+    is_register_jg, logo, roles, `source`, institution_user_id, risk_assessment_level, 
+    update_time, create_time
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample" resultMap="BaseResultMap">
     select
@@ -91,6 +93,9 @@
       </if>
       <if test="isFrozen != null">
         is_frozen,
+      </if>
+      <if test="isRegisterJg != null">
+        is_register_jg,
       </if>
       <if test="logo != null">
         logo,
@@ -135,6 +140,9 @@
       </if>
       <if test="isFrozen != null">
         #{isFrozen,jdbcType=TINYINT},
+      </if>
+      <if test="isRegisterJg != null">
+        #{isRegisterJg,jdbcType=TINYINT},
       </if>
       <if test="logo != null">
         #{logo,jdbcType=VARCHAR},
@@ -182,6 +190,9 @@
       </if>
       <if test="isFrozen != null">
         is_frozen = #{isFrozen,jdbcType=TINYINT},
+      </if>
+      <if test="isRegisterJg != null">
+        is_register_jg = #{isRegisterJg,jdbcType=TINYINT},
       </if>
       <if test="logo != null">
         logo = #{logo,jdbcType=VARCHAR},

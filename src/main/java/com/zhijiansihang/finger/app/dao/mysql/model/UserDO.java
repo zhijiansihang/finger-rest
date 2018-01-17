@@ -45,6 +45,11 @@ public class UserDO implements Serializable {
     private Byte isFrozen;
 
     /**
+     * 是否极注册 1:为注册 0:未注册
+     */
+    private Byte isRegisterJg;
+
+    /**
      * 
      */
     private String logo;
@@ -213,6 +218,22 @@ public class UserDO implements Serializable {
     }
 
     /**
+     * 是否极注册 1:为注册 0:未注册
+     * @return is_register_jg 是否极注册 1:为注册 0:未注册
+     */
+    public Byte getIsRegisterJg() {
+        return isRegisterJg;
+    }
+
+    /**
+     * 是否极注册 1:为注册 0:未注册
+     * @param isRegisterJg 是否极注册 1:为注册 0:未注册
+     */
+    public void setIsRegisterJg(Byte isRegisterJg) {
+        this.isRegisterJg = isRegisterJg;
+    }
+
+    /**
      * 
      * @return logo 
      */
@@ -342,6 +363,7 @@ public class UserDO implements Serializable {
         sb.append(", passwd=").append(passwd);
         sb.append(", isNameAuth=").append(isNameAuth);
         sb.append(", isFrozen=").append(isFrozen);
+        sb.append(", isRegisterJg=").append(isRegisterJg);
         sb.append(", logo=").append(logo);
         sb.append(", roles=").append(roles);
         sb.append(", source=").append(source);

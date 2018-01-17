@@ -72,7 +72,7 @@ public interface UserFinanceDetailDAO {
         "from user_finance_detail",
         "where user_id = #{userId,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserFinanceDetailDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO.BaseResultMap")
     UserFinanceDetailDO selectByPrimaryKey(Long userId);
 
     /**

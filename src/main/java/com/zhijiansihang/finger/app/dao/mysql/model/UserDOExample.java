@@ -691,6 +691,66 @@ public class UserDOExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsRegisterJgIsNull() {
+            addCriterion("is_register_jg is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgIsNotNull() {
+            addCriterion("is_register_jg is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgEqualTo(Byte value) {
+            addCriterion("is_register_jg =", value, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgNotEqualTo(Byte value) {
+            addCriterion("is_register_jg <>", value, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgGreaterThan(Byte value) {
+            addCriterion("is_register_jg >", value, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_register_jg >=", value, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgLessThan(Byte value) {
+            addCriterion("is_register_jg <", value, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgLessThanOrEqualTo(Byte value) {
+            addCriterion("is_register_jg <=", value, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgIn(List<Byte> values) {
+            addCriterion("is_register_jg in", values, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgNotIn(List<Byte> values) {
+            addCriterion("is_register_jg not in", values, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgBetween(Byte value1, Byte value2) {
+            addCriterion("is_register_jg between", value1, value2, "isRegisterJg");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRegisterJgNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_register_jg not between", value1, value2, "isRegisterJg");
+            return (Criteria) this;
+        }
+
         public Criteria andLogoIsNull() {
             addCriterion("logo is null");
             return (Criteria) this;

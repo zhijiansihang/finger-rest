@@ -55,6 +55,11 @@ public class UserDemandDO implements Serializable {
     private Long matchSolutionCount;
 
     /**
+     * 需求编号
+     */
+    private Long serialNumber;
+
+    /**
      * 更新时间
      */
     private Date updateTime;
@@ -230,6 +235,22 @@ public class UserDemandDO implements Serializable {
     }
 
     /**
+     * 需求编号
+     * @return serial_number 需求编号
+     */
+    public Long getSerialNumber() {
+        return serialNumber;
+    }
+
+    /**
+     * 需求编号
+     * @param serialNumber 需求编号
+     */
+    public void setSerialNumber(Long serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    /**
      * 更新时间
      * @return update_time 更新时间
      */
@@ -281,6 +302,7 @@ public class UserDemandDO implements Serializable {
         sb.append(", isClosed=").append(isClosed);
         sb.append(", lastBatchSid=").append(lastBatchSid);
         sb.append(", matchSolutionCount=").append(matchSolutionCount);
+        sb.append(", serialNumber=").append(serialNumber);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

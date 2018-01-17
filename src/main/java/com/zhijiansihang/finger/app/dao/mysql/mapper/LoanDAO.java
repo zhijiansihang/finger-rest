@@ -96,7 +96,7 @@ public interface LoanDAO {
         "from loan",
         "where loan_id = #{loanId,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.LoanDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.LoanDAO.BaseResultMap")
     LoanDO selectByPrimaryKey(Long loanId);
 
     /**

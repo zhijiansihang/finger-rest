@@ -66,7 +66,7 @@ public interface UserAuthRecordDAO {
         "from user_auth_record",
         "where id = #{id,jdbcType=BIGINT}"
     })
-    @ResultMap("com.zhijiansihang.finger.dao.mysql.mapper.UserAuthRecordDAO.BaseResultMap")
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserAuthRecordDAO.BaseResultMap")
     UserAuthRecordDO selectByPrimaryKey(Long id);
 
     /**
