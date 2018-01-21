@@ -1,5 +1,6 @@
 package com.zhijiansihang.sys.service;
 
+import com.google.common.collect.Lists;
 import com.zhijiansihang.common.RetCode;
 import com.zhijiansihang.sys.entity.Resource;
 import com.zhijiansihang.sys.entity.Role;
@@ -296,13 +297,23 @@ public class RoleService {
 	}
 
 
-	public JsTreeNode getMenuListByRole(String[] roleCode, String loginName) throws ValidationException {
-		Role role = this.roleRepository.findByRoleCode(roleCode[0]);
+	public JsTreeNode getMenuListByRole(String roleCode, String loginName, String system) throws ValidationException {
+		Role role = this.roleRepository.findByRoleCode(roleCode);
 		Set<Resource> resources = role.getResources();
 		JsTreeNode<Resource> root = new JsTreeNode<>("root_0", loginName);
 		root.getState().setSelected(true);
-		List<Resource> platform = this.resourceRepository.findByParentIdOrderByDispOrder("0");
-		iterator(root, platform, resources);
+		List<Resource> tops = Lists.newArrayList();
+		if("all".equals(system)){
+			// 全平台展示(一级是平台)
+			tops = this.resourceRepository.findByParentIdOrderByDispOrder("0");
+		}else{
+			// 单平台菜单（一级是菜单）
+			Resource platform = resourceRepository.findByModTypeAndNameOrderByDispOrder("1",system);
+			if(platform!= null){
+				tops = this.resourceRepository.findByParentIdOrderByDispOrder(String.valueOf(platform.getId()));
+			}
+		}
+		iterator(root, tops, resources);
 		return root;
 	}
 

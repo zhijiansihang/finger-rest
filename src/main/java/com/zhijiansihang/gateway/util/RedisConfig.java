@@ -24,6 +24,7 @@ public class RedisConfig extends CachingConfigurerSupport {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(redis.getHost());
         factory.setDatabase(StringUtils.isNotBlank(redis.getDatabase()) ? Integer.valueOf(redis.getDatabase()) : 0);
+        factory.setPassword(redis.getPassword());
         factory.setPort(redis.getPort());
         factory.setTimeout(redis.getTimeout()); // 设置连接超时时间
         return factory;

@@ -139,8 +139,8 @@ public class RoleController {
 	 * @return
 	 */
 	@RequestMapping(value = "/menus", method = RequestMethod.GET)
-	public Response getMenuListByRole(@RequestParam(ComParams.X_ROLECODE)String[] roleCode, @RequestParam(ComParams.X_LOGINNAME)String loginName) throws ValidationException {
-		return Response.success(roleService.getMenuListByRole(roleCode, loginName));
+	public Response getMenuListByRole(@RequestParam(ComParams.X_ROLECODE)String roleCode, @RequestParam(ComParams.X_LOGINNAME)String loginName, @RequestParam(value = "system",defaultValue = "all") String system) throws ValidationException {
+		return Response.success(roleService.getMenuListByRole(roleCode, loginName, system));
 	}
 
 	/**
