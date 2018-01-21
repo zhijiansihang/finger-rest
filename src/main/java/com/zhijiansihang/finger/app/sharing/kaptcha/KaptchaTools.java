@@ -46,10 +46,10 @@ public class KaptchaTools {
         //定义response输出类型为image/jpeg类型，使用response输出流输出图片的byte数组
         captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
         String string = UUID.randomUUID().toString();
-        Cookie cookie = new Cookie(KAPTCHA_TOKEN, string);
-        cookie.setMaxAge(Integer.MAX_VALUE);
-        cookie.setPath(ROOT);
-        httpServletResponse.addCookie(cookie);
+//        Cookie cookie = new Cookie(KAPTCHA_TOKEN, string);
+//        cookie.setMaxAge(Integer.MAX_VALUE);
+//        cookie.setPath(ROOT);
+//        httpServletResponse.addCookie(cookie);
         httpServletResponse.setHeader(KAPTCHA_TOKEN,string);
 
         redisTemplate.opsForValue().set(KAPTCHA_TOKEN+string,createText);
@@ -68,35 +68,15 @@ public class KaptchaTools {
 
     /**
      * 校验图形验证码
-     * @param httpServletRequest 用来取凭证token
-     * @param httpServletResponse 将cookie清除
      * @param kaptchaCode 如果为空，从reques中取名称为kaptchaCode
      * @return
      */
-    public boolean check(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,String kaptchaCode){
-        if (kaptchaCode==null || kaptchaCode.length() == 0){
-            kaptchaCode = httpServletRequest.getParameter("kaptchaCode");
-        }
+    public boolean check(String kaptchaCodeKey,String kaptchaCode){
         if (kaptchaCode==null || kaptchaCode.length() == 0){
            return false;
         }
-
-        String kaptchaCodeKey = httpServletRequest.getHeader(KAPTCHA_TOKEN);
-
-        Cookie[] cookies = httpServletRequest.getCookies();
-        for (Cookie cookie :cookies){
-            if(KAPTCHA_TOKEN.equals(cookie.getName())){
-                if (kaptchaCodeKey == null ){
-                    kaptchaCodeKey=cookie.getValue();
-                }
-                cookie.setMaxAge(0);
-                cookie.setPath(ROOT);
-                httpServletResponse.addCookie(cookie);
-                break;
-            }
-        }
-        if (kaptchaCodeKey == null || kaptchaCodeKey.length()==0){
-            return false;
+        if (kaptchaCodeKey==null || kaptchaCodeKey.length() == 0){
+           return false;
         }
 
         String rightCode = redisTemplate.opsForValue().get(KAPTCHA_TOKEN + kaptchaCodeKey);

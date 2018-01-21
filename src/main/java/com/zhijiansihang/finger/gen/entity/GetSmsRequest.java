@@ -14,6 +14,7 @@ public class GetSmsRequest extends MobileMessage {
 
 
 	private String kaptchaCode;
+	private String kaptchaToken;
 	private String mobile;
 
 	public GetSmsRequest() {
@@ -29,6 +30,17 @@ public class GetSmsRequest extends MobileMessage {
 
 	public void setKaptchaCode(String kaptchaCode) {
 		this.kaptchaCode = kaptchaCode;
+	}
+
+	/**
+	 * @return 请求图形验证码返回的token
+	 */
+	public String getKaptchaToken() {
+		return kaptchaToken;
+	}
+
+	public void setKaptchaToken(String kaptchaToken) {
+		this.kaptchaToken = kaptchaToken;
 	}
 
 	/**

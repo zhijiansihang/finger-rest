@@ -36,7 +36,7 @@ custom:
   sharing:
     file-system-root: C:/nfs
     static-server-link: http://127.0.0.1:10000
-    open-thirdparty-service: true
+    open-thirdparty-service: false
 #开启动态设置日志此处是不同通过校验loggers 权限 或者默认使用角色ACTUATOR
 endpoints:
   loggers:
