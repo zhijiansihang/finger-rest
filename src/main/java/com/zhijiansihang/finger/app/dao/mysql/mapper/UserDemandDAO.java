@@ -3,25 +3,23 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandDOExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDemandDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from user_demand",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into user_demand (user_id, money_situation, ",
         "earning_type, expected_deadline, ",
@@ -39,28 +37,12 @@ public interface UserDemandDAO {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(UserDemandDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(UserDemandDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserDemandDO> selectByExampleWithRowbounds(UserDemandDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserDemandDO> selectByExample(UserDemandDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
         "id, user_id, money_situation, earning_type, expected_deadline, additional_remarks, ",
@@ -72,16 +54,8 @@ public interface UserDemandDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandDAO.BaseResultMap")
     UserDemandDO selectByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(UserDemandDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update user_demand",
         "set user_id = #{userId,jdbcType=BIGINT},",

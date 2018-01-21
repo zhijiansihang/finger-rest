@@ -3,26 +3,23 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDOExample;
 import java.util.List;
-
-import com.zhijiansihang.finger.app.vo.CmsVO;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CmsDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from cms",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into cms (type_code, type_name, ",
         "image_path, image_access_path, ",
@@ -44,28 +41,12 @@ public interface CmsDAO {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(CmsDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(CmsDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<CmsDO> selectByExampleWithRowbounds(CmsDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<CmsDO> selectByExample(CmsDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
         "id, type_code, type_name, image_path, image_access_path, title, sub_title, content, ",
@@ -77,16 +58,8 @@ public interface CmsDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO.BaseResultMap")
     CmsDO selectByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(CmsDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update cms",
         "set type_code = #{typeCode,jdbcType=SMALLINT},",

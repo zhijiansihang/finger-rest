@@ -3,25 +3,23 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDOExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserSolutionDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from user_solution",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into user_solution (user_id, money_situation, ",
         "earning_type, expected_deadline, ",
@@ -41,28 +39,12 @@ public interface UserSolutionDAO {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(UserSolutionDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(UserSolutionDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserSolutionDO> selectByExampleWithRowbounds(UserSolutionDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserSolutionDO> selectByExample(UserSolutionDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
         "id, user_id, money_situation, earning_type, expected_deadline, solution, risk_assessment_level, ",
@@ -74,16 +56,8 @@ public interface UserSolutionDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserSolutionDAO.BaseResultMap")
     UserSolutionDO selectByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(UserSolutionDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update user_solution",
         "set user_id = #{userId,jdbcType=BIGINT},",

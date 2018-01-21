@@ -36,6 +36,16 @@ public class LoanDO implements Serializable {
     private BigDecimal amount;
 
     /**
+     * 公墓利率
+     */
+    private BigDecimal interestRate;
+
+    /**
+     * 公墓是否浮动 1位浮动 0 不浮动
+     */
+    private Byte isRateFloating;
+
+    /**
      * 已预约金额
      */
     private BigDecimal reserveAmount;
@@ -284,6 +294,38 @@ public class LoanDO implements Serializable {
      */
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    /**
+     * 公墓利率
+     * @return interest_rate 公墓利率
+     */
+    public BigDecimal getInterestRate() {
+        return interestRate;
+    }
+
+    /**
+     * 公墓利率
+     * @param interestRate 公墓利率
+     */
+    public void setInterestRate(BigDecimal interestRate) {
+        this.interestRate = interestRate;
+    }
+
+    /**
+     * 公墓是否浮动 1位浮动 0 不浮动
+     * @return is_rate_floating 公墓是否浮动 1位浮动 0 不浮动
+     */
+    public Byte getIsRateFloating() {
+        return isRateFloating;
+    }
+
+    /**
+     * 公墓是否浮动 1位浮动 0 不浮动
+     * @param isRateFloating 公墓是否浮动 1位浮动 0 不浮动
+     */
+    public void setIsRateFloating(Byte isRateFloating) {
+        this.isRateFloating = isRateFloating;
     }
 
     /**
@@ -766,10 +808,6 @@ public class LoanDO implements Serializable {
         this.createTime = createTime;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -782,6 +820,8 @@ public class LoanDO implements Serializable {
         sb.append(", loanType=").append(loanType);
         sb.append(", productType=").append(productType);
         sb.append(", amount=").append(amount);
+        sb.append(", interestRate=").append(interestRate);
+        sb.append(", isRateFloating=").append(isRateFloating);
         sb.append(", reserveAmount=").append(reserveAmount);
         sb.append(", loanStatus=").append(loanStatus);
         sb.append(", isDisplay=").append(isDisplay);

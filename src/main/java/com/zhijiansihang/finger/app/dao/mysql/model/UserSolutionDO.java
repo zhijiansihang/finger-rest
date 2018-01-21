@@ -303,10 +303,6 @@ public class UserSolutionDO implements Serializable {
         this.serialNumber = serialNumber;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

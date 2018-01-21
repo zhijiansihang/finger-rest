@@ -3,25 +3,23 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDOExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDemandSolutionDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from user_demand_solution",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into user_demand_solution (demand_user_id, demand_id, ",
         "solution_user_id, solution_id, ",
@@ -35,28 +33,12 @@ public interface UserDemandSolutionDAO {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(UserDemandSolutionDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(UserDemandSolutionDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserDemandSolutionDO> selectByExampleWithRowbounds(UserDemandSolutionDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserDemandSolutionDO> selectByExample(UserDemandSolutionDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
         "id, demand_user_id, demand_id, solution_user_id, solution_id, is_read_demand, ",
@@ -67,16 +49,8 @@ public interface UserDemandSolutionDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandSolutionDAO.BaseResultMap")
     UserDemandSolutionDO selectByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(UserDemandSolutionDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update user_demand_solution",
         "set demand_user_id = #{demandUserId,jdbcType=BIGINT},",

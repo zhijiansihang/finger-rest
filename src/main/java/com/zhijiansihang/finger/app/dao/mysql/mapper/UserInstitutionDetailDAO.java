@@ -3,25 +3,22 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserInstitutionDetailDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserInstitutionDetailDOExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserInstitutionDetailDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from user_institution_detail",
         "where user_id = #{userId,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long userId);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into user_institution_detail (user_id, `name`, ",
         "contact_name, contact_mobile, ",
@@ -34,28 +31,12 @@ public interface UserInstitutionDetailDAO {
     })
     int insert(UserInstitutionDetailDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(UserInstitutionDetailDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserInstitutionDetailDO> selectByExampleWithRowbounds(UserInstitutionDetailDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserInstitutionDetailDO> selectByExample(UserInstitutionDetailDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
         "user_id, `name`, contact_name, contact_mobile, is_deleted, update_time, create_time",
@@ -65,16 +46,8 @@ public interface UserInstitutionDetailDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserInstitutionDetailDAO.BaseResultMap")
     UserInstitutionDetailDO selectByPrimaryKey(Long userId);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(UserInstitutionDetailDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update user_institution_detail",
         "set `name` = #{name,jdbcType=VARCHAR},",

@@ -11,6 +11,7 @@
     <result column="service_concept" jdbcType="VARCHAR" property="serviceConcept" />
     <result column="working_experience" jdbcType="VARCHAR" property="workingExperience" />
     <result column="personal_profile" jdbcType="VARCHAR" property="personalProfile" />
+    <result column="is_add" jdbcType="TINYINT" property="isAdd" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
     <result column="loan_count" jdbcType="BIGINT" property="loanCount" />
     <result column="user_order_count" jdbcType="BIGINT" property="userOrderCount" />
@@ -49,8 +50,8 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, education_level, school_name, work_age, `position`, service_direction, service_concept, 
-    working_experience, personal_profile, is_deleted, loan_count, user_order_count, adopt_count, 
-    update_time, create_time
+    working_experience, personal_profile, is_add, is_deleted, loan_count, user_order_count, 
+    adopt_count, update_time, create_time
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDOExample" resultMap="BaseResultMap">
     select
@@ -95,6 +96,9 @@
       </if>
       <if test="personalProfile != null">
         personal_profile,
+      </if>
+      <if test="isAdd != null">
+        is_add,
       </if>
       <if test="isDeleted != null">
         is_deleted,
@@ -143,6 +147,9 @@
       <if test="personalProfile != null">
         #{personalProfile,jdbcType=VARCHAR},
       </if>
+      <if test="isAdd != null">
+        #{isAdd,jdbcType=TINYINT},
+      </if>
       <if test="isDeleted != null">
         #{isDeleted,jdbcType=TINYINT},
       </if>
@@ -189,6 +196,9 @@
       </if>
       <if test="personalProfile != null">
         personal_profile = #{personalProfile,jdbcType=VARCHAR},
+      </if>
+      <if test="isAdd != null">
+        is_add = #{isAdd,jdbcType=TINYINT},
       </if>
       <if test="isDeleted != null">
         is_deleted = #{isDeleted,jdbcType=TINYINT},

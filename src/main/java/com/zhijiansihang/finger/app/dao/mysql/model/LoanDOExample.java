@@ -21,76 +21,40 @@ public class LoanDOExample {
      */
     protected List<Criteria> oredCriteria;
 
-    /**
-     *
-     * @mbg.generated
-     */
     public LoanDOExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public String getOrderByClause() {
         return orderByClause;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public boolean isDistinct() {
         return distinct;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
@@ -99,19 +63,11 @@ public class LoanDOExample {
         return criteria;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
         return criteria;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public void clear() {
         oredCriteria.clear();
         orderByClause = null;
@@ -529,6 +485,126 @@ public class LoanDOExample {
 
         public Criteria andAmountNotBetween(BigDecimal value1, BigDecimal value2) {
             addCriterion("amount not between", value1, value2, "amount");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateIsNull() {
+            addCriterion("interest_rate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateIsNotNull() {
+            addCriterion("interest_rate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateEqualTo(BigDecimal value) {
+            addCriterion("interest_rate =", value, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateNotEqualTo(BigDecimal value) {
+            addCriterion("interest_rate <>", value, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateGreaterThan(BigDecimal value) {
+            addCriterion("interest_rate >", value, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateGreaterThanOrEqualTo(BigDecimal value) {
+            addCriterion("interest_rate >=", value, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateLessThan(BigDecimal value) {
+            addCriterion("interest_rate <", value, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateLessThanOrEqualTo(BigDecimal value) {
+            addCriterion("interest_rate <=", value, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateIn(List<BigDecimal> values) {
+            addCriterion("interest_rate in", values, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateNotIn(List<BigDecimal> values) {
+            addCriterion("interest_rate not in", values, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("interest_rate between", value1, value2, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andInterestRateNotBetween(BigDecimal value1, BigDecimal value2) {
+            addCriterion("interest_rate not between", value1, value2, "interestRate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingIsNull() {
+            addCriterion("is_rate_floating is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingIsNotNull() {
+            addCriterion("is_rate_floating is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingEqualTo(Byte value) {
+            addCriterion("is_rate_floating =", value, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingNotEqualTo(Byte value) {
+            addCriterion("is_rate_floating <>", value, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingGreaterThan(Byte value) {
+            addCriterion("is_rate_floating >", value, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_rate_floating >=", value, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingLessThan(Byte value) {
+            addCriterion("is_rate_floating <", value, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingLessThanOrEqualTo(Byte value) {
+            addCriterion("is_rate_floating <=", value, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingIn(List<Byte> values) {
+            addCriterion("is_rate_floating in", values, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingNotIn(List<Byte> values) {
+            addCriterion("is_rate_floating not in", values, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingBetween(Byte value1, Byte value2) {
+            addCriterion("is_rate_floating between", value1, value2, "isRateFloating");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsRateFloatingNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_rate_floating not between", value1, value2, "isRateFloating");
             return (Criteria) this;
         }
 
