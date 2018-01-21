@@ -28,8 +28,9 @@ public class FingerApplication {
     private static final Logger logger = LoggerFactory.getLogger(FingerApplication.class);
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(FingerApplication.class, args);
-        startTest(context);
+//        ConfigurableApplicationContext context =
+        SpringApplication.run(FingerApplication.class, args);
+//        startTest(context);
     }
 
 
@@ -43,14 +44,14 @@ public class FingerApplication {
         return new SendResponsePreFilter();
     }
 
-    private static void startTest(ConfigurableApplicationContext context) {
-        try {
-            ((RedisTemplate) (context.getBean("redisTemplate"))).opsForValue().get("test");
-        } catch (Exception e) {
-            logger.error("redis连接失败,请查看配置！！！", e);
-            System.exit(-1);
-        }
-        logger.info("redis检测连接成功！！！");
-
-    }
+//    private static void startTest(ConfigurableApplicationContext context) {
+//        try {
+//            ((RedisTemplate) (context.getBean("redisTemplate"))).opsForValue().get("test");
+//        } catch (Exception e) {
+//            logger.error("redis连接失败,请查看配置！！！", e);
+//            System.exit(-1);
+//        }
+//        logger.info("redis检测连接成功！！！");
+//
+//    }
 }
