@@ -4,23 +4,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class UserCollectionDOExample {
+public class UserFriendCountDOExample {
     /**
-     * user_collection
+     * user_friend_count
      */
     protected String orderByClause;
 
     /**
-     * user_collection
+     * user_friend_count
      */
     protected boolean distinct;
 
     /**
-     * user_collection
+     * user_friend_count
      */
     protected List<Criteria> oredCriteria;
 
-    public UserCollectionDOExample() {
+    public UserFriendCountDOExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -74,7 +74,7 @@ public class UserCollectionDOExample {
     }
 
     /**
-     * user_collection null
+     * user_friend_count null
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -115,66 +115,6 @@ public class UserCollectionDOExample {
                 throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
-        }
-
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdEqualTo(Long value) {
-            addCriterion("id =", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotEqualTo(Long value) {
-            addCriterion("id <>", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThan(Long value) {
-            addCriterion("id >", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("id >=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThan(Long value) {
-            addCriterion("id <", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThanOrEqualTo(Long value) {
-            addCriterion("id <=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIn(List<Long> values) {
-            addCriterion("id in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotIn(List<Long> values) {
-            addCriterion("id not in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdBetween(Long value1, Long value2) {
-            addCriterion("id between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotBetween(Long value1, Long value2) {
-            addCriterion("id not between", value1, value2, "id");
-            return (Criteria) this;
         }
 
         public Criteria andUserIdIsNull() {
@@ -237,123 +177,63 @@ public class UserCollectionDOExample {
             return (Criteria) this;
         }
 
-        public Criteria andContentIdIsNull() {
-            addCriterion("content_id is null");
+        public Criteria andFriendCountsIsNull() {
+            addCriterion("friend_counts is null");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdIsNotNull() {
-            addCriterion("content_id is not null");
+        public Criteria andFriendCountsIsNotNull() {
+            addCriterion("friend_counts is not null");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdEqualTo(Long value) {
-            addCriterion("content_id =", value, "contentId");
+        public Criteria andFriendCountsEqualTo(Long value) {
+            addCriterion("friend_counts =", value, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdNotEqualTo(Long value) {
-            addCriterion("content_id <>", value, "contentId");
+        public Criteria andFriendCountsNotEqualTo(Long value) {
+            addCriterion("friend_counts <>", value, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdGreaterThan(Long value) {
-            addCriterion("content_id >", value, "contentId");
+        public Criteria andFriendCountsGreaterThan(Long value) {
+            addCriterion("friend_counts >", value, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("content_id >=", value, "contentId");
+        public Criteria andFriendCountsGreaterThanOrEqualTo(Long value) {
+            addCriterion("friend_counts >=", value, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdLessThan(Long value) {
-            addCriterion("content_id <", value, "contentId");
+        public Criteria andFriendCountsLessThan(Long value) {
+            addCriterion("friend_counts <", value, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdLessThanOrEqualTo(Long value) {
-            addCriterion("content_id <=", value, "contentId");
+        public Criteria andFriendCountsLessThanOrEqualTo(Long value) {
+            addCriterion("friend_counts <=", value, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdIn(List<Long> values) {
-            addCriterion("content_id in", values, "contentId");
+        public Criteria andFriendCountsIn(List<Long> values) {
+            addCriterion("friend_counts in", values, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdNotIn(List<Long> values) {
-            addCriterion("content_id not in", values, "contentId");
+        public Criteria andFriendCountsNotIn(List<Long> values) {
+            addCriterion("friend_counts not in", values, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdBetween(Long value1, Long value2) {
-            addCriterion("content_id between", value1, value2, "contentId");
+        public Criteria andFriendCountsBetween(Long value1, Long value2) {
+            addCriterion("friend_counts between", value1, value2, "friendCounts");
             return (Criteria) this;
         }
 
-        public Criteria andContentIdNotBetween(Long value1, Long value2) {
-            addCriterion("content_id not between", value1, value2, "contentId");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeIsNull() {
-            addCriterion("content_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeIsNotNull() {
-            addCriterion("content_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeEqualTo(Byte value) {
-            addCriterion("content_type =", value, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeNotEqualTo(Byte value) {
-            addCriterion("content_type <>", value, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeGreaterThan(Byte value) {
-            addCriterion("content_type >", value, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeGreaterThanOrEqualTo(Byte value) {
-            addCriterion("content_type >=", value, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeLessThan(Byte value) {
-            addCriterion("content_type <", value, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeLessThanOrEqualTo(Byte value) {
-            addCriterion("content_type <=", value, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeIn(List<Byte> values) {
-            addCriterion("content_type in", values, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeNotIn(List<Byte> values) {
-            addCriterion("content_type not in", values, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeBetween(Byte value1, Byte value2) {
-            addCriterion("content_type between", value1, value2, "contentType");
-            return (Criteria) this;
-        }
-
-        public Criteria andContentTypeNotBetween(Byte value1, Byte value2) {
-            addCriterion("content_type not between", value1, value2, "contentType");
+        public Criteria andFriendCountsNotBetween(Long value1, Long value2) {
+            addCriterion("friend_counts not between", value1, value2, "friendCounts");
             return (Criteria) this;
         }
 
@@ -419,7 +299,7 @@ public class UserCollectionDOExample {
     }
 
     /**
-     * user_collection
+     * user_friend_count
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -429,7 +309,7 @@ public class UserCollectionDOExample {
     }
 
     /**
-     * user_collection null
+     * user_friend_count null
      */
     public static class Criterion {
         private String condition;

@@ -282,10 +282,6 @@ public class UserDemandDO implements Serializable {
         this.createTime = createTime;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

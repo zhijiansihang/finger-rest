@@ -3,21 +3,16 @@ package com.zhijiansihang.finger.app.dao.mysql.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserFriendDO implements Serializable {
-    /**
-     * 好友关系表id
-     */
-    private Long id;
-
+public class UserFriendCountDO implements Serializable {
     /**
      * 我的用户id
      */
-    private Long myUserId;
+    private Long userId;
 
     /**
-     * 用户id
+     * 好于数
      */
-    private Long friendUserId;
+    private Long friendCounts;
 
     /**
      * 创建时间
@@ -25,56 +20,40 @@ public class UserFriendDO implements Serializable {
     private Date createTime;
 
     /**
-     * user_friend
+     * user_friend_count
      */
     private static final long serialVersionUID = 1L;
 
     /**
-     * 好友关系表id
-     * @return id 好友关系表id
+     * 我的用户id
+     * @return user_id 我的用户id
      */
-    public Long getId() {
-        return id;
-    }
-
-    /**
-     * 好友关系表id
-     * @param id 好友关系表id
-     */
-    public void setId(Long id) {
-        this.id = id;
+    public Long getUserId() {
+        return userId;
     }
 
     /**
      * 我的用户id
-     * @return my_user_id 我的用户id
+     * @param userId 我的用户id
      */
-    public Long getMyUserId() {
-        return myUserId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     /**
-     * 我的用户id
-     * @param myUserId 我的用户id
+     * 好于数
+     * @return friend_counts 好于数
      */
-    public void setMyUserId(Long myUserId) {
-        this.myUserId = myUserId;
+    public Long getFriendCounts() {
+        return friendCounts;
     }
 
     /**
-     * 用户id
-     * @return friend_user_id 用户id
+     * 好于数
+     * @param friendCounts 好于数
      */
-    public Long getFriendUserId() {
-        return friendUserId;
-    }
-
-    /**
-     * 用户id
-     * @param friendUserId 用户id
-     */
-    public void setFriendUserId(Long friendUserId) {
-        this.friendUserId = friendUserId;
+    public void setFriendCounts(Long friendCounts) {
+        this.friendCounts = friendCounts;
     }
 
     /**
@@ -99,9 +78,8 @@ public class UserFriendDO implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", myUserId=").append(myUserId);
-        sb.append(", friendUserId=").append(friendUserId);
+        sb.append(", userId=").append(userId);
+        sb.append(", friendCounts=").append(friendCounts);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

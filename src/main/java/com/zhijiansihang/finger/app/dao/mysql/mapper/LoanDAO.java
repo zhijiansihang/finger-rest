@@ -3,29 +3,28 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LoanDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from loan",
         "where loan_id = #{loanId,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long loanId);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into loan (institution_user_id, title, ",
         "loan_type, product_type, ",
-        "amount, reserve_amount, ",
+        "amount, interest_rate, ",
+        "is_rate_floating, reserve_amount, ",
         "loan_status, is_display, ",
         "location_size, product_direction, ",
         "safeguard_way, begin_amount, ",
@@ -43,7 +42,8 @@ public interface LoanDAO {
         "create_time)",
         "values (#{institutionUserId,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, ",
         "#{loanType,jdbcType=TINYINT}, #{productType,jdbcType=SMALLINT}, ",
-        "#{amount,jdbcType=DECIMAL}, #{reserveAmount,jdbcType=DECIMAL}, ",
+        "#{amount,jdbcType=DECIMAL}, #{interestRate,jdbcType=DECIMAL}, ",
+        "#{isRateFloating,jdbcType=TINYINT}, #{reserveAmount,jdbcType=DECIMAL}, ",
         "#{loanStatus,jdbcType=SMALLINT}, #{isDisplay,jdbcType=TINYINT}, ",
         "#{locationSize,jdbcType=INTEGER}, #{productDirection,jdbcType=VARCHAR}, ",
         "#{safeguardWay,jdbcType=VARCHAR}, #{beginAmount,jdbcType=DECIMAL}, ",
@@ -63,52 +63,29 @@ public interface LoanDAO {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="loanId", before=false, resultType=Long.class)
     int insert(LoanDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(LoanDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<LoanDO> selectByExampleWithRowbounds(LoanDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<LoanDO> selectByExample(LoanDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
-        "loan_id, institution_user_id, title, loan_type, product_type, amount, reserve_amount, ",
-        "loan_status, is_display, location_size, product_direction, safeguard_way, begin_amount, ",
-        "earning_desc, issuer, fund_type, servicing_way, adaptation_deadline, investment_deadline, ",
-        "distribution_region, ratio_type, bright_spot, finance_introduce, money_use, ",
-        "repay_source, risk_control, product_desc, product_desc_files, risk_alert, capital_type, ",
-        "organize_form, manage_rate, review_code, review_desc, update_time, create_time",
+        "loan_id, institution_user_id, title, loan_type, product_type, amount, interest_rate, ",
+        "is_rate_floating, reserve_amount, loan_status, is_display, location_size, product_direction, ",
+        "safeguard_way, begin_amount, earning_desc, issuer, fund_type, servicing_way, ",
+        "adaptation_deadline, investment_deadline, distribution_region, ratio_type, bright_spot, ",
+        "finance_introduce, money_use, repay_source, risk_control, product_desc, product_desc_files, ",
+        "risk_alert, capital_type, organize_form, manage_rate, review_code, review_desc, ",
+        "update_time, create_time",
         "from loan",
         "where loan_id = #{loanId,jdbcType=BIGINT}"
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.LoanDAO.BaseResultMap")
     LoanDO selectByPrimaryKey(Long loanId);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(LoanDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update loan",
         "set institution_user_id = #{institutionUserId,jdbcType=BIGINT},",
@@ -116,6 +93,8 @@ public interface LoanDAO {
           "loan_type = #{loanType,jdbcType=TINYINT},",
           "product_type = #{productType,jdbcType=SMALLINT},",
           "amount = #{amount,jdbcType=DECIMAL},",
+          "interest_rate = #{interestRate,jdbcType=DECIMAL},",
+          "is_rate_floating = #{isRateFloating,jdbcType=TINYINT},",
           "reserve_amount = #{reserveAmount,jdbcType=DECIMAL},",
           "loan_status = #{loanStatus,jdbcType=SMALLINT},",
           "is_display = #{isDisplay,jdbcType=TINYINT},",

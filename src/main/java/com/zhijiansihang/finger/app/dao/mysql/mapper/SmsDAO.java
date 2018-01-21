@@ -3,25 +3,23 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.SmsDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.SmsDOExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SmsDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from sms",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into sms (mobile, req_message, ",
         "resp_message, channel_name, ",
@@ -37,28 +35,12 @@ public interface SmsDAO {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(SmsDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(SmsDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<SmsDO> selectByExampleWithRowbounds(SmsDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<SmsDO> selectByExample(SmsDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
         "id, mobile, req_message, resp_message, channel_name, template_code, request_id, ",
@@ -69,16 +51,8 @@ public interface SmsDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.SmsDAO.BaseResultMap")
     SmsDO selectByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(SmsDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update sms",
         "set mobile = #{mobile,jdbcType=VARCHAR},",

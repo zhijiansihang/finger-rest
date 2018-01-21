@@ -50,6 +50,11 @@ public class UserFinanceDetailDO implements Serializable {
     private String personalProfile;
 
     /**
+     * 是否添加 1:为已添加 0:未添加
+     */
+    private Byte isAdd;
+
+    /**
      * 是否删除 1:为删除 0:未删除
      */
     private Byte isDeleted;
@@ -229,6 +234,22 @@ public class UserFinanceDetailDO implements Serializable {
     }
 
     /**
+     * 是否添加 1:为已添加 0:未添加
+     * @return is_add 是否添加 1:为已添加 0:未添加
+     */
+    public Byte getIsAdd() {
+        return isAdd;
+    }
+
+    /**
+     * 是否添加 1:为已添加 0:未添加
+     * @param isAdd 是否添加 1:为已添加 0:未添加
+     */
+    public void setIsAdd(Byte isAdd) {
+        this.isAdd = isAdd;
+    }
+
+    /**
      * 是否删除 1:为删除 0:未删除
      * @return is_deleted 是否删除 1:为删除 0:未删除
      */
@@ -324,10 +345,6 @@ public class UserFinanceDetailDO implements Serializable {
         this.createTime = createTime;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -343,6 +360,7 @@ public class UserFinanceDetailDO implements Serializable {
         sb.append(", serviceConcept=").append(serviceConcept);
         sb.append(", workingExperience=").append(workingExperience);
         sb.append(", personalProfile=").append(personalProfile);
+        sb.append(", isAdd=").append(isAdd);
         sb.append(", isDeleted=").append(isDeleted);
         sb.append(", loanCount=").append(loanCount);
         sb.append(", userOrderCount=").append(userOrderCount);

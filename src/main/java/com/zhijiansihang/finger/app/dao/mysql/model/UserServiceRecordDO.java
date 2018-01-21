@@ -3,26 +3,26 @@ package com.zhijiansihang.finger.app.dao.mysql.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserCollectionDO implements Serializable {
+public class UserServiceRecordDO implements Serializable {
     /**
      * id
      */
     private Long id;
 
     /**
-     * user_id
+     * 用户id谁服务
      */
     private Long userId;
 
     /**
-     * 内容id:理财师就是userid，产品就是loanid
+     * 被服务用户id
      */
-    private Long contentId;
+    private Long personUserId;
 
     /**
-     * 收藏的类型 1:理财师(店铺) 2:产品
+     * 1:为咨询0:预约
      */
-    private Byte contentType;
+    private Byte serviceType;
 
     /**
      * 创建时间
@@ -30,7 +30,7 @@ public class UserCollectionDO implements Serializable {
     private Date createTime;
 
     /**
-     * user_collection
+     * user_service_record
      */
     private static final long serialVersionUID = 1L;
 
@@ -51,51 +51,51 @@ public class UserCollectionDO implements Serializable {
     }
 
     /**
-     * user_id
-     * @return user_id user_id
+     * 用户id谁服务
+     * @return user_id 用户id谁服务
      */
     public Long getUserId() {
         return userId;
     }
 
     /**
-     * user_id
-     * @param userId user_id
+     * 用户id谁服务
+     * @param userId 用户id谁服务
      */
     public void setUserId(Long userId) {
         this.userId = userId;
     }
 
     /**
-     * 内容id:理财师就是userid，产品就是loanid
-     * @return content_id 内容id:理财师就是userid，产品就是loanid
+     * 被服务用户id
+     * @return person_user_id 被服务用户id
      */
-    public Long getContentId() {
-        return contentId;
+    public Long getPersonUserId() {
+        return personUserId;
     }
 
     /**
-     * 内容id:理财师就是userid，产品就是loanid
-     * @param contentId 内容id:理财师就是userid，产品就是loanid
+     * 被服务用户id
+     * @param personUserId 被服务用户id
      */
-    public void setContentId(Long contentId) {
-        this.contentId = contentId;
+    public void setPersonUserId(Long personUserId) {
+        this.personUserId = personUserId;
     }
 
     /**
-     * 收藏的类型 1:理财师(店铺) 2:产品
-     * @return content_type 收藏的类型 1:理财师(店铺) 2:产品
+     * 1:为咨询0:预约
+     * @return service_type 1:为咨询0:预约
      */
-    public Byte getContentType() {
-        return contentType;
+    public Byte getServiceType() {
+        return serviceType;
     }
 
     /**
-     * 收藏的类型 1:理财师(店铺) 2:产品
-     * @param contentType 收藏的类型 1:理财师(店铺) 2:产品
+     * 1:为咨询0:预约
+     * @param serviceType 1:为咨询0:预约
      */
-    public void setContentType(Byte contentType) {
-        this.contentType = contentType;
+    public void setServiceType(Byte serviceType) {
+        this.serviceType = serviceType;
     }
 
     /**
@@ -122,8 +122,8 @@ public class UserCollectionDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
-        sb.append(", contentId=").append(contentId);
-        sb.append(", contentType=").append(contentType);
+        sb.append(", personUserId=").append(personUserId);
+        sb.append(", serviceType=").append(serviceType);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");

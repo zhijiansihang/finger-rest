@@ -345,10 +345,6 @@ public class CmsDO implements Serializable {
         this.updateBy = updateBy;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

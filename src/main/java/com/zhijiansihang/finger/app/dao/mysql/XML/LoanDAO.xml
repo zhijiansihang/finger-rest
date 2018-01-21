@@ -8,6 +8,8 @@
     <result column="loan_type" jdbcType="TINYINT" property="loanType" />
     <result column="product_type" jdbcType="SMALLINT" property="productType" />
     <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="interest_rate" jdbcType="DECIMAL" property="interestRate" />
+    <result column="is_rate_floating" jdbcType="TINYINT" property="isRateFloating" />
     <result column="reserve_amount" jdbcType="DECIMAL" property="reserveAmount" />
     <result column="loan_status" jdbcType="SMALLINT" property="loanStatus" />
     <result column="is_display" jdbcType="TINYINT" property="isDisplay" />
@@ -69,12 +71,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    loan_id, institution_user_id, title, loan_type, product_type, amount, reserve_amount, 
-    loan_status, is_display, location_size, product_direction, safeguard_way, begin_amount, 
-    earning_desc, issuer, fund_type, servicing_way, adaptation_deadline, investment_deadline, 
-    distribution_region, ratio_type, bright_spot, finance_introduce, money_use, repay_source, 
-    risk_control, product_desc, product_desc_files, risk_alert, capital_type, organize_form, 
-    manage_rate, review_code, review_desc, update_time, create_time
+    loan_id, institution_user_id, title, loan_type, product_type, amount, interest_rate, 
+    is_rate_floating, reserve_amount, loan_status, is_display, location_size, product_direction, 
+    safeguard_way, begin_amount, earning_desc, issuer, fund_type, servicing_way, adaptation_deadline, 
+    investment_deadline, distribution_region, ratio_type, bright_spot, finance_introduce, 
+    money_use, repay_source, risk_control, product_desc, product_desc_files, risk_alert, 
+    capital_type, organize_form, manage_rate, review_code, review_desc, update_time, 
+    create_time
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample" resultMap="BaseResultMap">
     select
@@ -110,6 +113,12 @@
       </if>
       <if test="amount != null">
         amount,
+      </if>
+      <if test="interestRate != null">
+        interest_rate,
+      </if>
+      <if test="isRateFloating != null">
+        is_rate_floating,
       </if>
       <if test="reserveAmount != null">
         reserve_amount,
@@ -217,6 +226,12 @@
       </if>
       <if test="amount != null">
         #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="interestRate != null">
+        #{interestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="isRateFloating != null">
+        #{isRateFloating,jdbcType=TINYINT},
       </if>
       <if test="reserveAmount != null">
         #{reserveAmount,jdbcType=DECIMAL},
@@ -327,6 +342,12 @@
       </if>
       <if test="amount != null">
         amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="interestRate != null">
+        interest_rate = #{interestRate,jdbcType=DECIMAL},
+      </if>
+      <if test="isRateFloating != null">
+        is_rate_floating = #{isRateFloating,jdbcType=TINYINT},
       </if>
       <if test="reserveAmount != null">
         reserve_amount = #{reserveAmount,jdbcType=DECIMAL},

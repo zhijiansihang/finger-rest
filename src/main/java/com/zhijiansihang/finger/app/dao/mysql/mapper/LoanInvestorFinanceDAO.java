@@ -3,25 +3,23 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDOExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LoanInvestorFinanceDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from loan_investor_finance",
         "where id = #{id,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into loan_investor_finance (loan_id, user_id, ",
         "real_name, mobile, ",
@@ -37,28 +35,12 @@ public interface LoanInvestorFinanceDAO {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="id", before=false, resultType=Long.class)
     int insert(LoanInvestorFinanceDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(LoanInvestorFinanceDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<LoanInvestorFinanceDO> selectByExampleWithRowbounds(LoanInvestorFinanceDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<LoanInvestorFinanceDO> selectByExample(LoanInvestorFinanceDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
         "id, loan_id, user_id, real_name, mobile, amount, finance_user_id, is_deal, update_time, ",
@@ -69,16 +51,8 @@ public interface LoanInvestorFinanceDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.LoanInvestorFinanceDAO.BaseResultMap")
     LoanInvestorFinanceDO selectByPrimaryKey(Long id);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(LoanInvestorFinanceDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update loan_investor_finance",
         "set loan_id = #{loanId,jdbcType=BIGINT},",

@@ -3,25 +3,23 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
+
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDAO {
-    /**
-     *
-     * @mbg.generated
-     */
     @Delete({
         "delete from user",
         "where user_id = #{userId,jdbcType=BIGINT}"
     })
     int deleteByPrimaryKey(Long userId);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Insert({
         "insert into user (mobile, real_name, ",
         "id_card, nick_name, ",
@@ -41,28 +39,12 @@ public interface UserDAO {
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="userId", before=false, resultType=Long.class)
     int insert(UserDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int insertSelective(UserDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserDO> selectByExampleWithRowbounds(UserDOExample example, RowBounds rowBounds);
 
-    /**
-     *
-     * @mbg.generated
-     */
     List<UserDO> selectByExample(UserDOExample example);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Select({
         "select",
         "user_id, mobile, real_name, id_card, nick_name, passwd, is_name_auth, is_frozen, ",
@@ -74,16 +56,8 @@ public interface UserDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO.BaseResultMap")
     UserDO selectByPrimaryKey(Long userId);
 
-    /**
-     *
-     * @mbg.generated
-     */
     int updateByPrimaryKeySelective(UserDO record);
 
-    /**
-     *
-     * @mbg.generated
-     */
     @Update({
         "update user",
         "set mobile = #{mobile,jdbcType=VARCHAR},",

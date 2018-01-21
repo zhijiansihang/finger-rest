@@ -20,76 +20,40 @@ public class UserFinanceDetailDOExample {
      */
     protected List<Criteria> oredCriteria;
 
-    /**
-     *
-     * @mbg.generated
-     */
     public UserFinanceDetailDOExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public String getOrderByClause() {
         return orderByClause;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public boolean isDistinct() {
         return distinct;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
         oredCriteria.add(criteria);
         return criteria;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
         if (oredCriteria.size() == 0) {
@@ -98,19 +62,11 @@ public class UserFinanceDetailDOExample {
         return criteria;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
         return criteria;
     }
 
-    /**
-     *
-     * @mbg.generated
-     */
     public void clear() {
         oredCriteria.clear();
         orderByClause = null;
@@ -768,6 +724,66 @@ public class UserFinanceDetailDOExample {
 
         public Criteria andPersonalProfileNotBetween(String value1, String value2) {
             addCriterion("personal_profile not between", value1, value2, "personalProfile");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddIsNull() {
+            addCriterion("is_add is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddIsNotNull() {
+            addCriterion("is_add is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddEqualTo(Byte value) {
+            addCriterion("is_add =", value, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddNotEqualTo(Byte value) {
+            addCriterion("is_add <>", value, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddGreaterThan(Byte value) {
+            addCriterion("is_add >", value, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_add >=", value, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddLessThan(Byte value) {
+            addCriterion("is_add <", value, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddLessThanOrEqualTo(Byte value) {
+            addCriterion("is_add <=", value, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddIn(List<Byte> values) {
+            addCriterion("is_add in", values, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddNotIn(List<Byte> values) {
+            addCriterion("is_add not in", values, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddBetween(Byte value1, Byte value2) {
+            addCriterion("is_add between", value1, value2, "isAdd");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsAddNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_add not between", value1, value2, "isAdd");
             return (Criteria) this;
         }
 
