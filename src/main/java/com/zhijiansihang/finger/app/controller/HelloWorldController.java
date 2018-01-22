@@ -4,7 +4,7 @@ import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDOExample;
-import com.zhijiansihang.finger.app.service.UserService;
+import com.zhijiansihang.finger.app.service.UserDetailService;
 import com.zhijiansihang.finger.app.sharing.SharingProperties;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.CmsVO;
@@ -25,7 +25,7 @@ public class HelloWorldController {
     private static Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
 
     @Autowired
-    UserService userService;
+    UserDetailService userDetailService;
 
     @Autowired
     SharingProperties sharingProperties;

@@ -63,6 +63,7 @@ public class UserDetailService {
 
         UserFriendCountDO userFriendCountDO = new UserFriendCountDO();
         userFriendCountDO.setUserId((long)userId);
+        userFriendCountDO.setFriendCounts(0L);
         userFriendCountDAO.insertSelective(userFriendCountDO);
         UserDO userByMobile = getUserByMobile(mobile);
 

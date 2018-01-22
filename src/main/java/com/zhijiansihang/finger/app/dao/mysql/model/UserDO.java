@@ -77,7 +77,7 @@ public class UserDO implements Serializable {
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private Date updateTime =new Date();
 
     /**
      * 创建时间

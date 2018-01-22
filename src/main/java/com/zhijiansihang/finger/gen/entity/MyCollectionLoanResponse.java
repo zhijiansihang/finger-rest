@@ -37,7 +37,6 @@ public class MyCollectionLoanResponse extends MobileMessage {
 		private String loanStatus;
 		private String loanType;
 		private String productType;
-		private String productType;
 		private String progress;
 		private String safeguardWay;
 		private String title;
@@ -152,16 +151,6 @@ public class MyCollectionLoanResponse extends MobileMessage {
 			this.productType = productType;
 		}
 
-		/**
-		 * @return 产品类型:1.信托；2.资管；3.其他资产,4私募
-		 */
-		public String getProductType() {
-			return productType;
-		}
-
-		public void setProductType(String productType) {
-			this.productType = productType;
-		}
 
 		/**
 		 * @return 进度

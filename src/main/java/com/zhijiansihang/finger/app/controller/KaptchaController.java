@@ -24,8 +24,4 @@ public class KaptchaController {
         kaptchaTools.create(httpServletResponse);
     }
 
-    @RequestMapping("/kaptcha/check")
-    public boolean checkKaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String code) throws Exception {
-        return kaptchaTools.check(httpServletRequest, httpServletResponse, code);
-    }
 }

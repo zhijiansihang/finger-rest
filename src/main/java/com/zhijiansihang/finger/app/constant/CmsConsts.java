@@ -74,7 +74,45 @@ public class CmsConsts {
             }
             return serverLink +"/"+ this.name().toLowerCase()+"/";
         }
+    }
 
+    public static enum RiskAssessmentEnum{
+        LEVEL_1(1,"保守型"),
+        LEVEL_2(2,"稳健型"),
+        LEVEL_3(3,"成熟型"),
+        LEVEL_4(4,"进取型"),
+        LEVEL_5(5,"激进型");
 
+        public Integer getRole() {
+            return role;
+        }
+
+        public void setRole(Integer role) {
+            this.role = role;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
+        }
+
+        private Integer role;
+        private String desc;
+        RiskAssessmentEnum(Integer role, String desc) {
+            this.role = role;
+            this.desc = desc;
+        }
+    }
+    public static String getRiskAssessment(int level){
+        RiskAssessmentEnum[] values = RiskAssessmentEnum.values();
+        for (RiskAssessmentEnum riskAssessmentEnum:values){
+            if (riskAssessmentEnum.getRole().intValue()==level){
+                return riskAssessmentEnum.getDesc();
+            }
+        }
+        return "";
     }
 }

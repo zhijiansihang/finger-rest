@@ -2,6 +2,7 @@ package com.zhijiansihang.finger.gen.serviceImpl;
 
 
 import com.zhijiansihang.common.ResponseHeader;
+import com.zhijiansihang.common.ResponseHeaderBuilder;
 import com.zhijiansihang.finger.app.sharing.kaptcha.KaptchaTools;
 import com.zhijiansihang.finger.app.sharing.message.VerificationCodeTools;
 import com.zhijiansihang.finger.mmc.MessageService;
@@ -37,20 +38,14 @@ public class GetSmsService implements MessageService<GetSmsRequest, Response<Get
 
         String mobile = request.getMobile();
         if (!StringUtils.hasLength(mobile)){
-            ResponseHeader responseHeader = new
-                    ResponseHeader();
-            responseHeader.setCode(VALIDATEERROR.getCode());
-            responseHeader.setMessage("手机号输入不能空");
+            ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("手机号输入不能空");
             response.setHeader(responseHeader);
             return;
         }
         boolean check = kaptchaTools.check(request.getKaptchaToken(), request.getKaptchaCode());
         if (!check) {
             //图形验证码不正确
-            ResponseHeader responseHeader = new
-                    ResponseHeader();
-            responseHeader.setCode(VALIDATEERROR.getCode());
-            responseHeader.setMessage("图形验证码错误");
+            ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("图形验证码错误");
             response.setHeader(responseHeader);
             return;
         }

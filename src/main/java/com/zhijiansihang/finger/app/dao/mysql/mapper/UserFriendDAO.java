@@ -54,4 +54,11 @@ public interface UserFriendDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserFriendDO record);
+
+    @Select({
+            "select count(*)",
+            "from user_friend",
+            "where my_user_id = #{myUserId} and friend_user_id = #{friendUserId}"
+    })
+    int existFriendUserid(UserFriendDO userFriendDO);
 }

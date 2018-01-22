@@ -51,4 +51,12 @@ public interface UserFriendCountDAO {
         "where user_id = #{userId,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserFriendCountDO record);
+
+
+    @Update({
+            "update user_friend_count",
+            "set friend_counts = friendCounts + 1 ",
+            "where user_id = #{userId}"
+    })
+    int addFriendCounts(Long userId);
 }

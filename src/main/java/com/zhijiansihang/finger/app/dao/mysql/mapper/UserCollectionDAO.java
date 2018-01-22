@@ -55,4 +55,11 @@ public interface UserCollectionDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserCollectionDO record);
+
+    @Select({
+            "select count(*)",
+            "from user_collection",
+            "where user_id = #{userId} AND content_id=#{contentId} AND content_type=#{contentType}"
+    })
+    int existContentidtypeAndUserid(UserCollectionDO userCollection);
 }

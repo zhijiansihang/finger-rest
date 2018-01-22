@@ -2,6 +2,8 @@ package com.zhijiansihang.finger.gen.serviceImpl;
 
 
 import com.zhijiansihang.common.ResponseHeader;
+import com.zhijiansihang.common.ResponseHeaderBuilder;
+import com.zhijiansihang.finger.app.constant.UserConsts;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.service.UserDetailService;
 import com.zhijiansihang.finger.app.sharing.message.VerificationCodeTools;
@@ -16,6 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Collection;
+import java.util.Collections;
 
 import static com.zhijiansihang.common.RetCode.USERLOCKED;
 import static com.zhijiansihang.common.RetCode.VALIDATEERROR;
@@ -46,10 +51,7 @@ public class LoginOrRegisterService implements MessageService<LoginOrRegisterReq
 
 		boolean check = verificationCodeTools.check(mobile, smsCode);
 		if (!check){
-			ResponseHeader responseHeader = new
-					ResponseHeader();
-			responseHeader.setCode(VALIDATEERROR.getCode());
-			responseHeader.setMessage("短信验证码错误");
+			ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("短信验证码错误");
 			response.setHeader(responseHeader);
 			return;
 		}
@@ -73,8 +75,9 @@ public class LoginOrRegisterService implements MessageService<LoginOrRegisterReq
 		session.setMobile(userDO.getMobile());
 		session.setId(userDO.getUserId());
 		session.setDisabled(false);
-		//TODO 角色
-		session.setRoleNames(null);
+		Short roles = userDO.getRoles();
+		String userRoles = UserConsts.getUserRoles(roles.intValue());
+		session.setRoleNames(Collections.singleton(userRoles));
 		String generate = jwtTokenUtil.generate(session);
 		response.getBody().setIdCard(userDO.getIdCard());
 		response.getBody().setIsNameAuth(userDO.getIsNameAuth().toString());

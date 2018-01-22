@@ -24,7 +24,7 @@ public class RedisLock implements Lock {
 
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,String> redisTemplate;
 
     @Override
     public void lock(String key) {
@@ -33,7 +33,7 @@ public class RedisLock implements Lock {
 
     @Override
     public boolean tryLock(String key) {
-        return tryLock(key, 0L, null);
+        return tryLock(key, 20, TimeUnit.SECONDS);
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDOExample;
 import java.util.List;
+
+import com.zhijiansihang.finger.app.vo.CmsVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;

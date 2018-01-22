@@ -37,12 +37,28 @@ public class VerificationCodeTools {
 
     private static final String ROOT = "/";
 
+    public static String getRandom4() {
+        String random = getRandom(4);
+        return random;
+    }
+    public static String getRandom(int place) {
+        if (place <= 4) {
+            place = 4;
+        }
+        final int length = place;
+        StringBuilder num = new StringBuilder("");
+        for (int i = 0; i < length; i++) {
+            num = num.append((int) Math.floor(Math.random() * 9 + 1));
+        }
+        return num.toString();
+    }
+
     public String generateCode(){
         boolean openThirdpartyService = sharingProperties.isOpenThirdpartyService();
         //验证码默认值
         String code = "1111";
         if (openThirdpartyService){
-            //TODO 随机数验证码生成
+            code = getRandom4();
         }
         return code;
     }
