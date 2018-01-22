@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 增加收藏
+ * Y增加收藏
  * 
  */
 @Component("genaddSolutionService")
 public class AddSolutionService implements MessageService<AddSolutionRequest, Response<AddSolutionResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(AddSolutionService.class);
-	private static final String SERVICE_DESC = "增加收藏";
+	private static final String SERVICE_DESC = "Y增加收藏";
 
 	@Override
 	public void execute(AddSolutionRequest request, Response<AddSolutionResponse> response) {

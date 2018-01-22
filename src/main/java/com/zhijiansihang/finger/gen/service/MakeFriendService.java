@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 交朋友
+ * Y交朋友
  * 
  */
 @Component("genmakeFriendService")
 public class MakeFriendService implements MessageService<MakeFriendRequest, Response<MakeFriendResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MakeFriendService.class);
-	private static final String SERVICE_DESC = "交朋友";
+	private static final String SERVICE_DESC = "Y交朋友";
 
 	@Override
 	public void execute(MakeFriendRequest request, Response<MakeFriendResponse> response) {

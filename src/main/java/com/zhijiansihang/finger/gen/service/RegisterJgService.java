@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 注册极光
+ * Y注册极光
  * 
  */
 @Component("genregisterJgService")
 public class RegisterJgService implements MessageService<RegisterJgRequest, Response<RegisterJgResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RegisterJgService.class);
-	private static final String SERVICE_DESC = "注册极光";
+	private static final String SERVICE_DESC = "Y注册极光";
 
 	@Override
 	public void execute(RegisterJgRequest request, Response<RegisterJgResponse> response) {

@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 注册或者登陆
+ * Y注册或者登陆
  * 
  */
 @Component("genloginOrRegisterService")
 public class LoginOrRegisterService implements MessageService<LoginOrRegisterRequest, Response<LoginOrRegisterResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(LoginOrRegisterService.class);
-	private static final String SERVICE_DESC = "注册或者登陆";
+	private static final String SERVICE_DESC = "Y注册或者登陆";
 
 	@Override
 	public void execute(LoginOrRegisterRequest request, Response<LoginOrRegisterResponse> response) {

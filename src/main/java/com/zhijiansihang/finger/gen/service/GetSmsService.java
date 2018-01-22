@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 获取短信验证码
+ * Y获取短信验证码
  * 
  */
 @Component("gengetSmsService")
 public class GetSmsService implements MessageService<GetSmsRequest, Response<GetSmsResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GetSmsService.class);
-	private static final String SERVICE_DESC = "获取短信验证码";
+	private static final String SERVICE_DESC = "Y获取短信验证码";
 
 	@Override
 	public void execute(GetSmsRequest request, Response<GetSmsResponse> response) {

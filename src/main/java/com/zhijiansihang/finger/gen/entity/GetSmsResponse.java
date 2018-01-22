@@ -7,7 +7,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * 获取短信验证码.服务端响应
+ * Y获取短信验证码.服务端响应
  * 
  * @author 代码生成器v1.0
  * 

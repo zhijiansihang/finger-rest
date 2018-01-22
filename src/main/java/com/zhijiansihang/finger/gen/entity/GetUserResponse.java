@@ -7,7 +7,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * 获取用户.服务端响应
+ * Y获取用户.服务端响应
  * 
  * @author 代码生成器v1.0
  * 
@@ -134,7 +134,7 @@ public class GetUserResponse extends MobileMessage {
 	}
 
 	/**
-	 * @return 用户角色:3:用户投资人4:个人理财师5:机构理财师
+	 * @return 用户角色:3:用户投资人4:理财师
 	 */
 	public String getRoles() {
 		return roles;

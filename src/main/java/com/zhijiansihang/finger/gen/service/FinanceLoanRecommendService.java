@@ -44,13 +44,13 @@ public class FinanceLoanRecommendService implements MessageService<FinanceLoanRe
 		elem.setAdaptationDeadline("10");
 		elem.setBeginAmount("1");
 		elem.setBrightSpot("0");
+		elem.setFundType("1");
 		elem.setInterestRate("10");
 		elem.setInvestmentDeadline("10");
 		elem.setIsRateFloating("0");
 		elem.setLoanId("1");
 		elem.setLoanStatus("10");
 		elem.setLoanType("1");
-		elem.setProductType("1");
 		elem.setProductType("10");
 		elem.setProgress("40");
 		elem.setSafeguardWay("1");

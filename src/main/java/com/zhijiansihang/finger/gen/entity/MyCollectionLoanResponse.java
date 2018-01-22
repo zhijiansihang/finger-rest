@@ -30,6 +30,7 @@ public class MyCollectionLoanResponse extends MobileMessage {
 		private String adaptationDeadline;
 		private String beginAmount;
 		private String brightSpot;
+		private String fundType;
 		private String interestRate;
 		private String investmentDeadline;
 		private String isRateFloating;
@@ -72,6 +73,17 @@ public class MyCollectionLoanResponse extends MobileMessage {
 
 		public void setBrightSpot(String brightSpot) {
 			this.brightSpot = brightSpot;
+		}
+
+		/**
+		 * @return 基金类型
+		 */
+		public String getFundType() {
+			return fundType;
+		}
+
+		public void setFundType(String fundType) {
+			this.fundType = fundType;
 		}
 
 		/**
@@ -141,7 +153,7 @@ public class MyCollectionLoanResponse extends MobileMessage {
 		}
 
 		/**
-		 * @return 产品类型基金类型
+		 * @return 产品类型:1.信托；2.资管；3.其他资产,4私募
 		 */
 		public String getProductType() {
 			return productType;
@@ -150,7 +162,6 @@ public class MyCollectionLoanResponse extends MobileMessage {
 		public void setProductType(String productType) {
 			this.productType = productType;
 		}
-
 
 		/**
 		 * @return 进度

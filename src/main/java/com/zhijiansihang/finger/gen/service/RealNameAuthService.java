@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 实名认证
+ * Y实名认证
  * 
  */
 @Component("genrealNameAuthService")
 public class RealNameAuthService implements MessageService<RealNameAuthRequest, Response<RealNameAuthResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(RealNameAuthService.class);
-	private static final String SERVICE_DESC = "实名认证";
+	private static final String SERVICE_DESC = "Y实名认证";
 
 	@Override
 	public void execute(RealNameAuthRequest request, Response<RealNameAuthResponse> response) {

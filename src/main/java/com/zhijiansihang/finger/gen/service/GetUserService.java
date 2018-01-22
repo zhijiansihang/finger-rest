@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 获取用户
+ * Y获取用户
  * 
  */
 @Component("gengetUserService")
 public class GetUserService implements MessageService<GetUserRequest, Response<GetUserResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GetUserService.class);
-	private static final String SERVICE_DESC = "获取用户";
+	private static final String SERVICE_DESC = "Y获取用户";
 
 	@Override
 	public void execute(GetUserRequest request, Response<GetUserResponse> response) {
