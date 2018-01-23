@@ -43,6 +43,9 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     @Value("${jwt.header:xToken}")
     private String tokenName;
 
+    @Value("${jwt.never.expires:eyJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1MTY3MTYyNDQsInN1YiI6IntcImRpc2FibGVkXCI6ZmFsc2UsXCJpZFwiOjEsXCJsb2dpbk5hbWVcIjpcImFkbWluXCIsXCJyb2xlTmFtZXNcIjpbXCJBRE1JTlwiXX0ifQ.H2sf8lgr9DmqZiX8TE0z7_sh8BkVCsItSVDm0M-Hg9ub9G-Imdr-ncNgQJUm1SexdYMDAZ4heRstjYMNh1gBDQ}")
+    private String neverExpires;
+
     @Autowired
     private RedisTemplate<Serializable, Serializable> redisTemplate;
 
@@ -110,6 +113,10 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
             return true;
         }
 
+        // App内置永不过期的sessionId
+        if(neverExpires.equals(xToken)){
+            return true;
+        }
         return false;
     }
 }
