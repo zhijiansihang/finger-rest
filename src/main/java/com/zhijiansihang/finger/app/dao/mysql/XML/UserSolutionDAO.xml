@@ -8,7 +8,7 @@
     <result column="earning_type" jdbcType="SMALLINT" property="earningType" />
     <result column="expected_deadline" jdbcType="SMALLINT" property="expectedDeadline" />
     <result column="solution" jdbcType="VARCHAR" property="solution" />
-    <result column="risk_assessment_level" jdbcType="VARCHAR" property="riskAssessmentLevel" />
+    <result column="risk_assessment_level" jdbcType="SMALLINT" property="riskAssessmentLevel" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
     <result column="is_closed" jdbcType="TINYINT" property="isClosed" />
@@ -128,7 +128,7 @@
         #{solution,jdbcType=VARCHAR},
       </if>
       <if test="riskAssessmentLevel != null">
-        #{riskAssessmentLevel,jdbcType=VARCHAR},
+        #{riskAssessmentLevel,jdbcType=SMALLINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -172,7 +172,7 @@
         solution = #{solution,jdbcType=VARCHAR},
       </if>
       <if test="riskAssessmentLevel != null">
-        risk_assessment_level = #{riskAssessmentLevel,jdbcType=VARCHAR},
+        risk_assessment_level = #{riskAssessmentLevel,jdbcType=SMALLINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},

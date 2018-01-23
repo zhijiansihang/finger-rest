@@ -30,7 +30,7 @@ public interface UserSolutionDAO {
         "serial_number)",
         "values (#{userId,jdbcType=BIGINT}, #{moneySituation,jdbcType=SMALLINT}, ",
         "#{earningType,jdbcType=SMALLINT}, #{expectedDeadline,jdbcType=SMALLINT}, ",
-        "#{solution,jdbcType=VARCHAR}, #{riskAssessmentLevel,jdbcType=VARCHAR}, ",
+        "#{solution,jdbcType=VARCHAR}, #{riskAssessmentLevel,jdbcType=SMALLINT}, ",
         "#{createTime,jdbcType=TIMESTAMP}, #{isDeleted,jdbcType=TINYINT}, ",
         "#{isClosed,jdbcType=TINYINT}, #{matchDemandCount,jdbcType=BIGINT}, ",
         "#{readCount,jdbcType=BIGINT}, #{adoptCount,jdbcType=BIGINT}, ",
@@ -65,7 +65,7 @@ public interface UserSolutionDAO {
           "earning_type = #{earningType,jdbcType=SMALLINT},",
           "expected_deadline = #{expectedDeadline,jdbcType=SMALLINT},",
           "solution = #{solution,jdbcType=VARCHAR},",
-          "risk_assessment_level = #{riskAssessmentLevel,jdbcType=VARCHAR},",
+          "risk_assessment_level = #{riskAssessmentLevel,jdbcType=SMALLINT},",
           "create_time = #{createTime,jdbcType=TIMESTAMP},",
           "is_deleted = #{isDeleted,jdbcType=TINYINT},",
           "is_closed = #{isClosed,jdbcType=TINYINT},",
@@ -76,4 +76,19 @@ public interface UserSolutionDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserSolutionDO record);
+
+    @Select({
+            "select count(*) ",
+            "from user_solution ",
+            "where user_id = #{userId} and money_situation = #{moneySituation} " +
+            " and earning_type = #{earningType} and expected_deadline = #{expectedDeadline} and risk_assessment_level=#{riskAssessmentLevel}"
+    })
+    int existSameType(UserSolutionDO userSolutionDO);
+
+    @Select({
+            "select ifnull(max(serial_number),0)",
+            "from user_solution",
+            "where user_id = #{userId}"
+    })
+    int getMaxSerialNumber(long userId);
 }

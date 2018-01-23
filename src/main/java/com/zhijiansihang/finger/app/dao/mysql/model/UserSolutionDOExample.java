@@ -497,62 +497,52 @@ public class UserSolutionDOExample {
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelEqualTo(String value) {
+        public Criteria andRiskAssessmentLevelEqualTo(Short value) {
             addCriterion("risk_assessment_level =", value, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelNotEqualTo(String value) {
+        public Criteria andRiskAssessmentLevelNotEqualTo(Short value) {
             addCriterion("risk_assessment_level <>", value, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelGreaterThan(String value) {
+        public Criteria andRiskAssessmentLevelGreaterThan(Short value) {
             addCriterion("risk_assessment_level >", value, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelGreaterThanOrEqualTo(String value) {
+        public Criteria andRiskAssessmentLevelGreaterThanOrEqualTo(Short value) {
             addCriterion("risk_assessment_level >=", value, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelLessThan(String value) {
+        public Criteria andRiskAssessmentLevelLessThan(Short value) {
             addCriterion("risk_assessment_level <", value, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelLessThanOrEqualTo(String value) {
+        public Criteria andRiskAssessmentLevelLessThanOrEqualTo(Short value) {
             addCriterion("risk_assessment_level <=", value, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelLike(String value) {
-            addCriterion("risk_assessment_level like", value, "riskAssessmentLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andRiskAssessmentLevelNotLike(String value) {
-            addCriterion("risk_assessment_level not like", value, "riskAssessmentLevel");
-            return (Criteria) this;
-        }
-
-        public Criteria andRiskAssessmentLevelIn(List<String> values) {
+        public Criteria andRiskAssessmentLevelIn(List<Short> values) {
             addCriterion("risk_assessment_level in", values, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelNotIn(List<String> values) {
+        public Criteria andRiskAssessmentLevelNotIn(List<Short> values) {
             addCriterion("risk_assessment_level not in", values, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelBetween(String value1, String value2) {
+        public Criteria andRiskAssessmentLevelBetween(Short value1, Short value2) {
             addCriterion("risk_assessment_level between", value1, value2, "riskAssessmentLevel");
             return (Criteria) this;
         }
 
-        public Criteria andRiskAssessmentLevelNotBetween(String value1, String value2) {
+        public Criteria andRiskAssessmentLevelNotBetween(Short value1, Short value2) {
             addCriterion("risk_assessment_level not between", value1, value2, "riskAssessmentLevel");
             return (Criteria) this;
         }

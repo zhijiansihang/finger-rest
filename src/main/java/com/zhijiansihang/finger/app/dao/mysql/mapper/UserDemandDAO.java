@@ -73,4 +73,18 @@ public interface UserDemandDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserDemandDO record);
+
+    @Select({
+            "select count(*)",
+            "from user_demand",
+            "where user_id = #{userId} and money_situation = #{moneySituation} and earning_type = #{earningType} and expected_deadline = #{expectedDeadline}"
+    })
+    int existSameType(UserDemandDO userDemandDO);
+
+    @Select({
+            "select ifnull(max(serial_number),0)",
+            "from user_demand",
+            "where user_id = #{userId}"
+    })
+    int getMaxSerialNumber(long userId);
 }

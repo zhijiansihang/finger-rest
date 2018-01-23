@@ -20,7 +20,9 @@ public enum RetCode {
     SENDSMSFAIL("-211", "1分钟内已发送过验证码"),
     NOSMSTEMPLATE("-212", "没找到短信模板"),
     VERIFYSMSVERIFYCODEFAIL("-213", "请输入正确验证码"),
-    EMPTYVVERIFYCODEFAIL("-214", "验证码为空");
+    EMPTYVVERIFYCODEFAIL("-214", "验证码为空"),
+    NEEDUPDATE("-215", "数据已经存在,请进行修改"),
+    NOTSUPPORT("-216", "不支持的操作类型");
 
     private String code;
 

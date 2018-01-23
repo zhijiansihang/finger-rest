@@ -35,9 +35,9 @@ public class UserSolutionDO implements Serializable {
     private String solution;
 
     /**
-     * 对应需求人风险测评等级
+     * 风险测评等级冗余
      */
-    private String riskAssessmentLevel;
+    private Short riskAssessmentLevel;
 
     /**
      * 创建时间
@@ -176,19 +176,19 @@ public class UserSolutionDO implements Serializable {
     }
 
     /**
-     * 对应需求人风险测评等级
-     * @return risk_assessment_level 对应需求人风险测评等级
+     * 风险测评等级冗余
+     * @return risk_assessment_level 风险测评等级冗余
      */
-    public String getRiskAssessmentLevel() {
+    public Short getRiskAssessmentLevel() {
         return riskAssessmentLevel;
     }
 
     /**
-     * 对应需求人风险测评等级
-     * @param riskAssessmentLevel 对应需求人风险测评等级
+     * 风险测评等级冗余
+     * @param riskAssessmentLevel 风险测评等级冗余
      */
-    public void setRiskAssessmentLevel(String riskAssessmentLevel) {
-        this.riskAssessmentLevel = riskAssessmentLevel == null ? null : riskAssessmentLevel.trim();
+    public void setRiskAssessmentLevel(Short riskAssessmentLevel) {
+        this.riskAssessmentLevel = riskAssessmentLevel;
     }
 
     /**
