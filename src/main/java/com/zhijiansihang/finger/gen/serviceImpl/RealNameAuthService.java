@@ -21,6 +21,8 @@ import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
+import static com.zhijiansihang.common.RetCode.INTERNALEXCEP;
+
 /**
  * 实名认证
  * 
@@ -67,7 +69,16 @@ public class RealNameAuthService implements MessageService<RealNameAuthRequest, 
 					response.setHeader(responseHeader);
 					return;
 				}
-				boolean real = realNameAuthManager.isReal(realName, idCard);
+				boolean real =false;
+
+				try {
+					real = realNameAuthManager.isReal(realName, idCard);
+				} catch (Exception e) {
+					e.printStackTrace();
+					ResponseHeader responseHeader = ResponseHeaderBuilder.build(INTERNALEXCEP,"请稍后重试");
+					response.setHeader(responseHeader);
+					return;
+				}
 				if (!real){
 					ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("实名认证失败");
 					response.setHeader(responseHeader);

@@ -29,4 +29,11 @@ public class CheckTools {
         }
         return string;
     }
+
+    public static String nullToNullString(String string) {
+        if (string == null || string.trim().length() == 0) {
+            return null;
+        }
+        return string.trim();
+    }
 }
