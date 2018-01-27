@@ -110,4 +110,18 @@ public interface UserSolutionDAO {
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserSolutionDAO.BaseResultMap")
     List<UserSolutionDO> selectByUseridPage(Long userid, RowBounds rowBounds);
+
+    @Update({
+            "update user_solution",
+            "set read_count = read_count + 1",
+            "where id = #{id}"
+    })
+    int readCountAdd(Long id);
+
+    @Update({
+            "update user_solution",
+            "set adopt_count = adopt_count + 1",
+            "where id = #{id}"
+    })
+    int adoptCountAdd(Long solutionId);
 }

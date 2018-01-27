@@ -90,4 +90,11 @@ public interface UserFinanceDetailDAO {
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO.BaseResultMapEx")
     List<UserFinanceDetailVO> selectCollectionPage(Long userId, RowBounds rowBounds);
+
+    @Update({
+            "update user_finance_detail",
+            "set adopt_count = adopt_count + 1",
+            "where user_id = #{userId}"
+    })
+    int adoptCountAdd(Long userId);
 }

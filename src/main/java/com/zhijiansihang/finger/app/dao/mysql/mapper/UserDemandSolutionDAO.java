@@ -2,16 +2,15 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDOExample;
+
+import java.security.acl.LastOwnerException;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Mapper
 public interface UserDemandSolutionDAO {
     @Delete({
@@ -64,4 +63,21 @@ public interface UserDemandSolutionDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserDemandSolutionDO record);
+    @Update({
+            "update user_demand_solution",
+            "set is_operate_solution = 1,",
+            "update_time = now() ",
+            "where id = #{id} and is_operate_solution = 0 and demand_user_id = #{demandUserId}"
+    })
+    int readMyDemandsolution(@Param("demandUserId") Long demandUserId, @Param("id") Integer id);
+
+    @Update({
+            "update user_demand_solution",
+            "set is_operate_solution = 2,",
+            "update_time = now() ",
+            "where id = #{id} and is_operate_solution <> 2 and demand_user_id = #{demandUserId}"
+    })
+    int adoptMyDemandsolution(@Param("demandUserId") Long demandUserId, @Param("id") Integer id);
+
+
 }
