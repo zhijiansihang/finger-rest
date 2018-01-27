@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 是否实名认证和评测
+ * Y是否实名认证和评测
  * 
  */
 @Component("gengetNameAuthAndRiskResultService")
 public class GetNameAuthAndRiskResultService implements MessageService<GetNameAuthAndRiskResultRequest, Response<GetNameAuthAndRiskResultResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GetNameAuthAndRiskResultService.class);
-	private static final String SERVICE_DESC = "是否实名认证和评测";
+	private static final String SERVICE_DESC = "Y是否实名认证和评测";
 
 	@Override
 	public void execute(GetNameAuthAndRiskResultRequest request, Response<GetNameAuthAndRiskResultResponse> response) {

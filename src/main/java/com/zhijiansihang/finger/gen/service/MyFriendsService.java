@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 我的好友
+ * Y我的好友
  * 
  */
 @Component("genmyFriendsService")
 public class MyFriendsService implements MessageService<MyFriendsRequest, Response<MyFriendsResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MyFriendsService.class);
-	private static final String SERVICE_DESC = "我的好友";
+	private static final String SERVICE_DESC = "Y我的好友";
 
 	@Override
 	public void execute(MyFriendsRequest request, Response<MyFriendsResponse> response) {

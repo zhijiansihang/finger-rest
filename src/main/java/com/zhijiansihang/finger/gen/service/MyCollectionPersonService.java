@@ -42,12 +42,13 @@ public class MyCollectionPersonService implements MessageService<MyCollectionPer
 		elems.add(elem);
 
 		elem.setAdoptCount("45");
-		elem.setDesc("信托基金私募");
 		elem.setFinanceUserId("10000");
+		elem.setInstitutionName("1");
 		elem.setIsNameAuth("1");
 		elem.setLoanCount("2");
 		elem.setLogo("http://www.baidu.com/10000.png");
 		elem.setRealName("张经理");
+		elem.setServiceDirection("信托基金私募");
 		elem.setUserOrderCount("10");
 
 		return elems;

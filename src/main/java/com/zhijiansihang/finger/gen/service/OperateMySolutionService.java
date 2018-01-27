@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 删除关闭我的方案
+ * Y删除关闭我的方案
  * 
  */
 @Component("genoperateMySolutionService")
 public class OperateMySolutionService implements MessageService<OperateMySolutionRequest, Response<OperateMySolutionResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(OperateMySolutionService.class);
-	private static final String SERVICE_DESC = "删除关闭我的方案";
+	private static final String SERVICE_DESC = "Y删除关闭我的方案";
 
 	@Override
 	public void execute(OperateMySolutionRequest request, Response<OperateMySolutionResponse> response) {

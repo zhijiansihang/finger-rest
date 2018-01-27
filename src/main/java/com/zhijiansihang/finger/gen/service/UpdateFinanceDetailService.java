@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 更新我的资料
+ * Y更新我的资料
  * 
  */
 @Component("genupdateFinanceDetailService")
 public class UpdateFinanceDetailService implements MessageService<UpdateFinanceDetailRequest, Response<UpdateFinanceDetailResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UpdateFinanceDetailService.class);
-	private static final String SERVICE_DESC = "更新我的资料";
+	private static final String SERVICE_DESC = "Y更新我的资料";
 
 	@Override
 	public void execute(UpdateFinanceDetailRequest request, Response<UpdateFinanceDetailResponse> response) {

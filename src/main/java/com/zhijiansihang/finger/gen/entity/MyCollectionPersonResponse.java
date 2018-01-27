@@ -28,12 +28,13 @@ public class MyCollectionPersonResponse extends MobileMessage {
 	public static class FinanceListElement {
 
 		private String adoptCount;
-		private String desc;
 		private String financeUserId;
+		private String institutionName;
 		private String isNameAuth;
 		private String loanCount;
 		private String logo;
 		private String realName;
+		private String serviceDirection;
 		private String userOrderCount;
 
 		/**
@@ -48,17 +49,6 @@ public class MyCollectionPersonResponse extends MobileMessage {
 		}
 
 		/**
-		 * @return 理财师方向
-		 */
-		public String getDesc() {
-			return desc;
-		}
-
-		public void setDesc(String desc) {
-			this.desc = desc;
-		}
-
-		/**
 		 * @return 理财师用户id
 		 */
 		public String getFinanceUserId() {
@@ -67,6 +57,17 @@ public class MyCollectionPersonResponse extends MobileMessage {
 
 		public void setFinanceUserId(String financeUserId) {
 			this.financeUserId = financeUserId;
+		}
+
+		/**
+		 * @return 机构名称
+		 */
+		public String getInstitutionName() {
+			return institutionName;
+		}
+
+		public void setInstitutionName(String institutionName) {
+			this.institutionName = institutionName;
 		}
 
 		/**
@@ -111,6 +112,17 @@ public class MyCollectionPersonResponse extends MobileMessage {
 
 		public void setRealName(String realName) {
 			this.realName = realName;
+		}
+
+		/**
+		 * @return 理财师服务方向
+		 */
+		public String getServiceDirection() {
+			return serviceDirection;
+		}
+
+		public void setServiceDirection(String serviceDirection) {
+			this.serviceDirection = serviceDirection;
 		}
 
 		/**

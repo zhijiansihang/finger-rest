@@ -142,12 +142,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[createMyDemand] 发布我的需求接口请求数据:{}", request);
+		LOG.info("[createMyDemand] Y发布我的需求接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/createMyDemand");
 
-		LOG.info("[createMyDemand] 发布我的需求接口响应数据:{}:", response);
+		LOG.info("[createMyDemand] Y发布我的需求接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -177,12 +177,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[createMySolution] 发布我的方案接口请求数据:{}", request);
+		LOG.info("[createMySolution] Y发布我的方案接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/createMySolution");
 
-		LOG.info("[createMySolution] 发布我的方案接口响应数据:{}:", response);
+		LOG.info("[createMySolution] Y发布我的方案接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -399,12 +399,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[getNameAuthAndRiskResult] 是否实名认证和评测接口请求数据:{}", request);
+		LOG.info("[getNameAuthAndRiskResult] Y是否实名认证和评测接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getNameAuthAndRiskResult");
 
-		LOG.info("[getNameAuthAndRiskResult] 是否实名认证和评测接口响应数据:{}:", response);
+		LOG.info("[getNameAuthAndRiskResult] Y是否实名认证和评测接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -713,12 +713,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[myFinanceDetail] 我的资料接口请求数据:{}", request);
+		LOG.info("[myFinanceDetail] Y我的资料接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/myFinanceDetail");
 
-		LOG.info("[myFinanceDetail] 我的资料接口响应数据:{}:", response);
+		LOG.info("[myFinanceDetail] Y我的资料接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -745,12 +745,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[myFriends] 我的好友接口请求数据:{}", request);
+		LOG.info("[myFriends] Y我的好友接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/myFriends");
 
-		LOG.info("[myFriends] 我的好友接口响应数据:{}:", response);
+		LOG.info("[myFriends] Y我的好友接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -874,12 +874,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[operateMyDemand] 删除关闭我的需求接口请求数据:{}", request);
+		LOG.info("[operateMyDemand] Y删除关闭我的需求接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/operateMyDemand");
 
-		LOG.info("[operateMyDemand] 删除关闭我的需求接口响应数据:{}:", response);
+		LOG.info("[operateMyDemand] Y删除关闭我的需求接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -938,12 +938,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[operateMySolution] 删除关闭我的方案接口请求数据:{}", request);
+		LOG.info("[operateMySolution] Y删除关闭我的方案接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/operateMySolution");
 
-		LOG.info("[operateMySolution] 删除关闭我的方案接口响应数据:{}:", response);
+		LOG.info("[operateMySolution] Y删除关闭我的方案接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -1202,12 +1202,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[updateFinanceDetail] 更新我的资料接口请求数据:{}", request);
+		LOG.info("[updateFinanceDetail] Y更新我的资料接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/updateFinanceDetail");
 
-		LOG.info("[updateFinanceDetail] 更新我的资料接口响应数据:{}:", response);
+		LOG.info("[updateFinanceDetail] Y更新我的资料接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -1234,12 +1234,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[updateMyDemand] 更新我的需求接口请求数据:{}", request);
+		LOG.info("[updateMyDemand] Y更新我的需求接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/updateMyDemand");
 
-		LOG.info("[updateMyDemand] 更新我的需求接口响应数据:{}:", response);
+		LOG.info("[updateMyDemand] Y更新我的需求接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -1297,12 +1297,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[updateMySolution] 更新我的方案接口请求数据:{}", request);
+		LOG.info("[updateMySolution] Y更新我的方案接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/updateMySolution");
 
-		LOG.info("[updateMySolution] 更新我的方案接口响应数据:{}:", response);
+		LOG.info("[updateMySolution] Y更新我的方案接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
