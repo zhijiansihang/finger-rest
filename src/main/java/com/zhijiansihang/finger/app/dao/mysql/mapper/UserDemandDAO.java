@@ -3,15 +3,10 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandDOExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDemandDAO {
     @Delete({
@@ -87,4 +82,23 @@ public interface UserDemandDAO {
             "where user_id = #{userId}"
     })
     int getMaxSerialNumber(long userId);
+
+    @Select({
+            "select count(*)",
+            "from user_demand",
+            "where user_id = #{userId} and is_deleted = 0"
+    })
+    int countByUserid(Long userId);
+
+    @Select({
+            "select",
+            "id, user_id, money_situation, earning_type, expected_deadline, additional_remarks, ",
+            "is_deleted, is_closed, last_batch_sid, match_solution_count, serial_number, ",
+            "update_time, create_time",
+            "from user_demand",
+            "where user_id = #{userId} and is_deleted = 0",
+            "order by is_closed desc,serial_number desc"
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandDAO.BaseResultMap")
+    List<UserDemandDO> selectByUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
 }

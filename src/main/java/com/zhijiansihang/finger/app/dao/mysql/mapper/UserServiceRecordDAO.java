@@ -3,15 +3,11 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserServiceRecordDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserServiceRecordDOExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+
+import com.zhijiansihang.finger.app.vo.UserServiceRecordVO;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserServiceRecordDAO {
     @Delete({
@@ -55,4 +51,26 @@ public interface UserServiceRecordDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserServiceRecordDO record);
+
+    @Select({
+            "select count(*)",
+            "from user_service_record",
+            "where user_id  = #{userId}"
+    })
+    int countByUserid(Long userId);
+
+
+    @Select({
+            "select usr.create_time,usr.service_type,u.logo,u.real_name",
+            "from user_service_record usr,user u",
+            "where usr.user_id  = #{userId} and usr.person_user_id=u.user_id",
+            "order by create_time desc"
+    })
+    @Results({
+            @Result(property = "createTime", column = "create_time"),
+            @Result(property = "realName", column = "real_name"),
+            @Result(property = "logo", column = "logo"),
+            @Result(property = "service_type", column = "serviceType")
+    })
+    List<UserServiceRecordVO> selectByUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
 }

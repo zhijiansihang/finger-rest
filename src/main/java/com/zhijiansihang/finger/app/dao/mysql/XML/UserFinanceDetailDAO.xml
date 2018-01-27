@@ -19,6 +19,30 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
+
+  <resultMap id="BaseResultMapEx" type="com.zhijiansihang.finger.app.vo.UserFinanceDetailVO">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="education_level" jdbcType="VARCHAR" property="educationLevel" />
+    <result column="school_name" jdbcType="VARCHAR" property="schoolName" />
+    <result column="work_age" jdbcType="SMALLINT" property="workAge" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="service_direction" jdbcType="VARCHAR" property="serviceDirection" />
+    <result column="service_concept" jdbcType="VARCHAR" property="serviceConcept" />
+    <result column="working_experience" jdbcType="VARCHAR" property="workingExperience" />
+    <result column="personal_profile" jdbcType="VARCHAR" property="personalProfile" />
+    <result column="is_add" jdbcType="TINYINT" property="isAdd" />
+    <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
+    <result column="loan_count" jdbcType="BIGINT" property="loanCount" />
+    <result column="user_order_count" jdbcType="BIGINT" property="userOrderCount" />
+    <result column="adopt_count" jdbcType="BIGINT" property="adoptCount" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="institution_name" jdbcType="VARCHAR" property="institutionName" />
+  </resultMap>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

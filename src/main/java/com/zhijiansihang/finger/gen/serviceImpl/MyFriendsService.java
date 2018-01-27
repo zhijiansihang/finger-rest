@@ -54,6 +54,8 @@ public class MyFriendsService implements MessageService<MyFriendsRequest, Respon
         if (count > 0) {
             List<UserDO> cmsDOS = userFriendDAO.selectByUseridPage(id, page.getRowBounds());
             response.getBody().setFriendList(getFriendList(cmsDOS));
+        }else {
+            response.getBody().setFriendList(new ArrayList<>());
         }
         response.getBody().setCurrentPage(page.getCurrentPage() + "");
         response.getBody().setPageCount(page.getPageCount() + "");

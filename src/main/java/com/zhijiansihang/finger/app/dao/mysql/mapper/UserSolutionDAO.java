@@ -91,4 +91,23 @@ public interface UserSolutionDAO {
             "where user_id = #{userId}"
     })
     int getMaxSerialNumber(long userId);
+
+    @Select({
+            "select count(*)",
+            "from user_solution",
+            "where user_id = #{userId} and is_deleted = 0"
+    })
+    int countByUserid(Long userid);
+
+    @Select({
+            "select",
+            "id, user_id, money_situation, earning_type, expected_deadline, solution, risk_assessment_level, ",
+            "create_time, is_deleted, is_closed, match_demand_count, read_count, adopt_count, ",
+            "serial_number",
+            "from user_solution",
+            "where user_id = #{userId} and is_deleted = 0",
+            "order by is_closed desc,serial_number desc"
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserSolutionDAO.BaseResultMap")
+    List<UserSolutionDO> selectByUseridPage(Long userid, RowBounds rowBounds);
 }

@@ -3,6 +3,8 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDOExample;
 import java.util.List;
+
+import com.zhijiansihang.finger.app.vo.UserFinanceDetailVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;
@@ -78,4 +80,14 @@ public interface UserFinanceDetailDAO {
         "where user_id = #{userId,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(UserFinanceDetailDO record);
+
+
+    @Select({
+            "select ufd.*,u.logo,u.real_name,u.institution_name",
+            "from user_collection uc,user_finance_detail ufd,user u",
+            "where uc.content_id=ufd.user_id and ufd.user_id=u.user_id and uc.user_id = #{userId,jdbcType=BIGINT} AND uc.content_type=1 ",
+            "order by uc.create_time desc"
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO.BaseResultMapEx")
+    List<UserFinanceDetailVO> selectCollectionPage(Long userId, RowBounds rowBounds);
 }

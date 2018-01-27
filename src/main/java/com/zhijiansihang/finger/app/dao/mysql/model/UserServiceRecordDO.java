@@ -20,7 +20,7 @@ public class UserServiceRecordDO implements Serializable {
     private Long personUserId;
 
     /**
-     * 1:为咨询0:预约
+     * 1:为咨询2:预约
      */
     private Byte serviceType;
 

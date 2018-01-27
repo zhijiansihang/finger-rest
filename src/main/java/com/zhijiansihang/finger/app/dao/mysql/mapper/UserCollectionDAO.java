@@ -3,15 +3,10 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserCollectionDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserCollectionDOExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserCollectionDAO {
     @Delete({
@@ -62,4 +57,18 @@ public interface UserCollectionDAO {
             "where user_id = #{userId} AND content_id=#{contentId} AND content_type=#{contentType}"
     })
     int existContentidtypeAndUserid(UserCollectionDO userCollection);
+
+    @Select({
+            "select count(*)",
+            "from user_collection",
+            "where user_id = #{userId} and AND content_type=1"
+    })
+    int countFinanceByUserid(Long userId);
+
+    @Select({
+            "select count(*)",
+            "from user_collection",
+            "where user_id = #{userId} and AND content_type=2"
+    })
+    int countLoanByUserid(Long userId);
 }

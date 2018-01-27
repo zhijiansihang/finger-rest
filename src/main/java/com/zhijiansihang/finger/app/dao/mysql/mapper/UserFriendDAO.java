@@ -78,5 +78,5 @@ public interface UserFriendDAO {
             @Result(property = "realName", column = "real_name"),
             @Result(property = "logo", column = "logo")
     })
-    List<UserDO> selectByUseridPage(Long id, RowBounds rowBounds);
+    List<UserDO> selectByUseridPage(@Param("myUserId") Long myUserId, RowBounds rowBounds);
 }
