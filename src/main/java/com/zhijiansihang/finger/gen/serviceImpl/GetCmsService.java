@@ -3,54 +3,90 @@ package com.zhijiansihang.finger.gen.serviceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zhijiansihang.finger.app.constant.CmsConsts;
+import com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO;
+import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
+import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
+import com.zhijiansihang.finger.app.sharing.SharingProperties;
+import com.zhijiansihang.finger.app.tool.Page;
+import com.zhijiansihang.finger.gen.tool.CheckTools;
+import com.zhijiansihang.finger.gen.tool.UserTools;
 import com.zhijiansihang.finger.mmc.MessageService;
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.gen.entity.GetCmsRequest;
 import com.zhijiansihang.finger.gen.entity.GetCmsResponse;
 import com.zhijiansihang.finger.gen.entity.GetCmsResponse.CmsListElement;
 
+import org.apache.poi.hssf.record.OldFormulaRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 /**
  * 获取banner咨询公告
- * 
  */
 @Component("getCmsService")
 public class GetCmsService implements MessageService<GetCmsRequest, Response<GetCmsResponse>> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(GetCmsService.class);
-	private static final String SERVICE_DESC = "获取banner咨询公告";
+    private static final Logger LOG = LoggerFactory.getLogger(GetCmsService.class);
+    private static final String SERVICE_DESC = "获取banner咨询公告";
+    @Autowired
+    CmsDAO cmsDAO;
+    @Autowired
+    SharingProperties sharingProperties;
 
-	@Override
-	public void execute(GetCmsRequest request, Response<GetCmsResponse> response) {
-		LOG.info("[{}][request={}]", SERVICE_DESC, request);
+    @Override
+    public void execute(GetCmsRequest request, Response<GetCmsResponse> response) {
+        LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
-		response.getBody().setCurrentPage("1");
-		response.getBody().setPageCount("1");
-		response.getBody().setPageSize("10");
-		response.getBody().setRecordCount("10");
-		response.getBody().setCmsList(getCmsList());
-	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
-		response.getBody().setMode("test");
-	}
+        int typeCode = Integer.parseInt(request.getTypeCode().trim());
+        Page<Long, UserDO> page = Page.create();
+        page.setCurrentPage(CheckTools.isInteger(request.getCurrentPage()) ? Integer.parseInt(request.getCurrentPage()) : 1);
+        page.setCurrentPage(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
+        page.setSelect((long) typeCode);
+        int count = cmsDAO.countByTypeCode(typeCode);
+        page.setRecordCount(count);
 
-	private List<CmsListElement> getCmsList() {
-		List<CmsListElement> elems = new ArrayList<CmsListElement>();
-		CmsListElement elem = new CmsListElement();
-		elems.add(elem);
+        if (count > 0) {
+            List<CmsDO> cmsDOS = cmsDAO.selectByTypeCodePage(typeCode, page.getRowBounds());
+            response.getBody().setCmsList(getCmsList(cmsDOS));
+        } else {
+            response.getBody().setCmsList(new ArrayList<>());
+        }
+        response.getBody().setTypeCode(typeCode+"");
+        response.getBody().setCurrentPage(page.getCurrentPage() + "");
+        response.getBody().setPageCount(page.getPageCount() + "");
+        response.getBody().setPageSize(page.getPageSize() + "");
+        response.getBody().setRecordCount(page.getRecordCount() + "");
+    }
 
-		elem.setContent("10");
-		elem.setHrefLink("10");
-		elem.setId("1");
-		elem.setImageAccessPath("1");
-		elem.setSubTitle("1");
-		elem.setTitle("1");
-		elem.setTypeCode("paul");
-		elem.setTypeName("0");
-		elem.setUserId("1");
+    private List<CmsListElement> getCmsList(List<CmsDO> cmsDOS) {
+        List<CmsListElement> elems = new ArrayList<CmsListElement>();
+        if (cmsDOS == null) {
+            return elems;
+        }
 
-		return elems;
-	}
+        for (CmsDO cmsDO : cmsDOS){
+            CmsListElement elem = new CmsListElement();
+            elems.add(elem);
+
+            elem.setContent(cmsDO.getContent());
+            elem.setHrefLink(cmsDO.getHrefLink());
+            elem.setId(cmsDO.getId().toString());
+            elem.setImageAccessPath("1");
+            if (cmsDO.getImageAccessPath() !=null && cmsDO.getImageAccessPath().trim().length()>0){
+                elem.setImageAccessPath(sharingProperties.getStaticServerLink()+cmsDO.getImageAccessPath());
+            }else {
+                elem.setImageAccessPath("");
+            }
+            elem.setSubTitle(cmsDO.getSubTitle());
+            elem.setTitle(cmsDO.getTitle());
+        }
+
+
+        return elems;
+    }
 }

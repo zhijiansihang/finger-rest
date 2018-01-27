@@ -14,6 +14,15 @@ public class CmsConsts {
     public static final String ACCESS_PREFIX_0 = "/cms/pic";
     public static final String ACCESS_PREFIX_1 = "cms/pic";
 
+    public static CmsEnum getCmsEnum(int typeCode){
+        CmsEnum[] values = CmsEnum.values();
+        for (CmsEnum cmsEnum:values){
+            if (cmsEnum.getTypeCode().intValue()==typeCode){
+                return cmsEnum;
+            }
+        }
+        return null;
+    }
     public static enum CmsEnum {
         banner(100, "banner"), notice(200, "公告"), information(300, "资讯"), avatar(400, "头像");
 

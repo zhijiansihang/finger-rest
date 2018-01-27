@@ -33,9 +33,6 @@ public class GetCmsResponse extends MobileMessage {
 		private String imageAccessPath;
 		private String subTitle;
 		private String title;
-		private String typeCode;
-		private String typeName;
-		private String userId;
 
 		/**
 		 * @return 内容
@@ -102,39 +99,6 @@ public class GetCmsResponse extends MobileMessage {
 		public void setTitle(String title) {
 			this.title = title;
 		}
-
-		/**
-		 * @return banner=100bannernotice200公告information300资讯avatar400头像exam500考题
-		 */
-		public String getTypeCode() {
-			return typeCode;
-		}
-
-		public void setTypeCode(String typeCode) {
-			this.typeCode = typeCode;
-		}
-
-		/**
-		 * @return 服务方向
-		 */
-		public String getTypeName() {
-			return typeName;
-		}
-
-		public void setTypeName(String typeName) {
-			this.typeName = typeName;
-		}
-
-		/**
-		 * @return 理财师id
-		 */
-		public String getUserId() {
-			return userId;
-		}
-
-		public void setUserId(String userId) {
-			this.userId = userId;
-		}
 	
 		@Override
 		public String toString() {
@@ -147,6 +111,7 @@ public class GetCmsResponse extends MobileMessage {
 	private String pageCount;
 	private String pageSize;
 	private String recordCount;
+	private String typeCode;
 	private List<CmsListElement> cmsList;
 
 	public GetCmsResponse() {
@@ -209,6 +174,17 @@ public class GetCmsResponse extends MobileMessage {
 
 	public void setRecordCount(String recordCount) {
 		this.recordCount = recordCount;
+	}
+
+	/**
+	 * @return banner=100bannernotice200公告information300资讯avatar400头像exam500考题
+	 */
+	public String getTypeCode() {
+		return typeCode;
+	}
+
+	public void setTypeCode(String typeCode) {
+		this.typeCode = typeCode;
 	}
 
 	/**

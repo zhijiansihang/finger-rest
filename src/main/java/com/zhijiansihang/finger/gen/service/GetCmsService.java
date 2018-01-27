@@ -31,6 +31,7 @@ public class GetCmsService implements MessageService<GetCmsRequest, Response<Get
 		response.getBody().setPageCount("1");
 		response.getBody().setPageSize("10");
 		response.getBody().setRecordCount("10");
+		response.getBody().setTypeCode("1000");
 		response.getBody().setCmsList(getCmsList());
 	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
 		response.getBody().setMode("test");
@@ -47,9 +48,6 @@ public class GetCmsService implements MessageService<GetCmsRequest, Response<Get
 		elem.setImageAccessPath("1");
 		elem.setSubTitle("1");
 		elem.setTitle("1");
-		elem.setTypeCode("paul");
-		elem.setTypeName("0");
-		elem.setUserId("1");
 
 		return elems;
 	}

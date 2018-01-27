@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 是否是好友关系
+ * Y是否是好友关系
  * 
  */
 @Component("genisFriendService")
 public class IsFriendService implements MessageService<IsFriendRequest, Response<IsFriendResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(IsFriendService.class);
-	private static final String SERVICE_DESC = "是否是好友关系";
+	private static final String SERVICE_DESC = "Y是否是好友关系";
 
 	@Override
 	public void execute(IsFriendRequest request, Response<IsFriendResponse> response) {

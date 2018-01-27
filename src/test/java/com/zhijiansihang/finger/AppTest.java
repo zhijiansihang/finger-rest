@@ -492,12 +492,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[isFriend] 是否是好友关系接口请求数据:{}", request);
+		LOG.info("[isFriend] Y是否是好友关系接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/isFriend");
 
-		LOG.info("[isFriend] 是否是好友关系接口响应数据:{}:", response);
+		LOG.info("[isFriend] Y是否是好友关系接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {

@@ -2,18 +2,19 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDOExample;
+
+import java.io.Serializable;
 import java.util.List;
 
 import com.zhijiansihang.finger.app.vo.CmsVO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.metamodel.SingularAttribute;
+
 @Mapper
 public interface CmsDAO {
     @Delete({
@@ -103,4 +104,22 @@ public interface CmsDAO {
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO.BaseResultMap")
     List<CmsDO> selectByCmsVO(CmsVO cmsVO, RowBounds rowBounds);
 
+    @Select({
+            "select count(*)",
+            "from cms",
+            "where type_code = #{typeCode} and  is_front_display = 1 and is_deleted =0 "
+    })
+    int countByTypeCode(@Param("typeCode") Integer typeCode);
+
+    @Select({
+            "select",
+            "id, type_code, type_name, image_path, image_access_path, title, sub_title, content, ",
+            "href_link, is_front_display, is_deleted, location_size, create_time, create_by, ",
+            "update_time, update_by",
+            "from cms",
+            "where type_code = #{typeCode} and  is_front_display = 1 and is_deleted =0 ",
+            "order by location_size desc,location_size desc "
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO.BaseResultMap")
+    List<CmsDO> selectByTypeCodePage(@Param("typeCode") Integer typeCode, RowBounds rowBounds);
 }
