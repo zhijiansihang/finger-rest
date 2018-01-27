@@ -45,6 +45,11 @@ public class MakeFriendService implements MessageService<MakeFriendRequest, Resp
 		userFriendDO.setCreateTime(new Date());
 		userFriendDO.setFriendUserId(friendUserid);
 		userFriendDO.setMyUserId(userid);
+
+		UserFriendDO userFriendDO1 = new UserFriendDO();
+		userFriendDO1.setCreateTime(new Date());
+		userFriendDO1.setFriendUserId(userid);
+		userFriendDO1.setMyUserId(friendUserid);
 		String redisKey = this.getClass().getName() + "_" + userid.toString();
 		boolean tryLock = redisLock.tryLock(redisKey);
 		if (tryLock){
@@ -55,6 +60,13 @@ public class MakeFriendService implements MessageService<MakeFriendRequest, Resp
 				}
 				userFriendDAO.insert(userFriendDO);
 				userFriendCountDAO.addFriendCounts(userid);
+
+				int count1 = userFriendDAO.existFriendUserid(userFriendDO1);
+				if (count1>0){
+					return;
+				}
+				userFriendDAO.insert(userFriendDO1);
+				userFriendCountDAO.addFriendCounts(friendUserid);
 			}finally {
 				redisLock.unLock(redisKey);
 			}
