@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 我的方案
+ * Y我的方案
  * 
  */
 @Component("genmySolutionService")
 public class MySolutionService implements MessageService<MySolutionRequest, Response<MySolutionResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MySolutionService.class);
-	private static final String SERVICE_DESC = "我的方案";
+	private static final String SERVICE_DESC = "Y我的方案";
 
 	@Override
 	public void execute(MySolutionRequest request, Response<MySolutionResponse> response) {

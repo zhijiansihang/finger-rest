@@ -7,7 +7,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * 理财师操作预约记录.服务端响应
+ * Y理财师操作预约记录.服务端响应
  * 
  * @author 代码生成器v1.0
  * 

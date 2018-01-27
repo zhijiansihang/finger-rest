@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 点咨询和预约客户
+ * Y理财师服务点咨询和预约客户
  * 
  */
 @Component("genservicePersonRecordService")
 public class ServicePersonRecordService implements MessageService<ServicePersonRecordRequest, Response<ServicePersonRecordResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ServicePersonRecordService.class);
-	private static final String SERVICE_DESC = "点咨询和预约客户";
+	private static final String SERVICE_DESC = "Y理财师服务点咨询和预约客户";
 
 	@Override
 	public void execute(ServicePersonRecordRequest request, Response<ServicePersonRecordResponse> response) {

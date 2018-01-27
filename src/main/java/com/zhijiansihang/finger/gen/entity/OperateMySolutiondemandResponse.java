@@ -7,17 +7,17 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * Y点咨询记录.服务端响应
+ * 方案已读需求.服务端响应
  * 
  * @author 代码生成器v1.0
  * 
  */
 @JsonInclude(Include.NON_NULL)
-public class ConsultingRecordResponse extends MobileMessage {
+public class OperateMySolutiondemandResponse extends MobileMessage {
 
 
 
-	public ConsultingRecordResponse() {
+	public OperateMySolutiondemandResponse() {
 		super();
 		StringBuffer sb = new StringBuffer();
 		
@@ -29,7 +29,7 @@ public class ConsultingRecordResponse extends MobileMessage {
 		this.setMsgeps(eps);
 	}
 
-	public ConsultingRecordResponse(String statusCode, String statusMessage) {
+	public OperateMySolutiondemandResponse(String statusCode, String statusMessage) {
 		this.setStatusCode(statusCode);
 		this.setStatusMessage(statusMessage);
 	}

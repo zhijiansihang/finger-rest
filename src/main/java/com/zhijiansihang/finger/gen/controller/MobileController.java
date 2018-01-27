@@ -209,13 +209,6 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<MySolutionRequest, Response<MySolutionResponse>> genMySolutionService;
 
-	@Qualifier("operateMyColutionSemandService")
-	@Autowired(required = false)
-	MessageService<OperateMyColutionSemandRequest, Response<OperateMyColutionSemandResponse>> operateMyColutionSemandService;
-	@Qualifier("genoperateMyColutionSemandService")
-	@Autowired(required = false)
-	MessageService<OperateMyColutionSemandRequest, Response<OperateMyColutionSemandResponse>> genOperateMyColutionSemandService;
-
 	@Qualifier("operateMyDemandService")
 	@Autowired(required = false)
 	MessageService<OperateMyDemandRequest, Response<OperateMyDemandResponse>> operateMyDemandService;
@@ -236,6 +229,13 @@ public class MobileController {
 	@Qualifier("genoperateMySolutionService")
 	@Autowired(required = false)
 	MessageService<OperateMySolutionRequest, Response<OperateMySolutionResponse>> genOperateMySolutionService;
+
+	@Qualifier("operateMySolutiondemandService")
+	@Autowired(required = false)
+	MessageService<OperateMySolutiondemandRequest, Response<OperateMySolutiondemandResponse>> operateMySolutiondemandService;
+	@Qualifier("genoperateMySolutiondemandService")
+	@Autowired(required = false)
+	MessageService<OperateMySolutiondemandRequest, Response<OperateMySolutiondemandResponse>> genOperateMySolutiondemandService;
 
 	@Qualifier("realNameAuthService")
 	@Autowired(required = false)
@@ -797,26 +797,6 @@ public class MobileController {
 		return response;
 	}
 
-	@RequestMapping(value = "/operateMyColutionSemand", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<OperateMyColutionSemandResponse> operateMyColutionSemand(@RequestBody OperateMyColutionSemandRequest request) {
-
-		logRequest("operateMyColutionSemand", request);
-
-  		Response<OperateMyColutionSemandResponse> response = new Response<>();
-
-		request = (OperateMyColutionSemandRequest) this.validate(request, response);
-		if(null == request){
-			return response;
-		}
-
-		response = getOperateMyColutionSemandResponse(request);
-		
-		logResponse("operateMyColutionSemand", response);
-
-		return response;
-	}
-
 	@RequestMapping(value = "/operateMyDemand", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<OperateMyDemandResponse> operateMyDemand(@RequestBody OperateMyDemandRequest request) {
@@ -873,6 +853,26 @@ public class MobileController {
 		response = getOperateMySolutionResponse(request);
 		
 		logResponse("operateMySolution", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/operateMySolutiondemand", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<OperateMySolutiondemandResponse> operateMySolutiondemand(@RequestBody OperateMySolutiondemandRequest request) {
+
+		logRequest("operateMySolutiondemand", request);
+
+  		Response<OperateMySolutiondemandResponse> response = new Response<>();
+
+		request = (OperateMySolutiondemandRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getOperateMySolutiondemandResponse(request);
+		
+		logResponse("operateMySolutiondemand", response);
 
 		return response;
 	}
@@ -1338,16 +1338,6 @@ public class MobileController {
 		return mobileService.service(request, service, MySolutionRequest.class, MySolutionResponse.class);
 	}
 
-	private Response<OperateMyColutionSemandResponse> getOperateMyColutionSemandResponse(OperateMyColutionSemandRequest request) {
-
-		MessageService<OperateMyColutionSemandRequest, Response<OperateMyColutionSemandResponse>> service = operateMyColutionSemandService;
-		if (service == null) {
-			service = genOperateMyColutionSemandService;
-		}
-
-		return mobileService.service(request, service, OperateMyColutionSemandRequest.class, OperateMyColutionSemandResponse.class);
-	}
-
 	private Response<OperateMyDemandResponse> getOperateMyDemandResponse(OperateMyDemandRequest request) {
 
 		MessageService<OperateMyDemandRequest, Response<OperateMyDemandResponse>> service = operateMyDemandService;
@@ -1376,6 +1366,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, OperateMySolutionRequest.class, OperateMySolutionResponse.class);
+	}
+
+	private Response<OperateMySolutiondemandResponse> getOperateMySolutiondemandResponse(OperateMySolutiondemandRequest request) {
+
+		MessageService<OperateMySolutiondemandRequest, Response<OperateMySolutiondemandResponse>> service = operateMySolutiondemandService;
+		if (service == null) {
+			service = genOperateMySolutiondemandService;
+		}
+
+		return mobileService.service(request, service, OperateMySolutiondemandRequest.class, OperateMySolutiondemandResponse.class);
 	}
 
 	private Response<RealNameAuthResponse> getRealNameAuthResponse(RealNameAuthRequest request) {

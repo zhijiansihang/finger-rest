@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zhijiansihang.finger.mmc.MobileMessage;
 
 /**
- * 点咨询记录.客户端请求
+ * Y点咨询记录.客户端请求
  * 
  * @author 代码生成器v1.0
  * 
@@ -14,7 +14,6 @@ public class ConsultingRecordRequest extends MobileMessage {
 
 
 	private String consultingUserid;
-	private String type;
 
 	public ConsultingRecordRequest() {
 		super();
@@ -29,17 +28,6 @@ public class ConsultingRecordRequest extends MobileMessage {
 
 	public void setConsultingUserid(String consultingUserid) {
 		this.consultingUserid = consultingUserid;
-	}
-
-	/**
-	 * @return 1咨询2预约
-	 */
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 	
 }

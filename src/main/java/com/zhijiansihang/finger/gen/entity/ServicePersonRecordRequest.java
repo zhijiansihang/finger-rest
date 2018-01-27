@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zhijiansihang.finger.mmc.MobileMessage;
 
 /**
- * 点咨询和预约客户.客户端请求
+ * Y理财师服务点咨询和预约客户.客户端请求
  * 
  * @author 代码生成器v1.0
  * 

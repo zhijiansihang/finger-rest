@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
  * 方案已读需求
  * 
  */
-@Component("operateMyColutionSemandService")
-public class OperateMyColutionSemandService implements MessageService<OperateMyColutionSemandRequest, Response<OperateMyColutionSemandResponse>> {
+@Component("operateMySolutiondemandService")
+public class OperateMySolutiondemandService implements MessageService<OperateMyColutionSemandRequest, Response<OperateMyColutionSemandResponse>> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(OperateMyColutionSemandService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OperateMySolutiondemandService.class);
 	private static final String SERVICE_DESC = "方案已读需求";
 
 	@Override

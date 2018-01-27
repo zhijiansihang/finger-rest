@@ -4,23 +4,24 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zhijiansihang.finger.mmc.MobileMessage;
 
 /**
- * Y理财师操作预约记录.客户端请求
+ * 方案已读需求.客户端请求
  * 
  * @author 代码生成器v1.0
  * 
  */
  @JsonIgnoreProperties(ignoreUnknown = true)
-public class FinanceOperateLoanInvestorRequest extends MobileMessage {
+public class OperateMySolutiondemandRequest extends MobileMessage {
 
 
 	private String id;
+	private String type;
 
-	public FinanceOperateLoanInvestorRequest() {
+	public OperateMySolutiondemandRequest() {
 		super();
 	}	
 
 	/**
-	 * @return 预约记录id
+	 * @return 方案需求记录id
 	 */
 	public String getId() {
 		return id;
@@ -28,6 +29,17 @@ public class FinanceOperateLoanInvestorRequest extends MobileMessage {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	/**
+	 * @return 操作类型:1:已读
+	 */
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }
