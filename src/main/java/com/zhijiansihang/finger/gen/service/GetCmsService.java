@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 获取banner咨询公告
+ * Y获取banner咨询公告
  * 
  */
 @Component("gengetCmsService")
 public class GetCmsService implements MessageService<GetCmsRequest, Response<GetCmsResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GetCmsService.class);
-	private static final String SERVICE_DESC = "获取banner咨询公告";
+	private static final String SERVICE_DESC = "Y获取banner咨询公告";
 
 	@Override
 	public void execute(GetCmsRequest request, Response<GetCmsResponse> response) {

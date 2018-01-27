@@ -11,7 +11,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * 我的预约记录.服务端响应
+ * 我的预约.服务端响应
  * 
  * @author 代码生成器v1.0
  * 

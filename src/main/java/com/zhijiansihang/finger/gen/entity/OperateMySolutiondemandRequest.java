@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zhijiansihang.finger.mmc.MobileMessage;
 
 /**
- * 方案已读需求.客户端请求
+ * Y方案已读需求.客户端请求
  * 
  * @author 代码生成器v1.0
  * 
@@ -14,7 +14,6 @@ public class OperateMySolutiondemandRequest extends MobileMessage {
 
 
 	private String id;
-	private String type;
 
 	public OperateMySolutiondemandRequest() {
 		super();
@@ -29,17 +28,6 @@ public class OperateMySolutiondemandRequest extends MobileMessage {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	/**
-	 * @return 操作类型:1:已读
-	 */
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 	
 }

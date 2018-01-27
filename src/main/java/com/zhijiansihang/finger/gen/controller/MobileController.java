@@ -153,13 +153,6 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<LoginOrRegisterRequest, Response<LoginOrRegisterResponse>> genLoginOrRegisterService;
 
-	@Qualifier("logoutService")
-	@Autowired(required = false)
-	MessageService<LogoutRequest, Response<LogoutResponse>> logoutService;
-	@Qualifier("genlogoutService")
-	@Autowired(required = false)
-	MessageService<LogoutRequest, Response<LogoutResponse>> genLogoutService;
-
 	@Qualifier("makeFriendService")
 	@Autowired(required = false)
 	MessageService<MakeFriendRequest, Response<MakeFriendResponse>> makeFriendService;
@@ -222,6 +215,13 @@ public class MobileController {
 	@Qualifier("genoperateMyDemandService")
 	@Autowired(required = false)
 	MessageService<OperateMyDemandRequest, Response<OperateMyDemandResponse>> genOperateMyDemandService;
+
+	@Qualifier("operateMyDemandsolutionService")
+	@Autowired(required = false)
+	MessageService<OperateMyDemandsolutionRequest, Response<OperateMyDemandsolutionResponse>> operateMyDemandsolutionService;
+	@Qualifier("genoperateMyDemandsolutionService")
+	@Autowired(required = false)
+	MessageService<OperateMyDemandsolutionRequest, Response<OperateMyDemandsolutionResponse>> genOperateMyDemandsolutionService;
 
 	@Qualifier("operateMyDemandsolutionService")
 	@Autowired(required = false)
@@ -644,26 +644,6 @@ public class MobileController {
 		return response;
 	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<LogoutResponse> logout(@RequestBody LogoutRequest request) {
-
-		logRequest("logout", request);
-
-  		Response<LogoutResponse> response = new Response<>();
-
-		request = (LogoutRequest) this.validate(request, response);
-		if(null == request){
-			return response;
-		}
-
-		response = getLogoutResponse(request);
-		
-		logResponse("logout", response);
-
-		return response;
-	}
-
 	@RequestMapping(value = "/makeFriend", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<MakeFriendResponse> makeFriend(@RequestBody MakeFriendRequest request) {
@@ -840,6 +820,26 @@ public class MobileController {
 		response = getOperateMyDemandResponse(request);
 		
 		logResponse("operateMyDemand", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/operateMyDemandsolution", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<OperateMyDemandsolutionResponse> operateMyDemandsolution(@RequestBody OperateMyDemandsolutionRequest request) {
+
+		logRequest("operateMyDemandsolution", request);
+
+  		Response<OperateMyDemandsolutionResponse> response = new Response<>();
+
+		request = (OperateMyDemandsolutionRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getOperateMyDemandsolutionResponse(request);
+		
+		logResponse("operateMyDemandsolution", response);
 
 		return response;
 	}
@@ -1285,16 +1285,6 @@ public class MobileController {
 		return mobileService.service(request, service, LoginOrRegisterRequest.class, LoginOrRegisterResponse.class);
 	}
 
-	private Response<LogoutResponse> getLogoutResponse(LogoutRequest request) {
-
-		MessageService<LogoutRequest, Response<LogoutResponse>> service = logoutService;
-		if (service == null) {
-			service = genLogoutService;
-		}
-
-		return mobileService.service(request, service, LogoutRequest.class, LogoutResponse.class);
-	}
-
 	private Response<MakeFriendResponse> getMakeFriendResponse(MakeFriendRequest request) {
 
 		MessageService<MakeFriendRequest, Response<MakeFriendResponse>> service = makeFriendService;
@@ -1383,6 +1373,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, OperateMyDemandRequest.class, OperateMyDemandResponse.class);
+	}
+
+	private Response<OperateMyDemandsolutionResponse> getOperateMyDemandsolutionResponse(OperateMyDemandsolutionRequest request) {
+
+		MessageService<OperateMyDemandsolutionRequest, Response<OperateMyDemandsolutionResponse>> service = operateMyDemandsolutionService;
+		if (service == null) {
+			service = genOperateMyDemandsolutionService;
+		}
+
+		return mobileService.service(request, service, OperateMyDemandsolutionRequest.class, OperateMyDemandsolutionResponse.class);
 	}
 
 	private Response<OperateMyDemandsolutionResponse> getOperateMyDemandsolutionResponse(OperateMyDemandsolutionRequest request) {
