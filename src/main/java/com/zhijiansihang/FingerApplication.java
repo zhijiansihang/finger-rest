@@ -1,5 +1,6 @@
 package com.zhijiansihang;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhijiansihang.gateway.filter.ParamSetFilter;
 import com.zhijiansihang.gateway.filter.SendResponsePreFilter;
 import org.mybatis.spring.annotation.MapperScan;
@@ -13,8 +14,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import java.text.SimpleDateFormat;
 
 @SpringCloudApplication
 @ComponentScan("com.zhijiansihang")
@@ -33,25 +37,18 @@ public class FingerApplication {
 //        startTest(context);
     }
 
-
     @Bean
-    public ParamSetFilter paramSetFilter() {
-        return new ParamSetFilter();
+    public MappingJackson2HttpMessageConverter getMappingJackson2HttpMessageConverter() {
+        MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
+        //设置日期格式
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleDateFormat smt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        objectMapper.setDateFormat(smt);
+        mappingJackson2HttpMessageConverter.setObjectMapper(objectMapper);
+        //设置中文编码格式
+//        List<MediaType> list = new ArrayList<MediaType>();
+//        list.add(MediaType.APPLICATION_JSON_UTF8);
+//        mappingJackson2HttpMessageConverter.setSupportedMediaTypes(list);
+        return mappingJackson2HttpMessageConverter;
     }
-
-    @Bean
-    public SendResponsePreFilter sendResponsePreFilter() {
-        return new SendResponsePreFilter();
-    }
-
-//    private static void startTest(ConfigurableApplicationContext context) {
-//        try {
-//            ((RedisTemplate) (context.getBean("redisTemplate"))).opsForValue().get("test");
-//        } catch (Exception e) {
-//            logger.error("redis连接失败,请查看配置！！！", e);
-//            System.exit(-1);
-//        }
-//        logger.info("redis检测连接成功！！！");
-//
-//    }
 }

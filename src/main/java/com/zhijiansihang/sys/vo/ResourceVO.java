@@ -3,9 +3,12 @@ package com.zhijiansihang.sys.vo;
 import com.zhijiansihang.sys.entity.Resource;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Max;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -57,9 +60,30 @@ public class ResourceVO implements Comparable,Serializable {
     /**
      *备注说明
      */
-//    @Max(value = 40,message = "备注说明的长度在1~40个字符")
-    @Length(max = 40,message = "备注说明的长度在1~40个字符")
     private String remarks;
+
+
+    /**
+     *创建者
+     */
+    private String  createBy;
+
+    /**
+     *创建时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime = new Date();
+
+    /**
+     *更新者
+     */
+    private String updateBy;
+
+    /**
+     *更新时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateTime;
 
     private Set<RoleVO> roles = new HashSet<RoleVO>();
 
@@ -149,6 +173,38 @@ public class ResourceVO implements Comparable,Serializable {
 
     public void setRoles(Set<RoleVO> roles) {
         this.roles = roles;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override
