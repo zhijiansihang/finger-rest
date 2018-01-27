@@ -8,6 +8,7 @@
     <result column="id_card" jdbcType="VARCHAR" property="idCard" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="institution_name" jdbcType="VARCHAR" property="institutionName" />
     <result column="is_name_auth" jdbcType="TINYINT" property="isNameAuth" />
     <result column="is_frozen" jdbcType="TINYINT" property="isFrozen" />
     <result column="is_register_jg" jdbcType="TINYINT" property="isRegisterJg" />
@@ -50,7 +51,7 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, mobile, real_name, id_card, nick_name, passwd, is_name_auth, is_frozen, 
-    is_register_jg, logo, roles, `source`, institution_user_id, risk_assessment_level, 
+    is_register_jg, logo, roles, `source`, institution_user_id,institution_name, risk_assessment_level,
     update_time, create_time
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample" resultMap="BaseResultMap">

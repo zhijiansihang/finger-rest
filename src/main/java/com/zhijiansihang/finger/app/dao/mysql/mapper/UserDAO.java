@@ -43,7 +43,7 @@ public interface UserDAO {
     @Select({
         "select",
         "user_id, mobile, real_name, id_card, nick_name, passwd, is_name_auth, is_frozen, ",
-        "is_register_jg, logo, roles, `source`, institution_user_id, risk_assessment_level, ",
+        "is_register_jg, logo, roles, `source`, institution_user_id,institution_name, risk_assessment_level, ",
         "update_time, create_time",
         "from user",
         "where user_id = #{userId,jdbcType=BIGINT}"

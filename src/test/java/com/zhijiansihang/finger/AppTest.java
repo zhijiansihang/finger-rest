@@ -100,7 +100,6 @@ public class AppTest {
 
 		ConsultingRecordRequest request = new ConsultingRecordRequest();
 	    request.setConsultingUserid("1");
-	    request.setType("1");
 		request.setChannelId("");
 		request.setDeviceId("aa-bb-cc");
 		request.setPlatformType("5");
@@ -108,12 +107,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[consultingRecord] 点咨询记录接口请求数据:{}", request);
+		LOG.info("[consultingRecord] Y点咨询记录接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/consultingRecord");
 
-		LOG.info("[consultingRecord] 点咨询记录接口响应数据:{}:", response);
+		LOG.info("[consultingRecord] Y点咨询记录接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -336,12 +335,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[financeOperateLoanInvestor] 理财师操作预约记录接口请求数据:{}", request);
+		LOG.info("[financeOperateLoanInvestor] Y理财师操作预约记录接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/financeOperateLoanInvestor");
 
-		LOG.info("[financeOperateLoanInvestor] 理财师操作预约记录接口响应数据:{}:", response);
+		LOG.info("[financeOperateLoanInvestor] Y理财师操作预约记录接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -468,6 +467,37 @@ public class AppTest {
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getUser");
 
 		LOG.info("[getUser] Y获取用户接口响应数据:{}:", response);
+
+		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
+			if ("test".equals(response.getBody().getMode())) {
+				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
+				return;
+			}
+		} else {
+			Assert.fail();
+		}
+	}
+
+	
+	@Test
+	public void isFriend() throws Exception {
+
+
+		IsFriendRequest request = new IsFriendRequest();
+	    request.setFriendUserid("1223");
+		request.setChannelId("");
+		request.setDeviceId("aa-bb-cc");
+		request.setPlatformType("5");
+		request.setVersionCode("101");
+		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
+		request.setSessionId("");
+
+		LOG.info("[isFriend] 是否是好友关系接口请求数据:{}", request);
+		String content = JSONObject.toJSONString(request);
+
+		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/isFriend");
+
+		LOG.info("[isFriend] 是否是好友关系接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -651,12 +681,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[myCollectionPerson] 我的收藏-店铺接口请求数据:{}", request);
+		LOG.info("[myCollectionPerson] Y我的收藏-店铺接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/myCollectionPerson");
 
-		LOG.info("[myCollectionPerson] 我的收藏-店铺接口响应数据:{}:", response);
+		LOG.info("[myCollectionPerson] Y我的收藏-店铺接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -683,12 +713,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[myDemand] 我的需求接口请求数据:{}", request);
+		LOG.info("[myDemand] Y我的需求接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/myDemand");
 
-		LOG.info("[myDemand] 我的需求接口响应数据:{}:", response);
+		LOG.info("[myDemand] Y我的需求接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -810,44 +840,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[mySolution] 我的方案接口请求数据:{}", request);
+		LOG.info("[mySolution] Y我的方案接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/mySolution");
 
-		LOG.info("[mySolution] 我的方案接口响应数据:{}:", response);
-
-		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
-			if ("test".equals(response.getBody().getMode())) {
-				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
-				return;
-			}
-		} else {
-			Assert.fail();
-		}
-	}
-
-	
-	@Test
-	public void operateMyColutionSemand() throws Exception {
-
-
-		OperateMyColutionSemandRequest request = new OperateMyColutionSemandRequest();
-	    request.setId("1");
-	    request.setType("1");
-		request.setChannelId("");
-		request.setDeviceId("aa-bb-cc");
-		request.setPlatformType("5");
-		request.setVersionCode("101");
-		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
-		request.setSessionId("");
-
-		LOG.info("[operateMyColutionSemand] 方案已读需求接口请求数据:{}", request);
-		String content = JSONObject.toJSONString(request);
-
-		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/operateMyColutionSemand");
-
-		LOG.info("[operateMyColutionSemand] 方案已读需求接口响应数据:{}:", response);
+		LOG.info("[mySolution] Y我的方案接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -944,6 +942,38 @@ public class AppTest {
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/operateMySolution");
 
 		LOG.info("[operateMySolution] Y删除关闭我的方案接口响应数据:{}:", response);
+
+		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
+			if ("test".equals(response.getBody().getMode())) {
+				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
+				return;
+			}
+		} else {
+			Assert.fail();
+		}
+	}
+
+	
+	@Test
+	public void operateMySolutiondemand() throws Exception {
+
+
+		OperateMySolutiondemandRequest request = new OperateMySolutiondemandRequest();
+	    request.setId("1");
+	    request.setType("1");
+		request.setChannelId("");
+		request.setDeviceId("aa-bb-cc");
+		request.setPlatformType("5");
+		request.setVersionCode("101");
+		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
+		request.setSessionId("");
+
+		LOG.info("[operateMySolutiondemand] 方案已读需求接口请求数据:{}", request);
+		String content = JSONObject.toJSONString(request);
+
+		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/operateMySolutiondemand");
+
+		LOG.info("[operateMySolutiondemand] 方案已读需求接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -1067,12 +1097,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[servicePersonRecord] 点咨询和预约客户接口请求数据:{}", request);
+		LOG.info("[servicePersonRecord] Y理财师服务点咨询和预约客户接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/servicePersonRecord");
 
-		LOG.info("[servicePersonRecord] 点咨询和预约客户接口响应数据:{}:", response);
+		LOG.info("[servicePersonRecord] Y理财师服务点咨询和预约客户接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {

@@ -132,6 +132,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<GetUserRequest, Response<GetUserResponse>> genGetUserService;
 
+	@Qualifier("isFriendService")
+	@Autowired(required = false)
+	MessageService<IsFriendRequest, Response<IsFriendResponse>> isFriendService;
+	@Qualifier("genisFriendService")
+	@Autowired(required = false)
+	MessageService<IsFriendRequest, Response<IsFriendResponse>> genIsFriendService;
+
 	@Qualifier("loanInvestorDetailService")
 	@Autowired(required = false)
 	MessageService<LoanInvestorDetailRequest, Response<LoanInvestorDetailResponse>> loanInvestorDetailService;
@@ -573,6 +580,26 @@ public class MobileController {
 		response = getGetUserResponse(request);
 		
 		logResponse("getUser", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/isFriend", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<IsFriendResponse> isFriend(@RequestBody IsFriendRequest request) {
+
+		logRequest("isFriend", request);
+
+  		Response<IsFriendResponse> response = new Response<>();
+
+		request = (IsFriendRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getIsFriendResponse(request);
+		
+		logResponse("isFriend", response);
 
 		return response;
 	}
@@ -1226,6 +1253,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, GetUserRequest.class, GetUserResponse.class);
+	}
+
+	private Response<IsFriendResponse> getIsFriendResponse(IsFriendRequest request) {
+
+		MessageService<IsFriendRequest, Response<IsFriendResponse>> service = isFriendService;
+		if (service == null) {
+			service = genIsFriendService;
+		}
+
+		return mobileService.service(request, service, IsFriendRequest.class, IsFriendResponse.class);
 	}
 
 	private Response<LoanInvestorDetailResponse> getLoanInvestorDetailResponse(LoanInvestorDetailRequest request) {

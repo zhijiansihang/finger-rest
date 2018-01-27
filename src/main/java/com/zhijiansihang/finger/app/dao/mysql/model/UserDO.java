@@ -19,6 +19,19 @@ public class UserDO implements Serializable {
      */
     private String realName;
 
+    public String getInstitutionName() {
+        return institutionName;
+    }
+
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName;
+    }
+
+    /**
+     * 真实姓名
+     */
+    private String institutionName;
+
     /**
      * 身份证号
      */
