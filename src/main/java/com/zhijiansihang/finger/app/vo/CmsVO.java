@@ -6,7 +6,11 @@ import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
  * Created by paul on 2018/1/14.
  */
 public class CmsVO extends CmsDO{
+
     public int currentPage;
+
+    public int pageSize;
+
     private String startDate;
 
     public int getCurrentPage() {
@@ -15,6 +19,14 @@ public class CmsVO extends CmsDO{
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     public String getStartDate() {
