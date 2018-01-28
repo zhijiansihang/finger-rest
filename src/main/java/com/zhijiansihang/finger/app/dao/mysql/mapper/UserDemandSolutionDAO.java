@@ -1,11 +1,14 @@
 package com.zhijiansihang.finger.app.dao.mysql.mapper;
 
+import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDOExample;
 
 import java.security.acl.LastOwnerException;
 import java.util.List;
 
+import com.zhijiansihang.finger.app.vo.DemandMatchSolutionResult;
+import org.apache.coyote.http11.filters.VoidInputFilter;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
@@ -80,4 +83,33 @@ public interface UserDemandSolutionDAO {
     int adoptMyDemandsolution(@Param("demandUserId") Long demandUserId, @Param("id") Integer id);
 
 
+    @Select({
+            "select count(*)",
+            "from user_demand_solution",
+            "where demand_user_id = #{demandUserId} and demand_id = #{demandId} and is_operate_solution=#{isOperateSolution}"
+    })
+    int countByDemandUserIdAndUserid(UserDemandSolutionDO userDemandSolutionDO);
+
+    @Select({
+            "select us.adopt_count,ufc.friend_counts,uds.id,u.institution_name,uds.is_operate_solution,u.logo,u.real_name",
+            "us.serial_number,uds.solution_id,uds.solution_user_id,ufd.service_direction",
+            "from user_demand_solution uds ,user u,user_solution us,user_friend_count ufc,user_finance_detail ufd",
+            "where uds.solution_user_id = u.user_id and uds.solution_id = us.id and uds.solution_user_id = ufc.user_id and uds.solution_user_id = ufd.user_id",
+            " and uds.demand_user_id = #{demandUserId} and uds.demand_id = #{demandId} and uds.is_operate_solution=#{isOperateSolution}",
+            "order by uds.create_time desc"
+    })
+    @Results({
+            @Result(property = "adoptCount", column = "adopt_count"),
+            @Result(property = "friendCounts", column = "friend_counts"),
+            @Result(property = "id", column = "id"),
+            @Result(property = "institutionName", column = "institution_name"),
+            @Result(property = "isOperateSolution", column = "is_operate_solution"),
+            @Result(property = "logo", column = "logo"),
+            @Result(property = "realName", column = "real_name"),
+            @Result(property = "serialNumber", column = "serial_number"),
+            @Result(property = "solutionId", column = "solution_id"),
+            @Result(property = "solutionUserId", column = "solution_user_id"),
+            @Result(property = "serviceDirection", column = "service_direction")
+    })
+    List<DemandMatchSolutionResult> selectByDemandUserIdAndUseridPage(UserDemandSolutionDO userDemandSolutionDO, RowBounds rowBounds);
 }
