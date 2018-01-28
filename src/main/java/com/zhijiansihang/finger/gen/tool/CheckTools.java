@@ -1,7 +1,5 @@
 package com.zhijiansihang.finger.gen.tool;
 
-import com.sun.xml.internal.ws.util.Pool;
-
 /**
  * Created by paul on 2018/1/23.
  */
