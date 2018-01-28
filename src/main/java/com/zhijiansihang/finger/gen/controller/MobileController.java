@@ -223,13 +223,6 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<OperateMyDemandsolutionRequest, Response<OperateMyDemandsolutionResponse>> genOperateMyDemandsolutionService;
 
-	@Qualifier("operateMyDemandsolutionService")
-	@Autowired(required = false)
-	MessageService<OperateMyDemandsolutionRequest, Response<OperateMyDemandsolutionResponse>> operateMyDemandsolutionService;
-	@Qualifier("genoperateMyDemandsolutionService")
-	@Autowired(required = false)
-	MessageService<OperateMyDemandsolutionRequest, Response<OperateMyDemandsolutionResponse>> genOperateMyDemandsolutionService;
-
 	@Qualifier("operateMySolutionService")
 	@Autowired(required = false)
 	MessageService<OperateMySolutionRequest, Response<OperateMySolutionResponse>> operateMySolutionService;
@@ -844,26 +837,6 @@ public class MobileController {
 		return response;
 	}
 
-	@RequestMapping(value = "/operateMyDemandsolution", method = RequestMethod.POST)
-	@ResponseBody
-	public Response<OperateMyDemandsolutionResponse> operateMyDemandsolution(@RequestBody OperateMyDemandsolutionRequest request) {
-
-		logRequest("operateMyDemandsolution", request);
-
-  		Response<OperateMyDemandsolutionResponse> response = new Response<>();
-
-		request = (OperateMyDemandsolutionRequest) this.validate(request, response);
-		if(null == request){
-			return response;
-		}
-
-		response = getOperateMyDemandsolutionResponse(request);
-		
-		logResponse("operateMyDemandsolution", response);
-
-		return response;
-	}
-
 	@RequestMapping(value = "/operateMySolution", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<OperateMySolutionResponse> operateMySolution(@RequestBody OperateMySolutionRequest request) {
@@ -1373,16 +1346,6 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, OperateMyDemandRequest.class, OperateMyDemandResponse.class);
-	}
-
-	private Response<OperateMyDemandsolutionResponse> getOperateMyDemandsolutionResponse(OperateMyDemandsolutionRequest request) {
-
-		MessageService<OperateMyDemandsolutionRequest, Response<OperateMyDemandsolutionResponse>> service = operateMyDemandsolutionService;
-		if (service == null) {
-			service = genOperateMyDemandsolutionService;
-		}
-
-		return mobileService.service(request, service, OperateMyDemandsolutionRequest.class, OperateMyDemandsolutionResponse.class);
 	}
 
 	private Response<OperateMyDemandsolutionResponse> getOperateMyDemandsolutionResponse(OperateMyDemandsolutionRequest request) {

@@ -45,7 +45,7 @@ public class GetCmsService implements MessageService<GetCmsRequest, Response<Get
         int typeCode = Integer.parseInt(request.getTypeCode().trim());
         Page<Long, UserDO> page = Page.create();
         page.setCurrentPage(CheckTools.isInteger(request.getCurrentPage()) ? Integer.parseInt(request.getCurrentPage()) : 1);
-        page.setCurrentPage(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
+        page.setPageSize(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
         page.setSelect((long) typeCode);
         int count = cmsDAO.countByTypeCode(typeCode);
         page.setRecordCount(count);

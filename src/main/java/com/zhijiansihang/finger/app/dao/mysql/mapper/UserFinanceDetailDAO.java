@@ -4,15 +4,13 @@ import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDOExample;
 import java.util.List;
 
+import com.zhijiansihang.finger.app.vo.UserFinanceDetailSelect;
 import com.zhijiansihang.finger.app.vo.UserFinanceDetailVO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Mapper
 public interface UserFinanceDetailDAO {
     @Delete({
@@ -46,6 +44,11 @@ public interface UserFinanceDetailDAO {
     List<UserFinanceDetailDO> selectByExampleWithRowbounds(UserFinanceDetailDOExample example, RowBounds rowBounds);
 
     List<UserFinanceDetailDO> selectByExample(UserFinanceDetailDOExample example);
+
+    int selectCountByFinanceType(UserFinanceDetailSelect userFinanceDetailSelect);
+
+
+    List<UserFinanceDetailVO> selectByFinanceType(UserFinanceDetailSelect userFinanceDetailSelect, RowBounds rowBounds);
 
     @Select({
         "select",

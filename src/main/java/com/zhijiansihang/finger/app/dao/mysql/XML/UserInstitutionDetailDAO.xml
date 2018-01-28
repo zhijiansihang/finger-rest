@@ -6,6 +6,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="contact_name" jdbcType="VARCHAR" property="contactName" />
     <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile" />
+    <result column="is_personal" jdbcType="TINYINT" property="isPersonal" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -40,7 +41,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    user_id, `name`, contact_name, contact_mobile, is_deleted, update_time, create_time
+    user_id, `name`, contact_name, contact_mobile, is_personal, is_deleted, update_time, 
+    create_time
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserInstitutionDetailDOExample" resultMap="BaseResultMap">
     select
@@ -71,6 +73,9 @@
       <if test="contactMobile != null">
         contact_mobile,
       </if>
+      <if test="isPersonal != null">
+        is_personal,
+      </if>
       <if test="isDeleted != null">
         is_deleted,
       </if>
@@ -94,6 +99,9 @@
       <if test="contactMobile != null">
         #{contactMobile,jdbcType=VARCHAR},
       </if>
+      <if test="isPersonal != null">
+        #{isPersonal,jdbcType=TINYINT},
+      </if>
       <if test="isDeleted != null">
         #{isDeleted,jdbcType=TINYINT},
       </if>
@@ -116,6 +124,9 @@
       </if>
       <if test="contactMobile != null">
         contact_mobile = #{contactMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="isPersonal != null">
+        is_personal = #{isPersonal,jdbcType=TINYINT},
       </if>
       <if test="isDeleted != null">
         is_deleted = #{isDeleted,jdbcType=TINYINT},

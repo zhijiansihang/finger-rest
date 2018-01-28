@@ -46,7 +46,7 @@ public class MyFriendsService implements MessageService<MyFriendsRequest, Respon
         Long id = UserTools.getLoginUser().getId();
         Page<Long, UserDO> page = Page.create();
         page.setCurrentPage(CheckTools.isInteger(request.getCurrentPage()) ? Integer.parseInt(request.getCurrentPage()) : 1);
-        page.setCurrentPage(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
+        page.setPageSize(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
         page.setSelect(id.longValue());
         int count = userFriendDAO.countByUserid(id);
         page.setRecordCount(count);

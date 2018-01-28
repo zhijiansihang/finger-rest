@@ -91,6 +91,50 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="selectByFinanceType" parameterType="com.zhijiansihang.finger.app.vo.UserFinanceDetailSelect" resultMap="BaseResultMapEx">
+    select
+    ufd.*,u.logo,u.real_name,u.institution_name
+    from user_finance_detail ufd,user u,user_institution_detail uid
+    where ufd.user_id = u.user_id and uid.user_id = u.institution_user_id
+    <if test="financeType != null and financeType == 0">
+      and 1=1
+    </if>
+    <if test="financeType != null and financeType == 1">
+      and uid.is_personal=1
+    </if>
+    <if test="financeType != null and financeType == 2">
+      and uid.is_personal=2
+    </if>
+    <if test="financeOrder != null and financeOrder==0">
+      order by ufd.loan_count desc,ufd.user_order_count desc,ufd.adopt_count desc,ufd.create_time desc
+    </if>
+    <if test="financeOrder != null and financeOrder==1">
+      order by ufd.loan_count desc,ufd.create_time desc
+    </if>
+    <if test="financeOrder != null and financeOrder==2">
+      order by ufd.user_order_count desc,ufd.create_time desc
+    </if>
+    <if test="financeOrder != null and financeOrder==3">
+      order by ufd.adopt_count desc,ufd.create_time desc
+    </if>
+  </select>
+
+  <select id="selectCountByFinanceType" parameterType="com.zhijiansihang.finger.app.vo.UserFinanceDetailSelect">
+    select count(*)
+    from user_finance_detail ufd,user u,user_institution_detail uid
+    where ufd.user_id = u.user_id and uid.user_id = u.institution_user_id
+    <if test="financeType != null and financeType == 0">
+      and 1=1
+    </if>
+    <if test="financeType != null and financeType == 1">
+      and uid.is_personal=1
+    </if>
+    <if test="financeType != null and financeType == 2">
+      and uid.is_personal=2
+    </if>
+  </select>
+
   <insert id="insertSelective" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO">
     insert into user_finance_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">

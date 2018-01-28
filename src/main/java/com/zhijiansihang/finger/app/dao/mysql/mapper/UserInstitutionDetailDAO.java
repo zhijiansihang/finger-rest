@@ -22,12 +22,12 @@ public interface UserInstitutionDetailDAO {
     @Insert({
         "insert into user_institution_detail (user_id, `name`, ",
         "contact_name, contact_mobile, ",
-        "is_deleted, update_time, ",
-        "create_time)",
+        "is_personal, is_deleted, ",
+        "update_time, create_time)",
         "values (#{userId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, ",
         "#{contactName,jdbcType=VARCHAR}, #{contactMobile,jdbcType=VARCHAR}, ",
-        "#{isDeleted,jdbcType=TINYINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
-        "#{createTime,jdbcType=TIMESTAMP})"
+        "#{isPersonal,jdbcType=TINYINT}, #{isDeleted,jdbcType=TINYINT}, ",
+        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
     })
     int insert(UserInstitutionDetailDO record);
 
@@ -39,7 +39,8 @@ public interface UserInstitutionDetailDAO {
 
     @Select({
         "select",
-        "user_id, `name`, contact_name, contact_mobile, is_deleted, update_time, create_time",
+        "user_id, `name`, contact_name, contact_mobile, is_personal, is_deleted, update_time, ",
+        "create_time",
         "from user_institution_detail",
         "where user_id = #{userId,jdbcType=BIGINT}"
     })
@@ -53,6 +54,7 @@ public interface UserInstitutionDetailDAO {
         "set `name` = #{name,jdbcType=VARCHAR},",
           "contact_name = #{contactName,jdbcType=VARCHAR},",
           "contact_mobile = #{contactMobile,jdbcType=VARCHAR},",
+          "is_personal = #{isPersonal,jdbcType=TINYINT},",
           "is_deleted = #{isDeleted,jdbcType=TINYINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",

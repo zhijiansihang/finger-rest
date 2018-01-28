@@ -25,6 +25,11 @@ public class UserInstitutionDetailDO implements Serializable {
     private String contactMobile;
 
     /**
+     * 是否个人机构 1:为个人机构 2:企业机构
+     */
+    private Byte isPersonal;
+
+    /**
      * 是否删除 1:为删除 0:未删除
      */
     private Byte isDeleted;
@@ -109,6 +114,22 @@ public class UserInstitutionDetailDO implements Serializable {
     }
 
     /**
+     * 是否个人机构 1:为个人机构 2:企业机构
+     * @return is_personal 是否个人机构 1:为个人机构 2:企业机构
+     */
+    public Byte getIsPersonal() {
+        return isPersonal;
+    }
+
+    /**
+     * 是否个人机构 1:为个人机构 2:企业机构
+     * @param isPersonal 是否个人机构 1:为个人机构 2:企业机构
+     */
+    public void setIsPersonal(Byte isPersonal) {
+        this.isPersonal = isPersonal;
+    }
+
+    /**
      * 是否删除 1:为删除 0:未删除
      * @return is_deleted 是否删除 1:为删除 0:未删除
      */
@@ -166,6 +187,7 @@ public class UserInstitutionDetailDO implements Serializable {
         sb.append(", name=").append(name);
         sb.append(", contactName=").append(contactName);
         sb.append(", contactMobile=").append(contactMobile);
+        sb.append(", isPersonal=").append(isPersonal);
         sb.append(", isDeleted=").append(isDeleted);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", createTime=").append(createTime);

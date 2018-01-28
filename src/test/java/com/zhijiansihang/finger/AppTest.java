@@ -874,44 +874,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[operateMyDemandsolution] 需求采纳已读方案接口请求数据:{}", request);
+		LOG.info("[operateMyDemandsolution] Y需求采纳已读方案接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/operateMyDemandsolution");
 
-		LOG.info("[operateMyDemandsolution] 需求采纳已读方案接口响应数据:{}:", response);
-
-		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
-			if ("test".equals(response.getBody().getMode())) {
-				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
-				return;
-			}
-		} else {
-			Assert.fail();
-		}
-	}
-
-	
-	@Test
-	public void operateMyDemandsolution() throws Exception {
-
-
-		OperateMyDemandsolutionRequest request = new OperateMyDemandsolutionRequest();
-	    request.setId("1");
-	    request.setType("1");
-		request.setChannelId("");
-		request.setDeviceId("aa-bb-cc");
-		request.setPlatformType("5");
-		request.setVersionCode("101");
-		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
-		request.setSessionId("");
-
-		LOG.info("[operateMyDemandsolution] 需求采纳已读方案接口请求数据:{}", request);
-		String content = JSONObject.toJSONString(request);
-
-		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/operateMyDemandsolution");
-
-		LOG.info("[operateMyDemandsolution] 需求采纳已读方案接口响应数据:{}:", response);
+		LOG.info("[operateMyDemandsolution] Y需求采纳已读方案接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {

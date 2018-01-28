@@ -49,7 +49,7 @@ public class ServicePersonRecordService implements MessageService<ServicePersonR
 
 		Page<Long, UserDO> page = Page.create();
 		page.setCurrentPage(CheckTools.isInteger(request.getCurrentPage()) ? Integer.parseInt(request.getCurrentPage()) : 1);
-		page.setCurrentPage(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
+		page.setPageSize(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
 		page.setSelect(Long.parseLong(financeUserid));
 		int count = userServiceRecordDAO.countByUserid(Long.parseLong(financeUserid));
 		page.setRecordCount(count);

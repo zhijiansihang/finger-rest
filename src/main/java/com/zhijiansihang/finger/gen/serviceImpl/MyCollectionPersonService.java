@@ -47,7 +47,7 @@ public class MyCollectionPersonService implements MessageService<MyCollectionPer
         Long userId = UserTools.getLoginUser().getId();
         Page<Long, UserDO> page = Page.create();
         page.setCurrentPage(CheckTools.isInteger(request.getCurrentPage()) ? Integer.parseInt(request.getCurrentPage()) : 1);
-        page.setCurrentPage(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
+        page.setPageSize(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
         page.setSelect(userId.longValue());
         int count = userCollectionDAO.countFinanceByUserid(userId);
         page.setRecordCount(count);

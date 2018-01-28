@@ -387,6 +387,66 @@ public class UserInstitutionDetailDOExample {
             return (Criteria) this;
         }
 
+        public Criteria andIsPersonalIsNull() {
+            addCriterion("is_personal is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalIsNotNull() {
+            addCriterion("is_personal is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalEqualTo(Byte value) {
+            addCriterion("is_personal =", value, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalNotEqualTo(Byte value) {
+            addCriterion("is_personal <>", value, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalGreaterThan(Byte value) {
+            addCriterion("is_personal >", value, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalGreaterThanOrEqualTo(Byte value) {
+            addCriterion("is_personal >=", value, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalLessThan(Byte value) {
+            addCriterion("is_personal <", value, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalLessThanOrEqualTo(Byte value) {
+            addCriterion("is_personal <=", value, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalIn(List<Byte> values) {
+            addCriterion("is_personal in", values, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalNotIn(List<Byte> values) {
+            addCriterion("is_personal not in", values, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalBetween(Byte value1, Byte value2) {
+            addCriterion("is_personal between", value1, value2, "isPersonal");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsPersonalNotBetween(Byte value1, Byte value2) {
+            addCriterion("is_personal not between", value1, value2, "isPersonal");
+            return (Criteria) this;
+        }
+
         public Criteria andIsDeletedIsNull() {
             addCriterion("is_deleted is null");
             return (Criteria) this;

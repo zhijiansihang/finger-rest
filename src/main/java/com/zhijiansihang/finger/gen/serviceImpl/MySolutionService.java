@@ -39,7 +39,7 @@ public class MySolutionService implements MessageService<MySolutionRequest, Resp
 		Long userid = UserTools.getLoginUser().getId();
 		Page<Long, UserDemandDO> page = Page.create();
 		page.setCurrentPage(CheckTools.isInteger(request.getCurrentPage()) ? Integer.parseInt(request.getCurrentPage()) : 1);
-		page.setCurrentPage(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
+		page.setPageSize(CheckTools.isInteger(request.getPageSize()) ? Integer.parseInt(request.getPageSize()) : 10);
 		page.setSelect(userid);
 		int count = userSolutionDAO.countByUserid(userid);
 		page.setRecordCount(count);
