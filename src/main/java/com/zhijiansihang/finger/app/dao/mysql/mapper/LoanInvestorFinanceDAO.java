@@ -2,16 +2,14 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDOExample;
+
+import java.math.BigDecimal;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+
+import com.zhijiansihang.finger.app.vo.LoanInvestorFinanceVO;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LoanInvestorFinanceDAO {
     @Delete({
@@ -67,4 +65,87 @@ public interface LoanInvestorFinanceDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(LoanInvestorFinanceDO record);
+
+    @Select({
+            "select count(*)",
+            "from loan_investor_finance",
+            "where finance_user_id = #{userId,jdbcType=BIGINT} and is_deal =1"
+    })
+    int countDealByFinanceUserid(Long userId);
+
+    @Select({
+            "select count(*)",
+            "from loan_investor_finance",
+            "where finance_user_id = #{userId,jdbcType=BIGINT} and is_deal =0"
+    })
+    int countNotDealByFinanceUserid(Long userId);
+
+    @Select({
+            "select lif.id,l.title,lif.amount,user.real_name",
+            "from loan_investor_finance",
+            "where finance_user_id = #{userId,jdbcType=BIGINT} and is_deal = 0",
+            "order by create_time desc"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "amount", column = "amount"),
+            @Result(property = "realName", column = "real_name")
+    })
+    List<LoanInvestorFinanceVO> selectNotDealByFinanceUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
+
+    @Select({
+            "select lif.id,l.title,lif.amount,user.real_name",
+            "from loan_investor_finance lif ,loan l,user u",
+            "where lif.loan_id = l.loan_id and lif.user_id = u.user_id and lif.finance_user_id = #{userId,jdbcType=BIGINT} and lif.is_deal = 1",
+            "order by lif.create_time desc"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "amount", column = "amount"),
+            @Result(property = "realName", column = "real_name")
+    })
+    List<LoanInvestorFinanceVO> selectDealByFinanceUseridPage(@Param("userId")Long userId, RowBounds rowBounds);
+
+    @Select({
+            "select count(*)",
+            "from loan_investor_finance",
+            "where user_id = #{userId,jdbcType=BIGINT} and is_deal =0"
+    })
+    int countNotDealByUserid(Long userId);
+    @Select({
+            "select count(*)",
+            "from loan_investor_finance",
+            "where user_id = #{userId,jdbcType=BIGINT} and is_deal =1"
+    })
+    int countDealByUserid(Long userId);
+
+    @Select({
+            "select lif.id,l.title,lif.amount,user.real_name",
+            "from loan_investor_finance lif ,loan l,user u",
+            "where lif.loan_id = l.loan_id and lif.user_id = u.user_id and lif.user_id = #{userId,jdbcType=BIGINT} and lif.is_deal = 0",
+            "order by lif.create_time desc"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "amount", column = "amount"),
+            @Result(property = "realName", column = "real_name")
+    })
+    List<LoanInvestorFinanceVO> selectNotDealByUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
+
+    @Select({
+            "select lif.id,l.title,lif.amount,user.real_name",
+            "from loan_investor_finance lif ,loan l,user u",
+            "where lif.loan_id = l.loan_id and lif.user_id = u.user_id and lif.user_id = #{userId,jdbcType=BIGINT} and lif.is_deal = 1",
+            "order by lif.create_time desc"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "title", column = "title"),
+            @Result(property = "amount", column = "amount"),
+            @Result(property = "realName", column = "real_name")
+    })
+    List<LoanInvestorFinanceVO> selectDealByUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
 }
