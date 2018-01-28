@@ -49,7 +49,7 @@ public class SingleDemandSolutionListService implements MessageService<SingleDem
 		UserDemandSolutionDO userDemandSolutionDO = new UserDemandSolutionDO();
 		userDemandSolutionDO.setDemandId(Long.parseLong(demandId));
 		userDemandSolutionDO.setDemandUserId(userId);
-		userDemandSolutionDO.setIsReadDemand(Byte.parseByte(type));
+		userDemandSolutionDO.setIsOperateSolution(Byte.parseByte(type));
 
 		Long id = UserTools.getLoginUser().getId();
 		Page<UserDemandSolutionDO, UserDO> page = Page.create();

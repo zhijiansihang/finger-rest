@@ -8,6 +8,7 @@ import java.security.acl.LastOwnerException;
 import java.util.List;
 
 import com.zhijiansihang.finger.app.vo.DemandMatchSolutionResult;
+import com.zhijiansihang.finger.app.vo.SolutionMatchDemandResult;
 import org.apache.coyote.http11.filters.VoidInputFilter;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
@@ -112,4 +113,30 @@ public interface UserDemandSolutionDAO {
             @Result(property = "serviceDirection", column = "service_direction")
     })
     List<DemandMatchSolutionResult> selectByDemandUserIdAndUseridPage(UserDemandSolutionDO userDemandSolutionDO, RowBounds rowBounds);
+
+    @Select({
+            "select count(*)",
+            "from user_demand_solution",
+            "where solution_user_id = #{solutionUserId} and solution_id = #{solutionId} and is_read_demand=#{isReadDemand}"
+    })
+    int countBySolutionUserIdAndUserid(UserDemandSolutionDO userDemandSolutionDO);
+
+    @Select({
+            "select uds.demand_id,uds.demand_user_id,uds.id,ud.serial_number,uds.is_read_demand,u.logo,u.real_name",
+            "from user_demand_solution uds ,user u,user_demand ud",
+            "where uds.demand_user_id = u.user_id and uds.demand_id = ud.id",
+            "and solution_user_id = #{solutionUserId} and solution_id = #{solutionId} and is_read_demand=#{isReadDemand}",
+            "order by uds.create_time desc"
+    })
+    @Results({
+            @Result(property = "realName", column = "real_name"),
+            @Result(property = "logo", column = "logo"),
+            @Result(property = "isReadDemand", column = "is_read_demand"),
+            @Result(property = "serialNumber", column = "serial_number"),
+            @Result(property = "demandId", column = "demand_id"),
+            @Result(property = "demandUserId", column = "demand_user_id"),
+            @Result(property = "id", column = "id")
+    })
+    List<SolutionMatchDemandResult> selectBySolutionUserIdAndUseridPage(UserDemandSolutionDO userDemandSolutionDO, RowBounds rowBounds);
+
 }
