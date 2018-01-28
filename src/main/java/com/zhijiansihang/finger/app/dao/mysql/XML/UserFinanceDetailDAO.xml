@@ -120,7 +120,7 @@
     </if>
   </select>
 
-  <select id="selectCountByFinanceType" parameterType="com.zhijiansihang.finger.app.vo.UserFinanceDetailSelect">
+  <select id="selectCountByFinanceType" parameterType="com.zhijiansihang.finger.app.vo.UserFinanceDetailSelect" resultType="java.lang.Integer">
     select count(*)
     from user_finance_detail ufd,user u,user_institution_detail uid
     where ufd.user_id = u.user_id and uid.user_id = u.institution_user_id

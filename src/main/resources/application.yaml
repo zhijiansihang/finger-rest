@@ -32,6 +32,7 @@ url:
 logging:
   level:
     root: info
+    com.zhijiansihang.finger.app.dao.mysql.mapper: debug
 custom:
   sharing:
     file-system-root: C:/nfs
@@ -45,6 +46,8 @@ endpoints:
 sms:
   aliyun:
     message-signature:
+
+
 
 
 

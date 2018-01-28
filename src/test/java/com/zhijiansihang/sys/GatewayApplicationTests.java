@@ -30,7 +30,6 @@ public class GatewayApplicationTests {
         UserFinanceDetailSelect userFinanceDetailSelect = new UserFinanceDetailSelect();
         userFinanceDetailSelect.setFinanceOrder(Integer.parseInt(order.trim()));
         userFinanceDetailSelect.setFinanceType(Integer.parseInt(type.trim()));
-        Long id = UserTools.getLoginUser().getId();
         Page<UserFinanceDetailSelect, UserFinanceDetailVO> page = Page.create();
         page.setCurrentPage(1);
         page.setPageSize(10);
