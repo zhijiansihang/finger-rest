@@ -4,16 +4,18 @@ spring:
   application:
     name: platform-gateway
   redis:
-    host: 127.0.0.1
+    host: r-2ze5cb303beecbc4.redis.rds.aliyuncs.com
     port: 6379
     database: 0
+#    host: 127.0.0.1
+    password: zjf123QWE
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyHbmImpl
         physical-strategy: com.zhijiansihang.sys.util.ImprovedNamingStrategy
-    show-sql: true
+    show-sql: false
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://rm-wz94f73g57lm69jezjo.mysql.rds.aliyuncs.com/finger?useUnicode=true&characterEncoding=UTF-8&useSSL=false
@@ -35,8 +37,8 @@ logging:
     com.zhijiansihang.finger.app.dao.mysql.mapper: debug
 custom:
   sharing:
-    file-system-root: C:/nfs
-    static-server-link: http://127.0.0.1:7035
+    file-system-root: /pic/
+    static-server-link: http://47.94.241.207:7031
     open-thirdparty-service: false
 #开启动态设置日志此处是不同通过校验loggers 权限 或者默认使用角色ACTUATOR
 endpoints:
