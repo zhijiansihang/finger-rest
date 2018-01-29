@@ -48,6 +48,8 @@ endpoints:
 sms:
   aliyun:
     message-signature:
+multipart:
+  location: /pic/tmp
 
 
 

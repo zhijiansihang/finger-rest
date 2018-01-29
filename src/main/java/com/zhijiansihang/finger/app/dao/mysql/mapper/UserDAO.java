@@ -4,6 +4,8 @@ import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import java.util.List;
 
+import com.zhijiansihang.finger.app.vo.CmsVO;
+import com.zhijiansihang.finger.app.vo.UserVO;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
@@ -80,4 +82,7 @@ public interface UserDAO {
             "where real_name = #{realName} and id_card = #{idCard}"
     })
     int existIdCardAndRealName(@Param("realName") String realName,@Param("idCard") String idCard);
+
+    int countByExample(UserDOExample example);
+
 }

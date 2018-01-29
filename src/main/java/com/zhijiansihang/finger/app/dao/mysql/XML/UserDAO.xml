@@ -233,4 +233,13 @@
       order by ${orderByClause}
     </if>
   </select>
+
+
+  <select id="countByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample" resultType="java.lang.Integer">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
 </mapper>
