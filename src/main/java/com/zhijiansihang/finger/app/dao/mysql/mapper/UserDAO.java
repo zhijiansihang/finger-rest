@@ -3,12 +3,15 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import java.util.List;
-
-import com.zhijiansihang.finger.app.vo.CmsVO;
-import com.zhijiansihang.finger.app.vo.UserVO;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 import org.apache.ibatis.session.RowBounds;
 
+import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDAO {
     @Delete({
@@ -23,15 +26,17 @@ public interface UserDAO {
         "passwd, is_name_auth, ",
         "is_frozen, is_register_jg, ",
         "logo, roles, `source`, ",
-        "institution_user_id, risk_assessment_level, ",
-        "update_time, create_time)",
+        "institution_user_id, institution_name, ",
+        "risk_assessment_level, update_time, ",
+        "create_time)",
         "values (#{mobile,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, ",
         "#{idCard,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, ",
         "#{passwd,jdbcType=VARCHAR}, #{isNameAuth,jdbcType=TINYINT}, ",
         "#{isFrozen,jdbcType=TINYINT}, #{isRegisterJg,jdbcType=TINYINT}, ",
         "#{logo,jdbcType=VARCHAR}, #{roles,jdbcType=SMALLINT}, #{source,jdbcType=SMALLINT}, ",
-        "#{institutionUserId,jdbcType=BIGINT}, #{riskAssessmentLevel,jdbcType=SMALLINT}, ",
-        "#{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP})"
+        "#{institutionUserId,jdbcType=BIGINT}, #{institutionName,jdbcType=BIGINT}, ",
+        "#{riskAssessmentLevel,jdbcType=SMALLINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
+        "#{createTime,jdbcType=TIMESTAMP})"
     })
     @SelectKey(statement="SELECT LAST_INSERT_ID()", keyProperty="userId", before=false, resultType=Long.class)
     int insert(UserDO record);
@@ -45,8 +50,8 @@ public interface UserDAO {
     @Select({
         "select",
         "user_id, mobile, real_name, id_card, nick_name, passwd, is_name_auth, is_frozen, ",
-        "is_register_jg, logo, roles, `source`, institution_user_id,institution_name, risk_assessment_level, ",
-        "update_time, create_time",
+        "is_register_jg, logo, roles, `source`, institution_user_id, institution_name, ",
+        "risk_assessment_level, update_time, create_time",
         "from user",
         "where user_id = #{userId,jdbcType=BIGINT}"
     })
@@ -69,6 +74,7 @@ public interface UserDAO {
           "roles = #{roles,jdbcType=SMALLINT},",
           "`source` = #{source,jdbcType=SMALLINT},",
           "institution_user_id = #{institutionUserId,jdbcType=BIGINT},",
+          "institution_name = #{institutionName,jdbcType=BIGINT},",
           "risk_assessment_level = #{riskAssessmentLevel,jdbcType=SMALLINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",

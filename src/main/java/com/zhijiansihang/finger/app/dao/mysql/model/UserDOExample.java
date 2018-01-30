@@ -957,6 +957,66 @@ public class UserDOExample {
             return (Criteria) this;
         }
 
+        public Criteria andInstitutionNameIsNull() {
+            addCriterion("institution_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameIsNotNull() {
+            addCriterion("institution_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameEqualTo(Long value) {
+            addCriterion("institution_name =", value, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameNotEqualTo(Long value) {
+            addCriterion("institution_name <>", value, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameGreaterThan(Long value) {
+            addCriterion("institution_name >", value, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameGreaterThanOrEqualTo(Long value) {
+            addCriterion("institution_name >=", value, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameLessThan(Long value) {
+            addCriterion("institution_name <", value, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameLessThanOrEqualTo(Long value) {
+            addCriterion("institution_name <=", value, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameIn(List<Long> values) {
+            addCriterion("institution_name in", values, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameNotIn(List<Long> values) {
+            addCriterion("institution_name not in", values, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameBetween(Long value1, Long value2) {
+            addCriterion("institution_name between", value1, value2, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameNotBetween(Long value1, Long value2) {
+            addCriterion("institution_name not between", value1, value2, "institutionName");
+            return (Criteria) this;
+        }
+
         public Criteria andRiskAssessmentLevelIsNull() {
             addCriterion("risk_assessment_level is null");
             return (Criteria) this;

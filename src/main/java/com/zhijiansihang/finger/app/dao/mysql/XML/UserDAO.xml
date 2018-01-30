@@ -8,7 +8,6 @@
     <result column="id_card" jdbcType="VARCHAR" property="idCard" />
     <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
     <result column="passwd" jdbcType="VARCHAR" property="passwd" />
-    <result column="institution_name" jdbcType="VARCHAR" property="institutionName" />
     <result column="is_name_auth" jdbcType="TINYINT" property="isNameAuth" />
     <result column="is_frozen" jdbcType="TINYINT" property="isFrozen" />
     <result column="is_register_jg" jdbcType="TINYINT" property="isRegisterJg" />
@@ -16,6 +15,7 @@
     <result column="roles" jdbcType="SMALLINT" property="roles" />
     <result column="source" jdbcType="SMALLINT" property="source" />
     <result column="institution_user_id" jdbcType="BIGINT" property="institutionUserId" />
+    <result column="institution_name" jdbcType="BIGINT" property="institutionName" />
     <result column="risk_assessment_level" jdbcType="SMALLINT" property="riskAssessmentLevel" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -51,7 +51,7 @@
   </sql>
   <sql id="Base_Column_List">
     user_id, mobile, real_name, id_card, nick_name, passwd, is_name_auth, is_frozen, 
-    is_register_jg, logo, roles, `source`, institution_user_id,institution_name, risk_assessment_level,
+    is_register_jg, logo, roles, `source`, institution_user_id, institution_name, risk_assessment_level, 
     update_time, create_time
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample" resultMap="BaseResultMap">
@@ -110,6 +110,9 @@
       <if test="institutionUserId != null">
         institution_user_id,
       </if>
+      <if test="institutionName != null">
+        institution_name,
+      </if>
       <if test="riskAssessmentLevel != null">
         risk_assessment_level,
       </if>
@@ -156,6 +159,9 @@
       </if>
       <if test="institutionUserId != null">
         #{institutionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="institutionName != null">
+        #{institutionName,jdbcType=BIGINT},
       </if>
       <if test="riskAssessmentLevel != null">
         #{riskAssessmentLevel,jdbcType=SMALLINT},
@@ -206,6 +212,9 @@
       </if>
       <if test="institutionUserId != null">
         institution_user_id = #{institutionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="institutionName != null">
+        institution_name = #{institutionName,jdbcType=BIGINT},
       </if>
       <if test="riskAssessmentLevel != null">
         risk_assessment_level = #{riskAssessmentLevel,jdbcType=SMALLINT},

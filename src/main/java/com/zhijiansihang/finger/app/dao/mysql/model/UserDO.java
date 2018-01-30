@@ -19,19 +19,6 @@ public class UserDO implements Serializable {
      */
     private String realName;
 
-    public String getInstitutionName() {
-        return institutionName;
-    }
-
-    public void setInstitutionName(String institutionName) {
-        this.institutionName = institutionName;
-    }
-
-    /**
-     * 真实姓名
-     */
-    private String institutionName;
-
     /**
      * 身份证号
      */
@@ -68,7 +55,7 @@ public class UserDO implements Serializable {
     private String logo;
 
     /**
-     * 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:个人理财师 5:机构理财师
+     * 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:理财师 
      */
     private Short roles;
 
@@ -81,6 +68,11 @@ public class UserDO implements Serializable {
      * 所属机构id即父userid
      */
     private Long institutionUserId;
+
+    /**
+     * 所属机构id即父userid
+     */
+    private Long institutionName;
 
     /**
      * 风险测评等级冗余
@@ -263,16 +255,16 @@ public class UserDO implements Serializable {
     }
 
     /**
-     * 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:个人理财师 5:机构理财师
-     * @return roles 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:个人理财师 5:机构理财师
+     * 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:理财师 
+     * @return roles 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:理财师 
      */
     public Short getRoles() {
         return roles;
     }
 
     /**
-     * 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:个人理财师 5:机构理财师
-     * @param roles 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:个人理财师 5:机构理财师
+     * 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:理财师 
+     * @param roles 用户角色:1平台管理员 2:第三方机构 3:用户投资人 4:理财师 
      */
     public void setRoles(Short roles) {
         this.roles = roles;
@@ -308,6 +300,22 @@ public class UserDO implements Serializable {
      */
     public void setInstitutionUserId(Long institutionUserId) {
         this.institutionUserId = institutionUserId;
+    }
+
+    /**
+     * 所属机构id即父userid
+     * @return institution_name 所属机构id即父userid
+     */
+    public Long getInstitutionName() {
+        return institutionName;
+    }
+
+    /**
+     * 所属机构id即父userid
+     * @param institutionName 所属机构id即父userid
+     */
+    public void setInstitutionName(Long institutionName) {
+        this.institutionName = institutionName;
     }
 
     /**
@@ -377,6 +385,7 @@ public class UserDO implements Serializable {
         sb.append(", roles=").append(roles);
         sb.append(", source=").append(source);
         sb.append(", institutionUserId=").append(institutionUserId);
+        sb.append(", institutionName=").append(institutionName);
         sb.append(", riskAssessmentLevel=").append(riskAssessmentLevel);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", createTime=").append(createTime);
