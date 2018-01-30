@@ -3,15 +3,10 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface UserDAO {
     @Delete({
@@ -87,7 +82,7 @@ public interface UserDAO {
             "from user",
             "where real_name = #{realName} and id_card = #{idCard}"
     })
-    int existIdCardAndRealName(@Param("realName") String realName,@Param("idCard") String idCard);
+    int existIdCardAndRealName(@Param("realName") String realName, @Param("idCard") String idCard);
 
     int countByExample(UserDOExample example);
 
