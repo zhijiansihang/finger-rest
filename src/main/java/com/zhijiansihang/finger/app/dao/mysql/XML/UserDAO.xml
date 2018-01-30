@@ -15,7 +15,7 @@
     <result column="roles" jdbcType="SMALLINT" property="roles" />
     <result column="source" jdbcType="SMALLINT" property="source" />
     <result column="institution_user_id" jdbcType="BIGINT" property="institutionUserId" />
-    <result column="institution_name" jdbcType="BIGINT" property="institutionName" />
+    <result column="institution_name" jdbcType="VARCHAR" property="institutionName" />
     <result column="risk_assessment_level" jdbcType="SMALLINT" property="riskAssessmentLevel" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -161,7 +161,7 @@
         #{institutionUserId,jdbcType=BIGINT},
       </if>
       <if test="institutionName != null">
-        #{institutionName,jdbcType=BIGINT},
+        #{institutionName,jdbcType=VARCHAR},
       </if>
       <if test="riskAssessmentLevel != null">
         #{riskAssessmentLevel,jdbcType=SMALLINT},
@@ -214,7 +214,7 @@
         institution_user_id = #{institutionUserId,jdbcType=BIGINT},
       </if>
       <if test="institutionName != null">
-        institution_name = #{institutionName,jdbcType=BIGINT},
+        institution_name = #{institutionName,jdbcType=VARCHAR},
       </if>
       <if test="riskAssessmentLevel != null">
         risk_assessment_level = #{riskAssessmentLevel,jdbcType=SMALLINT},

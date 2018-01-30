@@ -72,7 +72,7 @@ public class UserDO implements Serializable {
     /**
      * 所属机构id即父userid
      */
-    private Long institutionName;
+    private String institutionName;
 
     /**
      * 风险测评等级冗余
@@ -306,7 +306,7 @@ public class UserDO implements Serializable {
      * 所属机构id即父userid
      * @return institution_name 所属机构id即父userid
      */
-    public Long getInstitutionName() {
+    public String getInstitutionName() {
         return institutionName;
     }
 
@@ -314,8 +314,8 @@ public class UserDO implements Serializable {
      * 所属机构id即父userid
      * @param institutionName 所属机构id即父userid
      */
-    public void setInstitutionName(Long institutionName) {
-        this.institutionName = institutionName;
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName == null ? null : institutionName.trim();
     }
 
     /**

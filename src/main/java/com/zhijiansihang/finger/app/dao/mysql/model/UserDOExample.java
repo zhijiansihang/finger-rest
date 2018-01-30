@@ -967,52 +967,62 @@ public class UserDOExample {
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameEqualTo(Long value) {
+        public Criteria andInstitutionNameEqualTo(String value) {
             addCriterion("institution_name =", value, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameNotEqualTo(Long value) {
+        public Criteria andInstitutionNameNotEqualTo(String value) {
             addCriterion("institution_name <>", value, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameGreaterThan(Long value) {
+        public Criteria andInstitutionNameGreaterThan(String value) {
             addCriterion("institution_name >", value, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameGreaterThanOrEqualTo(Long value) {
+        public Criteria andInstitutionNameGreaterThanOrEqualTo(String value) {
             addCriterion("institution_name >=", value, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameLessThan(Long value) {
+        public Criteria andInstitutionNameLessThan(String value) {
             addCriterion("institution_name <", value, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameLessThanOrEqualTo(Long value) {
+        public Criteria andInstitutionNameLessThanOrEqualTo(String value) {
             addCriterion("institution_name <=", value, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameIn(List<Long> values) {
+        public Criteria andInstitutionNameLike(String value) {
+            addCriterion("institution_name like", value, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameNotLike(String value) {
+            addCriterion("institution_name not like", value, "institutionName");
+            return (Criteria) this;
+        }
+
+        public Criteria andInstitutionNameIn(List<String> values) {
             addCriterion("institution_name in", values, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameNotIn(List<Long> values) {
+        public Criteria andInstitutionNameNotIn(List<String> values) {
             addCriterion("institution_name not in", values, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameBetween(Long value1, Long value2) {
+        public Criteria andInstitutionNameBetween(String value1, String value2) {
             addCriterion("institution_name between", value1, value2, "institutionName");
             return (Criteria) this;
         }
 
-        public Criteria andInstitutionNameNotBetween(Long value1, Long value2) {
+        public Criteria andInstitutionNameNotBetween(String value1, String value2) {
             addCriterion("institution_name not between", value1, value2, "institutionName");
             return (Criteria) this;
         }

@@ -29,7 +29,7 @@ public interface UserDAO {
         "#{passwd,jdbcType=VARCHAR}, #{isNameAuth,jdbcType=TINYINT}, ",
         "#{isFrozen,jdbcType=TINYINT}, #{isRegisterJg,jdbcType=TINYINT}, ",
         "#{logo,jdbcType=VARCHAR}, #{roles,jdbcType=SMALLINT}, #{source,jdbcType=SMALLINT}, ",
-        "#{institutionUserId,jdbcType=BIGINT}, #{institutionName,jdbcType=BIGINT}, ",
+        "#{institutionUserId,jdbcType=BIGINT}, #{institutionName,jdbcType=VARCHAR}, ",
         "#{riskAssessmentLevel,jdbcType=SMALLINT}, #{updateTime,jdbcType=TIMESTAMP}, ",
         "#{createTime,jdbcType=TIMESTAMP})"
     })
@@ -69,7 +69,7 @@ public interface UserDAO {
           "roles = #{roles,jdbcType=SMALLINT},",
           "`source` = #{source,jdbcType=SMALLINT},",
           "institution_user_id = #{institutionUserId,jdbcType=BIGINT},",
-          "institution_name = #{institutionName,jdbcType=BIGINT},",
+          "institution_name = #{institutionName,jdbcType=VARCHAR},",
           "risk_assessment_level = #{riskAssessmentLevel,jdbcType=SMALLINT},",
           "update_time = #{updateTime,jdbcType=TIMESTAMP},",
           "create_time = #{createTime,jdbcType=TIMESTAMP}",
