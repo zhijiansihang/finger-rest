@@ -6,6 +6,7 @@ import com.zhijiansihang.common.ResponseHeaderBuilder;
 import com.zhijiansihang.finger.app.constant.UserConsts;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.service.UserDetailService;
+import com.zhijiansihang.finger.app.sharing.SharingProperties;
 import com.zhijiansihang.finger.app.sharing.message.VerificationCodeTools;
 import com.zhijiansihang.finger.mmc.MessageService;
 import com.zhijiansihang.common.Response;
@@ -39,6 +40,8 @@ public class LoginOrRegisterService implements MessageService<LoginOrRegisterReq
 	UserDetailService userDetailService;
 	@Autowired
 	VerificationCodeTools verificationCodeTools;
+	@Autowired
+	SharingProperties sharingProperties;
 
 	@Autowired
 	JwtTokenUtil jwtTokenUtil;
@@ -82,7 +85,13 @@ public class LoginOrRegisterService implements MessageService<LoginOrRegisterReq
 		response.getBody().setIdCard(userDO.getIdCard());
 		response.getBody().setIsNameAuth(userDO.getIsNameAuth().toString());
 		response.getBody().setIsRegisterJg(userDO.getIsRegisterJg().toString());
-		response.getBody().setLogo(userDO.getLogo());
+
+		if (userDO.getLogo() == null || userDO.getLogo().trim().length() ==0){
+			response.getBody().setLogo("");
+		}else {
+			response.getBody().setLogo(sharingProperties.getStaticServerLink()+userDO.getLogo().trim());
+		}
+
 		response.getBody().setMobile(userDO.getMobile());
 		response.getBody().setNickName(userDO.getNickName());
 		response.getBody().setRealName(userDO.getRealName());
