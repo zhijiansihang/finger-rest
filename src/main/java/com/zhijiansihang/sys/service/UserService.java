@@ -64,7 +64,7 @@ public class UserService {
             //认证方式 3：昵称
             userAuths.add(userAuth);
             userAuth.setAuthPass(MD5.encodeByMd5AndSalt(userAuth.getAuthPass()));//加密
-
+            this.userAuthRepository.save(userAuth);
             userAuth.setUser(user);
             userRepository.save(userAuth.getUser());
             this.userAuthRepository.save(userAuth);

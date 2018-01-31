@@ -14,7 +14,7 @@ public abstract class AbstractUser implements Serializable {
 //	@SequenceGenerator(name = SEQUENCE, sequenceName = SEQUENCE)
 //	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
 //	@Id
-	@GeneratedValue
+//	@GeneratedValue
 	@Id
 	@Column(name = "ID",length = 40,unique = true,nullable = false)
 	protected Long id;

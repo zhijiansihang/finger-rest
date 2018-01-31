@@ -1,24 +1,24 @@
 package com.zhijiansihang.finger.app.controller;
 
 
-import com.zhijiansihang.common.ComParams;
-import com.zhijiansihang.common.Response;
-import com.zhijiansihang.finger.app.constant.CmsConsts;
-import com.zhijiansihang.finger.app.service.CmsService;
-import com.zhijiansihang.finger.app.vo.CmsVO;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+        import com.zhijiansihang.common.ComParams;
+        import com.zhijiansihang.common.Response;
+        import com.zhijiansihang.finger.app.constant.CmsConsts;
+        import com.zhijiansihang.finger.app.service.CmsService;
+        import com.zhijiansihang.finger.app.vo.CmsVO;
+        import org.apache.commons.io.FileUtils;
+        import org.apache.commons.io.FilenameUtils;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
+        import org.springframework.beans.factory.annotation.Autowired;
+        import org.springframework.web.bind.annotation.*;
+        import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletInputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.util.UUID;
+        import javax.servlet.ServletInputStream;
+        import javax.servlet.http.HttpServletRequest;
+        import javax.servlet.http.HttpServletResponse;
+        import java.io.File;
+        import java.util.UUID;
 
 /**
  * @author paul
