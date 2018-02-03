@@ -100,4 +100,13 @@ public interface UserFinanceDetailDAO {
             "where user_id = #{userId}"
     })
     int adoptCountAdd(Long userId);
+
+    @Select({
+            "select ufd.*,u.logo,u.real_name",
+            "from loan_finance lf,user_finance_detail ufd,user u",
+            "where lf.loan_id = #{loanId} and lf.finance_user_id=ufd.user_id and ufd.user_id=u.user_id ",
+            "order by lf.create_time desc"
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO.BaseResultMapEx")
+    List<UserFinanceDetailVO> getLoanFinance(Long loanId);
 }
