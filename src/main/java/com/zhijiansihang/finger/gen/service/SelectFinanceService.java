@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 发现投顾
+ * Y发现投顾
  * 
  */
 @Component("genselectFinanceService")
 public class SelectFinanceService implements MessageService<SelectFinanceRequest, Response<SelectFinanceResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SelectFinanceService.class);
-	private static final String SERVICE_DESC = "发现投顾";
+	private static final String SERVICE_DESC = "Y发现投顾";
 
 	@Override
 	public void execute(SelectFinanceRequest request, Response<SelectFinanceResponse> response) {

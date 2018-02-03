@@ -5,32 +5,28 @@ import java.util.List;
 
 import com.zhijiansihang.finger.mmc.MessageService;
 import com.zhijiansihang.common.Response;
-import com.zhijiansihang.finger.gen.entity.SingleDemandSolutionListRequest;
-import com.zhijiansihang.finger.gen.entity.SingleDemandSolutionListResponse;
-import com.zhijiansihang.finger.gen.entity.SingleDemandSolutionListResponse.SolutionListElement;
+import com.zhijiansihang.finger.gen.entity.GetMySolutionTop10Request;
+import com.zhijiansihang.finger.gen.entity.GetMySolutionTop10Response;
+import com.zhijiansihang.finger.gen.entity.GetMySolutionTop10Response.SolutionListElement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * Y需求所匹配的方案列表
+ * 获取用户匹配方案
  * 
  */
-@Component("gensingleDemandSolutionListService")
-public class SingleDemandSolutionListService implements MessageService<SingleDemandSolutionListRequest, Response<SingleDemandSolutionListResponse>> {
+@Component("gengetMySolutionTop10Service")
+public class GetMySolutionTop10Service implements MessageService<GetMySolutionTop10Request, Response<GetMySolutionTop10Response>> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SingleDemandSolutionListService.class);
-	private static final String SERVICE_DESC = "Y需求所匹配的方案列表";
+	private static final Logger LOG = LoggerFactory.getLogger(GetMySolutionTop10Service.class);
+	private static final String SERVICE_DESC = "获取用户匹配方案";
 
 	@Override
-	public void execute(SingleDemandSolutionListRequest request, Response<SingleDemandSolutionListResponse> response) {
+	public void execute(GetMySolutionTop10Request request, Response<GetMySolutionTop10Response> response) {
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
-		response.getBody().setCurrentPage("1");
-		response.getBody().setPageCount("1");
-		response.getBody().setPageSize("10");
-		response.getBody().setRecordCount("10");
 		response.getBody().setSolutionList(getSolutionList());
 	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
 		response.getBody().setMode("test");

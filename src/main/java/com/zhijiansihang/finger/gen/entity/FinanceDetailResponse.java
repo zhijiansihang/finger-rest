@@ -1,9 +1,5 @@
 package com.zhijiansihang.finger.gen.entity;
 
-import java.util.List;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -20,46 +16,9 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 public class FinanceDetailResponse extends MobileMessage {
 
 
-	/**
-	 * @see com.zhijiansihang.finger.gen.entity.FinanceDetailResponse#getFinanceList
-	 * 
-	 */
-	@JsonInclude(Include.NON_NULL)
-	public static class FinanceListElement {
-
-		private String adoptCount;
-		private String collectionCount;
-
-		/**
-		 * @return 总采纳数
-		 */
-		public String getAdoptCount() {
-			return adoptCount;
-		}
-
-		public void setAdoptCount(String adoptCount) {
-			this.adoptCount = adoptCount;
-		}
-
-		/**
-		 * @return 收藏次数粉丝数
-		 */
-		public String getCollectionCount() {
-			return collectionCount;
-		}
-
-		public void setCollectionCount(String collectionCount) {
-			this.collectionCount = collectionCount;
-		}
-	
-		@Override
-		public String toString() {
-			String str = ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
-			return str;
-		}
-	}
-
+	private String adoptCount;
 	private String educationLevel;
+	private String friendCount;
 	private String institutionName;
 	private String isCollection;
 	private String isFriend;
@@ -77,7 +36,6 @@ public class FinanceDetailResponse extends MobileMessage {
 	private String userOrderCount;
 	private String workAge;
 	private String workingExperience;
-	private List<FinanceListElement> financeList;
 
 	public FinanceDetailResponse() {
 		super();
@@ -98,6 +56,17 @@ public class FinanceDetailResponse extends MobileMessage {
 
 
 	/**
+	 * @return 总采纳数
+	 */
+	public String getAdoptCount() {
+		return adoptCount;
+	}
+
+	public void setAdoptCount(String adoptCount) {
+		this.adoptCount = adoptCount;
+	}
+
+	/**
 	 * @return 文化程度
 	 */
 	public String getEducationLevel() {
@@ -106,6 +75,17 @@ public class FinanceDetailResponse extends MobileMessage {
 
 	public void setEducationLevel(String educationLevel) {
 		this.educationLevel = educationLevel;
+	}
+
+	/**
+	 * @return 粉丝数
+	 */
+	public String getFriendCount() {
+		return friendCount;
+	}
+
+	public void setFriendCount(String friendCount) {
+		this.friendCount = friendCount;
 	}
 
 	/**
@@ -293,17 +273,6 @@ public class FinanceDetailResponse extends MobileMessage {
 
 	public void setWorkingExperience(String workingExperience) {
 		this.workingExperience = workingExperience;
-	}
-
-	/**
-	 * @return 
-	 */
-	public List<FinanceListElement> getFinanceList() {
-		return financeList;
-	}
-
-	public void setFinanceList(List<FinanceListElement> financeList) {
-		this.financeList = financeList;
 	}
 
 }

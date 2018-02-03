@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 理财师查看属于预约自己的记录
+ * Y理财师查看属于预约自己的记录
  * 
  */
 @Component("genfinanceLoanInvestorService")
 public class FinanceLoanInvestorService implements MessageService<FinanceLoanInvestorRequest, Response<FinanceLoanInvestorResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(FinanceLoanInvestorService.class);
-	private static final String SERVICE_DESC = "理财师查看属于预约自己的记录";
+	private static final String SERVICE_DESC = "Y理财师查看属于预约自己的记录";
 
 	@Override
 	public void execute(FinanceLoanInvestorRequest request, Response<FinanceLoanInvestorResponse> response) {

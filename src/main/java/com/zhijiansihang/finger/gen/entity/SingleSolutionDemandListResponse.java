@@ -11,7 +11,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * 方案所匹配的需求列表.服务端响应
+ * Y方案所匹配的需求列表.服务端响应
  * 
  * @author 代码生成器v1.0
  * 

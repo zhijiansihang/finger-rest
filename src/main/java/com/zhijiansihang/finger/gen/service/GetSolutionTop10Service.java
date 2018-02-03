@@ -5,32 +5,28 @@ import java.util.List;
 
 import com.zhijiansihang.finger.mmc.MessageService;
 import com.zhijiansihang.common.Response;
-import com.zhijiansihang.finger.gen.entity.SingleDemandSolutionListRequest;
-import com.zhijiansihang.finger.gen.entity.SingleDemandSolutionListResponse;
-import com.zhijiansihang.finger.gen.entity.SingleDemandSolutionListResponse.SolutionListElement;
+import com.zhijiansihang.finger.gen.entity.GetSolutionTop10Request;
+import com.zhijiansihang.finger.gen.entity.GetSolutionTop10Response;
+import com.zhijiansihang.finger.gen.entity.GetSolutionTop10Response.SolutionListElement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * Y需求所匹配的方案列表
+ * 取采纳次数最高的top10方案
  * 
  */
-@Component("gensingleDemandSolutionListService")
-public class SingleDemandSolutionListService implements MessageService<SingleDemandSolutionListRequest, Response<SingleDemandSolutionListResponse>> {
+@Component("gengetSolutionTop10Service")
+public class GetSolutionTop10Service implements MessageService<GetSolutionTop10Request, Response<GetSolutionTop10Response>> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SingleDemandSolutionListService.class);
-	private static final String SERVICE_DESC = "Y需求所匹配的方案列表";
+	private static final Logger LOG = LoggerFactory.getLogger(GetSolutionTop10Service.class);
+	private static final String SERVICE_DESC = "取采纳次数最高的top10方案";
 
 	@Override
-	public void execute(SingleDemandSolutionListRequest request, Response<SingleDemandSolutionListResponse> response) {
+	public void execute(GetSolutionTop10Request request, Response<GetSolutionTop10Response> response) {
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
-		response.getBody().setCurrentPage("1");
-		response.getBody().setPageCount("1");
-		response.getBody().setPageSize("10");
-		response.getBody().setRecordCount("10");
 		response.getBody().setSolutionList(getSolutionList());
 	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
 		response.getBody().setMode("test");
@@ -43,9 +39,7 @@ public class SingleDemandSolutionListService implements MessageService<SingleDem
 
 		elem.setAdoptCount("1");
 		elem.setFriendCount("1");
-		elem.setId("1");
 		elem.setInstitutionName("0");
-		elem.setIsOperateSolution("2");
 		elem.setLogo("//www.baidu.com/1.png");
 		elem.setRealName("//www.baidu.com/1.png");
 		elem.setSerialNumber("1");

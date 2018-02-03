@@ -7,7 +7,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * 方案详情.服务端响应
+ * Y方案详情.服务端响应
  * 
  * @author 代码生成器v1.0
  * 

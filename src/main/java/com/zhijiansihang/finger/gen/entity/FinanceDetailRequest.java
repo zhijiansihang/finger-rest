@@ -20,7 +20,7 @@ public class FinanceDetailRequest extends MobileMessage {
 	}	
 
 	/**
-	 * @return 第几页
+	 * @return userid
 	 */
 	public String getFinanceUserid() {
 		return financeUserid;

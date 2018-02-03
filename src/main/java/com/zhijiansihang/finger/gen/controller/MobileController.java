@@ -111,6 +111,20 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<GetCmsRequest, Response<GetCmsResponse>> genGetCmsService;
 
+	@Qualifier("getLoanFinanceService")
+	@Autowired(required = false)
+	MessageService<GetLoanFinanceRequest, Response<GetLoanFinanceResponse>> getLoanFinanceService;
+	@Qualifier("gengetLoanFinanceService")
+	@Autowired(required = false)
+	MessageService<GetLoanFinanceRequest, Response<GetLoanFinanceResponse>> genGetLoanFinanceService;
+
+	@Qualifier("getMySolutionTop10Service")
+	@Autowired(required = false)
+	MessageService<GetMySolutionTop10Request, Response<GetMySolutionTop10Response>> getMySolutionTop10Service;
+	@Qualifier("gengetMySolutionTop10Service")
+	@Autowired(required = false)
+	MessageService<GetMySolutionTop10Request, Response<GetMySolutionTop10Response>> genGetMySolutionTop10Service;
+
 	@Qualifier("getNameAuthAndRiskResultService")
 	@Autowired(required = false)
 	MessageService<GetNameAuthAndRiskResultRequest, Response<GetNameAuthAndRiskResultResponse>> getNameAuthAndRiskResultService;
@@ -125,6 +139,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<GetSmsRequest, Response<GetSmsResponse>> genGetSmsService;
 
+	@Qualifier("getSolutionTop10Service")
+	@Autowired(required = false)
+	MessageService<GetSolutionTop10Request, Response<GetSolutionTop10Response>> getSolutionTop10Service;
+	@Qualifier("gengetSolutionTop10Service")
+	@Autowired(required = false)
+	MessageService<GetSolutionTop10Request, Response<GetSolutionTop10Response>> genGetSolutionTop10Service;
+
 	@Qualifier("getUserService")
 	@Autowired(required = false)
 	MessageService<GetUserRequest, Response<GetUserResponse>> getUserService;
@@ -132,12 +153,26 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<GetUserRequest, Response<GetUserResponse>> genGetUserService;
 
+	@Qualifier("investService")
+	@Autowired(required = false)
+	MessageService<InvestRequest, Response<InvestResponse>> investService;
+	@Qualifier("geninvestService")
+	@Autowired(required = false)
+	MessageService<InvestRequest, Response<InvestResponse>> genInvestService;
+
 	@Qualifier("isFriendService")
 	@Autowired(required = false)
 	MessageService<IsFriendRequest, Response<IsFriendResponse>> isFriendService;
 	@Qualifier("genisFriendService")
 	@Autowired(required = false)
 	MessageService<IsFriendRequest, Response<IsFriendResponse>> genIsFriendService;
+
+	@Qualifier("isHasMatchDemandSolutionService")
+	@Autowired(required = false)
+	MessageService<IsHasMatchDemandSolutionRequest, Response<IsHasMatchDemandSolutionResponse>> isHasMatchDemandSolutionService;
+	@Qualifier("genisHasMatchDemandSolutionService")
+	@Autowired(required = false)
+	MessageService<IsHasMatchDemandSolutionRequest, Response<IsHasMatchDemandSolutionResponse>> genIsHasMatchDemandSolutionService;
 
 	@Qualifier("loanInvestorDetailService")
 	@Autowired(required = false)
@@ -517,6 +552,46 @@ public class MobileController {
 		return response;
 	}
 
+	@RequestMapping(value = "/getLoanFinance", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<GetLoanFinanceResponse> getLoanFinance(@RequestBody GetLoanFinanceRequest request) {
+
+		logRequest("getLoanFinance", request);
+
+  		Response<GetLoanFinanceResponse> response = new Response<>();
+
+		request = (GetLoanFinanceRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getGetLoanFinanceResponse(request);
+		
+		logResponse("getLoanFinance", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/getMySolutionTop10", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<GetMySolutionTop10Response> getMySolutionTop10(@RequestBody GetMySolutionTop10Request request) {
+
+		logRequest("getMySolutionTop10", request);
+
+  		Response<GetMySolutionTop10Response> response = new Response<>();
+
+		request = (GetMySolutionTop10Request) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getGetMySolutionTop10Response(request);
+		
+		logResponse("getMySolutionTop10", response);
+
+		return response;
+	}
+
 	@RequestMapping(value = "/getNameAuthAndRiskResult", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<GetNameAuthAndRiskResultResponse> getNameAuthAndRiskResult(@RequestBody GetNameAuthAndRiskResultRequest request) {
@@ -557,6 +632,26 @@ public class MobileController {
 		return response;
 	}
 
+	@RequestMapping(value = "/getSolutionTop10", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<GetSolutionTop10Response> getSolutionTop10(@RequestBody GetSolutionTop10Request request) {
+
+		logRequest("getSolutionTop10", request);
+
+  		Response<GetSolutionTop10Response> response = new Response<>();
+
+		request = (GetSolutionTop10Request) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getGetSolutionTop10Response(request);
+		
+		logResponse("getSolutionTop10", response);
+
+		return response;
+	}
+
 	@RequestMapping(value = "/getUser", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<GetUserResponse> getUser(@RequestBody GetUserRequest request) {
@@ -577,6 +672,26 @@ public class MobileController {
 		return response;
 	}
 
+	@RequestMapping(value = "/invest", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<InvestResponse> invest(@RequestBody InvestRequest request) {
+
+		logRequest("invest", request);
+
+  		Response<InvestResponse> response = new Response<>();
+
+		request = (InvestRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getInvestResponse(request);
+		
+		logResponse("invest", response);
+
+		return response;
+	}
+
 	@RequestMapping(value = "/isFriend", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<IsFriendResponse> isFriend(@RequestBody IsFriendRequest request) {
@@ -593,6 +708,26 @@ public class MobileController {
 		response = getIsFriendResponse(request);
 		
 		logResponse("isFriend", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/isHasMatchDemandSolution", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<IsHasMatchDemandSolutionResponse> isHasMatchDemandSolution(@RequestBody IsHasMatchDemandSolutionRequest request) {
+
+		logRequest("isHasMatchDemandSolution", request);
+
+  		Response<IsHasMatchDemandSolutionResponse> response = new Response<>();
+
+		request = (IsHasMatchDemandSolutionRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getIsHasMatchDemandSolutionResponse(request);
+		
+		logResponse("isHasMatchDemandSolution", response);
 
 		return response;
 	}
@@ -1198,6 +1333,26 @@ public class MobileController {
 		return mobileService.service(request, service, GetCmsRequest.class, GetCmsResponse.class);
 	}
 
+	private Response<GetLoanFinanceResponse> getGetLoanFinanceResponse(GetLoanFinanceRequest request) {
+
+		MessageService<GetLoanFinanceRequest, Response<GetLoanFinanceResponse>> service = getLoanFinanceService;
+		if (service == null) {
+			service = genGetLoanFinanceService;
+		}
+
+		return mobileService.service(request, service, GetLoanFinanceRequest.class, GetLoanFinanceResponse.class);
+	}
+
+	private Response<GetMySolutionTop10Response> getGetMySolutionTop10Response(GetMySolutionTop10Request request) {
+
+		MessageService<GetMySolutionTop10Request, Response<GetMySolutionTop10Response>> service = getMySolutionTop10Service;
+		if (service == null) {
+			service = genGetMySolutionTop10Service;
+		}
+
+		return mobileService.service(request, service, GetMySolutionTop10Request.class, GetMySolutionTop10Response.class);
+	}
+
 	private Response<GetNameAuthAndRiskResultResponse> getGetNameAuthAndRiskResultResponse(GetNameAuthAndRiskResultRequest request) {
 
 		MessageService<GetNameAuthAndRiskResultRequest, Response<GetNameAuthAndRiskResultResponse>> service = getNameAuthAndRiskResultService;
@@ -1218,6 +1373,16 @@ public class MobileController {
 		return mobileService.service(request, service, GetSmsRequest.class, GetSmsResponse.class);
 	}
 
+	private Response<GetSolutionTop10Response> getGetSolutionTop10Response(GetSolutionTop10Request request) {
+
+		MessageService<GetSolutionTop10Request, Response<GetSolutionTop10Response>> service = getSolutionTop10Service;
+		if (service == null) {
+			service = genGetSolutionTop10Service;
+		}
+
+		return mobileService.service(request, service, GetSolutionTop10Request.class, GetSolutionTop10Response.class);
+	}
+
 	private Response<GetUserResponse> getGetUserResponse(GetUserRequest request) {
 
 		MessageService<GetUserRequest, Response<GetUserResponse>> service = getUserService;
@@ -1228,6 +1393,16 @@ public class MobileController {
 		return mobileService.service(request, service, GetUserRequest.class, GetUserResponse.class);
 	}
 
+	private Response<InvestResponse> getInvestResponse(InvestRequest request) {
+
+		MessageService<InvestRequest, Response<InvestResponse>> service = investService;
+		if (service == null) {
+			service = genInvestService;
+		}
+
+		return mobileService.service(request, service, InvestRequest.class, InvestResponse.class);
+	}
+
 	private Response<IsFriendResponse> getIsFriendResponse(IsFriendRequest request) {
 
 		MessageService<IsFriendRequest, Response<IsFriendResponse>> service = isFriendService;
@@ -1236,6 +1411,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, IsFriendRequest.class, IsFriendResponse.class);
+	}
+
+	private Response<IsHasMatchDemandSolutionResponse> getIsHasMatchDemandSolutionResponse(IsHasMatchDemandSolutionRequest request) {
+
+		MessageService<IsHasMatchDemandSolutionRequest, Response<IsHasMatchDemandSolutionResponse>> service = isHasMatchDemandSolutionService;
+		if (service == null) {
+			service = genIsHasMatchDemandSolutionService;
+		}
+
+		return mobileService.service(request, service, IsHasMatchDemandSolutionRequest.class, IsHasMatchDemandSolutionResponse.class);
 	}
 
 	private Response<LoanInvestorDetailResponse> getLoanInvestorDetailResponse(LoanInvestorDetailRequest request) {

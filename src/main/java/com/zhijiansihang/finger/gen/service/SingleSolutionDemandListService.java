@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 方案所匹配的需求列表
+ * Y方案所匹配的需求列表
  * 
  */
 @Component("gensingleSolutionDemandListService")
 public class SingleSolutionDemandListService implements MessageService<SingleSolutionDemandListRequest, Response<SingleSolutionDemandListResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SingleSolutionDemandListService.class);
-	private static final String SERVICE_DESC = "方案所匹配的需求列表";
+	private static final String SERVICE_DESC = "Y方案所匹配的需求列表";
 
 	@Override
 	public void execute(SingleSolutionDemandListRequest request, Response<SingleSolutionDemandListResponse> response) {

@@ -11,17 +11,17 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * Y需求所匹配的方案列表.服务端响应
+ * 获取用户匹配方案.服务端响应
  * 
  * @author 代码生成器v1.0
  * 
  */
 @JsonInclude(Include.NON_NULL)
-public class SingleDemandSolutionListResponse extends MobileMessage {
+public class GetMySolutionTop10Response extends MobileMessage {
 
 
 	/**
-	 * @see com.zhijiansihang.finger.gen.entity.SingleDemandSolutionListResponse#getSolutionList
+	 * @see com.zhijiansihang.finger.gen.entity.GetMySolutionTop10Response#getSolutionList
 	 * 
 	 */
 	@JsonInclude(Include.NON_NULL)
@@ -167,13 +167,9 @@ public class SingleDemandSolutionListResponse extends MobileMessage {
 		}
 	}
 
-	private String currentPage;
-	private String pageCount;
-	private String pageSize;
-	private String recordCount;
 	private List<SolutionListElement> solutionList;
 
-	public SingleDemandSolutionListResponse() {
+	public GetMySolutionTop10Response() {
 		super();
 		StringBuffer sb = new StringBuffer();
 		
@@ -185,55 +181,11 @@ public class SingleDemandSolutionListResponse extends MobileMessage {
 		this.setMsgeps(eps);
 	}
 
-	public SingleDemandSolutionListResponse(String statusCode, String statusMessage) {
+	public GetMySolutionTop10Response(String statusCode, String statusMessage) {
 		this.setStatusCode(statusCode);
 		this.setStatusMessage(statusMessage);
 	}
 
-
-	/**
-	 * @return 当前页
-	 */
-	public String getCurrentPage() {
-		return currentPage;
-	}
-
-	public void setCurrentPage(String currentPage) {
-		this.currentPage = currentPage;
-	}
-
-	/**
-	 * @return 总页数
-	 */
-	public String getPageCount() {
-		return pageCount;
-	}
-
-	public void setPageCount(String pageCount) {
-		this.pageCount = pageCount;
-	}
-
-	/**
-	 * @return 每页多少条
-	 */
-	public String getPageSize() {
-		return pageSize;
-	}
-
-	public void setPageSize(String pageSize) {
-		this.pageSize = pageSize;
-	}
-
-	/**
-	 * @return 总记录数
-	 */
-	public String getRecordCount() {
-		return recordCount;
-	}
-
-	public void setRecordCount(String recordCount) {
-		this.recordCount = recordCount;
-	}
 
 	/**
 	 * @return 方案list

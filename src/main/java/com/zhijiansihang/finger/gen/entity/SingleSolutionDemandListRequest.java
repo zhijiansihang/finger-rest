@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.zhijiansihang.finger.mmc.MobileMessage;
 
 /**
- * 方案所匹配的需求列表.客户端请求
+ * Y方案所匹配的需求列表.客户端请求
  * 
  * @author 代码生成器v1.0
  * 

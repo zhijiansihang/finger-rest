@@ -1,13 +1,10 @@
 package com.zhijiansihang.finger.gen.service;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import com.zhijiansihang.finger.mmc.MessageService;
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.gen.entity.FinanceDetailRequest;
 import com.zhijiansihang.finger.gen.entity.FinanceDetailResponse;
-import com.zhijiansihang.finger.gen.entity.FinanceDetailResponse.FinanceListElement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +24,9 @@ public class FinanceDetailService implements MessageService<FinanceDetailRequest
 	public void execute(FinanceDetailRequest request, Response<FinanceDetailResponse> response) {
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
+		response.getBody().setAdoptCount("10");
 		response.getBody().setEducationLevel("10");
+		response.getBody().setFriendCount("10");
 		response.getBody().setInstitutionName("1");
 		response.getBody().setIsCollection("10");
 		response.getBody().setIsFriend("10");
@@ -45,19 +44,7 @@ public class FinanceDetailService implements MessageService<FinanceDetailRequest
 		response.getBody().setUserOrderCount("1");
 		response.getBody().setWorkAge("10");
 		response.getBody().setWorkingExperience("10");
-		response.getBody().setFinanceList(getFinanceList());
 	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
 		response.getBody().setMode("test");
-	}
-
-	private List<FinanceListElement> getFinanceList() {
-		List<FinanceListElement> elems = new ArrayList<FinanceListElement>();
-		FinanceListElement elem = new FinanceListElement();
-		elems.add(elem);
-
-		elem.setAdoptCount("10");
-		elem.setCollectionCount("10");
-
-		return elems;
 	}
 }

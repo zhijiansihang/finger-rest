@@ -11,7 +11,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * 理财师查看属于预约自己的记录.服务端响应
+ * Y理财师查看属于预约自己的记录.服务端响应
  * 
  * @author 代码生成器v1.0
  * 
