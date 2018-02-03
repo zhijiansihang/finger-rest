@@ -81,6 +81,13 @@ public interface LoanInvestorFinanceDAO {
     int countNotDealByFinanceUserid(Long userId);
 
     @Select({
+            "select count(*)",
+            "from loan_investor_finance",
+            "where finance_user_id = #{userId,jdbcType=BIGINT}"
+    })
+    int countByFinanceUserid(Long userId);
+
+    @Select({
             "select lif.id,l.title,lif.amount,user.real_name",
             "from loan_investor_finance",
             "where finance_user_id = #{userId,jdbcType=BIGINT} and is_deal = 0",
@@ -148,4 +155,12 @@ public interface LoanInvestorFinanceDAO {
             @Result(property = "realName", column = "real_name")
     })
     List<LoanInvestorFinanceVO> selectDealByUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
+
+
+    @Select({
+            "select count(*)",
+            "from loan_investor_finance",
+            "where user_id = #{userId} and loan_id =#{loanId}"
+    })
+    int countBuy(LoanInvestorFinanceDO loanInvestorFinanceDO);
 }

@@ -22,6 +22,7 @@ public class FinanceDetailResponse extends MobileMessage {
 	private String institutionName;
 	private String isCollection;
 	private String isFriend;
+	private String isPerson;
 	private String loanCount;
 	private String logo;
 	private String personalProfile;
@@ -119,6 +120,17 @@ public class FinanceDetailResponse extends MobileMessage {
 
 	public void setIsFriend(String isFriend) {
 		this.isFriend = isFriend;
+	}
+
+	/**
+	 * @return 是否个人机构 1:为个人机构 2:企业机构
+	 */
+	public String getIsPerson() {
+		return isPerson;
+	}
+
+	public void setIsPerson(String isPerson) {
+		this.isPerson = isPerson;
 	}
 
 	/**

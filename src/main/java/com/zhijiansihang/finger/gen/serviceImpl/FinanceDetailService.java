@@ -1,21 +1,26 @@
 package com.zhijiansihang.finger.gen.serviceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
 
+import com.zhijiansihang.finger.app.dao.mysql.mapper.*;
+import com.zhijiansihang.finger.app.dao.mysql.model.*;
+import com.zhijiansihang.finger.app.sharing.SharingProperties;
+import com.zhijiansihang.finger.gen.tool.CheckTools;
+import com.zhijiansihang.finger.gen.tool.UserTools;
 import com.zhijiansihang.finger.mmc.MessageService;
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.gen.entity.FinanceDetailRequest;
 import com.zhijiansihang.finger.gen.entity.FinanceDetailResponse;
-import com.zhijiansihang.finger.gen.entity.FinanceDetailResponse.FinanceListElement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * 理财师详情
- * 
+ *
  */
 @Component("financeDetailService")
 public class FinanceDetailService implements MessageService<FinanceDetailRequest, Response<FinanceDetailResponse>> {
@@ -23,41 +28,103 @@ public class FinanceDetailService implements MessageService<FinanceDetailRequest
 	private static final Logger LOG = LoggerFactory.getLogger(FinanceDetailService.class);
 	private static final String SERVICE_DESC = "理财师详情";
 
+	@Autowired
+	UserFinanceDetailDAO userFinanceDetailDAO;
+	@Autowired
+	UserFriendCountDAO userFriendCountDAO;
+	@Autowired
+	UserDAO userDAO;
+	@Autowired
+	UserInstitutionDetailDAO userInstitutionDetailDAO;
+	@Autowired
+	SharingProperties sharingProperties;
+	@Autowired
+	UserCollectionDAO userCollectionDAO;
+
+	@Autowired
+	LoanFinanceDAO loanFinanceDAO;
+
+	@Autowired
+	UserFriendDAO userFriendDAO;
+
+	@Autowired
+	UserServiceRecordDAO userServiceRecordDAO;
+
+	@Autowired
+	LoanInvestorFinanceDAO loanInvestorFinanceDAO;
 	@Override
 	public void execute(FinanceDetailRequest request, Response<FinanceDetailResponse> response) {
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
+		String financeUserid = request.getFinanceUserid();
 
-		response.getBody().setEducationLevel("10");
-		response.getBody().setInstitutionName("1");
-		response.getBody().setIsCollection("10");
-		response.getBody().setIsFriend("10");
-		response.getBody().setLoanCount("1");
-		response.getBody().setLogo("1");
-		response.getBody().setPersonalProfile("10");
-		response.getBody().setPosition("10");
-		response.getBody().setRealName("paul");
-		response.getBody().setSchoolName("10");
-		response.getBody().setSellingloanCount("1");
-		response.getBody().setServiceConcept("10");
-		response.getBody().setServiceDirection("0");
-		response.getBody().setServicePersonCount("10");
-		response.getBody().setUserId("1");
-		response.getBody().setUserOrderCount("1");
-		response.getBody().setWorkAge("10");
-		response.getBody().setWorkingExperience("10");
-		response.getBody().setFinanceList(getFinanceList());
-	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
-		response.getBody().setMode("test");
-	}
+		Long loginUserid = UserTools.getLoginUser().getId();
 
-	private List<FinanceListElement> getFinanceList() {
-		List<FinanceListElement> elems = new ArrayList<FinanceListElement>();
-		FinanceListElement elem = new FinanceListElement();
-		elems.add(elem);
+		UserFinanceDetailDO userFinanceDetailDO = userFinanceDetailDAO.selectByPrimaryKey(Long.parseLong(financeUserid));
+		response.getBody().setAdoptCount(userFinanceDetailDO.getAdoptCount().toString());
+		response.getBody().setEducationLevel(CheckTools.nullToEmptyString(userFinanceDetailDO.getEducationLevel()));
 
-		elem.setAdoptCount("10");
-		elem.setCollectionCount("10");
+		UserFriendCountDO userFriendCountDO = userFriendCountDAO.selectByPrimaryKey(Long.parseLong(financeUserid));
+		response.getBody().setFriendCount(userFriendCountDO.getFriendCounts().toString());
 
-		return elems;
+		UserDO financeUserDO = userDAO.selectByPrimaryKey(Long.parseLong(financeUserid));
+		UserInstitutionDetailDO userfinanceInstitutionDetailDO = userInstitutionDetailDAO.selectByPrimaryKey(financeUserDO.getInstitutionUserId());
+		response.getBody().setInstitutionName(userfinanceInstitutionDetailDO.getName());
+		response.getBody().setIsPerson(userfinanceInstitutionDetailDO.getIsPersonal().toString());
+
+		{
+			UserCollectionDO userCollectionDO = new UserCollectionDO();
+			userCollectionDO.setUserId(loginUserid);
+			userCollectionDO.setContentId(Long.parseLong(financeUserid));
+			userCollectionDO.setContentType((byte)1);
+			int i = userCollectionDAO.existContentidtypeAndUserid(userCollectionDO);
+			if (i>0){
+				response.getBody().setIsCollection("1");
+			}else {
+				response.getBody().setIsCollection("0");
+			}
+		}
+		{
+			UserFriendDOExample example = new UserFriendDOExample();
+			UserFriendDOExample.Criteria criteria = example.createCriteria();
+			criteria.andMyUserIdEqualTo(loginUserid).andFriendUserIdEqualTo(Long.parseLong(financeUserid) );
+			List<UserFriendDO> userFriendDOS = userFriendDAO.selectByExample(example);
+			if (userFriendDOS != null && userFriendDOS.size() >0){
+				response.getBody().setIsFriend("1");
+			}else {
+				response.getBody().setIsFriend("0");
+			}
+		}
+		{
+			int count = loanFinanceDAO.countLoanByFinanceUser(Long.parseLong(financeUserid));
+			response.getBody().setLoanCount(count +"");
+		}
+		if (financeUserDO.getLogo() == null || financeUserDO.getLogo().trim().length() == 0){
+			response.getBody().setLogo("");
+		}else {
+			response.getBody().setLogo(sharingProperties.getStaticServerLink()+financeUserDO.getLogo());
+		}
+		response.getBody().setPersonalProfile(CheckTools.nullToEmptyString(userFinanceDetailDO.getPersonalProfile()));
+		response.getBody().setPosition(CheckTools.nullToEmptyString(userFinanceDetailDO.getPosition()));
+		response.getBody().setRealName(CheckTools.nullToEmptyString(financeUserDO.getRealName()));
+		response.getBody().setSchoolName(CheckTools.nullToEmptyString(userFinanceDetailDO.getSchoolName()));
+		{
+			int count = loanFinanceDAO.countSellingLoanByFinanceUser(Long.parseLong(financeUserid));
+			response.getBody().setSellingloanCount(count + "");
+		}
+
+		response.getBody().setServiceConcept(CheckTools.nullToEmptyString(userFinanceDetailDO.getSchoolName()));
+		response.getBody().setServiceDirection(CheckTools.nullToEmptyString(userFinanceDetailDO.getSchoolName()));
+
+		{
+			int i = userServiceRecordDAO.countByUserid(Long.parseLong(financeUserid));
+			response.getBody().setServicePersonCount(i + "");
+		}
+		response.getBody().setUserId(financeUserid);
+		{
+			int i = loanInvestorFinanceDAO.countByFinanceUserid(Long.parseLong(financeUserid));
+			response.getBody().setUserOrderCount(i+"");
+		}
+		response.getBody().setWorkAge(userFinanceDetailDO.getWorkAge() ==null ?"1":userFinanceDetailDO.getWorkAge().toString());
+		response.getBody().setWorkingExperience(CheckTools.nullToEmptyString(userFinanceDetailDO.getWorkingExperience()));
 	}
 }

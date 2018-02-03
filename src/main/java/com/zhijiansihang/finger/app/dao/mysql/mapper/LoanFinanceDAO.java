@@ -58,4 +58,18 @@ public interface LoanFinanceDAO {
         "where id = #{id,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(LoanFinanceDO record);
+
+    @Select({
+            "select count(*)",
+            "from loan_finance",
+            "where finance_user_id  = #{financeUserid}"
+    })
+    int countLoanByFinanceUser(Long financeUserid);
+
+    @Select({
+            "select count(*)",
+            "from loan_finance lf ,loan l",
+            "where lf.finance_user_id  = #{financeUserid} and lf.loan_id = l.loan_id  and l.loan_status = 200"
+    })
+    int countSellingLoanByFinanceUser(Long financeUserid);
 }

@@ -30,6 +30,7 @@ public class FinanceDetailService implements MessageService<FinanceDetailRequest
 		response.getBody().setInstitutionName("1");
 		response.getBody().setIsCollection("10");
 		response.getBody().setIsFriend("10");
+		response.getBody().setIsPerson("1");
 		response.getBody().setLoanCount("1");
 		response.getBody().setLogo("1");
 		response.getBody().setPersonalProfile("10");

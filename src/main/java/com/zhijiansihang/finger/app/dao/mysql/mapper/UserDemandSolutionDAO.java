@@ -139,4 +139,11 @@ public interface UserDemandSolutionDAO {
     })
     List<SolutionMatchDemandResult> selectBySolutionUserIdAndUseridPage(UserDemandSolutionDO userDemandSolutionDO, RowBounds rowBounds);
 
+
+    @Select({
+            "select count(*)",
+            "from user_demand_solution",
+            "where demand_user_id = #{demandUserId}"
+    })
+    int countByDemandUserId(Long demandUserId);
 }

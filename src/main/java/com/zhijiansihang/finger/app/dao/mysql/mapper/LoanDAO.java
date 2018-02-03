@@ -3,6 +3,8 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample;
 import java.util.List;
+
+import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.ResultMap;
@@ -128,4 +130,12 @@ public interface LoanDAO {
         "where loan_id = #{loanId,jdbcType=BIGINT}"
     })
     int updateByPrimaryKey(LoanDO record);
+
+
+    @Update({
+            "update loan",
+            "set reserve_amount = reserve_amount + #{amount,jdbcType=DECIMAL}",
+            "where loan_id = #{loanId}"
+    })
+    int invest(LoanInvestorFinanceDO loanInvestorFinanceDO);
 }
