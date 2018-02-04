@@ -146,4 +146,56 @@ public interface UserDemandSolutionDAO {
             "where demand_user_id = #{demandUserId}"
     })
     int countByDemandUserId(Long demandUserId);
+
+
+
+    @Select({
+            "select us.adopt_count,ufc.friend_counts,uds.id,u.institution_name,uds.is_operate_solution,u.logo,u.real_name",
+            "us.serial_number,uds.solution_id,uds.solution_user_id,ufd.service_direction",
+            "from user_demand_solution uds ,user u,user_solution us,user_friend_count ufc,user_finance_detail ufd",
+            "where uds.solution_user_id = u.user_id and uds.solution_id = us.id and uds.solution_user_id = ufc.user_id and uds.solution_user_id = ufd.user_id",
+            "and uds.demand_user_id = #{demandUserId}",
+            "order by us.adopt_count desc , uds.create_time desc",
+            "limit 0,10"
+    })
+    @Results({
+            @Result(property = "adoptCount", column = "adopt_count"),
+            @Result(property = "friendCounts", column = "friend_counts"),
+            @Result(property = "id", column = "id"),
+            @Result(property = "institutionName", column = "institution_name"),
+            @Result(property = "isOperateSolution", column = "is_operate_solution"),
+            @Result(property = "logo", column = "logo"),
+            @Result(property = "realName", column = "real_name"),
+            @Result(property = "serialNumber", column = "serial_number"),
+            @Result(property = "solutionId", column = "solution_id"),
+            @Result(property = "solutionUserId", column = "solution_user_id"),
+            @Result(property = "serviceDirection", column = "service_direction")
+    })
+    List<DemandMatchSolutionResult> getUserMatchSolutionTop10(Long demandUserId);
+
+
+    @Select({
+            "select us.adopt_count,ufc.friend_counts,uds.id,u.institution_name,uds.is_operate_solution,u.logo,u.real_name",
+            "us.serial_number,uds.solution_id,uds.solution_user_id,ufd.service_direction",
+            "from user_demand_solution uds ,user u,user_solution us,user_friend_count ufc,user_finance_detail ufd",
+            "where uds.solution_user_id = u.user_id and uds.solution_id = us.id and uds.solution_user_id = ufc.user_id and uds.solution_user_id = ufd.user_id",
+            "order by us.adopt_count desc , uds.create_time desc",
+            "limit 0,10"
+    })
+    @Results({
+            @Result(property = "adoptCount", column = "adopt_count"),
+            @Result(property = "friendCounts", column = "friend_counts"),
+            @Result(property = "id", column = "id"),
+            @Result(property = "institutionName", column = "institution_name"),
+            @Result(property = "isOperateSolution", column = "is_operate_solution"),
+            @Result(property = "logo", column = "logo"),
+            @Result(property = "realName", column = "real_name"),
+            @Result(property = "serialNumber", column = "serial_number"),
+            @Result(property = "solutionId", column = "solution_id"),
+            @Result(property = "solutionUserId", column = "solution_user_id"),
+            @Result(property = "serviceDirection", column = "service_direction")
+    })
+    List<DemandMatchSolutionResult> getAllMatchSolutionTop10();
+
+
 }
