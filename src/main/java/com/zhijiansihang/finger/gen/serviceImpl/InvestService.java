@@ -5,14 +5,8 @@ import com.zhijiansihang.common.Response;
 import com.zhijiansihang.common.ResponseHeader;
 import com.zhijiansihang.common.ResponseHeaderBuilder;
 import com.zhijiansihang.common.RetCode;
-import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanDAO;
-import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanInvestorFinanceDAO;
-import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
-import com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO;
-import com.zhijiansihang.finger.app.dao.mysql.model.LoanDO;
-import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDO;
-import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
-import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
+import com.zhijiansihang.finger.app.dao.mysql.mapper.*;
+import com.zhijiansihang.finger.app.dao.mysql.model.*;
 import com.zhijiansihang.finger.app.service.LoanInvestService;
 import com.zhijiansihang.finger.app.sharing.lock.redis.RedisLock;
 import com.zhijiansihang.finger.gen.entity.InvestRequest;
@@ -27,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * 预约
@@ -52,6 +47,9 @@ public class InvestService implements MessageService<InvestRequest, Response<Inv
 
     @Autowired
     RedisLock redisLock;
+
+    @Autowired
+    UserServiceRecordDAO userServiceRecordDAO;
 
     @Override
     public void execute(InvestRequest request, Response<InvestResponse> response) {
@@ -121,6 +119,13 @@ public class InvestService implements MessageService<InvestRequest, Response<Inv
                     ResponseHeader responseHeader = ResponseHeaderBuilder.build(RetCode.INTERNALEXCEP,"请稍后重试");
                     response.setHeader(responseHeader);
                     return;
+                }else {
+                    UserServiceRecordDO userServiceRecordDO = new UserServiceRecordDO();
+                    userServiceRecordDO.setUserId(Long.parseLong(financeUserId));
+                    userServiceRecordDO.setPersonUserId(loginUserid);
+                    userServiceRecordDO.setCreateTime(new Date());
+                    userServiceRecordDO.setServiceType((byte) 0);
+                    userServiceRecordDAO.insertSelective(userServiceRecordDO);
                 }
             }finally {
                 redisLock.unLock(redisKey);
