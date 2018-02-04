@@ -101,6 +101,15 @@ public interface UserFinanceDetailDAO {
     })
     int adoptCountAdd(Long userId);
 
+
+
+    @Update({
+            "update user_finance_detail",
+            "set addUserOrderCount = addUserOrderCount + 1",
+            "where user_id = #{userId}"
+    })
+    int addUserOrderCount(Long userId);
+
     @Select({
             "select ufd.*,u.logo,u.real_name",
             "from loan_finance lf,user_finance_detail ufd,user u",

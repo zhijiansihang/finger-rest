@@ -51,6 +51,7 @@ public class InvestService implements MessageService<InvestRequest, Response<Inv
     @Autowired
     UserServiceRecordDAO userServiceRecordDAO;
 
+
     @Override
     public void execute(InvestRequest request, Response<InvestResponse> response) {
         LOG.info("[{}][request={}]", SERVICE_DESC, request);
@@ -126,6 +127,8 @@ public class InvestService implements MessageService<InvestRequest, Response<Inv
                     userServiceRecordDO.setCreateTime(new Date());
                     userServiceRecordDO.setServiceType((byte) 0);
                     userServiceRecordDAO.insertSelective(userServiceRecordDO);
+
+                    userFinanceDetailDAO.addUserOrderCount(Long.parseLong(financeUserId));
                 }
             }finally {
                 redisLock.unLock(redisKey);
