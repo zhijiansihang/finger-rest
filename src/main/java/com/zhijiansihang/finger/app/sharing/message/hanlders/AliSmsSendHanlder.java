@@ -1,10 +1,13 @@
 package com.zhijiansihang.finger.app.sharing.message.hanlders;
 
 
+import com.zhijiansihang.finger.app.dao.mysql.mapper.SmsDAO;
+import com.zhijiansihang.finger.app.manager.AliYunSmsManager;
 import com.zhijiansihang.finger.app.sharing.annotation.NotThreadSafe;
 import com.zhijiansihang.finger.app.sharing.message.model.AliSms;
 import com.zhijiansihang.finger.app.sharing.message.model.MessageInsertDatabase;
 import com.zhijiansihang.finger.app.sharing.message.queue.TaskQueue;
+import com.zhijiansihang.finger.app.sharing.spring.ApplicationContextHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,9 +47,6 @@ public class AliSmsSendHanlder extends AbstractSmsSendHanlder {
     @Override
     protected void success() {
         super.success();
-        if (aliSms instanceof MessageInsertDatabase) {
-            TaskQueue.put(new SmsPutDbHandler(aliSms.insert()), SMS_INSERTDB);
-        }
     }
 
     private boolean sendToAiyun(){
@@ -54,6 +54,13 @@ public class AliSmsSendHanlder extends AbstractSmsSendHanlder {
          * TODO
          */
         logger.info("短信发送往阿里云请求:"+ aliSms);
+        try {
+            AliYunSmsManager.sendSms(aliSms);
+        }catch (Exception e){
+            logger.error("短信发送往阿里云error:",e);
+            return false;
+        }
+
         return true;
     }
 }

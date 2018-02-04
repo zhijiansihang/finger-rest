@@ -63,7 +63,13 @@ public abstract class AbstractSmsSendHanlder implements Runnable {
             logger.warn("当前Hanlder={}不允许操作,content={}", name, content());
             return;
         }
-        boolean send = send();
+        boolean send = false;
+        try {
+            send = send();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         if (send) {
             success();
         } else {

@@ -19,8 +19,8 @@ public class AliMessageStrategy implements MessageStrategy {
     public boolean sendVerificationCode(String mobile, String code) {
         AliSms aliSms = new AliSms();
         aliSms.setMobile(mobile);
-        aliSms.setTemplateCode("10000");
-        aliSms.getTemplateParam().put("code","10000");
+        aliSms.setTemplateCode("SMS_121720012");
+        aliSms.getTemplateParam().put("code",code);
         TaskQueue.put(new AliSmsSendHanlder(aliSms),SMS_SINGLE);
         return true;
     }
