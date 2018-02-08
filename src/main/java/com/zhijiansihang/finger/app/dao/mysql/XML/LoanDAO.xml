@@ -456,4 +456,11 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <select id="countByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample" resultType="java.lang.Integer">
+    select count(*) from loan
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
 </mapper>

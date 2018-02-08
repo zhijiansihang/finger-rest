@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaQuery;
+
 /**
  * Created by wanglu-jf on 17/9/7.
  */
@@ -26,19 +28,24 @@ public class UserAuthService {
         return userAuth;
     }
 
-    /**
-     * 根据用户Id查询认证账户
-     * @param userId 用户Id
-     * @return
-     */
-    public UserAuth findByUserId(Long userId){
-        User user = new User();
-        user.setId(userId);
-        UserAuth userAuth = new UserAuth();
-        userAuth.setUser(user);
-        Example<UserAuth> example = Example.of(userAuth);
-        return userAuthRepository.findOne(example);
-    }
+//    /**
+//     * 根据用户Id查询认证账户
+//     * @param userId 用户Id
+//     * @return
+//     */
+//    public UserAuth findByUserId(Long userId){
+//        User user = new User();
+//        user.setId(userId);
+//        UserAuth userAuth = new UserAuth();
+//        userAuth.setUser(user);
+//        Example<UserAuth> example = Example.of(userAuth);
+//        example.getMatcher().
+//
+////                CriteriaBuilder builder = em.getCriteriaBuilder();
+////        CriteriaQuery<S> query = builder.createQuery(domainClass);
+//
+//        return userAuthRepository.findOne(example);
+//    }
 
 
 }

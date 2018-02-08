@@ -138,4 +138,6 @@ public interface LoanDAO {
             "where loan_id = #{loanId}"
     })
     int invest(LoanInvestorFinanceDO loanInvestorFinanceDO);
+
+    int countByExample(LoanDOExample example);
 }

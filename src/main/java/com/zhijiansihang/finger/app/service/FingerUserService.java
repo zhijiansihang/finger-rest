@@ -11,6 +11,8 @@ import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.UserVO;
 import com.zhijiansihang.sys.entity.Role;
+import com.zhijiansihang.sys.entity.UserAuth;
+import com.zhijiansihang.sys.exception.EditDomainException;
 import com.zhijiansihang.sys.exception.ValidationException;
 import com.zhijiansihang.sys.service.UserAuthService;
 import com.zhijiansihang.sys.service.UserService;
@@ -18,6 +20,7 @@ import com.zhijiansihang.sys.util.MD5;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -233,10 +236,20 @@ public class FingerUserService {
      * @return
      */
     public Response getInstitutionByUserId(Long userId) {
-        Map<String,Object> root = Maps.newHashMap();
-        root.put("user",userDAO.selectByPrimaryKey(userId));
-        root.put("auth",userAuthService.findByUserId(userId));
-        return Response.success(root);
+
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(userDAO.selectByPrimaryKey(userId), userVO);
+        try {
+            userService.findById(userId).getUserAuths().forEach(userAuth -> {
+                userVO.setAuthId(userAuth.getAuthId());
+                userVO.setAuthPass(userAuth.getAuthPass());
+            });
+        } catch (EditDomainException e) {
+            e.printStackTrace();
+            return Response.error("查询异常");
+        }
+
+        return Response.success(userVO);
     }
 
     /**
@@ -271,6 +284,7 @@ public class FingerUserService {
     @Transactional
     public void institutionDelete(UserVO userVO) {
         userDAO.deleteByPrimaryKey(userVO.getUserId());
+//        userService.delete(userVO.getUserId());
         // 理财师转变为投资人
 
         // 结标
