@@ -1,6 +1,8 @@
 package com.zhijiansihang.finger.app.vo;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDO;
 
+import java.util.List;
+
 /**
  *
  */
@@ -12,6 +14,7 @@ public class LoanVO extends LoanDO{
 
     public int pageSize;
 
+    public List<Short> status;
 
 
     public int getCurrentPage() {
@@ -30,4 +33,11 @@ public class LoanVO extends LoanDO{
         this.pageSize = pageSize;
     }
 
+    public List<Short> getStatus() {
+        return status;
+    }
+
+    public void setStatus(List<Short> status) {
+        this.status = status;
+    }
 }

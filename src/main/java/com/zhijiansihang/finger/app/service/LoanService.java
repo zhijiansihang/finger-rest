@@ -1,25 +1,20 @@
 package com.zhijiansihang.finger.app.service;
 
 
-import com.google.common.collect.Sets;
 import com.zhijiansihang.common.Response;
+import com.zhijiansihang.finger.app.constant.LoanConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.LoanVO;
-import com.zhijiansihang.sys.entity.Role;
-import com.zhijiansihang.sys.exception.EditDomainException;
-import com.zhijiansihang.sys.exception.ValidationException;
-import com.zhijiansihang.sys.util.MD5;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -55,8 +50,8 @@ public class LoanService {
         if(loanVO.getProductType() != null){
             criteria.andProductTypeEqualTo(loanVO.getProductType());
         }
-        if(loanVO.getLoanStatus() != null){
-            criteria.andLoanStatusEqualTo(loanVO.getLoanStatus());
+        if(loanVO.getStatus() != null && loanVO.getStatus().size() > 0){
+            criteria.andLoanStatusIn(loanVO.getStatus());
         }
 //
 //        if(loanVO.getRolesList().size() > 0){
@@ -89,6 +84,54 @@ public class LoanService {
         if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
             return Response.error("审核失败");
         return Response.success("审核成功");
+    }
+
+    public Response publish(LoanVO loanVO, Long userId) {
+        if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
+            return Response.error("发布失败");
+        return Response.success("发布成功");
+    }
+
+    public Response publicAdd(Long userId, LoanVO loanVO) {
+        loanVO.setProductDescFiles("[{\"src\":\"http://47.94.241.207:7031/cms/pic/banner/a401d4c5-0dc8-4ac0-a4aa-f4c3803ba061.png\",\"name\":\"哈哈哈哈哈\",\"status\":\"上传成功\"},{\"src\":\"http://47.94.241.207:7031/cms/pic/banner/a401d4c5-0dc8-4ac0-a4aa-f4c3803ba061.png\",\"name\":\"哈哈哈哈哈\",\"status\":\"上传成功\"}]");
+        loanVO.setEarningDesc("[{\"startAmount\":\"0\",\"endAmount\":\"100万\",\"basisInterest\":\"0.05\",\"isFloating\":\"Y\"},{\"startAmount\":\"100万\",\"endAmount\":\"200万\",\"basisInterest\":\"0.05\",\"isFloating\":\"N\"},{\"startAmount\":\"0\",\"endAmount\":\"100万\",\"basisInterest\":\"0.05\",\"isFloating\":\"Y\"},{\"startAmount\":\"200万\",\"endAmount\":\"-\",\"basisInterest\":\"0.05\",\"isFloating\":\"N\"}]");
+        loanVO.setCreateTime(new Date());
+        loanVO.setManageRate(new BigDecimal("0.1"));
+        loanVO.setBeginAmount(new BigDecimal("1000"));
+        loanVO.setIsDisplay((byte)0);
+        loanVO.setLoanStatus((short)100);
+        loanVO.setReserveAmount(new BigDecimal("0"));
+        loanVO.setIsRateFloating((byte)1);
+        loanVO.setInterestRate(new BigDecimal(10));
+        loanVO.setInstitutionUserId(userId);
+        loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PUBLIC.getType());
+        if(loanDAO.insert(loanVO) <= 0)
+            return Response.error("添加失败");
+        return Response.success("添加成功");
+    }
+
+    public Response privateAdd(Long userId, LoanVO loanVO) {
+        loanVO.setCreateTime(new Date());
+        loanVO.setManageRate(new BigDecimal("0.1"));
+        loanVO.setBeginAmount(new BigDecimal("1000"));
+        loanVO.setIsDisplay((byte)0);
+        loanVO.setLoanStatus((short)100);
+        loanVO.setReserveAmount(new BigDecimal("0"));
+        loanVO.setIsRateFloating((byte)1);
+        loanVO.setInterestRate(new BigDecimal(10));
+        loanVO.setInstitutionUserId(userId);
+        loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PRIVATE.getType());
+        loanVO.setProductType((short)4);
+        if(loanDAO.insert(loanVO) <= 0)
+            return Response.error("添加失败");
+        return Response.success("添加成功");
+    }
+
+    public Response delete(LoanVO loanVO) {
+        loanVO.setLoanStatus((short)400);
+        if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
+            return Response.error("删除失败");
+        return Response.success("删除成功");
     }
 
 

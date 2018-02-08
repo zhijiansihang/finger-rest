@@ -3,9 +3,7 @@ package com.zhijiansihang.finger.app.controller;
 import com.zhijiansihang.common.ComParams;
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.service.LoanService;
-import com.zhijiansihang.finger.app.vo.CmsVO;
 import com.zhijiansihang.finger.app.vo.LoanVO;
-import com.zhijiansihang.sys.exception.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,50 +61,59 @@ public class LoanController {
     public Response review(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
         return loanService.review(loanVO, userId);
     }
-//
-//    /**
-//     *  标的 发布
-//     * @return
-//     */
-//    @RequestMapping(value = "/publish")
-//    @ResponseBody
-//    public Response publish(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody CmsVO cmsVO) {
-//        return loanService.updateByPrimaryKeySelective(cmsVO, userId);
-//    }
-//
-//
-//
-//    /**
-//     *  标的 公募添加
-//     * @return
-//     */
-//    @RequestMapping(value = "/public/add")
-//    @ResponseBody
-//    public Response publicAdd(@RequestBody LoanVO loanVO) {
-//        return loanService.getByUserId(loanVO.getLoanId());
-//    }
-//
-//    /**
-//     *  标的 私募添加
-//     * @return
-//     */
-//    @RequestMapping(value = "/private/add")
-//    @ResponseBody
-//    public Response privateAdd(@RequestBody LoanVO loanVO) {
-//        return loanService.getByUserId(loanVO.getLoanId());
-//    }
-//
-//    /**
-//     * 标的 添加
-//     * @param loanVO
-//     * @return
-//     * @throws ValidationException
-//     */
-//    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-//    public Response institutionDelete(@RequestBody LoanVO loanVO) throws ValidationException {
-//        loanService.institutionDelete(loanVO);
-//        return Response.success("删除成功");
-//    }
+
+    /**
+     *  标的 发布
+     * @return
+     */
+    @RequestMapping(value = "/publish")
+    @ResponseBody
+    public Response publish(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
+        return loanService.publish(loanVO, userId);
+    }
+
+
+    /**
+     *  标的 公募添加
+     * @return
+     */
+    @RequestMapping(value = "/public/add")
+    @ResponseBody
+    public Response publicAdd(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
+        return loanService.publicAdd(userId, loanVO);
+    }
+
+    /**
+     *  标的 私募添加
+     * @return
+     */
+    @RequestMapping(value = "/private/add")
+    @ResponseBody
+    public Response privateAdd(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
+        return loanService.privateAdd(userId, loanVO);
+    }
+
+
+    /**
+     *  标的 结标
+     * @return
+     */
+    @RequestMapping(value = "/end")
+    @ResponseBody
+    public Response end(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
+        return loanService.review(loanVO, userId);
+    }
+
+    /**
+     * 标的 删除
+     * @param loanVO
+     * @return
+     */
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Response institutionDelete(@RequestBody LoanVO loanVO){
+        loanService.delete(loanVO);
+        return Response.success("删除成功");
+    }
 
 
 }

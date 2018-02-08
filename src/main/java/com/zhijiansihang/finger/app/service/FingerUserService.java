@@ -262,9 +262,11 @@ public class FingerUserService {
     @Transactional
     public void institutionAdd(UserVO userVO, String admUserId) throws ValidationException {
         String enPass = MD5.encodeByMd5AndSalt(userVO.getAuthPass());
-
+        userVO.setIsNameAuth((byte)1);
         userVO.setPasswd(enPass);
+        userVO.setIsFrozen((byte)0);
         userVO.setCreateTime(new Date());
+        userVO.setIsRegisterJg((byte)0);
         userDAO.insert(userVO);
 
 //        UserDO userDO = userDAO.selectByPrimaryKey(userVO.getUserId());
