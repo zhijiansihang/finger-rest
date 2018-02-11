@@ -24,7 +24,7 @@ public class CmsConsts {
         return null;
     }
     public static enum CmsEnum {
-        banner(100, "banner"), notice(200, "公告"), information(300, "资讯"), avatar(400, "头像");
+        banner(100, "banner"), notice(200, "公告"), information(300, "资讯"), avatar(400, "头像"), loan(500, "标文件");
 
         CmsEnum(Integer typeCode, String typeName) {
             this.typeCode = typeCode;

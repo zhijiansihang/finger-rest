@@ -1,13 +1,22 @@
 package com.zhijiansihang.finger.app.controller;
 
+import com.google.common.collect.Maps;
 import com.zhijiansihang.common.ComParams;
 import com.zhijiansihang.common.Response;
+import com.zhijiansihang.finger.app.constant.CmsConsts;
 import com.zhijiansihang.finger.app.service.LoanService;
 import com.zhijiansihang.finger.app.vo.LoanVO;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.util.Map;
+import java.util.UUID;
 
 /**
  * @description
@@ -115,5 +124,26 @@ public class LoanController {
         return Response.success("删除成功");
     }
 
+    @RequestMapping("/file/upload")
+    public Response uploadLoanFile(@RequestParam("file")MultipartFile file) throws Exception{
+
+        String storageLocationPrefix = CmsConsts.CmsEnum.loan.getStorageLocationPrefix();
+        String accessLocationPrefix = CmsConsts.CmsEnum.loan.getAccessLocationPrefix();
+
+        FileUtils.forceMkdir(new File(storageLocationPrefix));
+
+        String filename = UUID.randomUUID().toString();
+        String ext =  FilenameUtils.getExtension(file.getOriginalFilename());
+
+        String logoFileName = storageLocationPrefix + filename + "." + ext;
+        file.transferTo(new File(logoFileName));
+
+        Map<String, String> loanFiles = Maps.newHashMap();
+        loanFiles.put("src", accessLocationPrefix + filename + "." + ext);
+        loanFiles.put("name", file.getOriginalFilename());
+        loanFiles.put("status", "上传成功");
+
+        return Response.success(loanFiles);
+    }
 
 }

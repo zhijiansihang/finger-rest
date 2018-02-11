@@ -1,18 +1,24 @@
 package com.zhijiansihang.finger.app.service;
 
 
+import com.google.common.collect.Lists;
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.constant.LoanConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanDAO;
+import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanFinanceDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample;
+import com.zhijiansihang.finger.app.dao.mysql.model.LoanFinanceDO;
+import com.zhijiansihang.finger.app.dao.mysql.model.LoanFinanceDOExample;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.LoanVO;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,6 +31,8 @@ public class LoanService {
     @Autowired
     private LoanDAO loanDAO;
 
+    @Autowired
+    private LoanFinanceDAO loanFinanceDAO;
     /**
      * 标的 分页列表
      *
@@ -77,7 +85,18 @@ public class LoanService {
     }
 
     public Response getByLoanId(Long loanId) {
-        return Response.success(loanDAO.selectByPrimaryKey(loanId));
+        LoanFinanceDOExample example = new LoanFinanceDOExample();
+        LoanFinanceDOExample.Criteria criteria = example.createCriteria();
+        criteria.andLoanIdEqualTo(loanId);
+        List<Long> financeUserIds = Lists.newArrayList();
+        loanFinanceDAO.selectByExample(example).forEach(financeUser -> {
+            financeUserIds.add(financeUser.getFinanceUserId());
+        });
+        LoanDO loanDo = loanDAO.selectByPrimaryKey(loanId);
+        LoanVO loanVO = new LoanVO();
+        BeanUtils.copyProperties(loanDo, loanVO);
+        loanVO.setUserIds(financeUserIds);
+        return Response.success(loanVO);
     }
 
     public Response review(LoanVO loanVO, Long userId) {
@@ -92,9 +111,8 @@ public class LoanService {
         return Response.success("发布成功");
     }
 
+    @Transactional
     public Response publicAdd(Long userId, LoanVO loanVO) {
-        loanVO.setProductDescFiles("[{\"src\":\"http://47.94.241.207:7031/cms/pic/banner/a401d4c5-0dc8-4ac0-a4aa-f4c3803ba061.png\",\"name\":\"哈哈哈哈哈\",\"status\":\"上传成功\"},{\"src\":\"http://47.94.241.207:7031/cms/pic/banner/a401d4c5-0dc8-4ac0-a4aa-f4c3803ba061.png\",\"name\":\"哈哈哈哈哈\",\"status\":\"上传成功\"}]");
-        loanVO.setEarningDesc("[{\"startAmount\":\"0\",\"endAmount\":\"100万\",\"basisInterest\":\"0.05\",\"isFloating\":\"Y\"},{\"startAmount\":\"100万\",\"endAmount\":\"200万\",\"basisInterest\":\"0.05\",\"isFloating\":\"N\"},{\"startAmount\":\"0\",\"endAmount\":\"100万\",\"basisInterest\":\"0.05\",\"isFloating\":\"Y\"},{\"startAmount\":\"200万\",\"endAmount\":\"-\",\"basisInterest\":\"0.05\",\"isFloating\":\"N\"}]");
         loanVO.setCreateTime(new Date());
         loanVO.setManageRate(new BigDecimal("0.1"));
         loanVO.setBeginAmount(new BigDecimal("1000"));
@@ -107,6 +125,16 @@ public class LoanService {
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PUBLIC.getType());
         if(loanDAO.insert(loanVO) <= 0)
             return Response.error("添加失败");
+
+        loanVO.getUserIds().forEach( financeUserId -> {
+            LoanFinanceDO loanFinanceDO = new LoanFinanceDO();
+            loanFinanceDO.setLoanId(loanVO.getLoanId());
+            loanFinanceDO.setFinanceUserId(financeUserId);
+            loanFinanceDO.setIsDeleted((byte)0);
+            loanFinanceDO.setCreateTime(new Date());
+            loanFinanceDAO.insert(loanFinanceDO);
+        });
+
         return Response.success("添加成功");
     }
 
@@ -134,93 +162,4 @@ public class LoanService {
         return Response.success("删除成功");
     }
 
-
-//    /**
-//     * 标的 通过id获取
-//     * @param loanId
-//     * @return
-//     */
-//    public Response getByLoanId(Long loanId) {
-//        return Response.success(loanDAO.selectByPrimaryKey(loanId));
-//    }
-//
-//
-//    /**
-//     * 标的 通过手机获取
-//     * @param mobile
-//     * @return
-//     */
-//    public Response getByMobile(String mobile) {
-//
-//        LoanDOExample example = new LoanDOExample();
-//        example.createCriteria().andMobileEqualTo(mobile);
-//        List<LoanDO> loanDOS = loanDAO.selectByExample(example);
-//
-//        if (loanDOS.size() > 0) {
-//            return Response.success(loanDOS.get(0));
-//        }
-//
-//        return Response.success("");
-//    }
-//
-//    /**
-//     * 机构 根据Id获取
-//     *
-//     * @param loanId
-//     * @return
-//     */
-//    public Response getInstitutionByLoanId(Long loanId) {
-//
-//        LoanVO loanVO = new LoanVO();
-//        BeanUtils.copyProperties(loanDAO.selectByPrimaryKey(loanId), loanVO);
-//        try {
-//            loanService.findById(loanId).getLoanAuths().forEach(loanAuth -> {
-//                loanVO.setAuthId(loanAuth.getAuthId());
-//                loanVO.setAuthPass(loanAuth.getAuthPass());
-//            });
-//        } catch (EditDomainException e) {
-//            e.printStackTrace();
-//            return Response.error("查询异常");
-//        }
-//
-//        return Response.success(loanVO);
-//    }
-//
-//    /**
-//     * 机构 添加
-//     *
-//     * @param loanVO
-//     * @param admLoanId
-//     * @throws ValidationException
-//     */
-//    @Transactional
-//    public void institutionAdd(LoanVO loanVO, String admLoanId) throws ValidationException {
-//        String enPass = MD5.encodeByMd5AndSalt(loanVO.getAuthPass());
-//
-//        loanVO.setPasswd(enPass);
-//        loanVO.setCreateTime(new Date());
-//        loanDAO.insert(loanVO);
-//
-////        LoanDO loanDO = loanDAO.selectByPrimaryKey(loanVO.getLoanId());
-//        com.zhijiansihang.sys.vo.LoanVO admLoanVo = new com.zhijiansihang.sys.vo.LoanVO();
-//        admLoanVo.setAuthId(loanVO.getAuthId());
-//        admLoanVo.setAuthPass(enPass);
-//        admLoanVo.setId(loanVO.getLoanId());
-//        admLoanVo.setPhone(loanVO.getMobile());
-//        // 机构角色
-//        Role role = new Role();
-//        role.setId(2l);
-//        admLoanVo.setRoleSet(Sets.newHashSet(role));
-//
-//        loanService.saveLoan(admLoanVo, admLoanId);
-//    }
-//
-//    @Transactional
-//    public void institutionDelete(LoanVO loanVO) {
-//        loanDAO.deleteByPrimaryKey(loanVO.getLoanId());
-////        loanService.delete(loanVO.getLoanId());
-//        // 理财师转变为投资人
-//
-//        // 结标
-//    }
 }

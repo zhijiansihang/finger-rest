@@ -161,6 +161,11 @@ public class FingerUserService {
         return page;
     }
 
+    public List<UserDO> findUserFbList(UserVO userVO) {
+        UserDOExample example = new UserDOExample();
+        return userDAO.selectByExample(example);
+    }
+
     /**
      * 理财师 根据Id获取
      *
@@ -290,5 +295,17 @@ public class FingerUserService {
         // 理财师转变为投资人
 
         // 结标
+    }
+
+
+    public Response getFbByUserIds(List<Long> userIds) {
+        UserDOExample example = new UserDOExample();
+        UserDOExample.Criteria criteria = example.createCriteria();
+        if (userIds != null && userIds.size()>0){
+            criteria.andUserIdIn(userIds);
+        } else {
+            return Response.success(null);
+        }
+        return Response.success(userDAO.selectByExample(example));
     }
 }
