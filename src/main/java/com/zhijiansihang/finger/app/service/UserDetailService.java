@@ -1,6 +1,7 @@
 package com.zhijiansihang.finger.app.service;
 
 
+import com.zhijiansihang.finger.app.constant.CmsConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserFriendCountDAO;
@@ -8,8 +9,8 @@ import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserFriendCountDO;
+import com.zhijiansihang.finger.app.event.demo.RiskAssessmentModifyEvent;
 import com.zhijiansihang.finger.app.event.demo.UserRegisterEvent;
-import com.zhijiansihang.finger.app.event.demo.UserRegisterListener;
 import com.zhijiansihang.finger.app.sharing.spring.ApplicationContextHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class UserDetailService {
@@ -71,5 +70,29 @@ public class UserDetailService {
         userRegisterEvent.setUserDO(userByMobile);
         ApplicationContextHelper.applicationContext.publishEvent(userRegisterEvent);
         return userByMobile;
+    }
+
+    @Transactional
+    public boolean updateRiskAssessment(Long userId, CmsConsts.RiskAssessmentEnum riskAssessmentEnum){
+        UserDO userDO = userDAO.selectByPrimaryKey(userId);
+        if (userDO == null){
+            return false;
+        }
+        Short riskAssessmentLevel = userDO.getRiskAssessmentLevel();
+        if (riskAssessmentLevel != null || riskAssessmentEnum.getRole().intValue() == riskAssessmentLevel.intValue()){
+            return true;
+        }
+        UserDO updateUser = new UserDO();
+        updateUser.setUserId(userId);
+        updateUser.setRiskAssessmentLevel(riskAssessmentEnum.getRole().shortValue());
+        int i = userDAO.updateByPrimaryKeySelective(updateUser);
+        if (i != 1){
+            throw new IllegalArgumentException();
+        }
+
+        RiskAssessmentModifyEvent event = new RiskAssessmentModifyEvent(this);
+        event.setUserId(userId);
+        ApplicationContextHelper.applicationContext.publishEvent(event);
+        return true;
     }
 }

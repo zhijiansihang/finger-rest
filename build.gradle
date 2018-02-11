@@ -4,9 +4,9 @@ buildscript {
     }
     repositories {
         repositories {
-            maven {
-                url "http://49.4.160.163:8093/nexus/content/groups/public/"
-            }
+           maven {
+        url "http://maven.aliyun.com/nexus/content/groups/public/"
+    }
         }
     }
     dependencies {
@@ -106,12 +106,12 @@ dependencies {
 //jar包下载慢可以参考修改:https://www.cnblogs.com/yoyotl/p/6291703.html
 repositories {
 //	mavenLocal()
-    maven {
-        url "http://49.4.160.163:8093/nexus/content/groups/public/"
-    }
+
+  
     maven {
         url "http://maven.aliyun.com/nexus/content/groups/public/"
     }
+
 }
 
 dependencyManagement {

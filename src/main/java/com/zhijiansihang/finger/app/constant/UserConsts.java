@@ -1,7 +1,5 @@
 package com.zhijiansihang.finger.app.constant;
 
-import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
-
 /**
  * Created by paul on 2018/1/22.
  */
@@ -44,4 +42,6 @@ public class UserConsts {
         }
         return "";
     }
+
+    public static final String USER_LOCK_RISK_INIT_PREFIX = "user_lock_risk_init_";
 }

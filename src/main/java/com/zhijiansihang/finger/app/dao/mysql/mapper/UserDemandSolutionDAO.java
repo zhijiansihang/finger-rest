@@ -1,19 +1,13 @@
 package com.zhijiansihang.finger.app.dao.mysql.mapper;
 
-import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDOExample;
-
-import java.security.acl.LastOwnerException;
-import java.util.List;
-
 import com.zhijiansihang.finger.app.vo.DemandMatchSolutionResult;
 import com.zhijiansihang.finger.app.vo.SolutionMatchDemandResult;
-import org.apache.coyote.http11.filters.VoidInputFilter;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import javax.persistence.criteria.CriteriaBuilder;
+import java.util.List;
 
 @Mapper
 public interface UserDemandSolutionDAO {
@@ -197,5 +191,9 @@ public interface UserDemandSolutionDAO {
     })
     List<DemandMatchSolutionResult> getAllMatchSolutionTop10();
 
-
+    @Delete({
+            "delete from user_demand_solution",
+            "where demand_user_id = #{userId}"
+    })
+    int deleteByUserid(Long userId);
 }

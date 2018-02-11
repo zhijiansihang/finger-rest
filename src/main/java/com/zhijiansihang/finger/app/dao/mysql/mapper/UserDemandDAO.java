@@ -2,10 +2,10 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandDOExample;
-import java.util.List;
-
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
+
+import java.util.List;
 
 @Mapper
 public interface UserDemandDAO {
@@ -101,4 +101,13 @@ public interface UserDemandDAO {
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandDAO.BaseResultMap")
     List<UserDemandDO> selectByUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
+
+
+
+
+
+    @Update({
+           "update user_demand set last_batch_sid = null and match_solution_count = 0 where is_deleted = 0 and is_closed = 0 and user_id = #{userId} "
+    })
+    int updateAgainRishBatchByUserid(Long userId);
 }
