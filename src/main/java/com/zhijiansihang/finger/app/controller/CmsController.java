@@ -132,4 +132,5 @@ public class CmsController {
         return Response.success(accessLocationPrefix + filename + "." + ext);
     }
 
+
 }

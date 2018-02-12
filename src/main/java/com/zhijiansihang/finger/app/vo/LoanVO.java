@@ -16,6 +16,8 @@ public class LoanVO extends LoanDO{
 
     public List<Short> status;
 
+    public List<Long> userIds;
+
 
     public int getCurrentPage() {
         return currentPage;
@@ -39,5 +41,13 @@ public class LoanVO extends LoanDO{
 
     public void setStatus(List<Short> status) {
         this.status = status;
+    }
+
+    public List<Long> getUserIds() {
+        return userIds;
+    }
+
+    public void setUserIds(List<Long> userIds) {
+        this.userIds = userIds;
     }
 }

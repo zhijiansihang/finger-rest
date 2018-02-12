@@ -161,6 +161,11 @@ public class FingerUserService {
         return page;
     }
 
+    public List<UserDO> findUserFbList(UserVO userVO) {
+        UserDOExample example = new UserDOExample();
+        return userDAO.selectByExample(example);
+    }
+
     /**
      * 理财师 根据Id获取
      *
@@ -203,7 +208,6 @@ public class FingerUserService {
         // 条件
         UserDOExample example = new UserDOExample();
         UserDOExample.Criteria criteria = example.createCriteria();
-
         // 机构角色
         userVO.getRolesList().add((short) 2);
         criteria.andRolesIn(userVO.getRolesList());
@@ -211,11 +215,9 @@ public class FingerUserService {
         if(userVO.getUserId() != null){
             criteria.andUserIdEqualTo(userVO.getUserId());
         }
-
         if(userVO.getInstitutionName() != null){
             criteria.andInstitutionNameLike(userVO.getInstitutionName());
         }
-
         // 条数
         int countByUserVO = userDAO.countByExample(example);
         page.setRecordCount(countByUserVO);
@@ -239,10 +241,13 @@ public class FingerUserService {
 
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(userDAO.selectByPrimaryKey(userId), userVO);
+
         try {
             userService.findById(userId).getUserAuths().forEach(userAuth -> {
+
                 userVO.setAuthId(userAuth.getAuthId());
                 userVO.setAuthPass(userAuth.getAuthPass());
+
             });
         } catch (EditDomainException e) {
             e.printStackTrace();
@@ -260,8 +265,31 @@ public class FingerUserService {
      * @throws ValidationException
      */
     @Transactional
-    public void institutionAdd(UserVO userVO, String admUserId) throws ValidationException {
+    public Response institutionAdd(UserVO userVO, String admUserId) throws ValidationException {
+
+        UserDOExample example = new UserDOExample();
+        UserDOExample.Criteria criteria = example.createCriteria();
+        criteria.andNickNameEqualTo(userVO.getNickName());
+        List<UserDO> userDOS = userDAO.selectByExample(example);
+        if(userDOS.size() > 0){
+            return Response.error("机构名称已存在！");
+        }
+
+        UserDOExample example2 = new UserDOExample();
+        UserDOExample.Criteria criteria2 = example2.createCriteria();
+        criteria2.andMobileEqualTo(userVO.getMobile());
+        List<UserDO> userDOS2 = userDAO.selectByExample(example2);
+        if(userDOS2.size() > 0){
+            return Response.error("联系方式已存在！");
+        }
+
+        // 验证用户账号已存在
+        if(userAuthService.findByAuthId(userVO.getAuthId()) != null){
+            return Response.error("后台账号已存在！");
+        }
+
         String enPass = MD5.encodeByMd5AndSalt(userVO.getAuthPass());
+
         userVO.setIsNameAuth((byte)1);
         userVO.setPasswd(enPass);
         userVO.setIsFrozen((byte)0);
@@ -281,14 +309,30 @@ public class FingerUserService {
         admUserVo.setRoleSet(Sets.newHashSet(role));
 
         userService.saveUser(admUserVo, admUserId);
+
+        return Response.success("添加成功");
     }
 
     @Transactional
-    public void institutionDelete(UserVO userVO) {
+    public void institutionDelete(UserVO userVO, Long loginUserId) throws ValidationException {
         userDAO.deleteByPrimaryKey(userVO.getUserId());
+
+        userService.lockUser(loginUserId + "", userVO.getUserId());
 //        userService.delete(userVO.getUserId());
         // 理财师转变为投资人
 
         // 结标
+    }
+
+
+    public Response getFbByUserIds(List<Long> userIds) {
+        UserDOExample example = new UserDOExample();
+        UserDOExample.Criteria criteria = example.createCriteria();
+        if (userIds != null && userIds.size()>0){
+            criteria.andUserIdIn(userIds);
+        } else {
+            return Response.success(null);
+        }
+        return Response.success(userDAO.selectByExample(example));
     }
 }

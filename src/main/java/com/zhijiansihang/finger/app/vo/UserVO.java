@@ -21,6 +21,8 @@ public class UserVO extends UserDO{
 
     public List<Short> rolesList = Lists.newArrayList();
 
+    public List<Long> userIds;
+
     public int getCurrentPage() {
         return currentPage;
     }
@@ -60,5 +62,13 @@ public class UserVO extends UserDO{
 
     public void setAuthPass(String authPass) {
         this.authPass = authPass;
+    }
+
+    public List<Long> getUserIds() {
+        return userIds;
+    }
+
+    public void setUserIds(List<Long> userIds) {
+        this.userIds = userIds;
     }
 }
