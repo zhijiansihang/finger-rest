@@ -38,34 +38,7 @@ public class RedisLock implements Lock {
 
     @Override
     public boolean tryLock(String key, long timeout, TimeUnit unit) {
-        try {
-            //系统计时器的当前值，以毫微秒为单位。
-            long nano = System.nanoTime();
-            do {
-                logger.debug("try lock key: " + key);
-                //设置key占位，成功返回ture
-                if (redisTemplate.opsForValue().setIfAbsent(key, key)) {
-                    //设置锁失效时间
-                    redisTemplate.expire(key, DEFAULT_SINGLE_EXPIRE, TimeUnit.SECONDS);
-                    logger.debug("get lock, key: " + key + " , expire in " + DEFAULT_SINGLE_EXPIRE + " seconds.");
-                    //成功获取锁，返回true
-                    return Boolean.TRUE;
-                } else { // 存在锁,循环等待锁
-                    if (logger.isDebugEnabled()) {
-                        String desc = (String) redisTemplate.opsForValue().get(key);
-                        logger.debug("key: " + key + " locked by another business：" + desc);
-                    }
-                }
-                if (timeout <= 0) {
-                    //没有设置超时时间，直接退出等待
-                    break;
-                }
-                Thread.sleep(SLEEP);
-            } while ((System.nanoTime() - nano) < unit.toNanos(timeout));
-        } catch (Exception e) {
-            logger.error("获取"+key+"锁异常！", e);
-        }
-        return Boolean.FALSE;
+        return tryLock( key,  timeout,  unit,DEFAULT_SINGLE_EXPIRE ,TimeUnit.SECONDS);
     }
 
     @Override
@@ -118,5 +91,37 @@ public class RedisLock implements Lock {
     @Override
     public void unLock(List<String> keys) {
         redisTemplate.delete(keys);
+    }
+
+    @Override
+    public boolean tryLock(String key, long timeout, TimeUnit timeoutUnit, long overdue, TimeUnit overdueUnit) {
+        try {
+            //系统计时器的当前值，以毫微秒为单位。
+            long nano = System.nanoTime();
+            do {
+                logger.debug("try lock key: " + key);
+                //设置key占位，成功返回ture
+                if (redisTemplate.opsForValue().setIfAbsent(key, key)) {
+                    //设置锁失效时间
+                    redisTemplate.expire(key, overdue, overdueUnit);
+                    logger.debug("get lock, key: " + key + " , expire in " + overdue + " "+overdueUnit.name());
+                    //成功获取锁，返回true
+                    return Boolean.TRUE;
+                } else { // 存在锁,循环等待锁
+                    if (logger.isDebugEnabled()) {
+                        String desc = (String) redisTemplate.opsForValue().get(key);
+                        logger.debug("key: " + key + " locked by another business：" + desc);
+                    }
+                }
+                if (timeout <= 0) {
+                    //没有设置超时时间，直接退出等待
+                    break;
+                }
+                Thread.sleep(SLEEP);
+            } while ((System.nanoTime() - nano) < timeoutUnit.toNanos(timeout));
+        } catch (Exception e) {
+            logger.error("获取"+key+"锁异常！", e);
+        }
+        return Boolean.FALSE;
     }
 }

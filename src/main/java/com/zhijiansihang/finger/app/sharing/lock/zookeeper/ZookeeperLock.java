@@ -47,4 +47,9 @@ public class ZookeeperLock implements Lock {
     public void unLock(List<String> keys) {
 
     }
+
+    @Override
+    public boolean tryLock(String key, long timeout, TimeUnit timeoutUnit, long overdue, TimeUnit overdueUnit) {
+        return false;
+    }
 }

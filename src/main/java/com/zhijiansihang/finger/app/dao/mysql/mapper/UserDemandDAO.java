@@ -72,7 +72,7 @@ public interface UserDemandDAO {
     @Select({
             "select count(*)",
             "from user_demand",
-            "where user_id = #{userId} and money_situation = #{moneySituation} and earning_type = #{earningType} and expected_deadline = #{expectedDeadline}"
+            "where is_deleted = 0 and user_id = #{userId} and money_situation = #{moneySituation} and earning_type = #{earningType} and expected_deadline = #{expectedDeadline}"
     })
     int existSameType(UserDemandDO userDemandDO);
 
@@ -110,4 +110,29 @@ public interface UserDemandDAO {
            "update user_demand set last_batch_sid = null and match_solution_count = 0 where is_deleted = 0 and is_closed = 0 and user_id = #{userId} "
     })
     int updateAgainRishBatchByUserid(Long userId);
+
+    @Select({
+          "select ifnull(max(id),0) from user_demand"
+    })
+    long getMaxId();
+
+    @Select({
+            "select ud.*,u.risk_assessment_level",
+            "from user_demand ud, user u",
+            "where ifnull(max(last_batch_sid),0) < #{userSolutionMax}  and is_deleted = 0 and is_closed = 0 ",
+            " and ud.user_id = u.user_id and u.risk_assessment_level is not null ",
+            "order by id desc"
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandDAO.BaseResultMap")
+    List<UserDemandDO> getLowLastBatchid(@Param("userSolutionMax") Long user_solution_max, RowBounds rowBounds);
+
+    @Update({
+            "update user_demand set last_batch_sid = #{userSolutionMax}  where id= #{id} "
+    })
+    int updateLastBatchid(@Param("id") Long id, @Param("userSolutionMax") Long userSolutionMax);
+
+    @Update({
+            "update user_demand set match_solution_count = match_solution_count + #{matchSolutionCount}  where id= #{id} "
+    })
+    int addMatchSolutionCount(@Param("id") Long id, @Param("matchSolutionCount") long matchSolutionCount);
 }

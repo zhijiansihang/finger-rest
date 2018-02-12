@@ -2,16 +2,10 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserSolutionDOExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
+import java.util.List;
 @Mapper
 public interface UserSolutionDAO {
     @Delete({
@@ -80,7 +74,7 @@ public interface UserSolutionDAO {
     @Select({
             "select count(*) ",
             "from user_solution ",
-            "where user_id = #{userId} and money_situation = #{moneySituation} " +
+            "where is_deleted = 0 and user_id = #{userId} and money_situation = #{moneySituation} " +
             " and earning_type = #{earningType} and expected_deadline = #{expectedDeadline} and risk_assessment_level=#{riskAssessmentLevel}"
     })
     int existSameType(UserSolutionDO userSolutionDO);
@@ -124,4 +118,30 @@ public interface UserSolutionDAO {
             "where id = #{id}"
     })
     int adoptCountAdd(Long solutionId);
+    @Select({
+           "select ifnull(max(id),0) from user_solution"
+    })
+    long getMaxId();
+
+    @Select({
+            "select",
+            "id, user_id, money_situation, earning_type, expected_deadline, solution, risk_assessment_level, ",
+            "create_time, is_deleted, is_closed, match_demand_count, read_count, adopt_count, ",
+            "serial_number",
+            "from user_solution",
+            "where user_id = #{userId} and is_deleted = 0 and is_closed = 0 ",
+            "and money_situation = #{moneySituation} ",
+            "and earning_type = #{earningType} ",
+            "and expected_deadline = #{expectedDeadline} ",
+            "and risk_assessment_level = #{riskAssessmentLevel} ",
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserSolutionDAO.BaseResultMap")
+    List<UserSolutionDO> selectMatch(UserSolutionDO userSolutionDO);
+
+    @Update({
+            "update user_solution",
+            "set match_demand_count = ifnull(match_demand_count,0) + 1",
+            "where id = #{id}"
+    })
+    int addMatchDemandCount(Long id);
 }

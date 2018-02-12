@@ -15,11 +15,11 @@
 	<bean id="demoJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<!--com.paulzhangcc.sharing.Quartz-->
 		<property name="targetObject" ref="quartz" />
-		<property name="targetMethod" value="demo" />
+		<property name="targetMethod" value="batchUserDemandSolution" />
 	</bean>
 	<bean id="demoCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
 		<property name="jobDetail" ref="demoJobDetail" />
-		<property name="cronExpression" value=" 0/10 * * * * ?" />
+		<property name="cronExpression" value="0 */2 * * * ?" />
 	</bean>
 	<!-- 理财师佣金跑批 end -->
 

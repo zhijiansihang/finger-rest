@@ -71,4 +71,10 @@ public interface Lock {
      * @param keys
      */
     public void unLock(List<String> keys);
+
+    /**
+     * 等待超时前获取锁成功 返回true， 否则返回false
+     *
+    */
+    public boolean tryLock(String key, long timeout, TimeUnit timeoutUnit,long overdue,TimeUnit overdueUnit);
 }

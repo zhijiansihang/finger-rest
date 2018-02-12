@@ -282,6 +282,19 @@ public class UserDemandDO implements Serializable {
         this.createTime = createTime;
     }
 
+    public Short getRiskAssessmentLevel() {
+        return riskAssessmentLevel;
+    }
+
+    public void setRiskAssessmentLevel(Short riskAssessmentLevel) {
+        this.riskAssessmentLevel = riskAssessmentLevel;
+    }
+
+    /**
+     * 风险测评等级冗余
+     */
+    private Short riskAssessmentLevel;
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
