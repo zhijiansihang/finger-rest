@@ -139,8 +139,7 @@ public class FingerUserController {
      */
     @RequestMapping(value = "/institution/add", method = RequestMethod.POST)
     public Response institutionAdd(@Param(ComParams.X_USERID) String userId, @RequestBody UserVO userVO) throws ValidationException {
-        fingerUserService.institutionAdd(userVO,userId);
-        return Response.success("添加成功");
+        return fingerUserService.institutionAdd(userVO,userId);
     }
 
     /**
@@ -150,8 +149,8 @@ public class FingerUserController {
      * @throws ValidationException
      */
     @RequestMapping(value = "/institution/delete", method = RequestMethod.POST)
-    public Response institutionDelete(@RequestBody UserVO userVO) throws ValidationException {
-        fingerUserService.institutionDelete(userVO);
+    public Response institutionDelete(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody UserVO userVO) throws ValidationException {
+        fingerUserService.institutionDelete(userVO, userId);
         return Response.success("删除成功");
     }
 
