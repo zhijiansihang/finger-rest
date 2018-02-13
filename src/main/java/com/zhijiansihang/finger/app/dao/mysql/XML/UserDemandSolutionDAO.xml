@@ -161,4 +161,18 @@
       order by ${orderByClause}
     </if>
   </select>
+
+  <insert id="batchCreate" useGeneratedKeys="false">
+    INSERT INTO demo(
+    "a",
+    "b"
+    )
+    <foreach collection="list" item="record" separator="UNION ALL">
+      SELECT
+      #{record.a} a ,
+      #{record.b} b
+      FROM DUAL
+    </foreach>
+  </insert>
+
 </mapper>

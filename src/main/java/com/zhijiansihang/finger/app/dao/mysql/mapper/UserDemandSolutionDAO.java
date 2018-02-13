@@ -196,4 +196,7 @@ public interface UserDemandSolutionDAO {
             "where demand_user_id = #{userId}"
     })
     int deleteByUserid(Long userId);
+
+
+    public int batchCreate(List<UserDemandSolutionDO> records);
 }
