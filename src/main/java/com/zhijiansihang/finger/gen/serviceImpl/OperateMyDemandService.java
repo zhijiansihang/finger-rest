@@ -46,12 +46,15 @@ public class OperateMyDemandService implements MessageService<OperateMyDemandReq
 		UserDemandDO userDemandDO = new UserDemandDO();
 		userDemandDO.setUserId(userid);
 		userDemandDO.setId(Long.parseLong(id));
-		//操作类型:1:关闭2:删除
+		//操作类型:1:关闭2:删除:0打开
 		if (Integer.parseInt(type) == 1){
 			userDemandDO.setIsClosed((byte) 1);
 			userDemandDAO.updateByPrimaryKeySelective(userDemandDO);
 		}else if(Integer.parseInt(type) == 2){
 			userDemandDO.setIsDeleted((byte)1);
+			userDemandDAO.updateByPrimaryKeySelective(userDemandDO);
+		}else if (Integer.parseInt(type) == 0){
+			userDemandDO.setIsClosed((byte) 0);
 			userDemandDAO.updateByPrimaryKeySelective(userDemandDO);
 		}else {
 			ResponseHeader responseHeader = ResponseHeaderBuilder.build(NOTSUPPORT,NOTSUPPORT.getMessage());

@@ -47,7 +47,7 @@ public class RiskAssessmentModifyListener implements ApplicationListener<RiskAss
             return;
         }
         String redisKey = USER_LOCK_RISK_INIT_PREFIX + demoEvent.getUserId();
-        boolean tryLock = redisLock.tryLock(redisKey,80, TimeUnit.SECONDS);
+        boolean tryLock = redisLock.tryLock(redisKey,100, TimeUnit.SECONDS);
         if (tryLock) {
             try {
                 userDemandDAO.updateAgainRishBatchByUserid(demoEvent.getUserId());

@@ -19,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import static com.zhijiansihang.finger.app.constant.UserConsts.USER_LOCK_RISK_INIT_PREFIX;
+
 /**
  * @author paul
  * @description
@@ -76,10 +78,16 @@ public class Quartz {
                         userDemandDAO.updateLastBatchid(userDemandDO.getId(),user_solution_max);
                         continue;
                     }else {
-                        try {
-                            ApplicationContextHelper.getBean(Quartz.class).userDemandMatchSolutionInsert(userDemandDO,matchUserSolutionDOS,user_solution_max);
-                        }catch (Exception e){
-                            e.printStackTrace();
+                        String redisKey = USER_LOCK_RISK_INIT_PREFIX + userDemandDO.getUserId();
+                        boolean tryLock = redisLock.tryLock(redisKey,50, TimeUnit.SECONDS);
+                        if (tryLock) {
+                            try {
+                                ApplicationContextHelper.getBean(Quartz.class).userDemandMatchSolutionInsert(userDemandDO, matchUserSolutionDOS, user_solution_max);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }else {
+                            logger.info(px+"==========>批次【{}】userDemand id={}获取锁失败，登录下一个批次处理",i,userDemandDO.getId());
                         }
                     }
                 }
