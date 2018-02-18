@@ -44,7 +44,7 @@ endpoints:
 #短信签名:用户收到的短信前加【公司业务名称】
 sms:
   aliyun:
-    message-signature:
+    message-signature: nihao
 
 
 
