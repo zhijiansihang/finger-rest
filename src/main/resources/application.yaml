@@ -30,7 +30,7 @@ mybatis:
   mapper-locations: classpath:com/zhijiansihang/finger/app/dao/orcl/mapper/*.xml,classpath*:com/zhijiansihang/finger/app/dao/mysql/XML/*.xml
 url:
   filter:
-    permission: /user/avatar/upload/** = ANONYMOUS\n/cms/pic/** = ANONYMOUS\n/app/** = ANONYMOUS\n/hello/** = ANONYMOUS\n/permissions/refresh = ANONYMOUS\n/login = ANONYMOUS\n/** = USER
+    permission: /user/avatar/upload/** = ANONYMOUS\n/cms/pic/** = ANONYMOUS\n/app/** = ANONYMOUS\n/kaptcha/** = ANONYMOUS\n/permissions/refresh = ANONYMOUS\n/login = ANONYMOUS\n/** = USER
 logging:
   level:
     root: info
