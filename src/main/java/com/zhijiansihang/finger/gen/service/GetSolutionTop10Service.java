@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 取采纳次数最高的top10方案
+ * Y取采纳次数最高的top10方案
  * 
  */
 @Component("gengetSolutionTop10Service")
 public class GetSolutionTop10Service implements MessageService<GetSolutionTop10Request, Response<GetSolutionTop10Response>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GetSolutionTop10Service.class);
-	private static final String SERVICE_DESC = "取采纳次数最高的top10方案";
+	private static final String SERVICE_DESC = "Y取采纳次数最高的top10方案";
 
 	@Override
 	public void execute(GetSolutionTop10Request request, Response<GetSolutionTop10Response> response) {

@@ -238,12 +238,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[financeDetail] 理财师详情接口请求数据:{}", request);
+		LOG.info("[financeDetail] Y理财师详情接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/financeDetail");
 
-		LOG.info("[financeDetail] 理财师详情接口响应数据:{}:", response);
+		LOG.info("[financeDetail] Y理财师详情接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -387,6 +387,37 @@ public class AppTest {
 
 	
 	@Test
+	public void getLoanDetail() throws Exception {
+
+
+		GetLoanDetailRequest request = new GetLoanDetailRequest();
+	    request.setLoanId("1000");
+		request.setChannelId("");
+		request.setDeviceId("aa-bb-cc");
+		request.setPlatformType("5");
+		request.setVersionCode("101");
+		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
+		request.setSessionId("");
+
+		LOG.info("[getLoanDetail] 获取标详情接口请求数据:{}", request);
+		String content = JSONObject.toJSONString(request);
+
+		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getLoanDetail");
+
+		LOG.info("[getLoanDetail] 获取标详情接口响应数据:{}:", response);
+
+		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
+			if ("test".equals(response.getBody().getMode())) {
+				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
+				return;
+			}
+		} else {
+			Assert.fail();
+		}
+	}
+
+	
+	@Test
 	public void getLoanFinance() throws Exception {
 
 
@@ -399,12 +430,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[getLoanFinance] 获取标的理财师列表接口请求数据:{}", request);
+		LOG.info("[getLoanFinance] Y获取标的理财师列表接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getLoanFinance");
 
-		LOG.info("[getLoanFinance] 获取标的理财师列表接口响应数据:{}:", response);
+		LOG.info("[getLoanFinance] Y获取标的理财师列表接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -429,12 +460,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[getMySolutionTop10] 获取用户匹配方案接口请求数据:{}", request);
+		LOG.info("[getMySolutionTop10] Y获取用户匹配方案接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getMySolutionTop10");
 
-		LOG.info("[getMySolutionTop10] 获取用户匹配方案接口响应数据:{}:", response);
+		LOG.info("[getMySolutionTop10] Y获取用户匹配方案接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -465,6 +496,76 @@ public class AppTest {
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getNameAuthAndRiskResult");
 
 		LOG.info("[getNameAuthAndRiskResult] Y是否实名认证和评测接口响应数据:{}:", response);
+
+		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
+			if ("test".equals(response.getBody().getMode())) {
+				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
+				return;
+			}
+		} else {
+			Assert.fail();
+		}
+	}
+
+	
+	@Test
+	public void getPrivateLoan() throws Exception {
+
+
+		GetPrivateLoanRequest request = new GetPrivateLoanRequest();
+	    request.setCapitalType("1");
+	    request.setCurrentPage("1");
+	    request.setFundType("1");
+	    request.setOrganizeForm("1");
+		request.setChannelId("");
+		request.setDeviceId("aa-bb-cc");
+		request.setPlatformType("5");
+		request.setVersionCode("101");
+		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
+		request.setSessionId("");
+
+		LOG.info("[getPrivateLoan] 获取私募的产品接口请求数据:{}", request);
+		String content = JSONObject.toJSONString(request);
+
+		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getPrivateLoan");
+
+		LOG.info("[getPrivateLoan] 获取私募的产品接口响应数据:{}:", response);
+
+		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
+			if ("test".equals(response.getBody().getMode())) {
+				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
+				return;
+			}
+		} else {
+			Assert.fail();
+		}
+	}
+
+	
+	@Test
+	public void getPublicLoan() throws Exception {
+
+
+		GetPublicLoanRequest request = new GetPublicLoanRequest();
+	    request.setCurrentPage("1");
+	    request.setInvestmentDeadline("1");
+	    request.setProductDirection("1");
+	    request.setProductType("1");
+	    request.setRatioType("1");
+	    request.setServicingWay("1");
+		request.setChannelId("");
+		request.setDeviceId("aa-bb-cc");
+		request.setPlatformType("5");
+		request.setVersionCode("101");
+		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
+		request.setSessionId("");
+
+		LOG.info("[getPublicLoan] 获取公募产品列表接口请求数据:{}", request);
+		String content = JSONObject.toJSONString(request);
+
+		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getPublicLoan");
+
+		LOG.info("[getPublicLoan] 获取公募产品列表接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -522,12 +623,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[getSolutionTop10] 取采纳次数最高的top10方案接口请求数据:{}", request);
+		LOG.info("[getSolutionTop10] Y取采纳次数最高的top10方案接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/getSolutionTop10");
 
-		LOG.info("[getSolutionTop10] 取采纳次数最高的top10方案接口响应数据:{}:", response);
+		LOG.info("[getSolutionTop10] Y取采纳次数最高的top10方案接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -586,12 +687,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[invest] 预约接口请求数据:{}", request);
+		LOG.info("[invest] Y预约接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/invest");
 
-		LOG.info("[invest] 预约接口响应数据:{}:", response);
+		LOG.info("[invest] Y预约接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {
@@ -647,12 +748,12 @@ public class AppTest {
 		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
 		request.setSessionId("");
 
-		LOG.info("[isHasMatchDemandSolution] 是否有匹配需求的方案接口请求数据:{}", request);
+		LOG.info("[isHasMatchDemandSolution] Y是否有匹配需求的方案接口请求数据:{}", request);
 		String content = JSONObject.toJSONString(request);
 
 		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/isHasMatchDemandSolution");
 
-		LOG.info("[isHasMatchDemandSolution] 是否有匹配需求的方案接口响应数据:{}:", response);
+		LOG.info("[isHasMatchDemandSolution] Y是否有匹配需求的方案接口响应数据:{}:", response);
 
 		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
 			if ("test".equals(response.getBody().getMode())) {

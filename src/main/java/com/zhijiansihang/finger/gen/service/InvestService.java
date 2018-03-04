@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 预约
+ * Y预约
  * 
  */
 @Component("geninvestService")
 public class InvestService implements MessageService<InvestRequest, Response<InvestResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(InvestService.class);
-	private static final String SERVICE_DESC = "预约";
+	private static final String SERVICE_DESC = "Y预约";
 
 	@Override
 	public void execute(InvestRequest request, Response<InvestResponse> response) {

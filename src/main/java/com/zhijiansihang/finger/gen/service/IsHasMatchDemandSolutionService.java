@@ -11,14 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * 是否有匹配需求的方案
+ * Y是否有匹配需求的方案
  * 
  */
 @Component("genisHasMatchDemandSolutionService")
 public class IsHasMatchDemandSolutionService implements MessageService<IsHasMatchDemandSolutionRequest, Response<IsHasMatchDemandSolutionResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(IsHasMatchDemandSolutionService.class);
-	private static final String SERVICE_DESC = "是否有匹配需求的方案";
+	private static final String SERVICE_DESC = "Y是否有匹配需求的方案";
 
 	@Override
 	public void execute(IsHasMatchDemandSolutionRequest request, Response<IsHasMatchDemandSolutionResponse> response) {

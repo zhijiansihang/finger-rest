@@ -11,7 +11,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 
 
 /**
- * 取采纳次数最高的top10方案.服务端响应
+ * Y取采纳次数最高的top10方案.服务端响应
  * 
  * @author 代码生成器v1.0
  * 

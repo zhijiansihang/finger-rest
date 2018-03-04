@@ -111,6 +111,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<GetCmsRequest, Response<GetCmsResponse>> genGetCmsService;
 
+	@Qualifier("getLoanDetailService")
+	@Autowired(required = false)
+	MessageService<GetLoanDetailRequest, Response<GetLoanDetailResponse>> getLoanDetailService;
+	@Qualifier("gengetLoanDetailService")
+	@Autowired(required = false)
+	MessageService<GetLoanDetailRequest, Response<GetLoanDetailResponse>> genGetLoanDetailService;
+
 	@Qualifier("getLoanFinanceService")
 	@Autowired(required = false)
 	MessageService<GetLoanFinanceRequest, Response<GetLoanFinanceResponse>> getLoanFinanceService;
@@ -131,6 +138,20 @@ public class MobileController {
 	@Qualifier("gengetNameAuthAndRiskResultService")
 	@Autowired(required = false)
 	MessageService<GetNameAuthAndRiskResultRequest, Response<GetNameAuthAndRiskResultResponse>> genGetNameAuthAndRiskResultService;
+
+	@Qualifier("getPrivateLoanService")
+	@Autowired(required = false)
+	MessageService<GetPrivateLoanRequest, Response<GetPrivateLoanResponse>> getPrivateLoanService;
+	@Qualifier("gengetPrivateLoanService")
+	@Autowired(required = false)
+	MessageService<GetPrivateLoanRequest, Response<GetPrivateLoanResponse>> genGetPrivateLoanService;
+
+	@Qualifier("getPublicLoanService")
+	@Autowired(required = false)
+	MessageService<GetPublicLoanRequest, Response<GetPublicLoanResponse>> getPublicLoanService;
+	@Qualifier("gengetPublicLoanService")
+	@Autowired(required = false)
+	MessageService<GetPublicLoanRequest, Response<GetPublicLoanResponse>> genGetPublicLoanService;
 
 	@Qualifier("getSmsService")
 	@Autowired(required = false)
@@ -552,6 +573,26 @@ public class MobileController {
 		return response;
 	}
 
+	@RequestMapping(value = "/getLoanDetail", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<GetLoanDetailResponse> getLoanDetail(@RequestBody GetLoanDetailRequest request) {
+
+		logRequest("getLoanDetail", request);
+
+  		Response<GetLoanDetailResponse> response = new Response<>();
+
+		request = (GetLoanDetailRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getGetLoanDetailResponse(request);
+		
+		logResponse("getLoanDetail", response);
+
+		return response;
+	}
+
 	@RequestMapping(value = "/getLoanFinance", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<GetLoanFinanceResponse> getLoanFinance(@RequestBody GetLoanFinanceRequest request) {
@@ -608,6 +649,46 @@ public class MobileController {
 		response = getGetNameAuthAndRiskResultResponse(request);
 		
 		logResponse("getNameAuthAndRiskResult", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/getPrivateLoan", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<GetPrivateLoanResponse> getPrivateLoan(@RequestBody GetPrivateLoanRequest request) {
+
+		logRequest("getPrivateLoan", request);
+
+  		Response<GetPrivateLoanResponse> response = new Response<>();
+
+		request = (GetPrivateLoanRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getGetPrivateLoanResponse(request);
+		
+		logResponse("getPrivateLoan", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/getPublicLoan", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<GetPublicLoanResponse> getPublicLoan(@RequestBody GetPublicLoanRequest request) {
+
+		logRequest("getPublicLoan", request);
+
+  		Response<GetPublicLoanResponse> response = new Response<>();
+
+		request = (GetPublicLoanRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getGetPublicLoanResponse(request);
+		
+		logResponse("getPublicLoan", response);
 
 		return response;
 	}
@@ -1333,6 +1414,16 @@ public class MobileController {
 		return mobileService.service(request, service, GetCmsRequest.class, GetCmsResponse.class);
 	}
 
+	private Response<GetLoanDetailResponse> getGetLoanDetailResponse(GetLoanDetailRequest request) {
+
+		MessageService<GetLoanDetailRequest, Response<GetLoanDetailResponse>> service = getLoanDetailService;
+		if (service == null) {
+			service = genGetLoanDetailService;
+		}
+
+		return mobileService.service(request, service, GetLoanDetailRequest.class, GetLoanDetailResponse.class);
+	}
+
 	private Response<GetLoanFinanceResponse> getGetLoanFinanceResponse(GetLoanFinanceRequest request) {
 
 		MessageService<GetLoanFinanceRequest, Response<GetLoanFinanceResponse>> service = getLoanFinanceService;
@@ -1361,6 +1452,26 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, GetNameAuthAndRiskResultRequest.class, GetNameAuthAndRiskResultResponse.class);
+	}
+
+	private Response<GetPrivateLoanResponse> getGetPrivateLoanResponse(GetPrivateLoanRequest request) {
+
+		MessageService<GetPrivateLoanRequest, Response<GetPrivateLoanResponse>> service = getPrivateLoanService;
+		if (service == null) {
+			service = genGetPrivateLoanService;
+		}
+
+		return mobileService.service(request, service, GetPrivateLoanRequest.class, GetPrivateLoanResponse.class);
+	}
+
+	private Response<GetPublicLoanResponse> getGetPublicLoanResponse(GetPublicLoanRequest request) {
+
+		MessageService<GetPublicLoanRequest, Response<GetPublicLoanResponse>> service = getPublicLoanService;
+		if (service == null) {
+			service = genGetPublicLoanService;
+		}
+
+		return mobileService.service(request, service, GetPublicLoanRequest.class, GetPublicLoanResponse.class);
 	}
 
 	private Response<GetSmsResponse> getGetSmsResponse(GetSmsRequest request) {
