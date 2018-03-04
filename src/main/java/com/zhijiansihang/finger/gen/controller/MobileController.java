@@ -307,6 +307,20 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<RegisterJgRequest, Response<RegisterJgResponse>> genRegisterJgService;
 
+	@Qualifier("riskAssessmentResultGetService")
+	@Autowired(required = false)
+	MessageService<RiskAssessmentResultGetRequest, Response<RiskAssessmentResultGetResponse>> riskAssessmentResultGetService;
+	@Qualifier("genriskAssessmentResultGetService")
+	@Autowired(required = false)
+	MessageService<RiskAssessmentResultGetRequest, Response<RiskAssessmentResultGetResponse>> genRiskAssessmentResultGetService;
+
+	@Qualifier("riskAssessmentResultPostService")
+	@Autowired(required = false)
+	MessageService<RiskAssessmentResultPostRequest, Response<RiskAssessmentResultPostResponse>> riskAssessmentResultPostService;
+	@Qualifier("genriskAssessmentResultPostService")
+	@Autowired(required = false)
+	MessageService<RiskAssessmentResultPostRequest, Response<RiskAssessmentResultPostResponse>> genRiskAssessmentResultPostService;
+
 	@Qualifier("selectFinanceService")
 	@Autowired(required = false)
 	MessageService<SelectFinanceRequest, Response<SelectFinanceResponse>> selectFinanceService;
@@ -1133,6 +1147,46 @@ public class MobileController {
 		return response;
 	}
 
+	@RequestMapping(value = "/riskAssessmentResultGet", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<RiskAssessmentResultGetResponse> riskAssessmentResultGet(@RequestBody RiskAssessmentResultGetRequest request) {
+
+		logRequest("riskAssessmentResultGet", request);
+
+  		Response<RiskAssessmentResultGetResponse> response = new Response<>();
+
+		request = (RiskAssessmentResultGetRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getRiskAssessmentResultGetResponse(request);
+		
+		logResponse("riskAssessmentResultGet", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/riskAssessmentResultPost", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<RiskAssessmentResultPostResponse> riskAssessmentResultPost(@RequestBody RiskAssessmentResultPostRequest request) {
+
+		logRequest("riskAssessmentResultPost", request);
+
+  		Response<RiskAssessmentResultPostResponse> response = new Response<>();
+
+		request = (RiskAssessmentResultPostRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getRiskAssessmentResultPostResponse(request);
+		
+		logResponse("riskAssessmentResultPost", response);
+
+		return response;
+	}
+
 	@RequestMapping(value = "/selectFinance", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<SelectFinanceResponse> selectFinance(@RequestBody SelectFinanceRequest request) {
@@ -1692,6 +1746,26 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, RegisterJgRequest.class, RegisterJgResponse.class);
+	}
+
+	private Response<RiskAssessmentResultGetResponse> getRiskAssessmentResultGetResponse(RiskAssessmentResultGetRequest request) {
+
+		MessageService<RiskAssessmentResultGetRequest, Response<RiskAssessmentResultGetResponse>> service = riskAssessmentResultGetService;
+		if (service == null) {
+			service = genRiskAssessmentResultGetService;
+		}
+
+		return mobileService.service(request, service, RiskAssessmentResultGetRequest.class, RiskAssessmentResultGetResponse.class);
+	}
+
+	private Response<RiskAssessmentResultPostResponse> getRiskAssessmentResultPostResponse(RiskAssessmentResultPostRequest request) {
+
+		MessageService<RiskAssessmentResultPostRequest, Response<RiskAssessmentResultPostResponse>> service = riskAssessmentResultPostService;
+		if (service == null) {
+			service = genRiskAssessmentResultPostService;
+		}
+
+		return mobileService.service(request, service, RiskAssessmentResultPostRequest.class, RiskAssessmentResultPostResponse.class);
 	}
 
 	private Response<SelectFinanceResponse> getSelectFinanceResponse(SelectFinanceRequest request) {

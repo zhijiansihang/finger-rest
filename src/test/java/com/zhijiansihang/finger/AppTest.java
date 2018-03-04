@@ -1274,6 +1274,68 @@ public class AppTest {
 
 	
 	@Test
+	public void riskAssessmentResultGet() throws Exception {
+
+
+		RiskAssessmentResultGetRequest request = new RiskAssessmentResultGetRequest();
+		request.setChannelId("");
+		request.setDeviceId("aa-bb-cc");
+		request.setPlatformType("5");
+		request.setVersionCode("101");
+		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
+		request.setSessionId("");
+
+		LOG.info("[riskAssessmentResultGet] 获取分险评测结果和答案接口请求数据:{}", request);
+		String content = JSONObject.toJSONString(request);
+
+		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/riskAssessmentResultGet");
+
+		LOG.info("[riskAssessmentResultGet] 获取分险评测结果和答案接口响应数据:{}:", response);
+
+		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
+			if ("test".equals(response.getBody().getMode())) {
+				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
+				return;
+			}
+		} else {
+			Assert.fail();
+		}
+	}
+
+	
+	@Test
+	public void riskAssessmentResultPost() throws Exception {
+
+
+		RiskAssessmentResultPostRequest request = new RiskAssessmentResultPostRequest();
+	    request.setAnswers("{}");
+	    request.setResult("1");
+		request.setChannelId("");
+		request.setDeviceId("aa-bb-cc");
+		request.setPlatformType("5");
+		request.setVersionCode("101");
+		request.setMsgtimestamp(new Timestamp(System.currentTimeMillis()).toString());
+		request.setSessionId("");
+
+		LOG.info("[riskAssessmentResultPost] 分险评测结果接口请求数据:{}", request);
+		String content = JSONObject.toJSONString(request);
+
+		Response<MobileMessage> response = post(MobileMessage.class, content, "/app/riskAssessmentResultPost");
+
+		LOG.info("[riskAssessmentResultPost] 分险评测结果接口响应数据:{}:", response);
+
+		if (response.getHeader().getCode().equals(RetCode.SUCCESS.getCode())){
+			if ("test".equals(response.getBody().getMode())) {
+				LOG.error("[appVersionUpdate] 检查版本更新接口未实现", "检查版本更新");
+				return;
+			}
+		} else {
+			Assert.fail();
+		}
+	}
+
+	
+	@Test
 	public void selectFinance() throws Exception {
 
 
