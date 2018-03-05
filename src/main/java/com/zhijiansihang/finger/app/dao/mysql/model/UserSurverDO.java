@@ -14,30 +14,19 @@ public class UserSurverDO implements Serializable {
      */
     private Long userId;
 
-    /**
-     * 考试id
-     */
-    private Long examId;
 
     /**
      * 答案记录
      */
     private String answers;
 
-    /**
-     * 考试结果
-     */
-    private String examResult;
+
 
     /**
      * 风险测评等级
      */
     private Short riskAssessmentLevel;
 
-    /**
-     * 得分
-     */
-    private Short score;
 
     /**
      * 创建时间
@@ -81,21 +70,6 @@ public class UserSurverDO implements Serializable {
         this.userId = userId;
     }
 
-    /**
-     * 考试id
-     * @return exam_id 考试id
-     */
-    public Long getExamId() {
-        return examId;
-    }
-
-    /**
-     * 考试id
-     * @param examId 考试id
-     */
-    public void setExamId(Long examId) {
-        this.examId = examId;
-    }
 
     /**
      * 答案记录
@@ -113,21 +87,6 @@ public class UserSurverDO implements Serializable {
         this.answers = answers == null ? null : answers.trim();
     }
 
-    /**
-     * 考试结果
-     * @return exam_result 考试结果
-     */
-    public String getExamResult() {
-        return examResult;
-    }
-
-    /**
-     * 考试结果
-     * @param examResult 考试结果
-     */
-    public void setExamResult(String examResult) {
-        this.examResult = examResult == null ? null : examResult.trim();
-    }
 
     /**
      * 风险测评等级
@@ -145,21 +104,6 @@ public class UserSurverDO implements Serializable {
         this.riskAssessmentLevel = riskAssessmentLevel;
     }
 
-    /**
-     * 得分
-     * @return score 得分
-     */
-    public Short getScore() {
-        return score;
-    }
-
-    /**
-     * 得分
-     * @param score 得分
-     */
-    public void setScore(Short score) {
-        this.score = score;
-    }
 
     /**
      * 创建时间
@@ -185,11 +129,8 @@ public class UserSurverDO implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", userId=").append(userId);
-        sb.append(", examId=").append(examId);
         sb.append(", answers=").append(answers);
-        sb.append(", examResult=").append(examResult);
         sb.append(", riskAssessmentLevel=").append(riskAssessmentLevel);
-        sb.append(", score=").append(score);
         sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
