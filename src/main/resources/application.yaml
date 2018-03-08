@@ -50,6 +50,9 @@ sms:
     message-signature:
 multipart:
   location: /pic/tmp
+#数据宝接口请求key
+sjb:
+  key:
 
 
 
