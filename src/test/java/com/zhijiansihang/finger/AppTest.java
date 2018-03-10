@@ -8,6 +8,7 @@ import com.google.common.collect.Lists;
 
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.common.RetCode;
+import com.zhijiansihang.finger.app.manager.RealNameAuthManager;
 import com.zhijiansihang.finger.gen.entity.*;
 import com.zhijiansihang.finger.mmc.MobileMessage;
 import com.zhijiansihang.gateway.util.JwtTokenUtil;
@@ -57,6 +58,9 @@ public class AppTest {
 	@Autowired
 	protected WebApplicationContext wac;
 
+	@Autowired
+	RealNameAuthManager realNameAuthManager;
+
 	@Before
 	public void setup() {
 		this.mockMvc = MockMvcBuilders.webAppContextSetup(this.wac).build();
@@ -64,8 +68,11 @@ public class AppTest {
 	
 	@Test
 	public void addSolution() throws Exception {
+		realNameAuthManager.isReal("张金凤","142429199304282835");
 
-
+		if (1==1){
+			return;
+		}
 		AddSolutionRequest request = new AddSolutionRequest();
 	    request.setId("1");
 	    request.setType("1");

@@ -24,4 +24,14 @@ public class RealNameAuthProperties {
     public void setKey(String key) {
         this.key = key;
     }
+
+    public void setOpen(boolean open) {
+        this.open = open;
+    }
+
+    private boolean open = false;
+
+    public boolean isOpen() {
+        return open;
+    }
 }

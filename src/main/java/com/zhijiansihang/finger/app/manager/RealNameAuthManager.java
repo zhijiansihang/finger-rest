@@ -42,6 +42,15 @@ public class RealNameAuthManager {
     RealNameAuthProperties realNameAuthProperties;
 
     public  boolean isReal(String realName,String idCard) throws Exception{
+        boolean open = realNameAuthProperties.isOpen();
+        if (!open){
+            LOG.warn("实名认证接口未开启:请配置sjb.open=true");
+            return true;
+        }
+        if (realNameAuthProperties.getKey()==null || realNameAuthProperties.getKey().length()==0){
+            LOG.warn("实名认证接口未开启:请配置sjb.key=接入key");
+            throw new RuntimeException("实名认证接口系统配置有误!");
+        }
         if (StringUtils.isEmpty(realName) || StringUtils.isEmpty(idCard)){
             throw new RuntimeException("请求参数不合法!");
         }
@@ -54,12 +63,9 @@ public class RealNameAuthManager {
         try {
             //http://api.chinadatapay.com/communication/personal/1882?key=您申请的key值&name=姓名&idcard=身份证号
             CloseableHttpClient httpclient = HttpClients.createDefault();
-            HttpPost httpPost = new HttpPost("http://api.chinadatapay.com/communication/personal/1882");
-            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-            nvps.add(new BasicNameValuePair("key", realNameAuthProperties.getKey()));
-            nvps.add(new BasicNameValuePair("name", realName));
-            nvps.add(new BasicNameValuePair("idcard", idCard));
-            httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+
+            String param = "key="+realNameAuthProperties.getKey()+"&name="+realName+"&idCard="+idCard;
+            HttpPost httpPost = new HttpPost("http://api.chinadatapay.com/communication/personal/1882"+"?"+param);
             String uuid = UUID.randomUUID().toString();
             userRealnameAuthRecordDAO.insert(uuid,realName,idCard);
             CloseableHttpResponse response2 = httpclient.execute(httpPost);
