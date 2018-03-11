@@ -5,15 +5,9 @@ import com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample;
 import java.util.List;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDO;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LoanDAO {
     @Delete({
@@ -140,4 +134,32 @@ public interface LoanDAO {
     int invest(LoanInvestorFinanceDO loanInvestorFinanceDO);
 
     int countByExample(LoanDOExample example);
+
+    int countByLoan(LoanDO select);
+
+
+    List<LoanDO> selectByLoan(LoanDO select, RowBounds rowBounds);
+
+
+    @Select({
+            "select count(*) ",
+            "from loan l ,loan_finance lf",
+            "where l.loan_id = lf.loan_finance and lf.finance_user_id = #{id} and l.is_display =1 and l.loan_status in (200,300)"
+    })
+    int countByFinanceLoan(Long id);
+
+
+    @Select({
+            "select l.*",
+            "from loan l ,loan_finance lf",
+            "where l.loan_id = lf.loan_finance and  lf.finance_user_id = #{id} and l.is_display =1 and l.loan_status in (200,300)",
+            "order by l.location_size desc,l.loan_status asc"
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.LoanDAO.BaseResultMap")
+    List<LoanDO> selectByFinanceLoan(@Param("id") Long id, RowBounds rowBounds);
+
+
+    int countByCollectionLoan(LoanDO select);
+
+    List<LoanDO> selectByCollectionLoan(LoanDO select, RowBounds rowBounds);
 }

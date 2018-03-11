@@ -345,7 +345,7 @@ public class LoanDO implements Serializable {
     }
 
     /**
-     * 机构操作：100 初始化审核中 200募集中 300 结束 400 已删除
+     * 机构操作：100 初始化审核中 150 待发布 200募集中 300 结束 400 已删除
      * @return loan_status 机构操作：100 初始化审核中 200募集中 300 结束 400 已删除
      */
     public Short getLoanStatus() {

@@ -463,4 +463,153 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+
+  <sql id="select_keys">
+    <if test="institutionUserId != null">
+      and institution_user_id = #{institutionUserId,jdbcType=BIGINT}
+    </if>
+    <if test="title != null">
+      and title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="loanType != null">
+      and loan_type = #{loanType,jdbcType=TINYINT}
+    </if>
+    <if test="productType != null">
+      and product_type = #{productType,jdbcType=SMALLINT}
+    </if>
+    <if test="amount != null">
+      and  amount = #{amount,jdbcType=DECIMAL}
+    </if>
+    <if test="interestRate != null">
+      and  interest_rate = #{interestRate,jdbcType=DECIMAL}
+    </if>
+    <if test="isRateFloating != null">
+      and  is_rate_floating = #{isRateFloating,jdbcType=TINYINT}
+    </if>
+    <if test="reserveAmount != null">
+      and  reserve_amount = #{reserveAmount,jdbcType=DECIMAL}
+    </if>
+    <if test="loanStatus != null">
+      and  loan_status = #{loanStatus,jdbcType=SMALLINT}
+    </if>
+    <if test="isDisplay != null">
+      and  is_display = #{isDisplay,jdbcType=TINYINT}
+    </if>
+    <if test="locationSize != null">
+      and  location_size = #{locationSize,jdbcType=INTEGER}
+    </if>
+    <if test="productDirection != null">
+      and product_direction = #{productDirection,jdbcType=VARCHAR}
+    </if>
+    <if test="safeguardWay != null">
+      and safeguard_way = #{safeguardWay,jdbcType=VARCHAR}
+    </if>
+    <if test="beginAmount != null">
+      and  begin_amount = #{beginAmount,jdbcType=DECIMAL}
+    </if>
+    <if test="earningDesc != null">
+      and earning_desc = #{earningDesc,jdbcType=VARCHAR}
+    </if>
+    <if test="issuer != null">
+      and  issuer = #{issuer,jdbcType=VARCHAR}
+    </if>
+    <if test="fundType != null">
+      and  fund_type = #{fundType,jdbcType=SMALLINT},
+    </if>
+    <if test="servicingWay != null">
+      and  servicing_way = #{servicingWay,jdbcType=SMALLINT}
+    </if>
+    <if test="adaptationDeadline != null">
+      and  adaptation_deadline = #{adaptationDeadline,jdbcType=SMALLINT}
+    </if>
+    <if test="investmentDeadline != null">
+      and  investment_deadline = #{investmentDeadline,jdbcType=SMALLINT}
+    </if>
+    <if test="distributionRegion != null">
+      and  distribution_region = #{distributionRegion,jdbcType=VARCHAR}
+    </if>
+    <if test="ratioType != null">
+      and  ratio_type = #{ratioType,jdbcType=SMALLINT}
+    </if>
+    <if test="brightSpot != null">
+      and  bright_spot = #{brightSpot,jdbcType=VARCHAR}
+    </if>
+    <if test="financeIntroduce != null">
+      and  finance_introduce = #{financeIntroduce,jdbcType=VARCHAR}
+    </if>
+    <if test="moneyUse != null">
+      and  money_use = #{moneyUse,jdbcType=VARCHAR}
+    </if>
+    <if test="repaySource != null">
+      and repay_source = #{repaySource,jdbcType=VARCHAR}
+    </if>
+    <if test="riskControl != null">
+      and  risk_control = #{riskControl,jdbcType=VARCHAR}
+    </if>
+    <if test="productDesc != null">
+      and  product_desc = #{productDesc,jdbcType=VARCHAR}
+    </if>
+    <if test="productDescFiles != null">
+      and  product_desc_files = #{productDescFiles,jdbcType=VARCHAR}
+    </if>
+    <if test="riskAlert != null">
+      and  risk_alert = #{riskAlert,jdbcType=VARCHAR}
+    </if>
+    <if test="capitalType != null">
+      and  capital_type = #{capitalType,jdbcType=VARCHAR}
+    </if>
+    <if test="organizeForm != null">
+      and organize_form = #{organizeForm,jdbcType=VARCHAR}
+    </if>
+    <if test="manageRate != null">
+      and  manage_rate = #{manageRate,jdbcType=DECIMAL}
+    </if>
+    <if test="reviewCode != null">
+      and  review_code = #{reviewCode,jdbcType=VARCHAR}
+    </if>
+    <if test="reviewDesc != null">
+      and  review_desc = #{reviewDesc,jdbcType=VARCHAR}
+    </if>
+    <if test="updateTime != null">
+      and  update_time = #{updateTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="createTime != null">
+      and  create_time = #{createTime,jdbcType=TIMESTAMP}
+    </if>
+  </sql>
+
+  <select id="countByLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultType="java.lang.Integer">
+    select count(*) from loan where 1=1
+    <include refid="select_keys" />
+  </select>
+
+
+  <select id="selectByLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultMap="BaseResultMap">
+    select * from loan where 1=1 and is_display =1 and loan_status in (200,300)
+    <include refid="select_keys" />
+    order by location_size desc,loan_status asc
+  </select>
+
+  <select id="countByCollectionLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultType="java.lang.Integer">
+    select count(*) from loan l ,user_collection u where l.loan_id = u.content_id and u.content_type =2 and u.user_id =#{institutionUserId}
+    <if test="loan_type != null">
+      and  l.review_desc = #{loanType}
+    </if>
+    <if test="productType != null">
+      and  l.product_type = #{productType}
+    </if>
+  </select>
+
+  <select id="selectByCollectionLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultMap="BaseResultMap">
+    select count(*) from loan l ,user_collection u where l.loan_id = u.content_id and u.content_type =2 and u.user_id =#{institutionUserId}
+    <if test="loan_type != null">
+      and  l.review_desc = #{loanType}
+    </if>
+    <if test="productType != null">
+      and  l.product_type = #{productType}
+    </if>
+    order by l.location_size desc,l.loan_status asc
+  </select>
+
 </mapper>
