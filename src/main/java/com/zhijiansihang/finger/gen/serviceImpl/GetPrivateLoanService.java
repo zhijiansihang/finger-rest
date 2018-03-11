@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,24 +96,32 @@ public class GetPrivateLoanService implements MessageService<GetPrivateLoanReque
 
 	private List<LoanListElement> getLoanList(List<LoanDO> loanDOS) {
 		List<LoanListElement> elems = new ArrayList<LoanListElement>();
-		LoanListElement elem = new LoanListElement();
-		elems.add(elem);
+		if (loanDOS == null || loanDOS.size() == 0){
+			return elems;
+		}
+		for (LoanDO loanDO : loanDOS){
+			LoanListElement elem = new LoanListElement();
+			elems.add(elem);
 
-		elem.setAdaptationDeadline("10");
-		elem.setBeginAmount("1");
-		elem.setBrightSpot("0");
-		elem.setFundType("1");
-		elem.setInterestRate("10");
-		elem.setInvestmentDeadline("10");
-		elem.setIsRateFloating("0");
-		elem.setLoanId("1");
-		elem.setLoanStatus("10");
-		elem.setLoanType("1");
-		elem.setProductType("10");
-		elem.setProgress("40");
-		elem.setSafeguardWay("1");
-		elem.setTitle("1");
+			elem.setAdaptationDeadline(loanDO.getAdaptationDeadline() == null?"":loanDO.getAdaptationDeadline().toString());
+			elem.setBeginAmount(loanDO.getBeginAmount()==null?"":loanDO.getBeginAmount().toString());
+			elem.setBrightSpot(loanDO.getBrightSpot());
+			elem.setInterestRate(loanDO.getInterestRate()==null?"":loanDO.getInterestRate().toString());
+			elem.setInvestmentDeadline(loanDO.getInvestmentDeadline()==null?"":loanDO.getInvestmentDeadline().toString());
+			elem.setIsRateFloating(loanDO.getIsRateFloating().toString());
+			elem.setLoanId(loanDO.getLoanId().toString());
+			elem.setLoanStatus(loanDO.getLoanStatus().toString());
+			elem.setLoanType(loanDO.getLoanType().toString());
+			elem.setProductType(loanDO.getProductType() == null? "":loanDO.getProductType().toString());
+			BigDecimal amount = loanDO.getAmount();
+			BigDecimal reserveAmount = loanDO.getReserveAmount();
+			elem.setProgress(reserveAmount.divide(amount,2, RoundingMode.HALF_UP).toEngineeringString());
+			elem.setSafeguardWay(loanDO.getSafeguardWay());
+			elem.setTitle(loanDO.getTitle());
+		}
+
 
 		return elems;
 	}
+
 }
