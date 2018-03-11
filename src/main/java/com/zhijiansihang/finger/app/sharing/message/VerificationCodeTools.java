@@ -72,6 +72,8 @@ public class VerificationCodeTools {
         String createText = generateCode();
         boolean openThirdpartyService = sharingProperties.isOpenThirdpartyService();
         if (!openThirdpartyService){
+            redisTemplate.opsForValue().set(SMS_TOKEN + mobile, createText);
+            redisTemplate.expire(SMS_TOKEN + mobile, 5, TimeUnit.MINUTES);
             logger.info("手机号[{}]短信验证码发送code={},挡板不发送",mobile,createText);
             return true;
         }

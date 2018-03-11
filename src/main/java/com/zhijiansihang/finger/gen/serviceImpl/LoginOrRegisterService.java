@@ -62,7 +62,8 @@ public class LoginOrRegisterService implements MessageService<LoginOrRegisterReq
 		UserDO userDO = userDetailService.getUserByMobile(mobile);
 		if (userDO==null){
 			//不存在就注册
-			userDO = userDetailService.register(mobile);
+
+			userDO = userDetailService.register(mobile,Short.parseShort(request.getPlatformType()));
 		}
 		Byte isFrozen = userDO.getIsFrozen();
 		if (isFrozen.intValue() == 1){

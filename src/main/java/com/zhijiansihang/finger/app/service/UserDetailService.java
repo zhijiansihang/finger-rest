@@ -43,17 +43,18 @@ public class UserDetailService {
         criteria.andMobileEqualTo(mobile);
         List<UserDO> userDOS = userDAO.selectByExample(example);
 
-        if (userDOS != null || userDOS.size() > 0) {
+        if (userDOS != null && userDOS.size() > 0) {
             return userDOS.get(0);
         }
         return null;
     }
     @Transactional
-    public UserDO register(String mobile){
+    public UserDO register(String mobile,Short source){
         UserDO userDO = new UserDO();
         userDO.setMobile(mobile);
         userDO.setRoles((short)2);
         userDO.setPasswd("nopasswd");
+        userDO.setSource(source);
         int userId = userDAO.insertSelective(userDO);
 
         UserFinanceDetailDO userFinanceDetailDO = new UserFinanceDetailDO();
