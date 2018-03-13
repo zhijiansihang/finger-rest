@@ -53,9 +53,19 @@ public class AuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         ParameterRequestWrapper requestWrapper = new ParameterRequestWrapper(request);
 
-        String xToken = request.getParameter(this.tokenName);
+        String xToken = request.getHeader("sessionId");
+        if (xToken == null || xToken.length() == 0){
+            xToken = request.getParameter(this.tokenName);
+            if (xToken == null || xToken.length() == 0){
+                logger.info("未知请求JWT Token : " + xToken);
+            }else {
+                logger.info("后端JWT Token : " + xToken);
+            }
+        }else {
+            logger.info("前端JWT Token : " + xToken);
+        }
 
-        logger.info("JWT Token : " + xToken);
+
 
         UserSession session = jwtTokenUtil.parser(xToken);
 

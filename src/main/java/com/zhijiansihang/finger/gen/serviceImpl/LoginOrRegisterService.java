@@ -79,6 +79,7 @@ public class LoginOrRegisterService implements MessageService<LoginOrRegisterReq
 		session.setMobile(userDO.getMobile());
 		session.setId(userDO.getUserId());
 		session.setDisabled(false);
+		session.setLoginName(userDO.getMobile());
 		Short roles = userDO.getRoles();
 		String userRoles = UserConsts.getUserRoles(roles.intValue());
 		session.setRoleNames(Collections.singleton(userRoles));

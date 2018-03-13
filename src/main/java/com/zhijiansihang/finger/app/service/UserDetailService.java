@@ -52,7 +52,7 @@ public class UserDetailService {
     public UserDO register(String mobile,Short source){
         UserDO userDO = new UserDO();
         userDO.setMobile(mobile);
-        userDO.setRoles((short)2);
+        userDO.setRoles((short)3);
         userDO.setPasswd("nopasswd");
         userDO.setSource(source);
         userDAO.insertSelective(userDO);
