@@ -55,14 +55,14 @@ public class UserDetailService {
         userDO.setRoles((short)2);
         userDO.setPasswd("nopasswd");
         userDO.setSource(source);
-        int userId = userDAO.insertSelective(userDO);
+        userDAO.insertSelective(userDO);
 
         UserFinanceDetailDO userFinanceDetailDO = new UserFinanceDetailDO();
-        userFinanceDetailDO.setUserId((long)userId);
+        userFinanceDetailDO.setUserId(userDO.getUserId());
         userFinanceDetailDAO.insertSelective(userFinanceDetailDO);
 
         UserFriendCountDO userFriendCountDO = new UserFriendCountDO();
-        userFriendCountDO.setUserId((long)userId);
+        userFriendCountDO.setUserId(userDO.getUserId());
         userFriendCountDO.setFriendCounts(0L);
         userFriendCountDAO.insertSelective(userFriendCountDO);
         UserDO userByMobile = getUserByMobile(mobile);
