@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import static com.zhijiansihang.common.RetCode.NEEDUPDATE;
+
 /**
  * 更新我的昵称
  * 
@@ -40,9 +42,21 @@ public class UpdateMyNikeNameService implements MessageService<UpdateMyNikeNameR
 			response.setHeader(responseHeader);
 			return;
 		}
+		if (userid == null){
+			ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("数据错误");
+			response.setHeader(responseHeader);
+			return;
+		}
 		UserDO userDO = new UserDO();
 		userDO.setUserId(userid);
 		userDO.setNickName(nikeName);
-		userDAO.updateByPrimaryKeySelective(userDO);
+		try {
+			userDAO.updateByPrimaryKeySelective(userDO);
+		}catch (Exception e){
+			ResponseHeader responseHeader = ResponseHeaderBuilder.build(NEEDUPDATE,"昵称已存在");
+			response.setHeader(responseHeader);
+			return;
+		}
+
 	}
 }
