@@ -2,12 +2,13 @@ package com.zhijiansihang.finger.app.vo;
 import com.google.common.collect.Lists;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  */
-public class UserVO extends UserDO{
+public class UserVO extends UserDO  implements Serializable {
 
     private static final long serialVersionUID = -5228484640414835579L;
 

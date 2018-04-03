@@ -155,4 +155,15 @@ public class FingerUserController {
     }
 
 
+    /**
+     *  机构 所有机构
+     * @return
+     */
+    @RequestMapping(value = "/institution/list")
+    @ResponseBody
+    public Response institutionList() {
+        return fingerUserService.getInstitutionList();
+    }
+
+
 }

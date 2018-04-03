@@ -131,7 +131,7 @@ public class LoanService {
 
         return Response.success("添加成功");
     }
-
+    @Transactional
     public Response privateAdd(Long userId, LoanVO loanVO) {
         loanVO.setCreateTime(new Date());
         loanVO.setManageRate(new BigDecimal("0.1"));

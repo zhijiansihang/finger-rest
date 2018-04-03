@@ -4,6 +4,7 @@ package com.zhijiansihang.finger.app.service;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.zhijiansihang.common.Response;
+import com.zhijiansihang.finger.app.constant.UserConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
@@ -11,7 +12,6 @@ import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.UserVO;
 import com.zhijiansihang.sys.entity.Role;
-import com.zhijiansihang.sys.entity.UserAuth;
 import com.zhijiansihang.sys.exception.EditDomainException;
 import com.zhijiansihang.sys.exception.ValidationException;
 import com.zhijiansihang.sys.service.UserAuthService;
@@ -186,6 +186,7 @@ public class FingerUserService {
      * @return
      */
     public Response addFb(UserVO userVO) {
+        userVO.setRoles(UserConsts.UserRolesEnum.FINANCE.getRole().shortValue());
         if (userDAO.updateByPrimaryKeySelective(userVO) > 0)
             return Response.success("添加成功");
         return Response.error("添加理财师失败");
@@ -333,6 +334,13 @@ public class FingerUserService {
         } else {
             return Response.success(null);
         }
+        return Response.success(userDAO.selectByExample(example));
+    }
+
+    public Response getInstitutionList() {
+        UserDOExample example = new UserDOExample();
+        UserDOExample.Criteria criteria = example.createCriteria();
+        criteria.andRolesEqualTo((short)2);
         return Response.success(userDAO.selectByExample(example));
     }
 }
