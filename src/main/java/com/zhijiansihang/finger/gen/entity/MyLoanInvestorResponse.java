@@ -28,6 +28,7 @@ public class MyLoanInvestorResponse extends MobileMessage {
 	public static class LoanInvestorListElement {
 
 		private String amount;
+		private String createtime;
 		private String id;
 		private String title;
 
@@ -40,6 +41,17 @@ public class MyLoanInvestorResponse extends MobileMessage {
 
 		public void setAmount(String amount) {
 			this.amount = amount;
+		}
+
+		/**
+		 * @return 订单创建时间
+		 */
+		public String getCreatetime() {
+			return createtime;
+		}
+
+		public void setCreatetime(String createtime) {
+			this.createtime = createtime;
 		}
 
 		/**
