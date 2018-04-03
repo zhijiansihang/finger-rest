@@ -96,7 +96,7 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 		/**
 		 * 1:公墓，2私募
 		 */
-		select.setLoanType((byte)2);
+		select.setLoanType((byte)1);
 		page.setSelect(select);
 
 		int count = loanDAO.countByLoan(select);
