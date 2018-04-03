@@ -1,6 +1,7 @@
 package com.zhijiansihang.finger.app.vo;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.function.BiConsumer;
 
 /**
@@ -44,4 +45,14 @@ public class LoanInvestorFinanceVO {
     private Long id;
     private String realName;
     private String title;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    private Date createTime;
 }

@@ -1,5 +1,6 @@
 package com.zhijiansihang.finger.gen.serviceImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +79,7 @@ public class MyLoanInvestorService implements MessageService<MyLoanInvestorReque
 		if (cmsDOS == null){
 			return elems;
 		}
+		SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		for (LoanInvestorFinanceVO loanInvestorFinanceVO : cmsDOS){
 			LoanInvestorListElement elem = new LoanInvestorListElement();
 			elems.add(elem);
@@ -85,6 +87,7 @@ public class MyLoanInvestorService implements MessageService<MyLoanInvestorReque
 			elem.setAmount(loanInvestorFinanceVO.getAmount().toEngineeringString());
 			elem.setId(loanInvestorFinanceVO.getId().toString());
 			elem.setTitle(loanInvestorFinanceVO.getTitle());
+			elem.setCreatetime(format0.format(loanInvestorFinanceVO.getCreateTime()));
 		}
 
 
