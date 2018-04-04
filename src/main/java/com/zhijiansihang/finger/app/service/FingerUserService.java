@@ -67,7 +67,7 @@ public class FingerUserService {
             criteria.andMobileEqualTo(userVO.getMobile());
         }
 
-        if(userVO.getRolesList().size() > 0){
+        if(userVO.getRolesList().size() > 0 && userVO.getRolesList().get(0) != null){
             criteria.andRolesIn(userVO.getRolesList());
         } else {
             // 默认显示 投资人 个人理财师 机构理财师
