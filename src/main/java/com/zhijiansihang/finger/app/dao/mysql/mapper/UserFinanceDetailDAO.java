@@ -105,7 +105,7 @@ public interface UserFinanceDetailDAO {
 
     @Update({
             "update user_finance_detail",
-            "set addUserOrderCount = addUserOrderCount + 1",
+            "set user_order_count = user_order_count + 1",
             "where user_id = #{userId}"
     })
     int addUserOrderCount(Long userId);

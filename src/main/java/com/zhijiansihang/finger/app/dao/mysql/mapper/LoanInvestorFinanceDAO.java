@@ -129,7 +129,7 @@ public interface LoanInvestorFinanceDAO {
     int countDealByUserid(Long userId);
 
     @Select({
-            "select lif.id,l.title,lif.amount,user.real_name,lif.create_time",
+            "select lif.id,l.title,lif.amount,u.real_name,lif.create_time",
             "from loan_investor_finance lif ,loan l,user u",
             "where lif.loan_id = l.loan_id and lif.user_id = u.user_id and lif.user_id = #{userId,jdbcType=BIGINT} and lif.is_deal = 0",
             "order by lif.create_time desc"
@@ -144,7 +144,7 @@ public interface LoanInvestorFinanceDAO {
     List<LoanInvestorFinanceVO> selectNotDealByUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
 
     @Select({
-            "select lif.id,l.title,lif.amount,user.real_name,lif.create_time",
+            "select lif.id,l.title,lif.amount,u.real_name,lif.create_time",
             "from loan_investor_finance lif ,loan l,user u",
             "where lif.loan_id = l.loan_id and lif.user_id = u.user_id and lif.user_id = #{userId,jdbcType=BIGINT} and lif.is_deal = 1",
             "order by lif.create_time desc"
