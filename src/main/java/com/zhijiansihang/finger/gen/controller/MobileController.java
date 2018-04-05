@@ -181,6 +181,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<InvestRequest, Response<InvestResponse>> genInvestService;
 
+	@Qualifier("isCollectedService")
+	@Autowired(required = false)
+	MessageService<IsCollectedRequest, Response<IsCollectedResponse>> isCollectedService;
+	@Qualifier("genisCollectedService")
+	@Autowired(required = false)
+	MessageService<IsCollectedRequest, Response<IsCollectedResponse>> genIsCollectedService;
+
 	@Qualifier("isFriendService")
 	@Autowired(required = false)
 	MessageService<IsFriendRequest, Response<IsFriendResponse>> isFriendService;
@@ -783,6 +790,26 @@ public class MobileController {
 		response = getInvestResponse(request);
 		
 		logResponse("invest", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/isCollected", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<IsCollectedResponse> isCollected(@RequestBody IsCollectedRequest request) {
+
+		logRequest("isCollected", request);
+
+  		Response<IsCollectedResponse> response = new Response<>();
+
+		request = (IsCollectedRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getIsCollectedResponse(request);
+		
+		logResponse("isCollected", response);
 
 		return response;
 	}
@@ -1566,6 +1593,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, InvestRequest.class, InvestResponse.class);
+	}
+
+	private Response<IsCollectedResponse> getIsCollectedResponse(IsCollectedRequest request) {
+
+		MessageService<IsCollectedRequest, Response<IsCollectedResponse>> service = isCollectedService;
+		if (service == null) {
+			service = genIsCollectedService;
+		}
+
+		return mobileService.service(request, service, IsCollectedRequest.class, IsCollectedResponse.class);
 	}
 
 	private Response<IsFriendResponse> getIsFriendResponse(IsFriendRequest request) {
