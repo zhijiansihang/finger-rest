@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 import static com.zhijiansihang.common.RetCode.NEEDUPDATE;
 
 /**
@@ -67,6 +69,10 @@ public class CreateMySolutionService implements MessageService<CreateMySolutionR
                 if (count > 0) {
                     ResponseHeader responseHeader = ResponseHeaderBuilder.build(NEEDUPDATE, NEEDUPDATE.getMessage());
                     response.setHeader(responseHeader);
+                    List<UserSolutionDO> sameTypeList = userSolutionDAO.getSameTypeList(userSolutionDO);
+                    if (sameTypeList !=null && sameTypeList.size() > 0){
+                        response.getBody().setSolutionId(sameTypeList.get(0).getId().toString());
+                    }
                     return;
                 }
                 int max = userSolutionDAO.getMaxSerialNumber(userId);
