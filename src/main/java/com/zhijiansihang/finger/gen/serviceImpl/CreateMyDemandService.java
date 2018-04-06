@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 import static com.zhijiansihang.common.RetCode.NEEDUPDATE;
 
 /**
@@ -62,6 +64,11 @@ public class CreateMyDemandService implements MessageService<CreateMyDemandReque
                 if (count>0){
                     ResponseHeader responseHeader = ResponseHeaderBuilder.build(NEEDUPDATE,NEEDUPDATE.getMessage());
                     response.setHeader(responseHeader);
+
+                    List<UserDemandDO> sameTypeList = userDemandDAO.getSameTypeList(userDemandDO);
+                    if (sameTypeList !=null && sameTypeList.size() > 0){
+                        response.getBody().setDemandId(sameTypeList.get(0).getId().toString());
+                    }
                     return;
                 }
                 int max = userDemandDAO.getMaxSerialNumber(userId);
