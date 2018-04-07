@@ -593,8 +593,8 @@
 
   <select id="countByCollectionLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultType="java.lang.Integer">
     select count(*) from loan l ,user_collection u where l.loan_id = u.content_id and u.content_type =2 and u.user_id =#{institutionUserId}
-    <if test="loan_type != null">
-      and  l.review_desc = #{loanType}
+    <if test="loanType != null">
+      and  l.loan_type = #{loanType}
     </if>
     <if test="productType != null">
       and  l.product_type = #{productType}
@@ -602,9 +602,9 @@
   </select>
 
   <select id="selectByCollectionLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultMap="BaseResultMap">
-    select count(*) from loan l ,user_collection u where l.loan_id = u.content_id and u.content_type =2 and u.user_id =#{institutionUserId}
-    <if test="loan_type != null">
-      and  l.review_desc = #{loanType}
+    select l.* from loan l ,user_collection u where l.loan_id = u.content_id and u.content_type =2 and u.user_id =#{institutionUserId}
+    <if test="loanType != null">
+      and  l.loan_type = #{loanType}
     </if>
     <if test="productType != null">
       and  l.product_type = #{productType}
