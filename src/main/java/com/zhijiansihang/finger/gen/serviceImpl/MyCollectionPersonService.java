@@ -72,6 +72,7 @@ public class MyCollectionPersonService implements MessageService<MyCollectionPer
         for (UserFinanceDetailVO userFinanceDetailVO : cmsDOS) {
             FinanceListElement elem = new FinanceListElement();
             elems.add(elem);
+            elem.setPosition(userFinanceDetailVO.getPosition() == null?"":userFinanceDetailVO.getPosition());
             elem.setAdoptCount(userFinanceDetailVO.getAdoptCount() == null ? "0" : userFinanceDetailVO.getAdoptCount().toString());
             elem.setInstitutionName(CheckTools.nullToEmptyString(userFinanceDetailVO.getInstitutionName()));
             elem.setServiceDirection(CheckTools.nullToEmptyString(userFinanceDetailVO.getServiceDirection()));

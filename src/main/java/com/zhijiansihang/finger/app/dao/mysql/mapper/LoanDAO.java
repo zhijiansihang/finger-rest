@@ -144,7 +144,7 @@ public interface LoanDAO {
     @Select({
             "select count(*) ",
             "from loan l ,loan_finance lf",
-            "where l.loan_id = lf.loan_finance and lf.finance_user_id = #{id} and l.is_display =1 and l.loan_status in (200,300)"
+            "where l.loan_id = lf.loan_id and lf.finance_user_id = #{id} and l.is_display =1 and l.loan_status in (200,300)"
     })
     int countByFinanceLoan(Long id);
 
@@ -152,7 +152,7 @@ public interface LoanDAO {
     @Select({
             "select l.*",
             "from loan l ,loan_finance lf",
-            "where l.loan_id = lf.loan_finance and  lf.finance_user_id = #{id} and l.is_display =1 and l.loan_status in (200,300)",
+            "where l.loan_id = lf.loan_id and  lf.finance_user_id = #{id} and l.is_display =1 and l.loan_status in (200,300)",
             "order by l.location_size desc,l.loan_status asc"
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.LoanDAO.BaseResultMap")

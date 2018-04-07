@@ -47,6 +47,7 @@ public class MyCollectionPersonService implements MessageService<MyCollectionPer
 		elem.setIsNameAuth("1");
 		elem.setLoanCount("2");
 		elem.setLogo("http://www.baidu.com/10000.png");
+		elem.setPosition("经理");
 		elem.setRealName("张经理");
 		elem.setServiceDirection("信托基金私募");
 		elem.setUserOrderCount("10");

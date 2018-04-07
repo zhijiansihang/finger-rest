@@ -80,6 +80,14 @@ public interface UserSolutionDAO {
     int existSameType(UserSolutionDO userSolutionDO);
 
     @Select({
+            "select count(*) ",
+            "from user_solution ",
+            "where is_deleted = 0 and user_id = #{userId} and money_situation = #{moneySituation} " +
+                    " and earning_type = #{earningType} and expected_deadline = #{expectedDeadline} and risk_assessment_level=#{riskAssessmentLevel}"
+    })
+    List<UserSolutionDO> getSameTypeList(UserSolutionDO userSolutionDO);
+
+    @Select({
             "select ifnull(max(serial_number),0)",
             "from user_solution",
             "where user_id = #{userId}"

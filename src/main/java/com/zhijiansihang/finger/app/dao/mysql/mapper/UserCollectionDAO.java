@@ -61,14 +61,14 @@ public interface UserCollectionDAO {
     @Select({
             "select count(*)",
             "from user_collection",
-            "where user_id = #{userId} and AND content_type=1"
+            "where user_id = #{userId} AND content_type=1"
     })
     int countFinanceByUserid(Long userId);
 
     @Select({
             "select count(*)",
             "from user_collection",
-            "where user_id = #{userId} and AND content_type=2"
+            "where user_id = #{userId} AND content_type=2"
     })
     int countLoanByUserid(Long userId);
 }

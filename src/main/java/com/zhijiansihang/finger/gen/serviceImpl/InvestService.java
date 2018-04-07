@@ -80,12 +80,12 @@ public class InvestService implements MessageService<InvestRequest, Response<Inv
             return;
         }
         UserDO userDO = userDAO.selectByPrimaryKey(loginUserid);
-        if (userDO.getRealName() == null || userDO.getRealName().trim().length() == 0 ||
-                realName == null || realName.trim().length() == 0 ){
-            ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("姓名不能为空");
-            response.setHeader(responseHeader);
-            return;
-        }
+//        if (userDO.getRealName() == null || userDO.getRealName().trim().length() == 0 ||
+//                realName == null || realName.trim().length() == 0 ){
+//            ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("姓名不能为空");
+//            response.setHeader(responseHeader);
+//            return;
+//        }
         if (new BigDecimal(amount).compareTo(loanDO.getAmount().divide(BigDecimal.valueOf(2L))) == 1){
             ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("预约金额不可超过募集金额的50%");
             response.setHeader(responseHeader);
@@ -108,7 +108,7 @@ public class InvestService implements MessageService<InvestRequest, Response<Inv
                 }
                 String userDORealName = userDO.getRealName();
                 if (userDORealName == null || userDORealName.length() == 0 ){
-                    loanInvestorFinanceDO.setRealName(realName);
+                    loanInvestorFinanceDO.setRealName(userDO.getNickName());
                 }else {
                     loanInvestorFinanceDO.setRealName(userDO.getRealName());
                 }

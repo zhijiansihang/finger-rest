@@ -33,6 +33,7 @@ public class MyCollectionPersonResponse extends MobileMessage {
 		private String isNameAuth;
 		private String loanCount;
 		private String logo;
+		private String position;
 		private String realName;
 		private String serviceDirection;
 		private String userOrderCount;
@@ -101,6 +102,17 @@ public class MyCollectionPersonResponse extends MobileMessage {
 
 		public void setLogo(String logo) {
 			this.logo = logo;
+		}
+
+		/**
+		 * @return 职位
+		 */
+		public String getPosition() {
+			return position;
+		}
+
+		public void setPosition(String position) {
+			this.position = position;
 		}
 
 		/**
