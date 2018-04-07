@@ -342,6 +342,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<ServicePersonRecordRequest, Response<ServicePersonRecordResponse>> genServicePersonRecordService;
 
+	@Qualifier("sessionIdIsOkService")
+	@Autowired(required = false)
+	MessageService<SessionIdIsOkRequest, Response<SessionIdIsOkResponse>> sessionIdIsOkService;
+	@Qualifier("gensessionIdIsOkService")
+	@Autowired(required = false)
+	MessageService<SessionIdIsOkRequest, Response<SessionIdIsOkResponse>> genSessionIdIsOkService;
+
 	@Qualifier("singleDemandSolutionListService")
 	@Autowired(required = false)
 	MessageService<SingleDemandSolutionListRequest, Response<SingleDemandSolutionListResponse>> singleDemandSolutionListService;
@@ -1254,6 +1261,26 @@ public class MobileController {
 		return response;
 	}
 
+	@RequestMapping(value = "/sessionIdIsOk", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<SessionIdIsOkResponse> sessionIdIsOk(@RequestBody SessionIdIsOkRequest request) {
+
+		logRequest("sessionIdIsOk", request);
+
+  		Response<SessionIdIsOkResponse> response = new Response<>();
+
+		request = (SessionIdIsOkRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getSessionIdIsOkResponse(request);
+		
+		logResponse("sessionIdIsOk", response);
+
+		return response;
+	}
+
 	@RequestMapping(value = "/singleDemandSolutionList", method = RequestMethod.POST)
 	@ResponseBody
 	public Response<SingleDemandSolutionListResponse> singleDemandSolutionList(@RequestBody SingleDemandSolutionListRequest request) {
@@ -1823,6 +1850,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, ServicePersonRecordRequest.class, ServicePersonRecordResponse.class);
+	}
+
+	private Response<SessionIdIsOkResponse> getSessionIdIsOkResponse(SessionIdIsOkRequest request) {
+
+		MessageService<SessionIdIsOkRequest, Response<SessionIdIsOkResponse>> service = sessionIdIsOkService;
+		if (service == null) {
+			service = genSessionIdIsOkService;
+		}
+
+		return mobileService.service(request, service, SessionIdIsOkRequest.class, SessionIdIsOkResponse.class);
 	}
 
 	private Response<SingleDemandSolutionListResponse> getSingleDemandSolutionListResponse(SingleDemandSolutionListRequest request) {
