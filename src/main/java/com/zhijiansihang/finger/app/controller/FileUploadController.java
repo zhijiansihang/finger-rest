@@ -48,6 +48,12 @@ public class FileUploadController {
         }
         try {
             File file = new File(CmsConsts.CmsEnum.valueOf(cmsEnumName).getStorageLocationPrefix() + imageName);
+            if (file!=null &&imageName.endsWith("png")){
+                httpServletResponse.setContentType("image/png");
+            }else {
+                httpServletResponse.setContentType("image/jpeg");
+
+            }
             httpServletResponse.getOutputStream().write(
                     FileUtils.readFileToByteArray(file));
             httpServletResponse.getOutputStream().close();
