@@ -1,6 +1,7 @@
 package com.zhijiansihang.finger.app.controller;
 
 import com.zhijiansihang.common.Response;
+import com.zhijiansihang.finger.app.constant.CmsConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDOExample;
@@ -8,18 +9,23 @@ import com.zhijiansihang.finger.app.service.UserDetailService;
 import com.zhijiansihang.finger.app.sharing.SharingProperties;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.CmsVO;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletInputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.List;
 
 @Controller
-@RequestMapping("/hello")
 public class HelloWorldController {
 
     private static Logger logger = LoggerFactory.getLogger(HelloWorldController.class);
@@ -79,5 +85,4 @@ public class HelloWorldController {
         List<CmsDO> cmsDOS = cmsDAO.selectByExampleWithRowbounds(example, new RowBounds(0, 10));
         return Response.success(cmsDOS);
     }
-
 }

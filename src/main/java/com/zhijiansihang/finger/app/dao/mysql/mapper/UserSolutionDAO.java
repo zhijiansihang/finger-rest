@@ -80,7 +80,7 @@ public interface UserSolutionDAO {
     int existSameType(UserSolutionDO userSolutionDO);
 
     @Select({
-            "select count(*) ",
+            "select *",
             "from user_solution ",
             "where is_deleted = 0 and user_id = #{userId} and money_situation = #{moneySituation} " +
                     " and earning_type = #{earningType} and expected_deadline = #{expectedDeadline} and risk_assessment_level=#{riskAssessmentLevel}"

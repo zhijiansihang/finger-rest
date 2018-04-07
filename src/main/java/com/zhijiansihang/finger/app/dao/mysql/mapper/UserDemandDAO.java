@@ -126,9 +126,9 @@ public interface UserDemandDAO {
     @Select({
             "select ud.*,u.risk_assessment_level",
             "from user_demand ud, user u",
-            "where ifnull(max(last_batch_sid),0) < #{userSolutionMax}  and is_deleted = 0 and is_closed = 0 ",
+            "where ifnull(ud.last_batch_sid,0) < #{userSolutionMax}  and ud.is_deleted = 0 and ud.is_closed = 0 ",
             " and ud.user_id = u.user_id and u.risk_assessment_level is not null ",
-            "order by id desc"
+            "order by ud.id desc"
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandDAO.BaseResultMap")
     List<UserDemandDO> getLowLastBatchid(@Param("userSolutionMax") Long user_solution_max, RowBounds rowBounds);
