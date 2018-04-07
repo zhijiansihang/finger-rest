@@ -6,10 +6,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -23,6 +20,7 @@ import java.io.File;
 public class FileUploadController {
     private static Logger logger = LoggerFactory.getLogger(FileUploadController.class);
     @PostMapping("/user/avatar/upload/{userId}")
+    @ResponseBody
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
                                   @PathVariable("userId") Integer userId ) throws Exception {
         String storageLocationPrefix = CmsConsts.CmsEnum.avatar.getStorageLocationPrefix();
