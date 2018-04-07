@@ -224,6 +224,9 @@ public class FingerUserService {
         if(userVO.getUserId() != null){
             criteria.andUserIdEqualTo(userVO.getUserId());
         }
+        if(StringUtils.isNotEmpty(userVO.getNickName())){
+            criteria.andNickNameLike(userVO.getNickName());
+        }
         if(userVO.getInstitutionName() != null){
             criteria.andInstitutionNameLike(userVO.getInstitutionName());
         }
