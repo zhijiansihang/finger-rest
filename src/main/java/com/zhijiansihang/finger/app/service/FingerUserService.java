@@ -9,6 +9,7 @@ import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
+import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.UserVO;
 import com.zhijiansihang.sys.entity.Role;
@@ -185,7 +186,14 @@ public class FingerUserService {
      * @param userVO
      * @return
      */
+    @Transactional
     public Response addFb(UserVO userVO) {
+        if (userFinanceDetailDAO.selectByPrimaryKey(userVO.getUserId()) == null){
+            UserFinanceDetailDO userFinanceDetailDO = new UserFinanceDetailDO();
+            userFinanceDetailDO.setCreateTime(new Date());
+            userFinanceDetailDO.setUserId(userVO.getUserId());
+            userFinanceDetailDAO.insertSelective(userFinanceDetailDO);
+        }
         userVO.setRoles(UserConsts.UserRolesEnum.FINANCE.getRole().shortValue());
         if (userDAO.updateByPrimaryKeySelective(userVO) > 0)
             return Response.success("添加成功");
