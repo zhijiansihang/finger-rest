@@ -53,7 +53,7 @@ public class GetUserService implements MessageService<GetUserRequest, Response<G
 		}	else {
 			response.getBody().setRiskAssessmentLevel(getRiskAssessment(userDO.getRiskAssessmentLevel().intValue()));
 		}
-		response.getBody().setRoles(userDO.getRoles() == null ? "":userDO.getRoles().toString());
+		response.getBody().setRoles(UserConsts.getUserRoles(userDO.getRoles()));
 		response.getBody().setUserId(id.toString());
 	}
 }

@@ -98,7 +98,7 @@ public class LoginOrRegisterService implements MessageService<LoginOrRegisterReq
 		response.getBody().setNickName(userDO.getNickName());
 		response.getBody().setRealName(userDO.getRealName());
 		response.getBody().setRiskAssessmentLevel(userDO.getRiskAssessmentLevel()==null ? "":userDO.getRiskAssessmentLevel().toString());
-		response.getBody().setRoles(userDO.getRoles().toString());
+		response.getBody().setRoles(UserConsts.getUserRoles(userDO.getRoles()));
 		response.getBody().setSessionId(generate);
 		response.getBody().setUserId(userDO.getUserId().toString());
 	}
