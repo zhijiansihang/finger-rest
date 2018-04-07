@@ -32,7 +32,7 @@ public class IsCollectedRequest extends MobileMessage {
 	}
 
 	/**
-	 * @return 收藏类型 1:标 2：理财师
+	 * @return 收藏类型 1: 理财师 2：标
 	 */
 	public String getType() {
 		return type;
