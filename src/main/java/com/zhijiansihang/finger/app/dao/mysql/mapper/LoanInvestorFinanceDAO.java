@@ -88,10 +88,10 @@ public interface LoanInvestorFinanceDAO {
     int countByFinanceUserid(Long userId);
 
     @Select({
-            "select lif.id,l.title,lif.amount,user.real_name",
-            "from loan_investor_finance",
-            "where finance_user_id = #{userId,jdbcType=BIGINT} and is_deal = 0",
-            "order by create_time desc"
+            "select lif.id,l.title,lif.amount,u.real_name",
+            "from loan_investor_finance lif,loan l,user u",
+            "where lif.loan_id = l.loan_id and lif.user_id = u.user_id  and lif.finance_user_id = #{userId,jdbcType=BIGINT} and is_deal = 0",
+            "order by lif.create_time desc"
     })
     @Results({
             @Result(property = "id", column = "id"),
@@ -102,8 +102,8 @@ public interface LoanInvestorFinanceDAO {
     List<LoanInvestorFinanceVO> selectNotDealByFinanceUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
 
     @Select({
-            "select lif.id,l.title,lif.amount,user.real_name",
-            "from loan_investor_finance lif ,loan l,user u",
+            "select lif.id,l.title,lif.amount,u.real_name",
+            "from loan_investor_finance lif,loan l,user u",
             "where lif.loan_id = l.loan_id and lif.user_id = u.user_id and lif.finance_user_id = #{userId,jdbcType=BIGINT} and lif.is_deal = 1",
             "order by lif.create_time desc"
     })
