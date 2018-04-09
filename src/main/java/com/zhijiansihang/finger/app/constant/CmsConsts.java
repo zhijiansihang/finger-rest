@@ -86,11 +86,11 @@ public class CmsConsts {
     }
 
     public static enum RiskAssessmentEnum{
-        LEVEL_1(10, 16,1,"保守型"),
-        LEVEL_2(17, 22,2,"稳健型"),
-        LEVEL_3(23, 29,3,"成熟型"),
-        LEVEL_4(30, 35,4,"进取型"),
-        LEVEL_5(36, 40, 5,"激进型");
+        LEVEL_1(12, 18,1,"保守型"),
+        LEVEL_2(19, 25,2,"稳健型"),
+        LEVEL_3(26, 35,3,"成熟型"),
+        LEVEL_4(36, 43,4,"进取型"),
+        LEVEL_5(44, 49, 5,"激进型");
 
         public Integer getRole() {
             return role;
