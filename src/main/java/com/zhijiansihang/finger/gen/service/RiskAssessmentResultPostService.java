@@ -24,6 +24,7 @@ public class RiskAssessmentResultPostService implements MessageService<RiskAsses
 	public void execute(RiskAssessmentResultPostRequest request, Response<RiskAssessmentResultPostResponse> response) {
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
+		response.getBody().setResult("");
 	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
 		response.getBody().setMode("test");
 	}

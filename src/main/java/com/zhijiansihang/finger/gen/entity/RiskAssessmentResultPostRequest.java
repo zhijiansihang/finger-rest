@@ -14,7 +14,7 @@ public class RiskAssessmentResultPostRequest extends MobileMessage {
 
 
 	private String answers;
-	private String result;
+	private String score;
 
 	public RiskAssessmentResultPostRequest() {
 		super();
@@ -32,14 +32,14 @@ public class RiskAssessmentResultPostRequest extends MobileMessage {
 	}
 
 	/**
-	 * @return 1:保守型2:稳健型3:成熟型4:进取型5:激进型
+	 * @return 总分
 	 */
-	public String getResult() {
-		return result;
+	public String getScore() {
+		return score;
 	}
 
-	public void setResult(String result) {
-		this.result = result;
+	public void setScore(String score) {
+		this.score = score;
 	}
 	
 }

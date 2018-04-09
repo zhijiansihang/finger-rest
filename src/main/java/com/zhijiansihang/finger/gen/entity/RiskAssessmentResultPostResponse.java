@@ -16,6 +16,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 public class RiskAssessmentResultPostResponse extends MobileMessage {
 
 
+	private String result;
 
 	public RiskAssessmentResultPostResponse() {
 		super();
@@ -34,5 +35,16 @@ public class RiskAssessmentResultPostResponse extends MobileMessage {
 		this.setStatusMessage(statusMessage);
 	}
 
+
+	/**
+	 * @return 1:保守型2:稳健型3:成熟型4:进取型5:激进型
+	 */
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
 
 }

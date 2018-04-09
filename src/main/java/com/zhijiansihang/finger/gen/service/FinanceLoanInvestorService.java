@@ -42,7 +42,9 @@ public class FinanceLoanInvestorService implements MessageService<FinanceLoanInv
 		elems.add(elem);
 
 		elem.setAmount("2017-12-12");
+		elem.setCreatetime("2017-01-01");
 		elem.setId("1");
+		elem.setLogo("1");
 		elem.setRealName("2017-12-12");
 		elem.setTitle("1");
 

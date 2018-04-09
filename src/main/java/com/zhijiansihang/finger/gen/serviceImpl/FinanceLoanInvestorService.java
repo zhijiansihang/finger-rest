@@ -1,10 +1,12 @@
 package com.zhijiansihang.finger.gen.serviceImpl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanInvestorFinanceDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
+import com.zhijiansihang.finger.app.sharing.SharingProperties;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.LoanInvestorFinanceVO;
 import com.zhijiansihang.finger.gen.tool.CheckTools;
@@ -31,6 +33,8 @@ public class FinanceLoanInvestorService implements MessageService<FinanceLoanInv
 
     @Autowired
     LoanInvestorFinanceDAO loanInvestorFinanceDAO;
+    @Autowired
+    SharingProperties sharingProperties;
 
     @Override
     public void execute(FinanceLoanInvestorRequest request, Response<FinanceLoanInvestorResponse> response) {
@@ -85,6 +89,13 @@ public class FinanceLoanInvestorService implements MessageService<FinanceLoanInv
             elem.setId(loanInvestorFinanceVO.getId().toString());
             elem.setRealName(CheckTools.nullToEmptyString(loanInvestorFinanceVO.getRealName()));
             elem.setTitle(loanInvestorFinanceVO.getTitle());
+            if (loanInvestorFinanceVO.getLogo() == null || loanInvestorFinanceVO.getLogo().length()==0){
+                elem.setLogo("");
+            }else {
+                elem.setLogo(sharingProperties.getStaticServerLink()+loanInvestorFinanceVO.getLogo().trim());
+            }
+            SimpleDateFormat format0 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            elem.setCreatetime(format0.format(loanInvestorFinanceVO.getCreateTime()));
         }
         return elems;
     }

@@ -1,16 +1,23 @@
 package com.zhijiansihang.finger.app.controller;
 
+import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.constant.CmsConsts;
+import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
+import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+
+import static com.zhijiansihang.finger.app.constant.CmsConsts.ACCESS_PREFIX_0;
+import static com.zhijiansihang.finger.app.constant.CmsConsts.CmsEnum.avatar;
 
 /**
  * Created by paul on 2018/4/7.
@@ -19,20 +26,30 @@ import java.io.File;
 @Controller
 public class FileUploadController {
     private static Logger logger = LoggerFactory.getLogger(FileUploadController.class);
+    @Autowired
+    UserDAO userDAO;
     @PostMapping("/user/avatar/upload/{userId}")
     @ResponseBody
-    public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                  @PathVariable("userId") Integer userId ) throws Exception {
-        String storageLocationPrefix = CmsConsts.CmsEnum.avatar.getStorageLocationPrefix();
-        String accessLocationPrefix = CmsConsts.CmsEnum.avatar.getAccessLocationPrefix();
+    public Response<String> handleFileUpload(@RequestParam("file") MultipartFile file,
+                                     @PathVariable("userId") Integer userId ) throws Exception {
+
+        if (userId == null || userId.intValue() <=0){
+            Response.error("请求参数有问题呢");
+        }
+        String storageLocationPrefix = avatar.getStorageLocationPrefix();
+        String accessLocationPrefix = avatar.getAccessLocationPrefix();
 
         FileUtils.forceMkdir(new File(storageLocationPrefix));
 
         String ext =  FilenameUtils.getExtension(file.getOriginalFilename());
 
+        UserDO userDO = new UserDO();
+        userDO.setUserId(userId.longValue());
+        userDO.setLogo(ACCESS_PREFIX_0+"/"+avatar.name()+"/"+ userId + "." + ext);
+        userDAO.updateByPrimaryKeySelective(userDO);
         String logoFileName = storageLocationPrefix + userId + "." + ext;
         file.transferTo(new File(logoFileName));
-        return accessLocationPrefix + userId + "." + ext;
+        return Response.success(accessLocationPrefix + userId + "." + ext);
     }
 
     /**
@@ -41,7 +58,7 @@ public class FileUploadController {
      * @param httpServletResponse
      * @throws Exception
      */
-    @RequestMapping(CmsConsts.ACCESS_PREFIX_0+"/{name}/{imageName:.*}")
+    @RequestMapping(ACCESS_PREFIX_0+"/{name}/{imageName:.*}")
     public void viewPicture(@PathVariable("name") String cmsEnumName , @PathVariable("imageName") String imageName, HttpServletResponse httpServletResponse) throws Exception {
         if (imageName !=null && imageName.contains("../")){
             throw new IllegalAccessException("Illegal image name");

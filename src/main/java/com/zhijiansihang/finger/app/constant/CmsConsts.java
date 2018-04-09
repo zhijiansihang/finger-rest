@@ -86,11 +86,11 @@ public class CmsConsts {
     }
 
     public static enum RiskAssessmentEnum{
-        LEVEL_1(1,"保守型"),
-        LEVEL_2(2,"稳健型"),
-        LEVEL_3(3,"成熟型"),
-        LEVEL_4(4,"进取型"),
-        LEVEL_5(5,"激进型");
+        LEVEL_1(10, 16,1,"保守型"),
+        LEVEL_2(17, 22,2,"稳健型"),
+        LEVEL_3(23, 29,3,"成熟型"),
+        LEVEL_4(30, 35,4,"进取型"),
+        LEVEL_5(36, 40, 5,"激进型");
 
         public Integer getRole() {
             return role;
@@ -108,9 +108,29 @@ public class CmsConsts {
             this.desc = desc;
         }
 
+        public int getMinScore() {
+            return minScore;
+        }
+
+        public void setMinScore(int minScore) {
+            this.minScore = minScore;
+        }
+
+        public int getMaxScore() {
+            return maxScore;
+        }
+
+        public void setMaxScore(int maxScore) {
+            this.maxScore = maxScore;
+        }
+
+        private int minScore;
+        private int maxScore;
         private Integer role;
         private String desc;
-        RiskAssessmentEnum(Integer role, String desc) {
+        RiskAssessmentEnum(int minScore, int maxScore,Integer role, String desc) {
+            this.minScore = minScore;
+            this.maxScore = maxScore;
             this.role = role;
             this.desc = desc;
         }
@@ -123,5 +143,15 @@ public class CmsConsts {
             }
         }
         return "";
+    }
+
+    public static RiskAssessmentEnum getRiskAssessmentByScore(int score){
+        RiskAssessmentEnum[] values = RiskAssessmentEnum.values();
+        for (RiskAssessmentEnum riskAssessmentEnum:values){
+            if (riskAssessmentEnum.getMinScore()<score && riskAssessmentEnum.getMaxScore() < score ){
+                return riskAssessmentEnum;
+            }
+        }
+        return null;
     }
 }

@@ -46,6 +46,26 @@ public class LoanInvestorFinanceVO {
     private String realName;
     private String title;
 
+    public String getLogo() {
+        return logo;
+    }
+
+    public void setLogo(String logo) {
+        this.logo = logo;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    private String logo;
+    private Long userId;
+
+
     public Date getCreateTime() {
         return createTime;
     }

@@ -28,7 +28,9 @@ public class FinanceLoanInvestorResponse extends MobileMessage {
 	public static class LoanInvestorListElement {
 
 		private String amount;
+		private String createtime;
 		private String id;
+		private String logo;
 		private String realName;
 		private String title;
 
@@ -44,6 +46,17 @@ public class FinanceLoanInvestorResponse extends MobileMessage {
 		}
 
 		/**
+		 * @return 提交时间
+		 */
+		public String getCreatetime() {
+			return createtime;
+		}
+
+		public void setCreatetime(String createtime) {
+			this.createtime = createtime;
+		}
+
+		/**
 		 * @return 记录id
 		 */
 		public String getId() {
@@ -52,6 +65,17 @@ public class FinanceLoanInvestorResponse extends MobileMessage {
 
 		public void setId(String id) {
 			this.id = id;
+		}
+
+		/**
+		 * @return 客户端的logo
+		 */
+		public String getLogo() {
+			return logo;
+		}
+
+		public void setLogo(String logo) {
+			this.logo = logo;
 		}
 
 		/**

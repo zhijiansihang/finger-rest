@@ -2,6 +2,7 @@ package com.zhijiansihang.finger.gen.serviceImpl;
 
 
 import com.zhijiansihang.common.Response;
+import com.zhijiansihang.finger.app.constant.CmsConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserSurverDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserSurverDO;
 import com.zhijiansihang.finger.gen.entity.RiskAssessmentResultGetRequest;
@@ -33,9 +34,8 @@ public class RiskAssessmentResultGetService implements MessageService<RiskAssess
 		UserSurverDO userSurverDO = userSurverDAO.selectByPrimaryKey(UserTools.getLoginUser().getId());
 		if (userSurverDO !=null){
 			response.getBody().setAnswers(userSurverDO.getAnswers());
-			response.getBody().setResult(userSurverDO.getRiskAssessmentLevel().toString());
+			String riskAssessment = CmsConsts.getRiskAssessment(userSurverDO.getRiskAssessmentLevel().intValue());
+			response.getBody().setResult(riskAssessment);
 		}
-
-
 	}
 }
