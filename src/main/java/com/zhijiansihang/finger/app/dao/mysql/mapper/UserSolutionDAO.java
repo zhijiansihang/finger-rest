@@ -137,7 +137,7 @@ public interface UserSolutionDAO {
             "create_time, is_deleted, is_closed, match_demand_count, read_count, adopt_count, ",
             "serial_number",
             "from user_solution",
-            "where user_id = #{userId} and is_deleted = 0 and is_closed = 0 ",
+            "where is_deleted = 0 and is_closed = 0 ",
             "and money_situation = #{moneySituation} ",
             "and earning_type = #{earningType} ",
             "and expected_deadline = #{expectedDeadline} ",
