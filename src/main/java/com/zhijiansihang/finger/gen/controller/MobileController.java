@@ -69,6 +69,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<CreateMySolutionRequest, Response<CreateMySolutionResponse>> genCreateMySolutionService;
 
+	@Qualifier("deleteSolutionService")
+	@Autowired(required = false)
+	MessageService<DeleteSolutionRequest, Response<DeleteSolutionResponse>> deleteSolutionService;
+	@Qualifier("gendeleteSolutionService")
+	@Autowired(required = false)
+	MessageService<DeleteSolutionRequest, Response<DeleteSolutionResponse>> genDeleteSolutionService;
+
 	@Qualifier("demandDetailService")
 	@Autowired(required = false)
 	MessageService<DemandDetailRequest, Response<DemandDetailResponse>> demandDetailService;
@@ -484,6 +491,26 @@ public class MobileController {
 		response = getCreateMySolutionResponse(request);
 		
 		logResponse("createMySolution", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/deleteSolution", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<DeleteSolutionResponse> deleteSolution(@RequestBody DeleteSolutionRequest request) {
+
+		logRequest("deleteSolution", request);
+
+  		Response<DeleteSolutionResponse> response = new Response<>();
+
+		request = (DeleteSolutionRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getDeleteSolutionResponse(request);
+		
+		logResponse("deleteSolution", response);
 
 		return response;
 	}
@@ -1487,6 +1514,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, CreateMySolutionRequest.class, CreateMySolutionResponse.class);
+	}
+
+	private Response<DeleteSolutionResponse> getDeleteSolutionResponse(DeleteSolutionRequest request) {
+
+		MessageService<DeleteSolutionRequest, Response<DeleteSolutionResponse>> service = deleteSolutionService;
+		if (service == null) {
+			service = genDeleteSolutionService;
+		}
+
+		return mobileService.service(request, service, DeleteSolutionRequest.class, DeleteSolutionResponse.class);
 	}
 
 	private Response<DemandDetailResponse> getDemandDetailResponse(DemandDetailRequest request) {

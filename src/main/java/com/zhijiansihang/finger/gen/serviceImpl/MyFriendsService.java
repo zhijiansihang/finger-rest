@@ -73,6 +73,7 @@ public class MyFriendsService implements MessageService<MyFriendsRequest, Respon
         }
         for (UserDO userDO : cmsDOS) {
             FriendListElement elem = new FriendListElement();
+            elem.setJgName(userDO.getInstitutionName()==null?"":userDO.getInstitutionName());
             elems.add(elem);
             elem.setFriendUserId(userDO.getUserId().toString());
             if (userDO.getLogo() !=null && userDO.getLogo().trim().length()>0){

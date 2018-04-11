@@ -42,6 +42,7 @@ public class MyFriendsService implements MessageService<MyFriendsRequest, Respon
 		elems.add(elem);
 
 		elem.setFriendUserId("1");
+		elem.setJgName("");
 		elem.setLogo("1");
 		elem.setRealName("2017-12-12");
 

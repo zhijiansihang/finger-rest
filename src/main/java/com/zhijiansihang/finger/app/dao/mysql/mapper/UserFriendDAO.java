@@ -68,7 +68,7 @@ public interface UserFriendDAO {
     int countByUserid(Long myUserId);
 
     @Select({
-            "select uf.friend_user_id,u.real_name,u.logo ",
+            "select uf.friend_user_id,u.real_name,u.logo,u.institutionName",
             "from user_friend uf,user u",
             "where uf.my_user_id = #{myUserId} and uf.friend_user_id = u.user_id",
             "order by uf.create_time desc"

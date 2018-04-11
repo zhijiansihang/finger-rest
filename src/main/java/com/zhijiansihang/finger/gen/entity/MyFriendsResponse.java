@@ -28,6 +28,7 @@ public class MyFriendsResponse extends MobileMessage {
 	public static class FriendListElement {
 
 		private String friendUserId;
+		private String jgName;
 		private String logo;
 		private String realName;
 
@@ -40,6 +41,17 @@ public class MyFriendsResponse extends MobileMessage {
 
 		public void setFriendUserId(String friendUserId) {
 			this.friendUserId = friendUserId;
+		}
+
+		/**
+		 * @return 机构名称
+		 */
+		public String getJgName() {
+			return jgName;
+		}
+
+		public void setJgName(String jgName) {
+			this.jgName = jgName;
 		}
 
 		/**
