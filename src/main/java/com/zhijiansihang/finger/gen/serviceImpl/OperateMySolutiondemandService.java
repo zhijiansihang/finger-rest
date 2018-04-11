@@ -3,6 +3,8 @@ package com.zhijiansihang.finger.gen.serviceImpl;
 
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandSolutionDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDemandSolutionDO;
+import com.zhijiansihang.finger.gen.entity.OperateMySolutiondemandRequest;
+import com.zhijiansihang.finger.gen.entity.OperateMySolutiondemandResponse;
 import com.zhijiansihang.finger.gen.tool.UserTools;
 import com.zhijiansihang.finger.mmc.MessageService;
 import com.zhijiansihang.common.Response;
@@ -21,7 +23,7 @@ import java.util.Date;
  * 
  */
 @Component("operateMySolutiondemandService")
-public class OperateMySolutiondemandService implements MessageService<OperateMyColutionSemandRequest, Response<OperateMyColutionSemandResponse>> {
+public class OperateMySolutiondemandService  implements MessageService<OperateMySolutiondemandRequest, Response<OperateMySolutiondemandResponse>> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(OperateMySolutiondemandService.class);
 	private static final String SERVICE_DESC = "方案已读需求";
@@ -29,7 +31,7 @@ public class OperateMySolutiondemandService implements MessageService<OperateMyC
 	@Autowired
 	UserDemandSolutionDAO userDemandSolutionDAO;
 	@Override
-	public void execute(OperateMyColutionSemandRequest request, Response<OperateMyColutionSemandResponse> response) {
+	public void execute(OperateMySolutiondemandRequest request, Response<OperateMySolutiondemandResponse> response) {
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 		Long userid = UserTools.getLoginUser().getId();
 		long id = Long.parseLong(request.getId().trim());
