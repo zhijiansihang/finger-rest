@@ -115,12 +115,12 @@ public class LoanService {
     public Response publicAdd(Long userId, LoanVO loanVO) {
         loanVO.setCreateTime(new Date());
         loanVO.setManageRate(new BigDecimal("0.1"));
-        loanVO.setBeginAmount(new BigDecimal("1000"));
+//        loanVO.setBeginAmount(new BigDecimal("1000"));
         loanVO.setIsDisplay((byte)0);
         loanVO.setLoanStatus(LoanConsts.LoanStatusEnum.LOAN_STATUS_REVIEW.getType());
         loanVO.setReserveAmount(new BigDecimal("0"));
-        loanVO.setIsRateFloating((byte)1);
-        loanVO.setInterestRate(new BigDecimal(10));
+//        loanVO.setIsRateFloating((byte)1);
+//        loanVO.setInterestRate(new BigDecimal(10));
         loanVO.setInstitutionUserId(userId);
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PUBLIC.getType());
         if(loanDAO.insert(loanVO) <= 0)
@@ -134,11 +134,11 @@ public class LoanService {
     @Transactional
     public Response privateAdd(Long userId, LoanVO loanVO) {
         loanVO.setCreateTime(new Date());
-        loanVO.setManageRate(new BigDecimal("0.1"));
+//        loanVO.setManageRate(new BigDecimal("0.1"));
         loanVO.setIsDisplay((byte)0);
         loanVO.setLoanStatus(LoanConsts.LoanStatusEnum.LOAN_STATUS_REVIEW.getType());
         loanVO.setReserveAmount(new BigDecimal("0"));
-        loanVO.setIsRateFloating((byte)1);
+        loanVO.setIsRateFloating((byte) 1);
         loanVO.setInterestRate(new BigDecimal(10));
         loanVO.setInstitutionUserId(userId);
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PRIVATE.getType());
