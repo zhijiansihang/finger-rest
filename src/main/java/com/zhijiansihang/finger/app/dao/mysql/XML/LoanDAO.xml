@@ -440,6 +440,9 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="releaseTime != null">
+        release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where loan_id = #{loanId,jdbcType=BIGINT}
   </update>
