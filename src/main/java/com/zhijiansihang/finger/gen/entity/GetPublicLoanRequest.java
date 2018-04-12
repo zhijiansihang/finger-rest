@@ -19,6 +19,7 @@ public class GetPublicLoanRequest extends MobileMessage {
 	private String productType;
 	private String ratioType;
 	private String servicingWay;
+	private String sort;
 
 	public GetPublicLoanRequest() {
 		super();
@@ -88,6 +89,17 @@ public class GetPublicLoanRequest extends MobileMessage {
 
 	public void setServicingWay(String servicingWay) {
 		this.servicingWay = servicingWay;
+	}
+
+	/**
+	 * @return 0：综合排序   1：按预期收益  2：按投资期限  3：按起投金额
+	 */
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 	
 }

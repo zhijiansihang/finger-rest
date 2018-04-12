@@ -40,6 +40,7 @@
     <result column="review_desc" jdbcType="VARCHAR" property="reviewDesc" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -588,7 +589,7 @@
   <select id="selectByLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultMap="BaseResultMap">
     select * from loan where 1=1 and is_display =1 and loan_status in (200,300)
     <include refid="select_keys" />
-    order by location_size desc,loan_status asc
+    order by location_size desc,loan_status asc,release_time desc
   </select>
 
   <select id="countByCollectionLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultType="java.lang.Integer">

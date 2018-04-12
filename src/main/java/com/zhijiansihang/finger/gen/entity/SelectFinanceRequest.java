@@ -16,6 +16,7 @@ public class SelectFinanceRequest extends MobileMessage {
 	private String currentPage;
 	private String order;
 	private String pageSize;
+	private String sort;
 	private String type;
 
 	public SelectFinanceRequest() {
@@ -53,6 +54,17 @@ public class SelectFinanceRequest extends MobileMessage {
 
 	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
+	}
+
+	/**
+	 * @return 0：默认排序  1：按产品数量排序 2：按预约单数排序 3：按关注度排序
+	 */
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 
 	/**

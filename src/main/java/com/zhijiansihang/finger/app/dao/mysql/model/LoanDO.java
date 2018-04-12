@@ -195,6 +195,19 @@ public class LoanDO implements Serializable {
      */
     private Date createTime;
 
+    public Date getReleaseTime() {
+        return releaseTime;
+    }
+
+    public void setReleaseTime(Date releaseTime) {
+        this.releaseTime = releaseTime;
+    }
+
+    /**
+     * 发布时间
+     */
+    private Date releaseTime;
+
     /**
      * loan
      */

@@ -17,6 +17,7 @@ public class GetPrivateLoanRequest extends MobileMessage {
 	private String currentPage;
 	private String fundType;
 	private String organizeForm;
+	private String sort;
 
 	public GetPrivateLoanRequest() {
 		super();
@@ -64,6 +65,17 @@ public class GetPrivateLoanRequest extends MobileMessage {
 
 	public void setOrganizeForm(String organizeForm) {
 		this.organizeForm = organizeForm;
+	}
+
+	/**
+	 * @return 0：综合排序   1：按预期收益  2：按投资期限  3：按起投金额
+	 */
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
 	}
 	
 }
