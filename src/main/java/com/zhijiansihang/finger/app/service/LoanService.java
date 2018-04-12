@@ -106,6 +106,7 @@ public class LoanService {
     }
 
     public Response publish(LoanVO loanVO, Long userId) {
+        loanVO.setReleaseTime(new Date());
         if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
             return Response.error("发布失败");
         return Response.success("发布成功");
