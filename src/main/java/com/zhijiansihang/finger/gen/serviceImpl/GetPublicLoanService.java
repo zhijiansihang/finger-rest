@@ -138,6 +138,7 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 			elem.setProgress(reserveAmount.divide(amount,2, RoundingMode.HALF_UP).toEngineeringString());
 			elem.setSafeguardWay(loanDO.getSafeguardWay());
 			elem.setTitle(loanDO.getTitle());
+			elem.setProductDirection(loanDO.getProductDirection());
 		}
 
 

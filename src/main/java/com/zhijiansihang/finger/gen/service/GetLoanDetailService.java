@@ -28,7 +28,7 @@ public class GetLoanDetailService implements MessageService<GetLoanDetailRequest
 		response.getBody().setAdaptationDeadline("1");
 		response.getBody().setAmount("1");
 		response.getBody().setBeginAmount("1");
-		response.getBody().setBrightSpot("1");
+		response.getBody().setBrightSpot("");
 		response.getBody().setCapitalType("1");
 		response.getBody().setCreateTime("1");
 		response.getBody().setDistributionRegion("1");

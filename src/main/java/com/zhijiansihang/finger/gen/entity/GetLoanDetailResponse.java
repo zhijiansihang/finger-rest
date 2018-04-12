@@ -116,7 +116,7 @@ public class GetLoanDetailResponse extends MobileMessage {
 	}
 
 	/**
-	 * @return 产品卖点（产品亮点）
+	 * @return 产品优势（产品亮点）
 	 */
 	public String getBrightSpot() {
 		return brightSpot;

@@ -37,6 +37,7 @@ public class GetPublicLoanResponse extends MobileMessage {
 		private String loanId;
 		private String loanStatus;
 		private String loanType;
+		private String productDirection;
 		private String productType;
 		private String progress;
 		private String safeguardWay;
@@ -150,6 +151,17 @@ public class GetPublicLoanResponse extends MobileMessage {
 
 		public void setLoanType(String loanType) {
 			this.loanType = loanType;
+		}
+
+		/**
+		 * @return （投资方向）产品方向：1.工商企业；2.金融市场；3.基础设施；4.房地产；5.资金池；6.其他； 空位全部
+		 */
+		public String getProductDirection() {
+			return productDirection;
+		}
+
+		public void setProductDirection(String productDirection) {
+			this.productDirection = productDirection;
 		}
 
 		/**

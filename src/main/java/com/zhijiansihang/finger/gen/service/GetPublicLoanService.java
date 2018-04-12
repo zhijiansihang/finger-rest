@@ -51,6 +51,7 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 		elem.setLoanId("1");
 		elem.setLoanStatus("10");
 		elem.setLoanType("1");
+		elem.setProductDirection("1");
 		elem.setProductType("10");
 		elem.setProgress("40");
 		elem.setSafeguardWay("1");
