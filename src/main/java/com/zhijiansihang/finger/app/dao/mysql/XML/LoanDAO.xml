@@ -594,7 +594,7 @@
     <include refid="select_keys" />
     order by location_size desc,loan_status asc,release_time desc
     <if test="requestSort != null">
-      #{requestSort}
+      ${requestSort}
     </if>
   </select>
 
