@@ -51,6 +51,15 @@ public class GetPrivateLoanService implements MessageService<GetPrivateLoanReque
 		}else {
 			currentPage = currentPage.trim();
 		}
+
+		//0：综合排序 1：按预期收益 2：按投资期限 3：按起投金额
+		String requestSort = request.getSort();
+		if (requestSort== null || requestSort.length() == 0){
+			requestSort = "0";
+		}
+
+
+
 		//基金类型
 		String fundType = request.getFundType();
 		if (fundType == null || fundType.trim().length() ==0){
@@ -78,6 +87,12 @@ public class GetPrivateLoanService implements MessageService<GetPrivateLoanReque
 		 */
 		select.setLoanType((byte)2);
 		page.setSelect(select);
+		if (requestSort.equals("3")){
+			//3：按起投金额
+			select.setRequestSort(",begin_amount desc");
+		}else {
+			select.setRequestSort("");
+		}
 
 		int count = loanDAO.countByLoan(select);
 		page.setRecordCount(count);

@@ -27,4 +27,15 @@ public class UserFinanceDetailSelect {
 
     //0:全部1:机构理财师2:个人理财师
     public Integer financeType;
+
+    public String getRequestSort() {
+        return requestSort;
+    }
+
+    public void setRequestSort(String requestSort) {
+        this.requestSort = requestSort;
+    }
+
+    //0：默认排序 1：按产品数量排序 2：按预约单数排序 3：按关注度排序
+    public String requestSort;
 }

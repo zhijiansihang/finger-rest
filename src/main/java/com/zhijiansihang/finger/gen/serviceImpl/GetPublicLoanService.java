@@ -45,6 +45,11 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 		}else {
 			currentPage = currentPage.trim();
 		}
+		//0：综合排序 1：按预期收益 2：按投资期限 investment_deadline 3：按起投金额  begin_amount
+		String requestSort = request.getSort();
+		if (requestSort== null || requestSort.length() == 0){
+			requestSort = "0";
+		}
 		//投资期限
 		String investmentDeadline = request.getInvestmentDeadline();
 		if (investmentDeadline == null || investmentDeadline.trim().length() ==0){
@@ -97,6 +102,18 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 		 * 1:公墓，2私募
 		 */
 		select.setLoanType((byte)1);
+//0：综合排序 1：按预期收益 interest_rate 2：按投资期限 investment_deadline 3：按起投金额  begin_amount
+		if (requestSort.equals("3")){
+			//3：按起投金额
+			select.setRequestSort(",begin_amount desc");
+		}else if (requestSort.equals("1")){
+			select.setRequestSort(",interest_rate desc");
+		}else if (requestSort.equals("2")){
+			select.setRequestSort(",investment_deadline desc");
+		}else{
+			select.setRequestSort("");
+		}
+
 		page.setSelect(select);
 
 		int count = loanDAO.countByLoan(select);
