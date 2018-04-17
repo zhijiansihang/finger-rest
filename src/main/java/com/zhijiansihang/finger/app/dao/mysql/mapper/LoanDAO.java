@@ -5,6 +5,7 @@ import com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample;
 import java.util.List;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDO;
+import com.zhijiansihang.finger.app.vo.LoanVO;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.session.RowBounds;
 

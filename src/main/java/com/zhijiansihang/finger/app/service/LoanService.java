@@ -42,7 +42,7 @@ public class LoanService {
     public Page findLoanPage(LoanVO loanVO) {
         logger.info("分页标的 列表");
 
-        Page<LoanVO,LoanDO> page = Page.create();
+        Page<LoanVO,LoanVO> page = Page.create();
         page.setCurrentPage(loanVO.getCurrentPage());
         page.setPageSize(loanVO.getPageSize());
         page.setSelect(loanVO);
@@ -61,6 +61,9 @@ public class LoanService {
         if(loanVO.getStatus() != null && loanVO.getStatus().size() > 0){
             criteria.andLoanStatusIn(loanVO.getStatus());
         }
+        if(loanVO.getInstitutionUserId() != null){
+            criteria.andInstitutionUserIdEqualTo(loanVO.getInstitutionUserId());
+        }
 //
 //        if(loanVO.getRolesList().size() > 0){
 //            criteria.andRolesIn(loanVO.getRolesList());
@@ -78,11 +81,20 @@ public class LoanService {
         if (countByLoanVO > 0 ){
 //            example.setOrderByClause("loan_id desc");
             // 结果
-            List<LoanDO> loanDOs = loanDAO.selectByExampleWithRowbounds(example, page.getRowBounds());
-            page.setResults(loanDOs);
+            List<LoanDO> loanDOS = loanDAO.selectByExampleWithRowbounds(example, page.getRowBounds());
+            List<LoanVO> loanVOS = Lists.newArrayList();
+            loanDOS.forEach(loanDO -> {
+                LoanVO newLoanVO = new LoanVO();
+                BeanUtils.copyProperties(loanDO, newLoanVO);
+                newLoanVO.setCountFinanceUser(loanFinanceDAO.countFinanceUserByLoanId(loanDO.getLoanId()));
+                loanVOS.add(newLoanVO);
+            });
+
+            page.setResults(loanVOS);
         }
         return page;
     }
+
 
     public Response getByLoanId(Long loanId) {
         LoanFinanceDOExample example = new LoanFinanceDOExample();

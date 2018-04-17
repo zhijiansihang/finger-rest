@@ -18,6 +18,8 @@ public class LoanVO extends LoanDO{
 
     public List<Long> userIds;
 
+    public int countFinanceUser;
+
 
     public int getCurrentPage() {
         return currentPage;
@@ -49,5 +51,13 @@ public class LoanVO extends LoanDO{
 
     public void setUserIds(List<Long> userIds) {
         this.userIds = userIds;
+    }
+
+    public int getCountFinanceUser() {
+        return countFinanceUser;
+    }
+
+    public void setCountFinanceUser(int countFinanceUser) {
+        this.countFinanceUser = countFinanceUser;
     }
 }

@@ -123,9 +123,10 @@ public class FingerUserService {
      * 理财师 分页列表
      *
      * @param userVO
+     * @param userId
      * @return
      */
-    public Page findUserFbPage(UserVO userVO) {
+    public Page findUserFbPage(UserVO userVO, String loginName) {
         logger.info("分页用户 列表");
         Page<UserVO,UserDO> page = Page.create();
         page.setCurrentPage(userVO.getCurrentPage());
@@ -149,6 +150,10 @@ public class FingerUserService {
             criteria.andInstitutionUserIdEqualTo(userVO.getInstitutionUserId());
         }
 
+        if (!loginName.equals("admin")){
+            criteria.andInstitutionNameEqualTo(loginName);
+        }
+
         // 条数
         int countByUserVO = userDAO.countByExample(example);
         page.setRecordCount(countByUserVO);
@@ -164,6 +169,11 @@ public class FingerUserService {
 
     public List<UserDO> findUserFbList(UserVO userVO) {
         UserDOExample example = new UserDOExample();
+        UserDOExample.Criteria criteria = example.createCriteria();
+        userVO.getRolesList().add((short) 4);
+        userVO.getRolesList().add((short) 5);
+        criteria.andRolesIn(userVO.getRolesList());
+
         return userDAO.selectByExample(example);
     }
 

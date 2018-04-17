@@ -5,12 +5,14 @@ import com.zhijiansihang.common.ComParams;
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.service.FingerUserService;
 import com.zhijiansihang.finger.app.vo.UserVO;
+import com.zhijiansihang.gateway.security.core.JwtUserDetails;
 import com.zhijiansihang.sys.entity.User;
 import com.zhijiansihang.sys.exception.ValidationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,7 +67,8 @@ public class FingerUserController {
     @RequestMapping(value = "/fb/page")
     @ResponseBody
     public Response fbPage(@RequestBody UserVO userVO) {
-        return Response.success(fingerUserService.findUserFbPage(userVO));
+        JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return Response.success(fingerUserService.findUserFbPage(userVO, principal.getUsername()));
     }
 
     /**
