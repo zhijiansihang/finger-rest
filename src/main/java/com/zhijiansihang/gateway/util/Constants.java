@@ -15,6 +15,6 @@ public class Constants {
     public static final String KEY_PORTAL_TOKEN = "key_portal_token";
 
     // 网关门户登陆token 会话时效
-    public static final long TIME_KEY_PORTAL_TOKEN = 30;
+    public static final long TIME_KEY_PORTAL_TOKEN = 10080;
 
 }
