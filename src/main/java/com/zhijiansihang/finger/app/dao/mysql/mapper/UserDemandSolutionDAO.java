@@ -169,7 +169,7 @@ public interface UserDemandSolutionDAO {
 
 
     @Select({
-            "select us.adopt_count,ufc.friend_counts,uds.id,u.institution_name,uds.is_operate_solution,u.logo,u.real_name",
+            "select us.adopt_count,ufc.friend_counts,uds.id,u.institution_name,uds.is_operate_solution,u.logo,u.real_name,",
             "us.serial_number,uds.solution_id,uds.solution_user_id,ufd.service_direction",
             "from user_demand_solution uds ,user u,user_solution us,user_friend_count ufc,user_finance_detail ufd",
             "where uds.solution_user_id = u.user_id and uds.solution_id = us.id and uds.solution_user_id = ufc.user_id and uds.solution_user_id = ufd.user_id",
