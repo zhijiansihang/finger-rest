@@ -38,15 +38,10 @@ public class JwtTokenUtil implements Serializable {
      * @return
      */
     public String generate(UserSession session) {
-        Calendar calendar = Calendar.getInstance();
-        Date date = new Date(System.currentTimeMillis());
-        calendar.setTime(date);
-        calendar.add(Calendar.DATE, 7);
-        Date expiration = calendar.getTime();
         String token = Jwts.builder()
                 .setIssuedAt(new Date())
                 .setSubject(JSON.toJSONString(session))
-                .setExpiration(expiration) // 失效时间
+//                .setExpiration(expiration) // 失效时间
                 .signWith(SignatureAlgorithm.HS512, secret) // 加密方式
                 .compact();
         // 存redis
