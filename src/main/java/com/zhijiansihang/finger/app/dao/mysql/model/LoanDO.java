@@ -821,6 +821,17 @@ public class LoanDO implements Serializable {
         this.createTime = createTime;
     }
 
+
+    public String getRequestSort() {
+        return requestSort;
+    }
+
+    public void setRequestSort(String requestSort) {
+        this.requestSort = requestSort;
+    }
+    //0：综合排序 1：按预期收益 2：按投资期限 3：按起投金额
+    public String requestSort;
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -13,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -40,7 +41,7 @@ public class JwtTokenUtil implements Serializable {
         String token = Jwts.builder()
                 .setIssuedAt(new Date())
                 .setSubject(JSON.toJSONString(session))
-//                .setExpiration(new Date(new Date().getTime() + expiration)) // 失效时间
+//                .setExpiration(expiration) // 失效时间
                 .signWith(SignatureAlgorithm.HS512, secret) // 加密方式
                 .compact();
         // 存redis

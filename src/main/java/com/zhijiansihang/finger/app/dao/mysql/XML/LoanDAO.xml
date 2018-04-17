@@ -593,6 +593,9 @@
     select * from loan where 1=1 and is_display =1 and loan_status in (200,300)
     <include refid="select_keys" />
     order by location_size desc,loan_status asc,release_time desc
+    <if test="requestSort != null">
+      ${requestSort}
+    </if>
   </select>
 
   <select id="countByCollectionLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultType="java.lang.Integer">

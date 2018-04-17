@@ -43,13 +43,17 @@ public class SelectFinanceService implements MessageService<SelectFinanceRequest
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
 		//0:默认排序1:按产品数量排序2:按预约单数排序3:按关注度排序
-		String order = request.getOrder();
+		String requestSort = request.getOrder();
 		//0:全部1:机构理财师2:个人理财师
 		String type = request.getType();
 
+		if (requestSort== null || requestSort.length() == 0){
+			requestSort = "0";
+		}
 		UserFinanceDetailSelect userFinanceDetailSelect = new UserFinanceDetailSelect();
-		userFinanceDetailSelect.setFinanceOrder(Integer.parseInt(order.trim()));
+		userFinanceDetailSelect.setFinanceOrder(Integer.parseInt(requestSort.trim()));
 		userFinanceDetailSelect.setFinanceType(Integer.parseInt(type.trim()));
+
 		Long id = UserTools.getLoginUser().getId();
 		Page<UserFinanceDetailSelect, UserFinanceDetailVO> page = Page.create();
 		page.setCurrentPage(CheckTools.isInteger(request.getCurrentPage()) ? Integer.parseInt(request.getCurrentPage()) : 1);
