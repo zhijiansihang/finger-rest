@@ -7,9 +7,11 @@ import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.constant.UserConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO;
+import com.zhijiansihang.finger.app.dao.mysql.mapper.UserInstitutionDetailDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
+import com.zhijiansihang.finger.app.dao.mysql.model.UserInstitutionDetailDO;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.UserVO;
 import com.zhijiansihang.sys.entity.Role;
@@ -38,6 +40,9 @@ public class FingerUserService {
     private UserDAO userDAO;
     @Autowired
     private UserFinanceDetailDAO userFinanceDetailDAO;
+
+    @Autowired
+    private UserInstitutionDetailDAO userInstitutionDetailDAO;
 
     @Autowired
     private UserAuthService userAuthService; // 若拆分系统改为远程调用
@@ -331,6 +336,18 @@ public class FingerUserService {
         admUserVo.setRoleSet(Sets.newHashSet(role));
 
         userService.saveUser(admUserVo, admUserId);
+
+        if (userInstitutionDetailDAO.selectByPrimaryKey(userVO.getUserId()) == null){
+            UserInstitutionDetailDO userInstitutionDetailDO = new UserInstitutionDetailDO();
+            userInstitutionDetailDO.setCreateTime(new Date());
+            userInstitutionDetailDO.setName(userVO.getNickName());
+            userInstitutionDetailDO.setUserId(userVO.getUserId());
+            userInstitutionDetailDO.setContactName(userVO.getRealName());
+            userInstitutionDetailDO.setContactMobile(userVO.getMobile());
+            userInstitutionDetailDO.setIsPersonal((byte)2);
+            userInstitutionDetailDO.setIsDeleted((byte)0);
+            userInstitutionDetailDAO.insertSelective(userInstitutionDetailDO);
+        }
 
         return Response.success("添加成功");
     }

@@ -102,6 +102,26 @@ public class LoanController {
         return loanService.privateAdd(userId, loanVO);
     }
 
+    /**
+     *  标的 公募添加
+     * @return
+     */
+    @RequestMapping(value = "/public/edit")
+    @ResponseBody
+    public Response publicEdit(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
+        return loanService.publicEdit(userId, loanVO);
+    }
+
+    /**
+     *  标的 私募添加
+     * @return
+     */
+    @RequestMapping(value = "/private/edit")
+    @ResponseBody
+    public Response privateEdit(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
+        return loanService.privateEdit(userId, loanVO);
+    }
+
 
     /**
      *  标的 结标

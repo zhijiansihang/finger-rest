@@ -79,4 +79,10 @@ public interface LoanFinanceDAO {
             "where loan_id  = #{loanId}"
     })
     int countFinanceUserByLoanId(Long loanId);
+
+    @Delete({
+            "delete from loan_finance",
+            "where loan_id = #{loanId}"
+    })
+    void deleteByLoanId(Long loanId);
 }

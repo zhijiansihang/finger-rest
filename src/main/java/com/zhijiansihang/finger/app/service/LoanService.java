@@ -163,7 +163,30 @@ public class LoanService {
         return Response.success("添加成功");
     }
 
+
+    @Transactional
+    public Response publicEdit(Long userId, LoanVO loanVO) {
+        if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
+            return Response.error("添加失败");
+
+
+        insertFinanceUser(loanVO.getUserIds(), loanVO.getLoanId());
+
+        return Response.success("添加成功");
+    }
+    @Transactional
+    public Response privateEdit(Long userId, LoanVO loanVO) {
+        if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
+            return Response.error("添加失败");
+
+        insertFinanceUser(loanVO.getUserIds(), loanVO.getLoanId());
+
+        return Response.success("添加成功");
+    }
+
+
     private void insertFinanceUser(List<Long> userIds, Long loanId){
+        loanFinanceDAO.deleteByLoanId(loanId);
         userIds.forEach( financeUserId -> {
             LoanFinanceDO loanFinanceDO = new LoanFinanceDO();
             loanFinanceDO.setLoanId(loanId);
