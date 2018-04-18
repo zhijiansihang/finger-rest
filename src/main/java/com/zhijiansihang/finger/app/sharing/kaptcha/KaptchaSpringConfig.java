@@ -21,7 +21,7 @@ public class KaptchaSpringConfig {
         //http://blog.csdn.net/elephantboy/article/details/52795309
         Properties properties = new Properties();
         //图片边框，合法值:yes , no  默认值:yes
-        properties.setProperty("kaptcha.border", "yes");
+        properties.setProperty("kaptcha.border", "no");
         //边框颜色，合法值： r,g,b (and optional alpha) 或者 white,black,blue. 默认值:black
         properties.setProperty("kaptcha.border.color", "black");
         //边框厚度，合法值：>0   默认值:1
