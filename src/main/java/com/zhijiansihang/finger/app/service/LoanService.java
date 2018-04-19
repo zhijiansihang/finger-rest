@@ -33,6 +33,8 @@ public class LoanService {
 
     @Autowired
     private LoanFinanceDAO loanFinanceDAO;
+
+    private static final BigDecimal TEN_THOUSAND = new BigDecimal("10000");
     /**
      * 标的 分页列表
      *
@@ -126,6 +128,8 @@ public class LoanService {
 
     @Transactional
     public Response publicAdd(Long userId, LoanVO loanVO) {
+//        loanVO.setBeginAmount(loanVO.getBeginAmount().multiply(TEN_THOUSAND));
+        loanVO.setAmount(loanVO.getAmount().multiply(TEN_THOUSAND));
         loanVO.setCreateTime(new Date());
         loanVO.setManageRate(new BigDecimal("0.1"));
 //        loanVO.setBeginAmount(new BigDecimal("1000"));
@@ -144,8 +148,11 @@ public class LoanService {
 
         return Response.success("添加成功");
     }
+
     @Transactional
     public Response privateAdd(Long userId, LoanVO loanVO) {
+        loanVO.setBeginAmount(loanVO.getBeginAmount().multiply(TEN_THOUSAND));
+        loanVO.setAmount(loanVO.getAmount().multiply(TEN_THOUSAND));
         loanVO.setCreateTime(new Date());
 //        loanVO.setManageRate(new BigDecimal("0.1"));
         loanVO.setIsDisplay((byte)0);
@@ -166,22 +173,25 @@ public class LoanService {
 
     @Transactional
     public Response publicEdit(Long userId, LoanVO loanVO) {
+        loanVO.setAmount(loanVO.getAmount().multiply(TEN_THOUSAND));
         if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
-            return Response.error("添加失败");
+            return Response.error("修改失败");
 
 
         insertFinanceUser(loanVO.getUserIds(), loanVO.getLoanId());
 
-        return Response.success("添加成功");
+        return Response.success("修改成功");
     }
     @Transactional
     public Response privateEdit(Long userId, LoanVO loanVO) {
+        loanVO.setAmount(loanVO.getAmount().multiply(TEN_THOUSAND));
+        loanVO.setBeginAmount(loanVO.getBeginAmount().multiply(TEN_THOUSAND));
         if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
-            return Response.error("添加失败");
+            return Response.error("修改失败");
 
         insertFinanceUser(loanVO.getUserIds(), loanVO.getLoanId());
 
-        return Response.success("添加成功");
+        return Response.success("修改成功");
     }
 
 
