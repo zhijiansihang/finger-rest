@@ -29,6 +29,7 @@ public class SolutionDetailService implements MessageService<SolutionDetailReque
 		response.getBody().setIsFinanceDeleted("0");
 		response.getBody().setMoneySituation("1");
 		response.getBody().setRiskAssessmentLevel("10");
+		response.getBody().setSerialNumber("1");
 		response.getBody().setSolution("10");
 	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
 		response.getBody().setMode("test");
