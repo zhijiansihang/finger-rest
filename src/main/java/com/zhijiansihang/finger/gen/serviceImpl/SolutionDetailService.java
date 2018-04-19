@@ -36,5 +36,6 @@ public class SolutionDetailService implements MessageService<SolutionDetailReque
 		response.getBody().setMoneySituation(userSolutionDO.getMoneySituation().toString());
 		response.getBody().setRiskAssessmentLevel(userSolutionDO.getRiskAssessmentLevel().toString());
 		response.getBody().setSolution(userSolutionDO.getSolution());
+		response.getBody().setSerialNumber(userSolutionDO.getSerialNumber() == null ?"":userSolutionDO.getSerialNumber().toString());
 	}
 }

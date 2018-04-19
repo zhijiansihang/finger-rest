@@ -21,6 +21,7 @@ public class SolutionDetailResponse extends MobileMessage {
 	private String isFinanceDeleted;
 	private String moneySituation;
 	private String riskAssessmentLevel;
+	private String serialNumber;
 	private String solution;
 
 	public SolutionDetailResponse() {
@@ -94,6 +95,17 @@ public class SolutionDetailResponse extends MobileMessage {
 
 	public void setRiskAssessmentLevel(String riskAssessmentLevel) {
 		this.riskAssessmentLevel = riskAssessmentLevel;
+	}
+
+	/**
+	 * @return 编号
+	 */
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 
 	/**
