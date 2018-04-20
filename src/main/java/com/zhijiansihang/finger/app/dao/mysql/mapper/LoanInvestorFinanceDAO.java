@@ -169,4 +169,26 @@ public interface LoanInvestorFinanceDAO {
             "where user_id = #{userId} and loan_id =#{loanId}"
     })
     int countBuy(LoanInvestorFinanceDO loanInvestorFinanceDO);
+
+
+    @Select({
+            "select count(*)",
+            "from loan_investor_finance",
+            "where user_id = #{userId,jdbcType=BIGINT}"
+    })
+    int countInvestTime(Long userId);
+
+    @Select({
+            "select sum(amount)",
+            "from loan_investor_finance",
+            "where user_id = #{userId,jdbcType=BIGINT}"
+    })
+    BigDecimal countTotalAmount(Long userId);
+
+    @Select({
+            "select sum(amount)",
+            "from loan_investor_finance",
+            "where finance_user_id = #{userId,jdbcType=BIGINT}"
+    })
+    BigDecimal countTotalAmountByFinanceUserid(Long userId);
 }

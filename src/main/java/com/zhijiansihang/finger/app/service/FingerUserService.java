@@ -1,10 +1,12 @@
 package com.zhijiansihang.finger.app.service;
 
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.constant.UserConsts;
+import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanInvestorFinanceDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserInstitutionDetailDAO;
@@ -49,7 +51,8 @@ public class FingerUserService {
 
     @Autowired
     private UserService userService; // 若拆分系统改为远程调用
-
+    @Autowired
+    LoanInvestorFinanceDAO loanInvestorFinanceDAO;
     /**
      * 用户 分页列表
      *
@@ -59,7 +62,7 @@ public class FingerUserService {
     public Page findUserPage(UserVO userVO) {
         logger.info("分页用户 列表");
 
-        Page<UserVO,UserDO> page = Page.create();
+        Page<UserVO,UserVO> page = Page.create();
         page.setCurrentPage(userVO.getCurrentPage());
         page.setPageSize(userVO.getPageSize());
         page.setSelect(userVO);
@@ -90,7 +93,16 @@ public class FingerUserService {
 //            example.setOrderByClause("user_id desc");
             // 结果
             List<UserDO> userDOs = userDAO.selectByExampleWithRowbounds(example, page.getRowBounds());
-            page.setResults(userDOs);
+            List<UserVO> userVOs = Lists.newArrayList();
+            userDOs.forEach(userDO -> {
+                UserVO newUserVO = new UserVO();
+                BeanUtils.copyProperties(userDO, newUserVO);
+                newUserVO.setInvestTime(loanInvestorFinanceDAO.countInvestTime(userDO.getUserId()));
+                newUserVO.setTotalAmount(loanInvestorFinanceDAO.countTotalAmount(userDO.getUserId()));
+                userVOs.add(newUserVO);
+            });
+
+            page.setResults(userVOs);
         }
         return page;
     }
@@ -133,7 +145,7 @@ public class FingerUserService {
      */
     public Page findUserFbPage(UserVO userVO, String loginName) {
         logger.info("分页用户 列表");
-        Page<UserVO,UserDO> page = Page.create();
+        Page<UserVO,UserVO> page = Page.create();
         page.setCurrentPage(userVO.getCurrentPage());
         page.setPageSize(userVO.getPageSize());
         page.setSelect(userVO);
@@ -167,7 +179,16 @@ public class FingerUserService {
 //            example.setOrderByClause("user_id desc");
             // 结果
             List<UserDO> userDOs = userDAO.selectByExampleWithRowbounds(example, page.getRowBounds());
-            page.setResults(userDOs);
+            List<UserVO> userVOs = Lists.newArrayList();
+            userDOs.forEach(userDO -> {
+                UserVO newUserVO = new UserVO();
+                BeanUtils.copyProperties(userDO, newUserVO);
+                newUserVO.setInvestTime(loanInvestorFinanceDAO.countByFinanceUserid(userDO.getUserId()));
+                newUserVO.setTotalAmount(loanInvestorFinanceDAO.countTotalAmountByFinanceUserid(userDO.getUserId()));
+                userVOs.add(newUserVO);
+            });
+
+            page.setResults(userVOs);
         }
         return page;
     }
@@ -225,7 +246,7 @@ public class FingerUserService {
      */
     public Page findUserInstitutionPage(UserVO userVO) {
         logger.info("机构 分页列表");
-        Page<UserVO,UserDO> page = Page.create();
+        Page<UserVO,UserVO> page = Page.create();
         page.setCurrentPage(userVO.getCurrentPage());
         page.setPageSize(userVO.getPageSize());
         page.setSelect(userVO);
@@ -253,7 +274,17 @@ public class FingerUserService {
 //            example.setOrderByClause("user_id desc");
             // 结果
             List<UserDO> userDOs = userDAO.selectByExampleWithRowbounds(example, page.getRowBounds());
-            page.setResults(userDOs);
+
+            List<UserVO> userVOs = Lists.newArrayList();
+            userDOs.forEach(userDO -> {
+                UserVO newUserVO = new UserVO();
+                BeanUtils.copyProperties(userDO, newUserVO);
+                newUserVO.setInvestTime(loanInvestorFinanceDAO.countByFinanceUserid(userDO.getUserId()));
+                newUserVO.setTotalAmount(loanInvestorFinanceDAO.countTotalAmountByFinanceUserid(userDO.getUserId()));
+                userVOs.add(newUserVO);
+            });
+
+            page.setResults(userVOs);
         }
         return page;
     }

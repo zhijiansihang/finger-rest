@@ -1,8 +1,10 @@
 package com.zhijiansihang.finger.app.vo;
 import com.google.common.collect.Lists;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
+import javafx.scene.layout.BackgroundImage;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,6 +25,10 @@ public class UserVO extends UserDO  implements Serializable {
     public List<Short> rolesList = Lists.newArrayList();
 
     public List<Long> userIds;
+
+    public int investTime;
+
+    public BigDecimal totalAmount;
 
     public int getCurrentPage() {
         return currentPage;
@@ -71,5 +77,21 @@ public class UserVO extends UserDO  implements Serializable {
 
     public void setUserIds(List<Long> userIds) {
         this.userIds = userIds;
+    }
+
+    public int getInvestTime() {
+        return investTime;
+    }
+
+    public void setInvestTime(int investTime) {
+        this.investTime = investTime;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
 }
