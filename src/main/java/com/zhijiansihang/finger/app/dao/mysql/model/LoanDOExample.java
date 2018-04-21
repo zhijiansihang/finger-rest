@@ -1318,52 +1318,52 @@ public class LoanDOExample {
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineEqualTo(Short value) {
+        public Criteria andAdaptationDeadlineEqualTo(String value) {
             addCriterion("adaptation_deadline =", value, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineNotEqualTo(Short value) {
+        public Criteria andAdaptationDeadlineNotEqualTo(String value) {
             addCriterion("adaptation_deadline <>", value, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineGreaterThan(Short value) {
+        public Criteria andAdaptationDeadlineGreaterThan(String value) {
             addCriterion("adaptation_deadline >", value, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineGreaterThanOrEqualTo(Short value) {
+        public Criteria andAdaptationDeadlineGreaterThanOrEqualTo(String value) {
             addCriterion("adaptation_deadline >=", value, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineLessThan(Short value) {
+        public Criteria andAdaptationDeadlineLessThan(String value) {
             addCriterion("adaptation_deadline <", value, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineLessThanOrEqualTo(Short value) {
+        public Criteria andAdaptationDeadlineLessThanOrEqualTo(String value) {
             addCriterion("adaptation_deadline <=", value, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineIn(List<Short> values) {
+        public Criteria andAdaptationDeadlineIn(List<String> values) {
             addCriterion("adaptation_deadline in", values, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineNotIn(List<Short> values) {
+        public Criteria andAdaptationDeadlineNotIn(List<String> values) {
             addCriterion("adaptation_deadline not in", values, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineBetween(Short value1, Short value2) {
+        public Criteria andAdaptationDeadlineBetween(String value1, String value2) {
             addCriterion("adaptation_deadline between", value1, value2, "adaptationDeadline");
             return (Criteria) this;
         }
 
-        public Criteria andAdaptationDeadlineNotBetween(Short value1, Short value2) {
+        public Criteria andAdaptationDeadlineNotBetween(String value1, String value2) {
             addCriterion("adaptation_deadline not between", value1, value2, "adaptationDeadline");
             return (Criteria) this;
         }

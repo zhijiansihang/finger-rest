@@ -21,7 +21,7 @@
     <result column="issuer" jdbcType="VARCHAR" property="issuer" />
     <result column="fund_type" jdbcType="SMALLINT" property="fundType" />
     <result column="servicing_way" jdbcType="SMALLINT" property="servicingWay" />
-    <result column="adaptation_deadline" jdbcType="SMALLINT" property="adaptationDeadline" />
+    <result column="adaptation_deadline" jdbcType="VARCHAR" property="adaptationDeadline" />
     <result column="investment_deadline" jdbcType="SMALLINT" property="investmentDeadline" />
     <result column="distribution_region" jdbcType="VARCHAR" property="distributionRegion" />
     <result column="ratio_type" jdbcType="SMALLINT" property="ratioType" />
@@ -384,7 +384,7 @@
         servicing_way = #{servicingWay,jdbcType=SMALLINT},
       </if>
       <if test="adaptationDeadline != null">
-        adaptation_deadline = #{adaptationDeadline,jdbcType=SMALLINT},
+        adaptation_deadline = #{adaptationDeadline,jdbcType=VARCHAR},
       </if>
       <if test="investmentDeadline != null">
         investment_deadline = #{investmentDeadline,jdbcType=SMALLINT},
@@ -525,7 +525,7 @@
       and  servicing_way = #{servicingWay,jdbcType=SMALLINT}
     </if>
     <if test="adaptationDeadline != null">
-      and  adaptation_deadline = #{adaptationDeadline,jdbcType=SMALLINT}
+      and  adaptation_deadline = #{adaptationDeadline,jdbcType=VARCHAR}
     </if>
     <if test="investmentDeadline != null">
       and  investment_deadline = #{investmentDeadline,jdbcType=SMALLINT}

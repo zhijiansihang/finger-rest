@@ -103,7 +103,7 @@ public class LoanDO implements Serializable {
     /**
      * 续存期限（年）
      */
-    private Short adaptationDeadline;
+    private String adaptationDeadline;
 
     /**
      * 投资期限（月）
@@ -521,7 +521,7 @@ public class LoanDO implements Serializable {
      * 续存期限（年）
      * @return adaptation_deadline 续存期限（年）
      */
-    public Short getAdaptationDeadline() {
+    public String getAdaptationDeadline() {
         return adaptationDeadline;
     }
 
@@ -529,7 +529,7 @@ public class LoanDO implements Serializable {
      * 续存期限（年）
      * @param adaptationDeadline 续存期限（年）
      */
-    public void setAdaptationDeadline(Short adaptationDeadline) {
+    public void setAdaptationDeadline(String adaptationDeadline) {
         this.adaptationDeadline = adaptationDeadline;
     }
 
