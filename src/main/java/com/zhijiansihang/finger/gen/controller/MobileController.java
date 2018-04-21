@@ -48,6 +48,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<AddSolutionRequest, Response<AddSolutionResponse>> genAddSolutionService;
 
+	@Qualifier("constantInformationService")
+	@Autowired(required = false)
+	MessageService<ConstantInformationRequest, Response<ConstantInformationResponse>> constantInformationService;
+	@Qualifier("genconstantInformationService")
+	@Autowired(required = false)
+	MessageService<ConstantInformationRequest, Response<ConstantInformationResponse>> genConstantInformationService;
+
 	@Qualifier("consultingRecordService")
 	@Autowired(required = false)
 	MessageService<ConsultingRecordRequest, Response<ConsultingRecordResponse>> consultingRecordService;
@@ -431,6 +438,26 @@ public class MobileController {
 		response = getAddSolutionResponse(request);
 		
 		logResponse("addSolution", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/constantInformation", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<ConstantInformationResponse> constantInformation(@RequestBody ConstantInformationRequest request) {
+
+		logRequest("constantInformation", request);
+
+  		Response<ConstantInformationResponse> response = new Response<>();
+
+		request = (ConstantInformationRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getConstantInformationResponse(request);
+		
+		logResponse("constantInformation", response);
 
 		return response;
 	}
@@ -1484,6 +1511,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, AddSolutionRequest.class, AddSolutionResponse.class);
+	}
+
+	private Response<ConstantInformationResponse> getConstantInformationResponse(ConstantInformationRequest request) {
+
+		MessageService<ConstantInformationRequest, Response<ConstantInformationResponse>> service = constantInformationService;
+		if (service == null) {
+			service = genConstantInformationService;
+		}
+
+		return mobileService.service(request, service, ConstantInformationRequest.class, ConstantInformationResponse.class);
 	}
 
 	private Response<ConsultingRecordResponse> getConsultingRecordResponse(ConsultingRecordRequest request) {

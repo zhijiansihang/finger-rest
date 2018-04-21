@@ -78,6 +78,7 @@ public class RiskAssessmentResultPostService implements MessageService<RiskAsses
 		UserDO userDO1 = userDAO.selectByPrimaryKey(userid);
 		if (userDO1.getRiskAssessmentLevel() != null &&riskAssessmentByScore.getRole().shortValue() == userDO1.getRiskAssessmentLevel().shortValue())
 		{
+			response.getBody().setResult(riskAssessmentByScore.getRole().toString());
 			LOG.info("用户{}分险测评和上一次结果[{}]相同,不触发跑批",userid,userDO1.getRiskAssessmentLevel());
 			return;
 		}
@@ -91,7 +92,7 @@ public class RiskAssessmentResultPostService implements MessageService<RiskAsses
 		riskAssessmentModifyEvent.setUserId(userid);
 
 		ApplicationContextHelper.applicationContext.publishEvent(riskAssessmentModifyEvent);
-		response.getBody().setResult(riskAssessmentByScore.getDesc());
+		response.getBody().setResult(riskAssessmentByScore.getRole().toString());
 
 	}
 }

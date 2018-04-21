@@ -148,7 +148,7 @@ public class CmsConsts {
     public static RiskAssessmentEnum getRiskAssessmentByScore(int score){
         RiskAssessmentEnum[] values = RiskAssessmentEnum.values();
         for (RiskAssessmentEnum riskAssessmentEnum:values){
-            if (riskAssessmentEnum.getMinScore()<score && riskAssessmentEnum.getMaxScore() < score ){
+            if (riskAssessmentEnum.getMinScore() < score && score <= riskAssessmentEnum.getMaxScore()   ){
                 return riskAssessmentEnum;
             }
         }
