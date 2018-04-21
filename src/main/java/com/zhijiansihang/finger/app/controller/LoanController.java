@@ -50,17 +50,17 @@ public class LoanController {
     public Response publicGet(@RequestBody LoanVO loanVO) {
         return loanService.getByLoanId(loanVO.getLoanId());
     }
-//
-//    /**
-//     *  标的 根据Id获取
-//     * @return
-//     */
-//    @RequestMapping(value = "/private/get")
-//    @ResponseBody
-//    public Response privateGet(@RequestBody LoanVO loanVO) {
-//        return loanService.getByUserId(loanVO.getLoanId());
-//    }
-//
+
+    /**
+     *  标的 根据Id获取
+     * @return
+     */
+    @RequestMapping(value = "/private/get")
+    @ResponseBody
+    public Response privateGet(@RequestBody LoanVO loanVO) {
+        return loanService.getByLoanId(loanVO.getLoanId());
+    }
+
      /**
      *  标的 审核
      * @return
