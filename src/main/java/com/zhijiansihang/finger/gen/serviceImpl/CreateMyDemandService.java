@@ -42,8 +42,7 @@ public class CreateMyDemandService implements MessageService<CreateMyDemandReque
         long userId = UserTools.getLoginUser().getId();
         if (!CheckTools.isInteger(request.getEarningType()) ||
                 !CheckTools.isInteger(request.getMoneySituation()) ||
-                !CheckTools.isInteger(request.getExpectedDeadline()) ||
-                CheckTools.stringEmptyString(request.getAdditionalRemarks())
+                !CheckTools.isInteger(request.getExpectedDeadline())
                 ){
             ResponseHeader responseHeader = ResponseHeaderBuilder.buildValidateError("参数不能为空");
             response.setHeader(responseHeader);
@@ -54,7 +53,7 @@ public class CreateMyDemandService implements MessageService<CreateMyDemandReque
         userDemandDO.setMoneySituation(Short.parseShort(request.getMoneySituation()));
         userDemandDO.setEarningType(Short.parseShort(request.getEarningType()));
         userDemandDO.setExpectedDeadline(Short.parseShort(request.getExpectedDeadline()));
-        userDemandDO.setAdditionalRemarks(request.getAdditionalRemarks().trim());
+        userDemandDO.setAdditionalRemarks(request.getAdditionalRemarks()== null ? null:request.getAdditionalRemarks().trim());
 
         String redisKey = this.getClass().getName() + "_" + userId;
         boolean tryLock = redisLock.tryLock(redisKey);
