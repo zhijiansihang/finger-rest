@@ -71,7 +71,12 @@ public interface LoanFinanceDAO {
             "from loan_finance lf ,loan l",
             "where lf.finance_user_id  = #{financeUserid} and lf.loan_id = l.loan_id  and l.loan_status = 200"
     })
-    int countSellingLoanByFinanceUser(Long financeUserid);
+    int countSellingLoanByFinanceUser(Long financeUserid);    @Select({
+            "select count(*)",
+            "from loan_finance lf ,loan l",
+            "where lf.finance_user_id  = #{financeUserid} and lf.loan_id = l.loan_id  and l.loan_status = 300"
+    })
+    int countSelledLoanByFinanceUser(Long financeUserid);
 
     @Select({
             "select count(*)",

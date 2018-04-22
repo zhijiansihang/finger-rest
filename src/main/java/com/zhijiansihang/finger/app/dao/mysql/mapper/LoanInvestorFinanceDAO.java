@@ -88,6 +88,13 @@ public interface LoanInvestorFinanceDAO {
     int countByFinanceUserid(Long userId);
 
     @Select({
+            "select count(distinct user_id)",
+            "from loan_investor_finance",
+            "where finance_user_id = #{userId,jdbcType=BIGINT}"
+    })
+    int countUserByFinanceUserid(Long userId);
+
+    @Select({
             "select u.logo,u.user_id,lif.create_time,lif.id,l.title,lif.amount,u.real_name",
             "from loan_investor_finance lif,loan l,user u",
             "where lif.loan_id = l.loan_id and lif.user_id = u.user_id  and lif.finance_user_id = #{userId,jdbcType=BIGINT} and is_deal = 0",
