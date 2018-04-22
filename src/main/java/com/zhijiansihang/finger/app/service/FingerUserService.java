@@ -80,9 +80,8 @@ public class FingerUserService {
             criteria.andRolesIn(userVO.getRolesList());
         } else {
             // 默认显示 投资人 个人理财师 机构理财师
-            userVO.getRolesList().add((short) 1);
+            userVO.getRolesList().add((short) 3);
             userVO.getRolesList().add((short) 4);
-            userVO.getRolesList().add((short) 5);
             criteria.andRolesIn(userVO.getRolesList());
         }
 

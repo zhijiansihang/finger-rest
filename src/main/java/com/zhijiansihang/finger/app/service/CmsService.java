@@ -5,6 +5,7 @@ import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.CmsDO;
+import com.zhijiansihang.finger.app.sharing.SharingProperties;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.CmsVO;
 import org.slf4j.Logger;
@@ -38,8 +39,15 @@ public class CmsService {
         }
         return page;
     }
-
+    @Autowired
+    SharingProperties sharingProperties;
     public Response save(CmsVO cmsVO, Long userId) {
+        String serverLink = sharingProperties.getStaticServerLink();
+        String realAccessPath =  cmsVO.getImageAccessPath().replace(serverLink, "");
+        if( !realAccessPath.startsWith("/")){
+            realAccessPath = "/" + realAccessPath;
+        }
+        cmsVO.setImageAccessPath(realAccessPath);
         if(cmsVO.getId() == null){
             cmsVO.setCreateBy(userId);
             cmsVO.setCreateTime(new Date());
@@ -73,6 +81,8 @@ public class CmsService {
         if (cmsDO == null){
            return Response.error(" 数据不存在");
         }else{
+            String serverLink = sharingProperties.getStaticServerLink();
+            cmsDO.setImageAccessPath(serverLink + '/' + cmsDO.getImageAccessPath());
             return Response.success(cmsDO);
         }
 
