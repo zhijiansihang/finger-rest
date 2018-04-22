@@ -5,12 +5,10 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.zhijiansihang.common.Response;
+import com.zhijiansihang.finger.app.constant.LoanConsts;
 import com.zhijiansihang.finger.app.constant.UserConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.*;
-import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
-import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
-import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
-import com.zhijiansihang.finger.app.dao.mysql.model.UserInstitutionDetailDO;
+import com.zhijiansihang.finger.app.dao.mysql.model.*;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.UserVO;
 import com.zhijiansihang.sys.entity.Role;
@@ -57,6 +55,8 @@ public class FingerUserService {
 
     @Autowired
     UserFriendDAO userFriendDAO;
+    @Autowired
+    LoanDAO loanDAO;
     /**
      * 用户 分页列表
      *
@@ -103,7 +103,10 @@ public class FingerUserService {
                 newUserVO.setInvestTime(loanInvestorFinanceDAO.countInvestTime(userDO.getUserId()));
                 newUserVO.setTotalAmount(loanInvestorFinanceDAO.countTotalAmount(userDO.getUserId()));
                 if (newUserVO.getInstitutionUserId() != null){
-                    newUserVO.setInstitutionName(userDAO.selectByPrimaryKey(newUserVO.getInstitutionUserId()).getRealName());
+                    UserDO institutionUser = userDAO.selectByPrimaryKey(newUserVO.getInstitutionUserId());
+                    if (institutionUser != null){
+                        newUserVO.setInstitutionName(institutionUser.getNickName());
+                    }
                 }
                 userVOs.add(newUserVO);
             });
@@ -190,6 +193,15 @@ public class FingerUserService {
                 BeanUtils.copyProperties(userDO, newUserVO);
                 newUserVO.setInvestTime(loanInvestorFinanceDAO.countByFinanceUserid(userDO.getUserId()));
                 newUserVO.setTotalAmount(loanInvestorFinanceDAO.countTotalAmountByFinanceUserid(userDO.getUserId()));
+//                if (newUserVO.getInstitutionUserId() != null){
+//                    newUserVO.setInstitutionName(userDAO.selectByPrimaryKey(newUserVO.getInstitutionUserId()).getNickName());
+//                }
+                if (newUserVO.getInstitutionUserId() != null){
+                    UserDO institutionUser = userDAO.selectByPrimaryKey(newUserVO.getInstitutionUserId());
+                    if (institutionUser != null){
+                        newUserVO.setInstitutionName(institutionUser.getNickName());
+                    }
+                }
                 userVOs.add(newUserVO);
             });
 
@@ -401,8 +413,21 @@ public class FingerUserService {
         userService.lockUser(loginUserId + "", userVO.getUserId());
 //        userService.delete(userVO.getUserId());
         // 理财师转变为投资人
-
+        UserDOExample example = new UserDOExample();
+        UserDOExample.Criteria criteria = example.createCriteria();
+        criteria.andInstitutionUserIdEqualTo(userVO.getUserId());
+        userDAO.selectByExample(example).forEach( userDO -> {
+            userDO.setRoles(UserConsts.UserRolesEnum.INVESTOR.getRole().shortValue());
+            userDAO.updateByPrimaryKeySelective(userDO);
+        });
         // 结标
+        LoanDOExample loanDOExample = new LoanDOExample();
+        LoanDOExample.Criteria loanDOCriterial = loanDOExample.createCriteria();
+        loanDOCriterial.andInstitutionUserIdEqualTo(userVO.getUserId());
+        loanDAO.selectByExample(loanDOExample).forEach(loanDO -> {
+            loanDO.setLoanStatus(LoanConsts.LoanStatusEnum.LOAN_STATUS_END.getType());
+            loanDAO.updateByPrimaryKeySelective(loanDO);
+        });
     }
 
 

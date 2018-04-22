@@ -6,10 +6,8 @@ import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.constant.LoanConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanDAO;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanFinanceDAO;
-import com.zhijiansihang.finger.app.dao.mysql.model.LoanDO;
-import com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample;
-import com.zhijiansihang.finger.app.dao.mysql.model.LoanFinanceDO;
-import com.zhijiansihang.finger.app.dao.mysql.model.LoanFinanceDOExample;
+import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
+import com.zhijiansihang.finger.app.dao.mysql.model.*;
 import com.zhijiansihang.finger.app.tool.Page;
 import com.zhijiansihang.finger.app.vo.LoanVO;
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +29,8 @@ public class LoanService {
     @Autowired
     private LoanDAO loanDAO;
 
+    @Autowired
+    private UserDAO userDAO;
     @Autowired
     private LoanFinanceDAO loanFinanceDAO;
 
@@ -65,9 +65,11 @@ public class LoanService {
             criteria.andLoanStatusIn(loanVO.getStatus());
         }
 
-        if (id == (long)1 && loanVO.getInstitutionUserId() != null){
-            criteria.andInstitutionUserIdEqualTo(loanVO.getInstitutionUserId());
-        } else { //用户是admin
+        if (id == (long)1){ //用户是admin
+            if (loanVO.getInstitutionUserId() != null){
+                criteria.andInstitutionUserIdEqualTo(loanVO.getInstitutionUserId());
+            }
+        } else {
             criteria.andInstitutionUserIdEqualTo(id);
         }
 //
@@ -93,6 +95,12 @@ public class LoanService {
                 LoanVO newLoanVO = new LoanVO();
                 BeanUtils.copyProperties(loanDO, newLoanVO);
                 newLoanVO.setCountFinanceUser(loanFinanceDAO.countFinanceUserByLoanId(loanDO.getLoanId()));
+                if (newLoanVO.getInstitutionUserId() != null){
+                    UserDO institutionUser = userDAO.selectByPrimaryKey(newLoanVO.getInstitutionUserId());
+                    if (institutionUser != null){
+                        newLoanVO.setInstitutionName(institutionUser.getNickName());
+                    }
+                }
                 loanVOS.add(newLoanVO);
             });
 

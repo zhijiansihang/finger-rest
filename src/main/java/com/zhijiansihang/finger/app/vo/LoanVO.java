@@ -20,6 +20,8 @@ public class LoanVO extends LoanDO{
 
     public int countFinanceUser;
 
+    public String institutionName;
+
 
     public int getCurrentPage() {
         return currentPage;
@@ -59,5 +61,13 @@ public class LoanVO extends LoanDO{
 
     public void setCountFinanceUser(int countFinanceUser) {
         this.countFinanceUser = countFinanceUser;
+    }
+
+    public String getInstitutionName() {
+        return institutionName;
+    }
+
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName;
     }
 }
