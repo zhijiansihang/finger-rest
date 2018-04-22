@@ -43,7 +43,7 @@ public class Quartz {
     public void batchUserDemandSolution(){
         String px = "跑批需求方案匹配";
         logger.debug("==========>开始!");
-        boolean batch_lock_demo = redisLock.tryLock("lock_batchUserDemandSolution", 12, TimeUnit.SECONDS,2,TimeUnit.HOURS);
+        boolean batch_lock_demo = redisLock.tryLock("lock_batchUserDemandSolution", 12, TimeUnit.SECONDS,10,TimeUnit.MINUTES);
         if (!batch_lock_demo){
             logger.info(px+"==========>跑批获取batch_lock_demo失败,结束该次跑批!");
             return;
