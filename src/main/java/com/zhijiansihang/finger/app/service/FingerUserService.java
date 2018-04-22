@@ -6,10 +6,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.constant.UserConsts;
-import com.zhijiansihang.finger.app.dao.mysql.mapper.LoanInvestorFinanceDAO;
-import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
-import com.zhijiansihang.finger.app.dao.mysql.mapper.UserFinanceDetailDAO;
-import com.zhijiansihang.finger.app.dao.mysql.mapper.UserInstitutionDetailDAO;
+import com.zhijiansihang.finger.app.dao.mysql.mapper.*;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDOExample;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
@@ -53,6 +50,12 @@ public class FingerUserService {
     private UserService userService; // 若拆分系统改为远程调用
     @Autowired
     LoanInvestorFinanceDAO loanInvestorFinanceDAO;
+
+    @Autowired
+    LoanFinanceDAO loanFinanceDAO;
+
+    @Autowired
+    UserFriendDAO userFriendDAO;
     /**
      * 用户 分页列表
      *
@@ -212,6 +215,12 @@ public class FingerUserService {
         Map<String,Object> root = Maps.newHashMap();
         root.put("user",userDAO.selectByPrimaryKey(userId));
         root.put("fb",userFinanceDetailDAO.selectByPrimaryKey(userId));
+
+        root.put("userFriend", userFriendDAO.countByUserid(userId));
+        root.put("fbSelling",loanFinanceDAO.countSellingLoanByFinanceUser(userId));
+        root.put("fbSelled",loanFinanceDAO.countSelledLoanByFinanceUser(userId));
+        root.put("fbService",loanInvestorFinanceDAO.countUserByFinanceUserid(userId));
+        root.put("appointment",loanInvestorFinanceDAO.countByFinanceUserid(userId));
         return Response.success(root);
     }
 
