@@ -369,7 +369,7 @@ public class FingerUserService {
 //        UserDO userDO = userDAO.selectByPrimaryKey(userVO.getUserId());
         com.zhijiansihang.sys.vo.UserVO admUserVo = new com.zhijiansihang.sys.vo.UserVO();
         admUserVo.setAuthId(userVO.getAuthId());
-        admUserVo.setAuthPass(enPass);
+        admUserVo.setAuthPass(userVO.getAuthPass());
         admUserVo.setId(userVO.getUserId());
         admUserVo.setPhone(userVO.getMobile());
         // 机构角色

@@ -6,11 +6,13 @@ import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.constant.CmsConsts;
 import com.zhijiansihang.finger.app.service.LoanService;
 import com.zhijiansihang.finger.app.vo.LoanVO;
+import com.zhijiansihang.gateway.security.core.JwtUserDetails;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,7 +40,8 @@ public class LoanController {
     @RequestMapping(value = "/page")
     @ResponseBody
     public Response page(@RequestBody LoanVO loanVO) {
-        return Response.success(loanService.findLoanPage(loanVO));
+        JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return Response.success(loanService.findLoanPage(loanVO, principal.getId()));
     }
 
     /**

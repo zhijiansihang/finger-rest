@@ -30,6 +30,17 @@ public class FingerUserController {
     @Autowired
     private FingerUserService fingerUserService;
 
+
+    /**
+     *  用户 根据Id获取
+     * @return
+     */
+    @RequestMapping(value = "/loginuser")
+    @ResponseBody
+    public Response loginUser() {
+        JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return fingerUserService.getByUserId(principal.getId());
+    }
     /**
      *  用户 分页
      * @return

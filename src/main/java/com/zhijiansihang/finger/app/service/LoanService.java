@@ -39,9 +39,10 @@ public class LoanService {
      * 标的 分页列表
      *
      * @param loanVO
+     * @param id
      * @return
      */
-    public Page findLoanPage(LoanVO loanVO) {
+    public Page findLoanPage(LoanVO loanVO, Long id) {
         logger.info("分页标的 列表");
 
         Page<LoanVO,LoanVO> page = Page.create();
@@ -63,8 +64,11 @@ public class LoanService {
         if(loanVO.getStatus() != null && loanVO.getStatus().size() > 0){
             criteria.andLoanStatusIn(loanVO.getStatus());
         }
-        if(loanVO.getInstitutionUserId() != null){
+
+        if (id == (long)1 && loanVO.getInstitutionUserId() != null){
             criteria.andInstitutionUserIdEqualTo(loanVO.getInstitutionUserId());
+        } else { //用户是admin
+            criteria.andInstitutionUserIdEqualTo(id);
         }
 //
 //        if(loanVO.getRolesList().size() > 0){
