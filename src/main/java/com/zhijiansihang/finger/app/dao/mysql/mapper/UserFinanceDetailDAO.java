@@ -86,7 +86,7 @@ public interface UserFinanceDetailDAO {
 
 
     @Select({
-            "select ufd.*,u.logo,u.real_name,u.institution_name",
+            "select ufd.*,u.logo,u.real_name,u.institution_name,u.nick_name",
             "from user_collection uc,user_finance_detail ufd,user u",
             "where uc.content_id=ufd.user_id and ufd.user_id=u.user_id and uc.user_id = #{userId,jdbcType=BIGINT} AND uc.content_type=1 ",
             "order by uc.create_time desc"
@@ -111,7 +111,7 @@ public interface UserFinanceDetailDAO {
     int addUserOrderCount(Long userId);
 
     @Select({
-            "select ufd.*,u.logo,u.real_name",
+            "select ufd.*,u.logo,u.real_name,u.nick_name",
             "from loan_finance lf,user_finance_detail ufd,user u",
             "where lf.loan_id = #{loanId} and lf.finance_user_id=ufd.user_id and ufd.user_id=u.user_id ",
             "order by lf.create_time desc"

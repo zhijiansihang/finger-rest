@@ -88,7 +88,7 @@ public class SingleSolutionDemandListService implements MessageService<SingleSol
 			}else {
 				elem.setLogo(sharingProperties.getStaticServerLink()+solutionMatchDemandResult.getLogo().trim());
 			}
-			elem.setRealName(CheckTools.nullToEmptyString(solutionMatchDemandResult.getRealName()));
+			elem.setRealName(CheckTools.nullToEmptyString(solutionMatchDemandResult.getNickName()));
 			elem.setSerialNumber(solutionMatchDemandResult.getSerialNumber().toString());
 		}
 		return elems;

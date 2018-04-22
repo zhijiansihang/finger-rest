@@ -94,7 +94,7 @@
 
   <select id="selectByFinanceType" parameterType="com.zhijiansihang.finger.app.vo.UserFinanceDetailSelect" resultMap="BaseResultMapEx">
     select
-    ufd.*,u.logo,u.real_name,u.institution_name
+    ufd.*,u.logo,u.real_name,u.institution_name,u.nick_name
     from user_finance_detail ufd,user u,user_institution_detail uid
     where ufd.user_id = u.user_id and uid.user_id = u.institution_user_id
     <if test="financeType != null and financeType == 0">

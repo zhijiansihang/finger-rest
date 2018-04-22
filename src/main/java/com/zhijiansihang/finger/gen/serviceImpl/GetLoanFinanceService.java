@@ -59,7 +59,7 @@ public class GetLoanFinanceService implements MessageService<GetLoanFinanceReque
 				elem.setLogo(sharingProperties.getStaticServerLink() + userFinanceDetailVO.getLogo());
 			}
 
-			elem.setRealName(userFinanceDetailVO.getRealName()==null?"":userFinanceDetailVO.getRealName());
+			elem.setRealName(userFinanceDetailVO.getNickName()==null?"":userFinanceDetailVO.getNickName());
 			elem.setUserId(userFinanceDetailVO.getUserId().toString());
 			elem.setWorkAge(userFinanceDetailVO.getWorkAge() == null ? "1":userFinanceDetailVO.getWorkAge().toString());		}
 

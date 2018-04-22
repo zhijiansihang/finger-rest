@@ -81,7 +81,7 @@ public class MyFriendsService implements MessageService<MyFriendsRequest, Respon
             }else {
                 elem.setLogo("");
             }
-            elem.setRealName(userDO.getRealName());
+            elem.setRealName(userDO.getNickName());
         }
 
         return elems;

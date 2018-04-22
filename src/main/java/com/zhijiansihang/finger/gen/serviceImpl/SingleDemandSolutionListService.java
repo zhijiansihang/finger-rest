@@ -89,7 +89,7 @@ public class SingleDemandSolutionListService implements MessageService<SingleDem
 			}else {
 				elem.setLogo(sharingProperties.getStaticServerLink()+demandMatchSolutionResult.getLogo().trim());
 			}
-			elem.setRealName(CheckTools.nullToEmptyString(demandMatchSolutionResult.getRealName()));
+			elem.setRealName(CheckTools.nullToEmptyString(demandMatchSolutionResult.getNickName()));
 			elem.setSerialNumber(demandMatchSolutionResult.getSerialNumber().toString());
 			elem.setServiceDirection(CheckTools.nullToEmptyString(demandMatchSolutionResult.getServiceDirection()));
 			elem.setSolutionId(demandMatchSolutionResult.getSolutionId().toString());

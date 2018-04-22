@@ -16,6 +16,16 @@ public class DemandMatchSolutionResult {
     private Long solutionUserId;
     private String serviceDirection;
 
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    private String nickName;
+
     public Long getAdoptCount() {
         return adoptCount;
     }
