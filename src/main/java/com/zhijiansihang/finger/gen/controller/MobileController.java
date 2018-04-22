@@ -223,6 +223,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<IsHasMatchDemandSolutionRequest, Response<IsHasMatchDemandSolutionResponse>> genIsHasMatchDemandSolutionService;
 
+	@Qualifier("isRegisterJgService")
+	@Autowired(required = false)
+	MessageService<IsRegisterJgRequest, Response<IsRegisterJgResponse>> isRegisterJgService;
+	@Qualifier("genisRegisterJgService")
+	@Autowired(required = false)
+	MessageService<IsRegisterJgRequest, Response<IsRegisterJgResponse>> genIsRegisterJgService;
+
 	@Qualifier("loanInvestorDetailService")
 	@Autowired(required = false)
 	MessageService<LoanInvestorDetailRequest, Response<LoanInvestorDetailResponse>> loanInvestorDetailService;
@@ -938,6 +945,26 @@ public class MobileController {
 		response = getIsHasMatchDemandSolutionResponse(request);
 		
 		logResponse("isHasMatchDemandSolution", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/isRegisterJg", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<IsRegisterJgResponse> isRegisterJg(@RequestBody IsRegisterJgRequest request) {
+
+		logRequest("isRegisterJg", request);
+
+  		Response<IsRegisterJgResponse> response = new Response<>();
+
+		request = (IsRegisterJgRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getIsRegisterJgResponse(request);
+		
+		logResponse("isRegisterJg", response);
 
 		return response;
 	}
@@ -1761,6 +1788,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, IsHasMatchDemandSolutionRequest.class, IsHasMatchDemandSolutionResponse.class);
+	}
+
+	private Response<IsRegisterJgResponse> getIsRegisterJgResponse(IsRegisterJgRequest request) {
+
+		MessageService<IsRegisterJgRequest, Response<IsRegisterJgResponse>> service = isRegisterJgService;
+		if (service == null) {
+			service = genIsRegisterJgService;
+		}
+
+		return mobileService.service(request, service, IsRegisterJgRequest.class, IsRegisterJgResponse.class);
 	}
 
 	private Response<LoanInvestorDetailResponse> getLoanInvestorDetailResponse(LoanInvestorDetailRequest request) {

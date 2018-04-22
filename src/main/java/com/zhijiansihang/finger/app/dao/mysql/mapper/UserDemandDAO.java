@@ -114,7 +114,7 @@ public interface UserDemandDAO {
 
 
     @Update({
-           "update user_demand set last_batch_sid = null and match_solution_count = 0 where is_deleted = 0 and is_closed = 0 and user_id = #{userId} "
+           "update user_demand set last_batch_sid = null , match_solution_count = 0 where is_deleted = 0 and is_closed = 0 and user_id = #{userId} "
     })
     int updateAgainRishBatchByUserid(Long userId);
 
