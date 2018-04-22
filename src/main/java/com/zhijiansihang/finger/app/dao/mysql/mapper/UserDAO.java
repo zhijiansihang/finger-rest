@@ -86,4 +86,11 @@ public interface UserDAO {
 
     int countByExample(UserDOExample example);
 
+    @Select({
+            "select count(*) ",
+            "from user",
+            "where institution_user_id = #{institutionUserId} and roles = 4"
+    })
+    int countFinanceUserByInstitutionUserId(Long institutionUserId);
+
 }

@@ -2,6 +2,8 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanFinanceDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.LoanFinanceDOExample;
+
+import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -90,4 +92,15 @@ public interface LoanFinanceDAO {
             "where loan_id = #{loanId}"
     })
     void deleteByLoanId(Long loanId);
+
+
+    @Select({
+            "select count(*)",
+            "from loan_finance",
+            "where finance_user_id in (" ,
+            "select user_id ",
+            "from user",
+            "where institution_user_id = #{institutionUserId} and roles = 4)"
+    })
+    BigDecimal countLoanByInstitutionUserId(Long institutionUserId);
 }

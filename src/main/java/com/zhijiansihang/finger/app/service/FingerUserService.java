@@ -37,6 +37,7 @@ public class FingerUserService {
 
     @Autowired
     private UserDAO userDAO;
+
     @Autowired
     private UserFinanceDetailDAO userFinanceDetailDAO;
 
@@ -101,6 +102,9 @@ public class FingerUserService {
                 BeanUtils.copyProperties(userDO, newUserVO);
                 newUserVO.setInvestTime(loanInvestorFinanceDAO.countInvestTime(userDO.getUserId()));
                 newUserVO.setTotalAmount(loanInvestorFinanceDAO.countTotalAmount(userDO.getUserId()));
+                if (newUserVO.getInstitutionUserId() != null){
+                    newUserVO.setInstitutionName(userDAO.selectByPrimaryKey(newUserVO.getInstitutionUserId()).getRealName());
+                }
                 userVOs.add(newUserVO);
             });
 
@@ -142,7 +146,6 @@ public class FingerUserService {
      * 理财师 分页列表
      *
      * @param userVO
-     * @param userId
      * @return
      */
     public Page findUserFbPage(UserVO userVO, String loginName) {
@@ -287,8 +290,8 @@ public class FingerUserService {
             userDOs.forEach(userDO -> {
                 UserVO newUserVO = new UserVO();
                 BeanUtils.copyProperties(userDO, newUserVO);
-                newUserVO.setInvestTime(loanInvestorFinanceDAO.countByFinanceUserid(userDO.getUserId()));
-                newUserVO.setTotalAmount(loanInvestorFinanceDAO.countTotalAmountByFinanceUserid(userDO.getUserId()));
+                newUserVO.setInvestTime(userDAO.countFinanceUserByInstitutionUserId(userDO.getUserId())); // 理财师 不想加字段了
+                newUserVO.setTotalAmount(loanFinanceDAO.countLoanByInstitutionUserId(userDO.getUserId())); // 产品数量
                 userVOs.add(newUserVO);
             });
 

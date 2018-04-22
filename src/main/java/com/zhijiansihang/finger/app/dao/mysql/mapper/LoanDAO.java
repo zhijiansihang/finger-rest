@@ -163,4 +163,5 @@ public interface LoanDAO {
     int countByCollectionLoan(LoanDO select);
 
     List<LoanDO> selectByCollectionLoan(LoanDO select, RowBounds rowBounds);
+
 }
