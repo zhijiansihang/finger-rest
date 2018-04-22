@@ -32,7 +32,7 @@ public class FingerUserController {
 
 
     /**
-     *  用户 根据Id获取
+     *  登录用户
      * @return
      */
     @RequestMapping(value = "/loginuser")
@@ -40,6 +40,16 @@ public class FingerUserController {
     public Response loginUser() {
         JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return fingerUserService.getByUserId(principal.getId());
+    }
+    /**
+     *  用户 根据Id获取
+     * @return
+     */
+    @RequestMapping(value = "/reset")
+    @ResponseBody
+    public Response reset(@RequestBody UserVO userVO) throws ValidationException {
+        JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return fingerUserService.reset(userVO.getUserId(), principal.getId());
     }
     /**
      *  用户 分页

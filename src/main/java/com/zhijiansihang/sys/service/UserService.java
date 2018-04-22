@@ -201,6 +201,36 @@ public class UserService {
 
     }
 
+
+    /**
+     * 重置密码
+     * @param userId
+     * @param newPass
+     * @param loginUserId
+     * @throws ValidationException
+     */
+    public void resetPwd(Long userId, String newPass, Long loginUserId) throws ValidationException {
+        User user = this.findById(userId);
+        user.getUserAuths().forEach( userAuth -> {
+            userAuth.setAuthPass(MD5.encodeByMd5AndSalt(newPass));
+            userAuth.setPassTime(new Date());
+            userAuth.setUpdateBy(loginUserId + "");
+            userAuth.setUpdateTime(new Date());
+            this.userAuthRepository.saveAndFlush(userAuth);
+        });
+//        try {
+//            UserAuth userAuth = new UserAuth();
+////            userAuth.setUser(user);
+//
+//        } catch (Exception e) {
+//            if(logger.isErrorEnabled()){
+//                logger.info("========[重置密码出现异常]，errorMSG：{}",e.getMessage());
+//            }
+//            throw new RuntimeException(e.getMessage(),e);
+//        }
+
+    }
+
     /**
      * 锁定、解锁账户
      * @param loginUserId

@@ -423,4 +423,11 @@ public class FingerUserService {
         criteria.andRolesEqualTo((short)2);
         return Response.success(userDAO.selectByExample(example));
     }
+
+    public Response reset(Long userId, Long loginUserId) throws ValidationException {
+        UserDO user =  userDAO.selectByPrimaryKey(userId);
+       String newPass =  user.getMobile().substring(7, 11) + "111111";
+        userService.resetPwd(userId, newPass, loginUserId);
+        return Response.success("修改成功！");
+    }
 }
