@@ -105,7 +105,7 @@ public class FinanceDetailService implements MessageService<FinanceDetailRequest
 		}
 		response.getBody().setPersonalProfile(CheckTools.nullToEmptyString(userFinanceDetailDO.getPersonalProfile()));
 		response.getBody().setPosition(CheckTools.nullToEmptyString(userFinanceDetailDO.getPosition()));
-		response.getBody().setRealName(CheckTools.nullToEmptyString(financeUserDO.getRealName()));
+		response.getBody().setRealName(CheckTools.nullToEmptyString(financeUserDO.getNickName()));
 		response.getBody().setSchoolName(CheckTools.nullToEmptyString(userFinanceDetailDO.getSchoolName()));
 		{
 			int count = loanFinanceDAO.countSellingLoanByFinanceUser(Long.parseLong(financeUserid));

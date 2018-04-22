@@ -92,7 +92,7 @@ public class SelectFinanceService implements MessageService<SelectFinanceRequest
 				elem.setLogo("");
 			}
 			elem.setPosition(CheckTools.nullToEmptyString(userFinanceDetailVO.getPosition()));
-			elem.setRealName(CheckTools.nullToEmptyString(userFinanceDetailVO.getRealName()));
+			elem.setRealName(CheckTools.nullToEmptyString(userFinanceDetailVO.getNickName()));
 			elem.setServiceDirection(CheckTools.nullToEmptyString(userFinanceDetailVO.getServiceDirection()));
 			elem.setUserId(userFinanceDetailVO.getUserId().toString());
 			elem.setUserOrderCount(userFinanceDetailVO.getUserOrderCount() == null ? "0" : userFinanceDetailVO.getUserOrderCount().toString());
