@@ -88,7 +88,7 @@ public class FingerUserService {
             userVO.getRolesList().add((short) 4);
             criteria.andRolesIn(userVO.getRolesList());
         }
-
+        example.setOrderByClause("create_time desc");
         // 条数
         int countByUserVO = userDAO.countByExample(example);
         page.setRecordCount(countByUserVO);
@@ -162,7 +162,7 @@ public class FingerUserService {
         UserDOExample.Criteria criteria = example.createCriteria();
 
         userVO.getRolesList().add((short) 4);
-        userVO.getRolesList().add((short) 5);
+//        userVO.getRolesList().add((short) 5);
         criteria.andRolesIn(userVO.getRolesList());
         if(userVO.getUserId() != null){
             criteria.andUserIdEqualTo(userVO.getUserId());
@@ -178,7 +178,7 @@ public class FingerUserService {
         if (!loginName.equals("admin")){
             criteria.andInstitutionNameEqualTo(loginName);
         }
-
+        example.setOrderByClause("create_time desc");
         // 条数
         int countByUserVO = userDAO.countByExample(example);
         page.setRecordCount(countByUserVO);
@@ -210,14 +210,27 @@ public class FingerUserService {
         return page;
     }
 
-    public List<UserDO> findUserFbList(UserVO userVO) {
+    public List<UserVO> findUserFbList(UserVO userVO, String loginName) {
         UserDOExample example = new UserDOExample();
         UserDOExample.Criteria criteria = example.createCriteria();
+        if (!loginName.equals("admin")){
+            criteria.andInstitutionNameEqualTo(loginName);
+        }
+        example.setOrderByClause("create_time desc");
         userVO.getRolesList().add((short) 4);
-        userVO.getRolesList().add((short) 5);
+//        userVO.getRolesList().add((short) 5);
         criteria.andRolesIn(userVO.getRolesList());
+        List<UserVO> userVOs = Lists.newArrayList();
 
-        return userDAO.selectByExample(example);
+        List<UserDO> userDOs =  userDAO.selectByExample(example);
+        userDOs.forEach(userDO -> {
+            UserVO newUserVO = new UserVO();
+            BeanUtils.copyProperties(userDO, newUserVO);
+            newUserVO.setInvestTime(loanInvestorFinanceDAO.countByFinanceUserid(userDO.getUserId()));
+            userVOs.add(newUserVO);
+        });
+
+        return userVOs;
     }
 
     /**
@@ -289,6 +302,7 @@ public class FingerUserService {
         if(userVO.getInstitutionName() != null){
             criteria.andInstitutionNameLike(userVO.getInstitutionName());
         }
+        example.setOrderByClause("create_time desc");
         // 条数
         int countByUserVO = userDAO.countByExample(example);
         page.setRecordCount(countByUserVO);
