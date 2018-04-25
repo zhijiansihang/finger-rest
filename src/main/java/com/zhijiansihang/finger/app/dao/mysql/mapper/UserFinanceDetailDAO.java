@@ -86,7 +86,7 @@ public interface UserFinanceDetailDAO {
 
 
     @Select({
-            "select ufd.*,u.logo,u.real_name,u.institution_name,u.nick_name",
+            "select ufd.*,u.logo,u.real_name,u.institution_name,u.nick_name,uc.id",
             "from user_collection uc,user_finance_detail ufd,user u",
             "where uc.content_id=ufd.user_id and ufd.user_id=u.user_id and uc.user_id = #{userId,jdbcType=BIGINT} AND uc.content_type=1 ",
             "order by uc.create_time desc"

@@ -31,6 +31,7 @@ public class MyCollectionLoanResponse extends MobileMessage {
 		private String beginAmount;
 		private String brightSpot;
 		private String fundType;
+		private String id;
 		private String interestRate;
 		private String investmentDeadline;
 		private String isRateFloating;
@@ -84,6 +85,17 @@ public class MyCollectionLoanResponse extends MobileMessage {
 
 		public void setFundType(String fundType) {
 			this.fundType = fundType;
+		}
+
+		/**
+		 * @return 删除id
+		 */
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
 		}
 
 		/**

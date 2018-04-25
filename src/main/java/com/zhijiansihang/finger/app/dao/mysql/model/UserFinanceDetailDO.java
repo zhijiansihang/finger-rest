@@ -371,4 +371,5 @@ public class UserFinanceDetailDO implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
 }

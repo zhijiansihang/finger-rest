@@ -29,6 +29,7 @@ public class MyCollectionPersonResponse extends MobileMessage {
 
 		private String adoptCount;
 		private String financeUserId;
+		private String id;
 		private String institutionName;
 		private String isNameAuth;
 		private String loanCount;
@@ -58,6 +59,17 @@ public class MyCollectionPersonResponse extends MobileMessage {
 
 		public void setFinanceUserId(String financeUserId) {
 			this.financeUserId = financeUserId;
+		}
+
+		/**
+		 * @return 
+		 */
+		public String getId() {
+			return id;
+		}
+
+		public void setId(String id) {
+			this.id = id;
 		}
 
 		/**

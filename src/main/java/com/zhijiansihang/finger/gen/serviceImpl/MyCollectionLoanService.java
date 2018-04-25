@@ -111,6 +111,7 @@ public class MyCollectionLoanService implements MessageService<MyCollectionLoanR
 			elem.setProgress(reserveAmount.divide(amount,2, RoundingMode.HALF_UP).toEngineeringString());
 			elem.setSafeguardWay(loanDO.getSafeguardWay());
 			elem.setTitle(loanDO.getTitle());
+			elem.setId(loanDO.getId().toString());
 		}
 
 
