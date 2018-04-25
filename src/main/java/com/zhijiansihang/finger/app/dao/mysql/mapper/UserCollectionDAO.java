@@ -11,9 +11,9 @@ import org.apache.ibatis.session.RowBounds;
 public interface UserCollectionDAO {
     @Delete({
         "delete from user_collection",
-        "where id = #{id,jdbcType=BIGINT}"
+        "where id = #{id} and user_id = #{userid} "
     })
-    int deleteByPrimaryKey(Long id);
+    int deleteByPrimaryKey(@Param("id") Long id,@Param("userid") Long userid);
 
     @Insert({
         "insert into user_collection (user_id, content_id, ",
@@ -57,6 +57,13 @@ public interface UserCollectionDAO {
             "where user_id = #{userId} AND content_id=#{contentId} AND content_type=#{contentType}"
     })
     int existContentidtypeAndUserid(UserCollectionDO userCollection);
+
+    @Select({
+            "select count(*)",
+            "from user_collection",
+            "where user_id = #{userId} AND content_id=#{contentId} AND content_type=#{contentType}"
+    })
+    UserCollectionDO getContentidtypeAndUserid(UserCollectionDO userCollection);
 
     @Select({
             "select count(*)",

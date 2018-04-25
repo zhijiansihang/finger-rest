@@ -86,6 +86,7 @@ public class MyCollectionPersonService implements MessageService<MyCollectionPer
             }
             elem.setRealName(CheckTools.nullToEmptyString(userFinanceDetailVO.getNickName()));
             elem.setUserOrderCount(userFinanceDetailVO.getUserOrderCount() == null ? "0" : userFinanceDetailVO.getUserOrderCount().toString());
+            elem.setId(userFinanceDetailVO.getId().toString());
         }
         return elems;
     }

@@ -5,6 +5,7 @@ import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserCollectionDAO;
 import com.zhijiansihang.finger.gen.entity.DeleteSolutionRequest;
 import com.zhijiansihang.finger.gen.entity.DeleteSolutionResponse;
+import com.zhijiansihang.finger.gen.tool.UserTools;
 import com.zhijiansihang.finger.mmc.MessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,7 @@ public class DeleteSolutionService implements MessageService<DeleteSolutionReque
 	@Override
 	public void execute(DeleteSolutionRequest request, Response<DeleteSolutionResponse> response) {
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
-		userCollectionDAO.deleteByPrimaryKey(Long.parseLong(request.getId()));
+		Long userid = UserTools.getLoginUser().getId();
+		userCollectionDAO.deleteByPrimaryKey(Long.parseLong(request.getId()),userid.longValue());
 	}
 }

@@ -42,6 +42,7 @@ public class AddSolutionService implements MessageService<AddSolutionRequest, Re
 		String type = request.getType();
 		String id = request.getId();
 		UserCollectionDO userCollection =new UserCollectionDO();
+		userCollection.setUserId(loginUserid);
 		userCollection.setContentId(Long.parseLong(id));
 		userCollection.setContentType(Byte.parseByte(type));
 		String redisKey = this.getClass().getName() + "_" + loginUserid.toString();

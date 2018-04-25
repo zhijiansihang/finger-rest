@@ -43,6 +43,7 @@ public class MyCollectionPersonService implements MessageService<MyCollectionPer
 
 		elem.setAdoptCount("45");
 		elem.setFinanceUserId("10000");
+		elem.setId("1");
 		elem.setInstitutionName("1");
 		elem.setIsNameAuth("1");
 		elem.setLoanCount("2");

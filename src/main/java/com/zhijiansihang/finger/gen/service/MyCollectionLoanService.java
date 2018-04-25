@@ -45,6 +45,7 @@ public class MyCollectionLoanService implements MessageService<MyCollectionLoanR
 		elem.setBeginAmount("1");
 		elem.setBrightSpot("0");
 		elem.setFundType("1");
+		elem.setId("");
 		elem.setInterestRate("10");
 		elem.setInvestmentDeadline("10");
 		elem.setIsRateFloating("0");

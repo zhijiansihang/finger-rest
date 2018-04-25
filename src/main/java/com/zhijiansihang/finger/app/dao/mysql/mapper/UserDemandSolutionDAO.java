@@ -174,12 +174,28 @@ public interface UserDemandSolutionDAO {
 
 
     @Select({
-            "select us.adopt_count,ufc.friend_counts,uds.id,u.institution_name,uds.is_operate_solution,u.logo,u.real_name,u.nick_name,",
-            "us.serial_number,uds.solution_id,uds.solution_user_id,ufd.service_direction",
-            "from user_demand_solution uds ,user u,user_solution us,user_friend_count ufc,user_finance_detail ufd",
-            "where uds.solution_user_id = u.user_id and uds.solution_id = us.id and uds.solution_user_id = ufc.user_id and uds.solution_user_id = ufd.user_id",
-            "order by us.adopt_count desc , uds.create_time desc",
-            "limit 0,10"
+            "SELECT  " +
+                    "    us.adopt_count, " +
+                    "    ufc.friend_counts,  " +
+                    "    u.institution_name, " +
+                    "    u.logo, " +
+                    "    u.real_name, " +
+                    "    u.nick_name, " +
+                    "    us.serial_number, " +
+                    "    us.id as solution_id, " +
+                    "    us.user_id as solution_user_id, " +
+                    "    ufd.service_direction " +
+                    "FROM " +
+                    "    user u, " +
+                    "    user_solution us, " +
+                    "    user_friend_count ufc, " +
+                    "    user_finance_detail ufd " +
+                    "WHERE " +
+                    "    us.user_id = u.user_id " +
+                    "        AND us.user_id = ufc.user_id " +
+                    "        AND us.user_id = ufd.user_id " +
+                    "ORDER BY us.adopt_count DESC , us.create_time DESC " +
+                    "LIMIT 0 , 10"
     })
     @Results({
             @Result(property = "adoptCount", column = "adopt_count"),

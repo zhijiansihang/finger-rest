@@ -4,6 +4,7 @@ import com.zhijiansihang.common.Response;
 import com.zhijiansihang.finger.app.constant.CmsConsts;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserDAO;
 import com.zhijiansihang.finger.app.dao.mysql.model.UserDO;
+import com.zhijiansihang.finger.gen.tool.UserTools;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
@@ -28,13 +29,17 @@ public class FileUploadController {
     private static Logger logger = LoggerFactory.getLogger(FileUploadController.class);
     @Autowired
     UserDAO userDAO;
-    @PostMapping("/user/avatar/upload/{userId}")
+    @PostMapping("/app/user/avatar/upload/{userId}")
     @ResponseBody
     public Response<String> handleFileUpload(@RequestParam("file") MultipartFile file,
                                      @PathVariable("userId") Integer userId ) throws Exception {
+            Long userid1 = UserTools.getLoginUser().getId();
 
         if (userId == null || userId.intValue() <=0){
-            Response.error("请求参数有问题呢");
+            return Response.error("请求参数有问题呢");
+        }
+        if (userid1.intValue() != userId.intValue()){
+            return Response.error("非本人操作");
         }
         String storageLocationPrefix = avatar.getStorageLocationPrefix();
         String accessLocationPrefix = avatar.getAccessLocationPrefix();

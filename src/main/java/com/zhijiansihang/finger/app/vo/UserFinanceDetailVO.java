@@ -48,5 +48,16 @@ public class UserFinanceDetailVO extends UserFinanceDetailDO {
 
     private String nickName;
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * 多余字段
+     */
+    private Long id;
 }

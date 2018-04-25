@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class LoanDO implements Serializable {
+
     /**
      * 标id
      */
@@ -880,4 +881,17 @@ public class LoanDO implements Serializable {
         sb.append("]");
         return sb.toString();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * 多余字段
+     */
+    private Long id;
 }

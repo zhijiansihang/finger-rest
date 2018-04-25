@@ -609,7 +609,7 @@
   </select>
 
   <select id="selectByCollectionLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultMap="BaseResultMap">
-    select l.* from loan l ,user_collection u where l.loan_id = u.content_id and u.content_type =2 and u.user_id =#{institutionUserId}
+    select l.*,u.id from loan l ,user_collection u where l.loan_id = u.content_id and u.content_type =2 and u.user_id =#{institutionUserId}
     <if test="loanType != null">
       and  l.loan_type = #{loanType}
     </if>

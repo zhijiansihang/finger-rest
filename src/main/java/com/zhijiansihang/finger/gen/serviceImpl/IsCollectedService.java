@@ -37,11 +37,11 @@ public class IsCollectedService implements MessageService<IsCollectedRequest, Re
 		userCollectionDO.setUserId(userid);
 		userCollectionDO.setContentId(Long.parseLong(id));
 		userCollectionDO.setContentType(Byte.valueOf(type));
-		int i = userCollectionDAO.existContentidtypeAndUserid(userCollectionDO);
-		if (i>0){
-			response.getBody().setStatus("1");
+		UserCollectionDO i = userCollectionDAO.getContentidtypeAndUserid(userCollectionDO);
+		if (i != null ){
+			response.getBody().setStatus(i.getId().toString());
 		}else{
-			response.getBody().setStatus("0");
+			response.getBody().setStatus("");
 		}
 
 
