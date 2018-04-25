@@ -29,7 +29,7 @@ public class FileUploadController {
     private static Logger logger = LoggerFactory.getLogger(FileUploadController.class);
     @Autowired
     UserDAO userDAO;
-    @PostMapping("/user/avatar/upload/{userId}")
+    @PostMapping("/app/user/avatar/upload/{userId}")
     @ResponseBody
     public Response<String> handleFileUpload(@RequestParam("file") MultipartFile file,
                                      @PathVariable("userId") Integer userId ) throws Exception {
