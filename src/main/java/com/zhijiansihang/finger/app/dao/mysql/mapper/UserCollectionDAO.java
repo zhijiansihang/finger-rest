@@ -61,6 +61,13 @@ public interface UserCollectionDAO {
     @Select({
             "select count(*)",
             "from user_collection",
+            "where user_id = #{userId} AND content_id=#{contentId} AND content_type=#{contentType}"
+    })
+    UserCollectionDO getContentidtypeAndUserid(UserCollectionDO userCollection);
+
+    @Select({
+            "select count(*)",
+            "from user_collection",
             "where user_id = #{userId} AND content_type=1"
     })
     int countFinanceByUserid(Long userId);
