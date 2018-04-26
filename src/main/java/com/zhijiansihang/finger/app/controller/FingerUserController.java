@@ -99,7 +99,8 @@ public class FingerUserController {
     @RequestMapping(value = "/fb/list")
     @ResponseBody
     public Response fbList(@RequestBody UserVO userVO) {
-        return Response.success(fingerUserService.findUserFbList(userVO));
+        JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return Response.success(fingerUserService.findUserFbList(userVO, principal.getUsername()));
     }
 
     /**

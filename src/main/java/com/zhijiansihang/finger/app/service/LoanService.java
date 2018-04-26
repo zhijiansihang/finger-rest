@@ -64,7 +64,6 @@ public class LoanService {
         if(loanVO.getStatus() != null && loanVO.getStatus().size() > 0){
             criteria.andLoanStatusIn(loanVO.getStatus());
         }
-
         if (id == (long)1){ //用户是admin
             if (loanVO.getInstitutionUserId() != null){
                 criteria.andInstitutionUserIdEqualTo(loanVO.getInstitutionUserId());
@@ -82,7 +81,7 @@ public class LoanService {
 //            loanVO.getRolesList().add((short) 5);
 //            criteria.andRolesIn(loanVO.getRolesList());
 //        }
-
+        example.setOrderByClause("create_time desc");
         // 条数
         int countByLoanVO = loanDAO.countByExample(example);
         page.setRecordCount(countByLoanVO);

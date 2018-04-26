@@ -99,7 +99,7 @@ public interface CmsDAO {
             "update_time, update_by",
             "from cms",
             "where type_code = #{typeCode}",
-            "order by id desc"
+            "order by create_time desc"
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO.BaseResultMap")
     List<CmsDO> selectByCmsVO(CmsVO cmsVO, RowBounds rowBounds);
