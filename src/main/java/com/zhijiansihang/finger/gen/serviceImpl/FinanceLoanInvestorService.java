@@ -87,7 +87,7 @@ public class FinanceLoanInvestorService implements MessageService<FinanceLoanInv
 
             elem.setAmount(loanInvestorFinanceVO.getAmount().toEngineeringString());
             elem.setId(loanInvestorFinanceVO.getId().toString());
-            elem.setRealName(CheckTools.nullToEmptyString(loanInvestorFinanceVO.getRealName()));
+            elem.setRealName(CheckTools.nullToEmptyString(loanInvestorFinanceVO.getNickName()));
             elem.setTitle(loanInvestorFinanceVO.getTitle());
             if (loanInvestorFinanceVO.getLogo() == null || loanInvestorFinanceVO.getLogo().length()==0){
                 elem.setLogo("");
