@@ -19,51 +19,48 @@ import java.util.List;
 
 /**
  * 获取标的理财师列表
- * 
  */
 @Component("getLoanFinanceService")
 public class GetLoanFinanceService implements MessageService<GetLoanFinanceRequest, Response<GetLoanFinanceResponse>> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(GetLoanFinanceService.class);
-	private static final String SERVICE_DESC = "获取标的理财师列表";
+    private static final Logger LOG = LoggerFactory.getLogger(GetLoanFinanceService.class);
+    private static final String SERVICE_DESC = "获取标的理财师列表";
 
-	@Autowired
-	UserFinanceDetailDAO userFinanceDetailDAO;
+    @Autowired
+    UserFinanceDetailDAO userFinanceDetailDAO;
 
-	@Autowired
-	SharingProperties sharingProperties;
-	@Override
-	public void execute(GetLoanFinanceRequest request, Response<GetLoanFinanceResponse> response) {
-		LOG.info("[{}][request={}]", SERVICE_DESC, request);
+    @Autowired
+    SharingProperties sharingProperties;
 
-		Long loanId = Long.parseLong(request.getLoanId());
+    @Override
+    public void execute(GetLoanFinanceRequest request, Response<GetLoanFinanceResponse> response) {
+        LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
-		List<UserFinanceDetailVO> loanFinance =
-				userFinanceDetailDAO.getLoanFinance(loanId);
-		response.getBody().setFinanceList(getFinanceList(loanFinance));
+        Long loanId = Long.parseLong(request.getLoanId());
 
-	}
+        List<UserFinanceDetailVO> loanFinance =
+                userFinanceDetailDAO.getLoanFinance(loanId);
+        response.getBody().setFinanceList(getFinanceList(loanFinance));
 
-	private List<FinanceListElement> getFinanceList(List<UserFinanceDetailVO> loanFinance) {
-		List<FinanceListElement> elems = new ArrayList<FinanceListElement>();
-		if(loanFinance==null){
-			return elems;
-		}
-		for (UserFinanceDetailVO userFinanceDetailVO :loanFinance){
-			FinanceListElement elem = new FinanceListElement();
-			elems.add(elem);
+    }
 
-			if (userFinanceDetailVO.getLogo() == null){
-				elem.setLogo("");
-			}else {
-				elem.setLogo(sharingProperties.getStaticServerLink() + userFinanceDetailVO.getLogo());
-			}
-
-			elem.setRealName(userFinanceDetailVO.getNickName()==null?"":userFinanceDetailVO.getNickName());
-			elem.setUserId(userFinanceDetailVO.getUserId().toString());
-			elem.setWorkAge(userFinanceDetailVO.getWorkAge() == null ? "1":userFinanceDetailVO.getWorkAge().toString());		}
-
-
-		return elems;
-	}
+    private List<FinanceListElement> getFinanceList(List<UserFinanceDetailVO> loanFinance) {
+        List<FinanceListElement> elems = new ArrayList<FinanceListElement>();
+        if (loanFinance == null) {
+            return elems;
+        }
+        for (UserFinanceDetailVO userFinanceDetailVO : loanFinance) {
+            FinanceListElement elem = new FinanceListElement();
+            elems.add(elem);
+            if (userFinanceDetailVO.getLogo() == null) {
+                elem.setLogo("");
+            } else {
+                elem.setLogo(sharingProperties.getStaticServerLink() + userFinanceDetailVO.getLogo());
+            }
+            elem.setRealName(userFinanceDetailVO.getNickName() == null ? "" : userFinanceDetailVO.getNickName());
+            elem.setUserId(userFinanceDetailVO.getUserId().toString());
+            elem.setWorkAge(userFinanceDetailVO.getServiceConcept() == null ? "" : userFinanceDetailVO.getServiceConcept());
+        }
+        return elems;
+    }
 }

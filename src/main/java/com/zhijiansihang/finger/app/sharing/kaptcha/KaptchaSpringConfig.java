@@ -46,7 +46,7 @@ public class KaptchaSpringConfig {
         //字体大小
         properties.setProperty("kaptcha.textproducer.font.size", "40");
         //文字间隔
-        properties.setProperty("kaptcha.textproducer.char.space", "5");
+        properties.setProperty("kaptcha.textproducer.char.space", "4");
 
         //properties.setProperty("kaptcha.session.key", "code");
         //        图片样式：

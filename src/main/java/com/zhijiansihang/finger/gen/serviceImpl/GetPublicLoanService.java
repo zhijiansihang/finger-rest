@@ -93,7 +93,24 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 		page.setCurrentPage(CheckTools.isInteger(request.getCurrentPage()) ? Integer.parseInt(request.getCurrentPage()) : 1);
 		page.setPageSize(10);
 		LoanDO select = new LoanDO();
-		select.setInvestmentDeadline(investmentDeadline == null?null:Short.parseShort(investmentDeadline));
+		select.setMinInvestmentDeadline((short)0);
+		select.setMaxInvestmentDeadline((short)30000);
+		if (investmentDeadline != null && CheckTools.isInteger(investmentDeadline)){
+			if (Integer.parseInt(investmentDeadline) == 1){
+				select.setMinInvestmentDeadline((short)0);
+				select.setMaxInvestmentDeadline((short)12);
+			} else if (Integer.parseInt(investmentDeadline) == 2){
+				select.setMinInvestmentDeadline((short)13);
+				select.setMaxInvestmentDeadline((short)23);
+			} else if (Integer.parseInt(investmentDeadline) == 3){
+				select.setMinInvestmentDeadline((short)24);
+				select.setMaxInvestmentDeadline((short)24);
+			} else if (Integer.parseInt(investmentDeadline) == 3){
+				select.setMinInvestmentDeadline((short)25);
+				select.setMaxInvestmentDeadline((short)30000);
+			}
+		}
+		//select.setInvestmentDeadline(investmentDeadline == null?null:Short.parseShort(investmentDeadline));
 		select.setProductDirection(productDirection);
 		select.setProductType(Short.parseShort(productType));
 		select.setRatioType(ratioType == null?null:Short.parseShort(ratioType));
@@ -105,13 +122,13 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 //0：综合排序 1：按预期收益 interest_rate 2：按投资期限 investment_deadline 3：按起投金额  begin_amount
 		if (requestSort.equals("3")){
 			//3：按起投金额
-			select.setRequestSort(",begin_amount desc");
+			select.setRequestSort(",begin_amount desc ");
 		}else if (requestSort.equals("1")){
-			select.setRequestSort(",interest_rate desc");
+			select.setRequestSort(",interest_rate desc ");
 		}else if (requestSort.equals("2")){
-			select.setRequestSort(",investment_deadline desc");
+			select.setRequestSort(",investment_deadline desc ");
 		}else{
-			select.setRequestSort("");
+			select.setRequestSort(",release_time desc ");
 		}
 
 		page.setSelect(select);

@@ -894,4 +894,24 @@ public class LoanDO implements Serializable {
      * 多余字段
      */
     private Long id;
+
+    public Short getMinInvestmentDeadline() {
+        return minInvestmentDeadline;
+    }
+
+    public void setMinInvestmentDeadline(Short minInvestmentDeadline) {
+        this.minInvestmentDeadline = minInvestmentDeadline;
+    }
+
+    public Short getMaxInvestmentDeadline() {
+        return maxInvestmentDeadline;
+    }
+
+    public void setMaxInvestmentDeadline(Short maxInvestmentDeadline) {
+        this.maxInvestmentDeadline = maxInvestmentDeadline;
+    }
+
+    private Short minInvestmentDeadline;
+    private Short maxInvestmentDeadline;
+
 }

@@ -89,9 +89,9 @@ public class GetPrivateLoanService implements MessageService<GetPrivateLoanReque
 		page.setSelect(select);
 		if (requestSort.equals("3")){
 			//3：按起投金额
-			select.setRequestSort(",begin_amount desc");
+			select.setRequestSort(",begin_amount desc ");
 		}else {
-			select.setRequestSort("");
+			select.setRequestSort(",release_time desc ");
 		}
 
 		int count = loanDAO.countByLoan(select);

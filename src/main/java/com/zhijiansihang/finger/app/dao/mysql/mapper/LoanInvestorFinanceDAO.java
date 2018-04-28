@@ -95,7 +95,7 @@ public interface LoanInvestorFinanceDAO {
     int countUserByFinanceUserid(Long userId);
 
     @Select({
-            "select u.logo,u.user_id,lif.create_time,lif.id,l.title,lif.amount,u.real_name",
+            "select u.logo,u.user_id,lif.create_time,lif.id,l.title,lif.amount,u.real_name,u.nick_name",
             "from loan_investor_finance lif,loan l,user u",
             "where lif.loan_id = l.loan_id and lif.user_id = u.user_id  and lif.finance_user_id = #{userId,jdbcType=BIGINT} and is_deal = 0",
             "order by lif.create_time desc"
@@ -106,12 +106,13 @@ public interface LoanInvestorFinanceDAO {
             @Result(property = "userId", column = "user_id"),
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "amount", column = "amount"),
+            @Result(property = "nickName", column = "nick_name"),
             @Result(property = "realName", column = "real_name")
     })
     List<LoanInvestorFinanceVO> selectNotDealByFinanceUseridPage(@Param("userId") Long userId, RowBounds rowBounds);
 
     @Select({
-            "select u.logo,u.user_id,lif.create_time,lif.id,l.title,lif.amount,u.real_name",
+            "select u.logo,u.user_id,lif.create_time,lif.id,l.title,lif.amount,u.real_name,u.nick_name",
             "from loan_investor_finance lif,loan l,user u",
             "where lif.loan_id = l.loan_id and lif.user_id = u.user_id and lif.finance_user_id = #{userId,jdbcType=BIGINT} and lif.is_deal = 1",
             "order by lif.create_time desc"
@@ -122,6 +123,7 @@ public interface LoanInvestorFinanceDAO {
             @Result(property = "userId", column = "user_id"),
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "amount", column = "amount"),
+            @Result(property = "nickName", column = "nick_name"),
             @Result(property = "realName", column = "real_name")
     })
     List<LoanInvestorFinanceVO> selectDealByFinanceUseridPage(@Param("userId")Long userId, RowBounds rowBounds);

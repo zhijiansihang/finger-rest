@@ -585,14 +585,26 @@
 
   <select id="countByLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultType="java.lang.Integer">
     select count(*) from loan where 1=1 and is_display =1 and loan_status in (200,300)
+    <if test="minInvestmentDeadline != null">
+      and investment_deadline >= #{minInvestmentDeadline}
+    </if>
+    <if test="maxInvestmentDeadline != null">
+      and #{maxInvestmentDeadline}  >= investment_deadline
+    </if>
     <include refid="select_keys" />
   </select>
 
 
   <select id="selectByLoan" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDO" resultMap="BaseResultMap">
     select * from loan where 1=1 and is_display =1 and loan_status in (200,300)
+    <if test="minInvestmentDeadline != null">
+      and investment_deadline >= #{minInvestmentDeadline}
+    </if>
+    <if test="maxInvestmentDeadline != null">
+      and #{maxInvestmentDeadline}  >= investment_deadline
+    </if>
     <include refid="select_keys" />
-    order by location_size desc,loan_status asc,release_time desc
+    order by location_size desc,loan_status asc
     <if test="requestSort != null">
       ${requestSort}
     </if>
