@@ -138,7 +138,7 @@ public class LoanService {
     }
 
     @Transactional
-    public Response publicAdd(Long userId, LoanVO loanVO) {
+    public Response publicAdd(LoanVO loanVO) {
 //        loanVO.setBeginAmount(loanVO.getBeginAmount().multiply(TEN_THOUSAND));
         loanVO.setAmount(loanVO.getAmount().multiply(TEN_THOUSAND));
         loanVO.setCreateTime(new Date());
@@ -149,7 +149,7 @@ public class LoanService {
         loanVO.setReserveAmount(new BigDecimal("0"));
 //        loanVO.setIsRateFloating((byte)1);
 //        loanVO.setInterestRate(new BigDecimal(10));
-        loanVO.setInstitutionUserId(userId);
+//        loanVO.setInstitutionUserId(userId);
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PUBLIC.getType());
         if(loanDAO.insert(loanVO) <= 0)
             return Response.error("添加失败");
@@ -161,7 +161,7 @@ public class LoanService {
     }
 
     @Transactional
-    public Response privateAdd(Long userId, LoanVO loanVO) {
+    public Response privateAdd(LoanVO loanVO) {
         loanVO.setBeginAmount(loanVO.getBeginAmount().multiply(TEN_THOUSAND));
         loanVO.setAmount(loanVO.getAmount().multiply(TEN_THOUSAND));
         loanVO.setCreateTime(new Date());
@@ -171,7 +171,7 @@ public class LoanService {
         loanVO.setReserveAmount(new BigDecimal("0"));
         loanVO.setIsRateFloating((byte) 1);
         loanVO.setInterestRate(new BigDecimal(10));
-        loanVO.setInstitutionUserId(userId);
+//        loanVO.setInstitutionUserId(userId);
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PRIVATE.getType());
         loanVO.setProductType((short)4);
         if(loanDAO.insert(loanVO) <= 0)

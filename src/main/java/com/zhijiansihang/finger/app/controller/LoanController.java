@@ -91,8 +91,8 @@ public class LoanController {
      */
     @RequestMapping(value = "/public/add")
     @ResponseBody
-    public Response publicAdd(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
-        return loanService.publicAdd(userId, loanVO);
+    public Response publicAdd(@RequestBody LoanVO loanVO) {
+        return loanService.publicAdd(loanVO);
     }
 
     /**
@@ -101,8 +101,8 @@ public class LoanController {
      */
     @RequestMapping(value = "/private/add")
     @ResponseBody
-    public Response privateAdd(@RequestParam(ComParams.X_USERID)Long userId, @RequestBody LoanVO loanVO) {
-        return loanService.privateAdd(userId, loanVO);
+    public Response privateAdd(@RequestBody LoanVO loanVO) {
+        return loanService.privateAdd(loanVO);
     }
 
     /**
