@@ -61,7 +61,7 @@ public class LoanInvestorDetailService implements MessageService<LoanInvestorDet
 		response.getBody().setCreateTime(format.format(loanInvestorFinanceDO.getCreateTime()));
 		response.getBody().setFinanceRealName(CheckTools.nullToEmptyString(userFinanceDO.getRealName()));
 		response.getBody().setFinanceUserId(loanInvestorFinanceDO.getFinanceUserId().toString());
-		response.getBody().setInvestorRealName(CheckTools.nullToEmptyString(userDO.getRealName()));
+		response.getBody().setInvestorRealName(CheckTools.nullToEmptyString(userDO.getNickName()));
 		response.getBody().setInvestorUserId(loanInvestorFinanceDO.getUserId().toString());
 		response.getBody().setIsDeal(loanInvestorFinanceDO.getIsDeal().toString());
 		response.getBody().setLoanId(loanInvestorFinanceDO.getLoanId().toString());

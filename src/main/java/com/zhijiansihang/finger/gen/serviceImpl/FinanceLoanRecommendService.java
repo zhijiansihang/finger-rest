@@ -99,6 +99,7 @@ public class FinanceLoanRecommendService implements MessageService<FinanceLoanRe
 			elem.setProgress(reserveAmount.divide(amount,2, RoundingMode.HALF_UP).toEngineeringString());
 			elem.setSafeguardWay(loanDO.getSafeguardWay());
 			elem.setTitle(loanDO.getTitle());
+			elem.setProductDirection(loanDO.getProductDirection());
 		}
 
 

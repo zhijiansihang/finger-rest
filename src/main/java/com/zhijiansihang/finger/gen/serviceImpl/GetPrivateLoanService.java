@@ -133,6 +133,7 @@ public class GetPrivateLoanService implements MessageService<GetPrivateLoanReque
 			elem.setProgress(reserveAmount.divide(amount,2, RoundingMode.HALF_UP).toEngineeringString());
 			elem.setSafeguardWay(loanDO.getSafeguardWay());
 			elem.setTitle(loanDO.getTitle());
+			elem.setFundType(loanDO.getFundType() == null ?"":loanDO.getFundType().toString());
 		}
 
 

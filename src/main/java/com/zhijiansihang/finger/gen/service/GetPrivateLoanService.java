@@ -28,6 +28,7 @@ public class GetPrivateLoanService implements MessageService<GetPrivateLoanReque
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
 		response.getBody().setCurrentPage("1");
+		response.getBody().setFundType("");
 		response.getBody().setPageCount("1");
 		response.getBody().setPageSize("10");
 		response.getBody().setRecordCount("10");

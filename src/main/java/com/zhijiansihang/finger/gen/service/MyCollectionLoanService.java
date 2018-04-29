@@ -28,6 +28,7 @@ public class MyCollectionLoanService implements MessageService<MyCollectionLoanR
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
 		response.getBody().setCurrentPage("1");
+		response.getBody().setFundType("");
 		response.getBody().setPageCount("1");
 		response.getBody().setPageSize("10");
 		response.getBody().setRecordCount("10");
@@ -52,6 +53,7 @@ public class MyCollectionLoanService implements MessageService<MyCollectionLoanR
 		elem.setLoanId("1");
 		elem.setLoanStatus("10");
 		elem.setLoanType("1");
+		elem.setProductDirection("1");
 		elem.setProductType("10");
 		elem.setProgress("40");
 		elem.setSafeguardWay("1");

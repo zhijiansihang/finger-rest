@@ -113,7 +113,7 @@ public class FinanceDetailService implements MessageService<FinanceDetailRequest
 		}
 
 		response.getBody().setServiceConcept(CheckTools.nullToEmptyString(userFinanceDetailDO.getSchoolName()));
-		response.getBody().setServiceDirection(CheckTools.nullToEmptyString(userFinanceDetailDO.getSchoolName()));
+		response.getBody().setServiceDirection(CheckTools.nullToEmptyString(userFinanceDetailDO.getServiceDirection()));
 
 		{
 			int i = userServiceRecordDAO.countByUserid(Long.parseLong(financeUserid));

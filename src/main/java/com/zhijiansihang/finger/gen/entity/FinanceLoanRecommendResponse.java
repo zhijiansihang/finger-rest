@@ -37,6 +37,7 @@ public class FinanceLoanRecommendResponse extends MobileMessage {
 		private String loanId;
 		private String loanStatus;
 		private String loanType;
+		private String productDirection;
 		private String productType;
 		private String progress;
 		private String safeguardWay;
@@ -150,6 +151,17 @@ public class FinanceLoanRecommendResponse extends MobileMessage {
 
 		public void setLoanType(String loanType) {
 			this.loanType = loanType;
+		}
+
+		/**
+		 * @return 产品方向
+		 */
+		public String getProductDirection() {
+			return productDirection;
+		}
+
+		public void setProductDirection(String productDirection) {
+			this.productDirection = productDirection;
 		}
 
 		/**

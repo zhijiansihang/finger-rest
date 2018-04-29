@@ -38,6 +38,7 @@ public class MyCollectionLoanResponse extends MobileMessage {
 		private String loanId;
 		private String loanStatus;
 		private String loanType;
+		private String productDirection;
 		private String productType;
 		private String progress;
 		private String safeguardWay;
@@ -165,6 +166,17 @@ public class MyCollectionLoanResponse extends MobileMessage {
 		}
 
 		/**
+		 * @return 产品方向
+		 */
+		public String getProductDirection() {
+			return productDirection;
+		}
+
+		public void setProductDirection(String productDirection) {
+			this.productDirection = productDirection;
+		}
+
+		/**
 		 * @return 产品类型:1.信托；2.资管；3.其他资产,4私募
 		 */
 		public String getProductType() {
@@ -216,6 +228,7 @@ public class MyCollectionLoanResponse extends MobileMessage {
 	}
 
 	private String currentPage;
+	private String fundType;
 	private String pageCount;
 	private String pageSize;
 	private String recordCount;
@@ -248,6 +261,17 @@ public class MyCollectionLoanResponse extends MobileMessage {
 
 	public void setCurrentPage(String currentPage) {
 		this.currentPage = currentPage;
+	}
+
+	/**
+	 * @return 基金类型
+	 */
+	public String getFundType() {
+		return fundType;
+	}
+
+	public void setFundType(String fundType) {
+		this.fundType = fundType;
 	}
 
 	/**

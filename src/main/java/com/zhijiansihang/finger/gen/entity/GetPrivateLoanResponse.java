@@ -204,6 +204,7 @@ public class GetPrivateLoanResponse extends MobileMessage {
 	}
 
 	private String currentPage;
+	private String fundType;
 	private String pageCount;
 	private String pageSize;
 	private String recordCount;
@@ -236,6 +237,17 @@ public class GetPrivateLoanResponse extends MobileMessage {
 
 	public void setCurrentPage(String currentPage) {
 		this.currentPage = currentPage;
+	}
+
+	/**
+	 * @return 基金类型
+	 */
+	public String getFundType() {
+		return fundType;
+	}
+
+	public void setFundType(String fundType) {
+		this.fundType = fundType;
 	}
 
 	/**

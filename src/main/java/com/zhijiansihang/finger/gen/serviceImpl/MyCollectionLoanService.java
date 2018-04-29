@@ -112,6 +112,8 @@ public class MyCollectionLoanService implements MessageService<MyCollectionLoanR
 			elem.setSafeguardWay(loanDO.getSafeguardWay());
 			elem.setTitle(loanDO.getTitle());
 			elem.setId(loanDO.getId().toString());
+			elem.setProductDirection(loanDO.getProductDirection());
+			elem.setFundType(loanDO.getFundType() == null ?"":loanDO.getFundType().toString());
 		}
 
 
