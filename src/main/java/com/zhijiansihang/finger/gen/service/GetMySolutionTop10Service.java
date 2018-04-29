@@ -38,6 +38,7 @@ public class GetMySolutionTop10Service implements MessageService<GetMySolutionTo
 		elems.add(elem);
 
 		elem.setAdoptCount("1");
+		elem.setDemandId("1");
 		elem.setFriendCount("1");
 		elem.setId("1");
 		elem.setInstitutionName("0");
@@ -45,6 +46,7 @@ public class GetMySolutionTop10Service implements MessageService<GetMySolutionTo
 		elem.setLogo("//www.baidu.com/1.png");
 		elem.setRealName("//www.baidu.com/1.png");
 		elem.setSerialNumber("1");
+		elem.setSerialNumberDemand("1");
 		elem.setServiceDirection("1");
 		elem.setSolutionId("1");
 		elem.setSolutionUserId("1");

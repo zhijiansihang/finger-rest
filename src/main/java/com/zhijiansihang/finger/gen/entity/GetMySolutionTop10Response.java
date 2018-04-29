@@ -28,6 +28,7 @@ public class GetMySolutionTop10Response extends MobileMessage {
 	public static class SolutionListElement {
 
 		private String adoptCount;
+		private String demandId;
 		private String friendCount;
 		private String id;
 		private String institutionName;
@@ -35,6 +36,7 @@ public class GetMySolutionTop10Response extends MobileMessage {
 		private String logo;
 		private String realName;
 		private String serialNumber;
+		private String serialNumberDemand;
 		private String serviceDirection;
 		private String solutionId;
 		private String solutionUserId;
@@ -48,6 +50,17 @@ public class GetMySolutionTop10Response extends MobileMessage {
 
 		public void setAdoptCount(String adoptCount) {
 			this.adoptCount = adoptCount;
+		}
+
+		/**
+		 * @return 
+		 */
+		public String getDemandId() {
+			return demandId;
+		}
+
+		public void setDemandId(String demandId) {
+			this.demandId = demandId;
 		}
 
 		/**
@@ -125,6 +138,17 @@ public class GetMySolutionTop10Response extends MobileMessage {
 
 		public void setSerialNumber(String serialNumber) {
 			this.serialNumber = serialNumber;
+		}
+
+		/**
+		 * @return 需求编号
+		 */
+		public String getSerialNumberDemand() {
+			return serialNumberDemand;
+		}
+
+		public void setSerialNumberDemand(String serialNumberDemand) {
+			this.serialNumberDemand = serialNumberDemand;
 		}
 
 		/**

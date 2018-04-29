@@ -1,5 +1,7 @@
 package com.zhijiansihang.finger.app.vo;
 
+import org.apache.ibatis.annotations.Result;
+
 /**
  * Created by paul on 2018/1/28.
  */
@@ -15,6 +17,26 @@ public class DemandMatchSolutionResult {
     private Long solutionId;
     private Long solutionUserId;
     private String serviceDirection;
+
+    public Long getDemandId() {
+        return demandId;
+    }
+
+    public void setDemandId(Long demandId) {
+        this.demandId = demandId;
+    }
+
+    public Long getSerialNumberDemand() {
+        return serialNumberDemand;
+    }
+
+    public void setSerialNumberDemand(Long serialNumberDemand) {
+        this.serialNumberDemand = serialNumberDemand;
+    }
+
+    private Long demandId;
+    private Long serialNumberDemand;
+
 
     public String getNickName() {
         return nickName;

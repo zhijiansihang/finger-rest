@@ -108,7 +108,7 @@ public interface UserSolutionDAO {
             "serial_number",
             "from user_solution",
             "where user_id = #{userId} and is_deleted = 0",
-            "order by is_closed desc,serial_number desc"
+            "order by is_closed ACS,serial_number desc"
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserSolutionDAO.BaseResultMap")
     List<UserSolutionDO> selectByUseridPage(Long userid, RowBounds rowBounds);

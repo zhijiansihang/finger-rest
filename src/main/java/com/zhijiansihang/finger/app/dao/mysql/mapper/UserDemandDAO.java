@@ -104,7 +104,7 @@ public interface UserDemandDAO {
             "update_time, create_time",
             "from user_demand",
             "where user_id = #{userId} and is_deleted = 0",
-            "order by is_closed desc,serial_number desc"
+            "order by is_closed ACS,serial_number desc"
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.UserDemandDAO.BaseResultMap")
     List<UserDemandDO> selectByUseridPage(@Param("userId") Long userId, RowBounds rowBounds);

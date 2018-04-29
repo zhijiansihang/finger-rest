@@ -68,6 +68,8 @@ public class GetMySolutionTop10Service implements MessageService<GetMySolutionTo
 			elem.setServiceDirection(CheckTools.nullToEmptyString(demandMatchSolutionResult.getServiceDirection()));
 			elem.setSolutionId(demandMatchSolutionResult.getSolutionId().toString());
 			elem.setSolutionUserId(demandMatchSolutionResult.getSolutionUserId().toString());
+			elem.setSerialNumberDemand(demandMatchSolutionResult.getSerialNumberDemand() == null ? "":demandMatchSolutionResult.getSerialNumberDemand().toString());
+			elem.setDemandId(demandMatchSolutionResult.getDemandId() == null?"":demandMatchSolutionResult.getDemandId().toString());
 		}
 
 		return elems;

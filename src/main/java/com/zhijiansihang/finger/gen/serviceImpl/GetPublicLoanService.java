@@ -101,11 +101,8 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 				select.setMaxInvestmentDeadline((short)12);
 			} else if (Integer.parseInt(investmentDeadline) == 2){
 				select.setMinInvestmentDeadline((short)13);
-				select.setMaxInvestmentDeadline((short)23);
-			} else if (Integer.parseInt(investmentDeadline) == 3){
-				select.setMinInvestmentDeadline((short)24);
 				select.setMaxInvestmentDeadline((short)24);
-			} else if (Integer.parseInt(investmentDeadline) == 3){
+			}  else if (Integer.parseInt(investmentDeadline) == 3){
 				select.setMinInvestmentDeadline((short)25);
 				select.setMaxInvestmentDeadline((short)30000);
 			}
