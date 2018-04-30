@@ -119,11 +119,11 @@ public class GetPublicLoanService implements MessageService<GetPublicLoanRequest
 //0：综合排序 1：按预期收益 interest_rate 2：按投资期限 investment_deadline 3：按起投金额  begin_amount
 		if (requestSort.equals("3")){
 			//3：按起投金额
-			select.setRequestSort(",begin_amount desc ");
+			select.setRequestSort(",begin_amount asc ");
 		}else if (requestSort.equals("1")){
 			select.setRequestSort(",interest_rate desc ");
 		}else if (requestSort.equals("2")){
-			select.setRequestSort(",investment_deadline desc ");
+			select.setRequestSort(",investment_deadline asc ");
 		}else{
 			select.setRequestSort(",release_time desc ");
 		}

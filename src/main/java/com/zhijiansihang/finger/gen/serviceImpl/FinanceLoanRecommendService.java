@@ -100,6 +100,7 @@ public class FinanceLoanRecommendService implements MessageService<FinanceLoanRe
 			elem.setSafeguardWay(loanDO.getSafeguardWay());
 			elem.setTitle(loanDO.getTitle());
 			elem.setProductDirection(loanDO.getProductDirection());
+			elem.setFundType(loanDO.getFundType() == null ?"":loanDO.getFundType().toString());
 		}
 
 

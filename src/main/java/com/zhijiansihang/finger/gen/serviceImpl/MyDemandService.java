@@ -75,7 +75,7 @@ public class MyDemandService implements MessageService<MyDemandRequest, Response
 			elem.setIsClosed(userDemandDO.getIsClosed().toString());
 			elem.setMatchSolutionCount(userDemandDO.getMatchSolutionCount().toString());
 			elem.setMoneySituation(userDemandDO.getMoneySituation().toString());
-			elem.setSerialNumber("需求NO."+userDemandDO.getSerialNumber().toString());
+			elem.setSerialNumber(userDemandDO.getSerialNumber().toString());
 		}
 		return elems;
 	}
