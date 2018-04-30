@@ -16,6 +16,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 public class AddSolutionResponse extends MobileMessage {
 
 
+	private String id;
 
 	public AddSolutionResponse() {
 		super();
@@ -34,5 +35,16 @@ public class AddSolutionResponse extends MobileMessage {
 		this.setStatusMessage(statusMessage);
 	}
 
+
+	/**
+	 * @return 收藏成功的id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 }

@@ -49,13 +49,15 @@ public class AddSolutionService implements MessageService<AddSolutionRequest, Re
 		boolean tryLock = redisLock.tryLock(redisKey);
 		if (tryLock){
 			try {
-				int count = userCollectionDAO.existContentidtypeAndUserid(userCollection);
-				if (count>0){
+				UserCollectionDO count = userCollectionDAO.getContentidtypeAndUserid(userCollection);
+				if (count != null){
+					response.getBody().setId(count.getId().toString());
 					return;
 				}
 				userCollection.setCreateTime(new Date());
 				userCollection.setUserId(loginUserid);
-				userCollectionDAO.insert(userCollection);
+				int insert = userCollectionDAO.insert(userCollection);
+				response.getBody().setId(insert+"");
 			}finally {
 				redisLock.unLock(redisKey);
 			}

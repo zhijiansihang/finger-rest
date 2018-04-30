@@ -24,6 +24,7 @@ public class AddSolutionService implements MessageService<AddSolutionRequest, Re
 	public void execute(AddSolutionRequest request, Response<AddSolutionResponse> response) {
 		LOG.info("[{}][request={}]", SERVICE_DESC, request);
 
+		response.getBody().setId("1");
 	  	//挡板服务标志，实现该服务时，不要给mode赋值了，把下边的代码删了
 		response.getBody().setMode("test");
 	}

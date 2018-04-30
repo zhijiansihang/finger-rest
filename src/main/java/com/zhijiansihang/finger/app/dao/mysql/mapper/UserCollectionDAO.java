@@ -59,7 +59,7 @@ public interface UserCollectionDAO {
     int existContentidtypeAndUserid(UserCollectionDO userCollection);
 
     @Select({
-            "select count(*)",
+            "select * ",
             "from user_collection",
             "where user_id = #{userId} AND content_id=#{contentId} AND content_type=#{contentType}"
     })

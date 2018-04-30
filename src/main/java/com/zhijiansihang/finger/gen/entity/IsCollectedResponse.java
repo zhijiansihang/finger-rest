@@ -37,7 +37,7 @@ public class IsCollectedResponse extends MobileMessage {
 
 
 	/**
-	 * @return 1:为已收藏 0:为未收藏
+	 * @return 空为收藏，有值为删除ID
 	 */
 	public String getStatus() {
 		return status;
