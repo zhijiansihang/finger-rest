@@ -1,5 +1,7 @@
 package com.zhijiansihang.finger.app.vo;
 
+import com.zhijiansihang.finger.app.dao.mysql.model.LoanInvestorFinanceDO;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.function.BiConsumer;
@@ -7,7 +9,7 @@ import java.util.function.BiConsumer;
 /**
  * Created by paul on 2018/1/28.
  */
-public class LoanInvestorFinanceVO {
+public class LoanInvestorFinanceVO extends LoanInvestorFinanceDO{
 
     public BigDecimal getAmount() {
         return amount;
@@ -45,6 +47,7 @@ public class LoanInvestorFinanceVO {
     private Long id;
     private String realName;
     private String title;
+    private String financeUserName;
 
     public String getLogo() {
         return logo;
@@ -84,5 +87,13 @@ public class LoanInvestorFinanceVO {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getFinanceUserName() {
+        return financeUserName;
+    }
+
+    public void setFinanceUserName(String financeUserName) {
+        this.financeUserName = financeUserName;
     }
 }

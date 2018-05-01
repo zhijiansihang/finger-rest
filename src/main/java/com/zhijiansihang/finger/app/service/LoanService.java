@@ -71,22 +71,11 @@ public class LoanService {
         } else {
             criteria.andInstitutionUserIdEqualTo(id);
         }
-//
-//        if(loanVO.getRolesList().size() > 0){
-//            criteria.andRolesIn(loanVO.getRolesList());
-//        } else {
-//            // 默认显示 投资人 个人理财师 机构理财师
-//            loanVO.getRolesList().add((short) 1);
-//            loanVO.getRolesList().add((short) 4);
-//            loanVO.getRolesList().add((short) 5);
-//            criteria.andRolesIn(loanVO.getRolesList());
-//        }
         example.setOrderByClause("create_time desc");
         // 条数
         int countByLoanVO = loanDAO.countByExample(example);
         page.setRecordCount(countByLoanVO);
         if (countByLoanVO > 0 ){
-//            example.setOrderByClause("loan_id desc");
             // 结果
             List<LoanDO> loanDOS = loanDAO.selectByExampleWithRowbounds(example, page.getRowBounds());
             List<LoanVO> loanVOS = Lists.newArrayList();
@@ -140,17 +129,12 @@ public class LoanService {
 
     @Transactional
     public Response publicAdd(LoanVO loanVO) {
-//        loanVO.setBeginAmount(loanVO.getBeginAmount().multiply(TEN_THOUSAND));
         loanVO.setAmount(loanVO.getAmount().multiply(TEN_THOUSAND));
         loanVO.setCreateTime(new Date());
         loanVO.setManageRate(new BigDecimal("0.1"));
-//        loanVO.setBeginAmount(new BigDecimal("1000"));
         loanVO.setIsDisplay((byte)0);
         loanVO.setLoanStatus(LoanConsts.LoanStatusEnum.LOAN_STATUS_REVIEW.getType());
         loanVO.setReserveAmount(new BigDecimal("0"));
-//        loanVO.setIsRateFloating((byte)1);
-//        loanVO.setInterestRate(new BigDecimal(10));
-//        loanVO.setInstitutionUserId(userId);
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PUBLIC.getType());
         if(loanDAO.insert(loanVO) <= 0)
             return Response.error("添加失败");
@@ -166,13 +150,11 @@ public class LoanService {
         loanVO.setBeginAmount(loanVO.getBeginAmount().multiply(TEN_THOUSAND));
         loanVO.setAmount(loanVO.getAmount().multiply(TEN_THOUSAND));
         loanVO.setCreateTime(new Date());
-//        loanVO.setManageRate(new BigDecimal("0.1"));
         loanVO.setIsDisplay((byte)0);
         loanVO.setLoanStatus(LoanConsts.LoanStatusEnum.LOAN_STATUS_REVIEW.getType());
         loanVO.setReserveAmount(new BigDecimal("0"));
         loanVO.setIsRateFloating((byte) 1);
         loanVO.setInterestRate(new BigDecimal(10));
-//        loanVO.setInstitutionUserId(userId);
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PRIVATE.getType());
         loanVO.setProductType((short)4);
         if(loanDAO.insert(loanVO) <= 0)
