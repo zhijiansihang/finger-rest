@@ -21,4 +21,24 @@ public class AliYunSmsProperties {
 
     private String messageSignature;
 
+    public String getAccessKeyId() {
+        return accessKeyId;
+    }
+
+    public void setAccessKeyId(String accessKeyId) {
+        this.accessKeyId = accessKeyId;
+    }
+
+    public String getAccessKeySecret() {
+        return accessKeySecret;
+    }
+
+    public void setAccessKeySecret(String accessKeySecret) {
+        this.accessKeySecret = accessKeySecret;
+    }
+
+    private String accessKeyId;
+
+    private String accessKeySecret;
+
 }
