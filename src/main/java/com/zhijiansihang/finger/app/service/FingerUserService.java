@@ -215,6 +215,8 @@ public class FingerUserService {
         UserDOExample.Criteria criteria = example.createCriteria();
         if (!loginName.equals("admin")){
             criteria.andInstitutionNameEqualTo(loginName);
+        } else if (userVO.getInstitutionUserId() != null){
+            criteria.andInstitutionUserIdEqualTo(userVO.getInstitutionUserId());
         }
         example.setOrderByClause("create_time desc");
         userVO.getRolesList().add((short) 4);
