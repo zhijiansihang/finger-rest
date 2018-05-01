@@ -44,14 +44,12 @@ public class AliYunSmsManager {
      */
     static final String domain = "dysmsapi.aliyuncs.com";
 
-    // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    static final String accessKeyId = "yourAccessKeyId";
-    static final String accessKeySecret = "yourAccessKeySecret";
 
     public static SendSmsResponse sendSms(AliSms aliSms) throws ClientException {
 
+        AliYunSmsProperties yunSmsProperties = ApplicationContextHelper.getBean(AliYunSmsProperties.class);
         //初始化acsClient,暂不支持region化
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", yunSmsProperties.getAccessKeyId(), yunSmsProperties.getAccessKeySecret());
         DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
         IAcsClient acsClient = new DefaultAcsClient(profile);
 
@@ -86,13 +84,13 @@ public class AliYunSmsManager {
 
 
     public static QuerySendDetailsResponse querySendDetails(String bizId) throws ClientException {
-
+        AliYunSmsProperties yunSmsProperties = ApplicationContextHelper.getBean(AliYunSmsProperties.class);
         //可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 
         //初始化acsClient,暂不支持region化
-        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
+        IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", yunSmsProperties.getAccessKeyId(), yunSmsProperties.getAccessKeySecret());
         DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
         IAcsClient acsClient = new DefaultAcsClient(profile);
 
