@@ -125,6 +125,7 @@ public class LoanService {
     }
 
     public Response review(LoanVO loanVO, Long userId) {
+        loanVO.setUpdateTime(new Date());
         if(loanDAO.updateByPrimaryKeySelective(loanVO) <= 0)
             return Response.error("审核失败");
         return Response.success("审核成功");

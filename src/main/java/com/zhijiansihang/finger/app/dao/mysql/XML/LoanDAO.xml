@@ -78,7 +78,7 @@
     investment_deadline, distribution_region, ratio_type, bright_spot, finance_introduce, 
     money_use, repay_source, risk_control, product_desc, product_desc_files, risk_alert, 
     capital_type, organize_form, manage_rate, review_code, review_desc, update_time, 
-    create_time
+    create_time, release_time
   </sql>
   <select id="selectByExample" parameterType="com.zhijiansihang.finger.app.dao.mysql.model.LoanDOExample" resultMap="BaseResultMap">
     select
