@@ -16,6 +16,7 @@ import com.zhijiansihang.finger.mmc.MobileMessage;
 public class ConstantInformationResponse extends MobileMessage {
 
 
+	private String financeServicesDirection;
 	private String mobile;
 
 	public ConstantInformationResponse() {
@@ -35,6 +36,17 @@ public class ConstantInformationResponse extends MobileMessage {
 		this.setStatusMessage(statusMessage);
 	}
 
+
+	/**
+	 * @return 理财师服务方向使用|隔开
+	 */
+	public String getFinanceServicesDirection() {
+		return financeServicesDirection;
+	}
+
+	public void setFinanceServicesDirection(String financeServicesDirection) {
+		this.financeServicesDirection = financeServicesDirection;
+	}
 
 	/**
 	 * @return 手机号
