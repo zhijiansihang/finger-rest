@@ -112,7 +112,7 @@ public class FinanceDetailService implements MessageService<FinanceDetailRequest
 			response.getBody().setSellingloanCount(count + "");
 		}
 
-		response.getBody().setServiceConcept(CheckTools.nullToEmptyString(userFinanceDetailDO.getSchoolName()));
+		response.getBody().setServiceConcept(CheckTools.nullToEmptyString(userFinanceDetailDO.getServiceConcept()));
 		response.getBody().setServiceDirection(CheckTools.nullToEmptyString(userFinanceDetailDO.getServiceDirection()));
 
 		{

@@ -65,6 +65,7 @@ public class LoanInvestorDetailService implements MessageService<LoanInvestorDet
 		response.getBody().setInvestorUserId(loanInvestorFinanceDO.getUserId().toString());
 		response.getBody().setIsDeal(loanInvestorFinanceDO.getIsDeal().toString());
 		response.getBody().setLoanId(loanInvestorFinanceDO.getLoanId().toString());
+		response.getBody().setIsRateFloating(loanDO.getIsRateFloating()== null?"":loanDO.getIsRateFloating().toString());
 		if (userFinanceDO.getLogo() == null || userFinanceDO.getLogo().trim().length() ==0){
 			response.getBody().setLogo("");
 		}else {

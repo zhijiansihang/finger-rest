@@ -24,6 +24,7 @@ public class LoanInvestorDetailResponse extends MobileMessage {
 	private String investorRealName;
 	private String investorUserId;
 	private String isDeal;
+	private String isRateFloating;
 	private String loanId;
 	private String logo;
 	private String mobile;
@@ -134,6 +135,17 @@ public class LoanInvestorDetailResponse extends MobileMessage {
 
 	public void setIsDeal(String isDeal) {
 		this.isDeal = isDeal;
+	}
+
+	/**
+	 * @return 是否浮动
+	 */
+	public String getIsRateFloating() {
+		return isRateFloating;
+	}
+
+	public void setIsRateFloating(String isRateFloating) {
+		this.isRateFloating = isRateFloating;
 	}
 
 	/**

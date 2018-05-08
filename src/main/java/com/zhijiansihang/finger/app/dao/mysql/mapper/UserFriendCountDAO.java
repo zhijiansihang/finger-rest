@@ -55,7 +55,7 @@ public interface UserFriendCountDAO {
 
     @Update({
             "update user_friend_count",
-            "set friend_counts = friendCounts + 1 ",
+            "set friend_counts = friend_counts + 1 ",
             "where user_id = #{userId}"
     })
     int addFriendCounts(Long userId);
