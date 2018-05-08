@@ -157,6 +157,7 @@ public class LoanService {
         loanVO.setInterestRate(new BigDecimal(10));
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PRIVATE.getType());
         loanVO.setProductType((short)4);
+        loanVO.setBrightSpot(loanVO.getSafeguardWay());
         if(loanDAO.insert(loanVO) <= 0)
             return Response.error("添加失败");
         insertFinanceUser(loanVO.getUserIds(), loanVO.getLoanId());
