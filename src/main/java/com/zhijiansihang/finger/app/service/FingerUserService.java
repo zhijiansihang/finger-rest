@@ -268,7 +268,9 @@ public class FingerUserService {
             userFinanceDetailDO.setUserId(userVO.getUserId());
             userFinanceDetailDAO.insertSelective(userFinanceDetailDO);
         }
+        UserDO institution =  userDAO.selectByPrimaryKey(userVO.getInstitutionUserId());
         userVO.setRoles(UserConsts.UserRolesEnum.FINANCE.getRole().shortValue());
+        userVO.setInstitutionName(institution.getNickName());
         if (userDAO.updateByPrimaryKeySelective(userVO) > 0)
             return Response.success("添加成功");
         return Response.error("添加理财师失败");

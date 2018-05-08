@@ -130,9 +130,9 @@ public class FingerUserController {
     @RequestMapping(value = "/fb/add")
     @ResponseBody
     public Response fbAdd(@RequestBody UserVO userVO) {
-        JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        userVO.setInstitutionUserId(principal.getId());
-        userVO.setInstitutionName(principal.getUsername());
+//        JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        userVO.setInstitutionUserId(principal.getId());
+//        userVO.setInstitutionName(principal.getUsername());
         return fingerUserService.addFb(userVO);
     }
 
