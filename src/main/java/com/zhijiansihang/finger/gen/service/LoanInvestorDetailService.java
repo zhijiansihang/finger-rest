@@ -34,6 +34,7 @@ public class LoanInvestorDetailService implements MessageService<LoanInvestorDet
 		response.getBody().setIsDeal("1");
 		response.getBody().setIsRateFloating("1");
 		response.getBody().setLoanId("10");
+		response.getBody().setLoanType("1");
 		response.getBody().setLogo("11");
 		response.getBody().setMobile("10");
 		response.getBody().setServicingWay("1");
