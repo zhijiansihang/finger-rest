@@ -26,6 +26,7 @@ public class LoanInvestorDetailResponse extends MobileMessage {
 	private String isDeal;
 	private String isRateFloating;
 	private String loanId;
+	private String loanType;
 	private String logo;
 	private String mobile;
 	private String servicingWay;
@@ -157,6 +158,17 @@ public class LoanInvestorDetailResponse extends MobileMessage {
 
 	public void setLoanId(String loanId) {
 		this.loanId = loanId;
+	}
+
+	/**
+	 * @return 1公墓 2私募
+	 */
+	public String getLoanType() {
+		return loanType;
+	}
+
+	public void setLoanType(String loanType) {
+		this.loanType = loanType;
 	}
 
 	/**

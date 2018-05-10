@@ -71,6 +71,7 @@ public class LoanInvestorDetailService implements MessageService<LoanInvestorDet
 		}else {
 			response.getBody().setLogo(sharingProperties.getStaticServerLink()+userFinanceDO.getLogo().trim());
 		}
+		response.getBody().setLoanType(loanDO.getLoanType().toString());
 		response.getBody().setMobile(userDO.getMobile());
 		response.getBody().setServicingWay(loanDO.getServicingWay()==null?"":loanDO.getServicingWay().toString());
 		response.getBody().setTitle(loanDO.getTitle());
