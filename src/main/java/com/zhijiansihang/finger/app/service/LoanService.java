@@ -154,7 +154,7 @@ public class LoanService {
         loanVO.setLoanStatus(LoanConsts.LoanStatusEnum.LOAN_STATUS_REVIEW.getType());
         loanVO.setReserveAmount(new BigDecimal("0"));
         loanVO.setIsRateFloating((byte) 1);
-        loanVO.setInterestRate(new BigDecimal(10));
+        loanVO.setInterestRate(new BigDecimal("0"));
         loanVO.setLoanType(LoanConsts.LoanTypeEnum.LOAN_TYPE_PRIVATE.getType());
         loanVO.setProductType((short)4);
         loanVO.setBrightSpot(loanVO.getSafeguardWay());
