@@ -56,7 +56,7 @@ public class LoanInvestorDetailService implements MessageService<LoanInvestorDet
 		UserDO userDO = userDAO.selectByPrimaryKey(loanInvestorFinanceDO.getUserId());
 
 		response.getBody().setAmount(loanInvestorFinanceDO.getAmount().toString());
-		response.getBody().setBasisIntere(loanDO.getInterestRate() ==null?"0.00":loanDO.getInterestRate().toString());
+		response.getBody().setBasisIntere(loanDO.getInterestRate() ==null?"":loanDO.getInterestRate().toString());
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		response.getBody().setCreateTime(format.format(loanInvestorFinanceDO.getCreateTime()));
 		response.getBody().setFinanceRealName(CheckTools.nullToEmptyString(userFinanceDO.getRealName()));
