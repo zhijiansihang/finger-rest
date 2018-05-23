@@ -48,6 +48,13 @@ public class MobileController {
 	@Autowired(required = false)
 	MessageService<AddSolutionRequest, Response<AddSolutionResponse>> genAddSolutionService;
 
+	@Qualifier("appVersionUpdateService")
+	@Autowired(required = false)
+	MessageService<AppVersionUpdateRequest, Response<AppVersionUpdateResponse>> appVersionUpdateService;
+	@Qualifier("genappVersionUpdateService")
+	@Autowired(required = false)
+	MessageService<AppVersionUpdateRequest, Response<AppVersionUpdateResponse>> genAppVersionUpdateService;
+
 	@Qualifier("constantInformationService")
 	@Autowired(required = false)
 	MessageService<ConstantInformationRequest, Response<ConstantInformationResponse>> constantInformationService;
@@ -445,6 +452,26 @@ public class MobileController {
 		response = getAddSolutionResponse(request);
 		
 		logResponse("addSolution", response);
+
+		return response;
+	}
+
+	@RequestMapping(value = "/appVersionUpdate", method = RequestMethod.POST)
+	@ResponseBody
+	public Response<AppVersionUpdateResponse> appVersionUpdate(@RequestBody AppVersionUpdateRequest request) {
+
+		logRequest("appVersionUpdate", request);
+
+  		Response<AppVersionUpdateResponse> response = new Response<>();
+
+		request = (AppVersionUpdateRequest) this.validate(request, response);
+		if(null == request){
+			return response;
+		}
+
+		response = getAppVersionUpdateResponse(request);
+		
+		logResponse("appVersionUpdate", response);
 
 		return response;
 	}
@@ -1538,6 +1565,16 @@ public class MobileController {
 		}
 
 		return mobileService.service(request, service, AddSolutionRequest.class, AddSolutionResponse.class);
+	}
+
+	private Response<AppVersionUpdateResponse> getAppVersionUpdateResponse(AppVersionUpdateRequest request) {
+
+		MessageService<AppVersionUpdateRequest, Response<AppVersionUpdateResponse>> service = appVersionUpdateService;
+		if (service == null) {
+			service = genAppVersionUpdateService;
+		}
+
+		return mobileService.service(request, service, AppVersionUpdateRequest.class, AppVersionUpdateResponse.class);
 	}
 
 	private Response<ConstantInformationResponse> getConstantInformationResponse(ConstantInformationRequest request) {
