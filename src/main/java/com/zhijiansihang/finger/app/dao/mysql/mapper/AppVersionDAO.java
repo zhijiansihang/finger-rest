@@ -3,15 +3,11 @@ package com.zhijiansihang.finger.app.dao.mysql.mapper;
 import com.zhijiansihang.finger.app.dao.mysql.model.AppVersionDO;
 import com.zhijiansihang.finger.app.dao.mysql.model.AppVersionDOExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.session.RowBounds;
 
-import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.type.JdbcType;
+
 @Mapper
 public interface AppVersionDAO {
     @Delete({
@@ -68,4 +64,29 @@ public interface AppVersionDAO {
         "where id = #{id,jdbcType=INTEGER}"
     })
     int updateByPrimaryKey(AppVersionDO record);
+
+
+
+    @Select({
+            "select",
+            "id, app_name, platform, version_code, version_name, min_version_code, update_title, ",
+            "update_content, update_time, update_status, update_url",
+            "from app_version",
+            "where ",
+            "app_name=#{appName} and platform = #{platform} ",
+            "AND version_code = (select max(version_code) FROM app_version WHERE app_name=#{appName} and platform = #{platform} and update_status = 1)"
+    })
+    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.AppVersionDAO.BaseResultMap")
+    AppVersionDO getNewestVersionByAppNameAndPlatform(@Param("appName")String appName, @Param("platform")String platform);
+
+//    @Select({
+//            "select",
+//            "id, app_name, platform, version_code, version_name, min_version_code, update_title, ",
+//            "update_content, update_time, update_status, update_url",
+//            "from app_version",
+//            "where ",
+//            "app_name=#{appName} and platform = #{platform} AND update_status = 1 AND version_code > #{versionCode} order by version_code desc"
+//    })
+//    @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.AppVersionDAO.BaseResultMap")
+//    List<AppVersionDO> queryNewerVersionList(String appName, String platform, Integer versionCode);
 }
