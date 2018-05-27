@@ -88,7 +88,7 @@ public class CmsService {
            return Response.error(" 数据不存在");
         }else{
             String serverLink = sharingProperties.getStaticServerLink();
-            cmsDO.setImageAccessPath(serverLink + '/' + cmsDO.getImageAccessPath());
+            cmsDO.setImageAccessPath(serverLink + cmsDO.getImageAccessPath());
             return Response.success(cmsDO);
         }
 
