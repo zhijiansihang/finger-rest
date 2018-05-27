@@ -100,7 +100,7 @@ public class FingerUserController {
     @ResponseBody
     public Response fbList(@RequestBody UserVO userVO) {
         JwtUserDetails principal = (JwtUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return Response.success(fingerUserService.findUserFbList(userVO, principal.getUsername()));
+        return Response.success(fingerUserService.findUserFbList(userVO, principal.getUsername(), principal.getId()));
     }
 
     /**

@@ -210,11 +210,11 @@ public class FingerUserService {
         return page;
     }
 
-    public List<UserVO> findUserFbList(UserVO userVO, String loginName) {
+    public List<UserVO> findUserFbList(UserVO userVO, String loginName, Long loginUserId) {
         UserDOExample example = new UserDOExample();
         UserDOExample.Criteria criteria = example.createCriteria();
         if (!loginName.equals("admin")){
-            criteria.andInstitutionNameEqualTo(loginName);
+            criteria.andInstitutionUserIdEqualTo(loginUserId);
         } else if (userVO.getInstitutionUserId() != null){
             criteria.andInstitutionUserIdEqualTo(userVO.getInstitutionUserId());
         }

@@ -63,6 +63,12 @@ public class CmsService {
     }
 
     public Response updateByPrimaryKeySelective(CmsVO cmsVO, Long userId){
+        String serverLink = sharingProperties.getStaticServerLink();
+        String realAccessPath =  cmsVO.getImageAccessPath().replace(serverLink, "");
+        if( !realAccessPath.startsWith("/")){
+            realAccessPath = "/" + realAccessPath;
+        }
+        cmsVO.setImageAccessPath(realAccessPath);
         cmsVO.setUpdateBy(userId);
         cmsVO.setUpdateTime(new Date());
         if(cmsDAO.updateByPrimaryKeySelective(cmsVO) <= 0)
