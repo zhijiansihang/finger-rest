@@ -54,6 +54,16 @@ public class SharingProperties {
 
     private String staticServerLink;
 
+    public String getIgnoreMobiles() {
+        return ignoreMobiles;
+    }
+
+    public void setIgnoreMobiles(String ignoreMobiles) {
+        this.ignoreMobiles = ignoreMobiles;
+    }
+
+    private String ignoreMobiles;
+
     @Override
     public String toString() {
         return "SharingProperties{" +

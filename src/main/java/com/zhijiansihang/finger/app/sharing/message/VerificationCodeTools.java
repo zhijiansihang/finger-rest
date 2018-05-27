@@ -69,7 +69,13 @@ public class VerificationCodeTools {
             return false;
 
         }
-        String createText = generateCode();
+        String createText = "";
+        String ignoreMobiles = sharingProperties.getIgnoreMobiles();
+        if (ignoreMobiles!= null && ignoreMobiles.contains(mobile)){
+            createText = "1111";
+        }else {
+            createText = generateCode();
+        }
         boolean openThirdpartyService = sharingProperties.isOpenThirdpartyService();
         if (!openThirdpartyService){
             redisTemplate.opsForValue().set(SMS_TOKEN + mobile, createText);
