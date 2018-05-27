@@ -151,7 +151,7 @@ public class FingerUserService {
      * @param userVO
      * @return
      */
-    public Page findUserFbPage(UserVO userVO, String loginName) {
+    public Page findUserFbPage(UserVO userVO, String loginName, Long loginUserId) {
         logger.info("分页用户 列表");
         Page<UserVO,UserVO> page = Page.create();
         page.setCurrentPage(userVO.getCurrentPage());
@@ -176,7 +176,7 @@ public class FingerUserService {
         }
 
         if (!loginName.equals("admin")){
-            criteria.andInstitutionNameEqualTo(loginName);
+            criteria.andInstitutionUserIdEqualTo(loginUserId);
         }
         example.setOrderByClause("create_time desc");
         // 条数
