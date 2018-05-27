@@ -1,29 +1,23 @@
 package com.zhijiansihang.finger.app.manager;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zhijiansihang.finger.app.dao.mysql.mapper.UserRealnameAuthRecordDAO;
 import com.zhijiansihang.finger.app.sharing.lock.redis.RedisLock;
-import com.zhijiansihang.finger.gen.controller.MobileController;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -64,7 +58,7 @@ public class RealNameAuthManager {
             //http://api.chinadatapay.com/communication/personal/1882?key=您申请的key值&name=姓名&idcard=身份证号
             CloseableHttpClient httpclient = HttpClients.createDefault();
 
-            String param = "key="+realNameAuthProperties.getKey()+"&name="+realName+"&idCard="+idCard;
+            String param = "key="+realNameAuthProperties.getKey()+"&name="+realName+"&idcard="+idCard;
             HttpPost httpPost = new HttpPost("http://api.chinadatapay.com/communication/personal/1882"+"?"+param);
             String uuid = UUID.randomUUID().toString();
             userRealnameAuthRecordDAO.insert(uuid,realName,idCard);
@@ -80,8 +74,15 @@ public class RealNameAuthManager {
                 InputStream content = entity2.getContent();
                 String string = IOUtils.toString(content, Charset.forName("UTF-8"));
                 LOG.info("数据宝实名认证{}:姓名[{}],身份证[{}],返回结果:{}",uuid,realName,idCard,string);
-                userRealnameAuthRecordDAO.updateResponse(uuid,string.contains("\"result\": \"1\"")?1:2,string);
-                return string.contains("\"result\": \"1\"");
+                JSONObject jsonObject = JSONObject.parseObject(string);
+                String code = jsonObject.getString("code");
+                String data = jsonObject.getString("data");
+                boolean success = false;
+                if (code!=null && data!=null && "10000".equals(code)&& data.contains("1")&& data.contains("result")){
+                    success =true;
+                }
+                userRealnameAuthRecordDAO.updateResponse(uuid,success?1:2,string);
+                return success;
             } finally {
                 response2.close();
             }
