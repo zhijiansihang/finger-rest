@@ -4,11 +4,9 @@ spring:
   application:
     name: platform-gateway
   redis:
-    host: r-2ze5cb303beecbc4.redis.rds.aliyuncs.com
+    host: 127.0.0.1
     port: 6379
     database: 0
-#    host: 127.0.0.1
-    password: zjf123QWE
   jpa:
     hibernate:
       ddl-auto: none
