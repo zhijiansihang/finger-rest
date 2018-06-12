@@ -85,7 +85,7 @@ public class SelectFinanceService implements MessageService<SelectFinanceRequest
 			elems.add(elem);
 			elem.setAdoptCount(userFinanceDetailVO.getAdoptCount() == null ? "0" : userFinanceDetailVO.getAdoptCount().toString());
 			elem.setInstitutionName(CheckTools.nullToEmptyString(userFinanceDetailVO.getInstitutionName()));
-			elem.setLoanCount(userFinanceDetailVO.getLoanCount() == null ? "0" : userFinanceDetailVO.getLoanCount().toString());
+			elem.setLoanCount(userFinanceDetailVO.getNewloancount() == null ? "0" : userFinanceDetailVO.getNewloancount().toString());
 			if (userFinanceDetailVO.getLogo() != null && userFinanceDetailVO.getLogo().trim().length() > 0) {
 				elem.setLogo(sharingProperties.getStaticServerLink() + userFinanceDetailVO.getLogo());
 			} else {

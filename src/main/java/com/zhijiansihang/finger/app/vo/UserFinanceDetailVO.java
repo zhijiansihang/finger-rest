@@ -2,6 +2,8 @@ package com.zhijiansihang.finger.app.vo;
 
 import com.zhijiansihang.finger.app.dao.mysql.model.UserFinanceDetailDO;
 
+import java.math.BigDecimal;
+
 /**
  * Created by paul on 2018/1/27.
  */
@@ -60,4 +62,14 @@ public class UserFinanceDetailVO extends UserFinanceDetailDO {
      * 多余字段
      */
     private Long id;
+
+    public BigDecimal getNewloancount() {
+        return newloancount;
+    }
+
+    public void setNewloancount(BigDecimal newloancount) {
+        this.newloancount = newloancount;
+    }
+
+    private BigDecimal newloancount;
 }

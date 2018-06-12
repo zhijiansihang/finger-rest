@@ -33,6 +33,7 @@
     <result column="is_add" jdbcType="TINYINT" property="isAdd" />
     <result column="is_deleted" jdbcType="TINYINT" property="isDeleted" />
     <result column="loan_count" jdbcType="BIGINT" property="loanCount" />
+    <result column="newloancount" jdbcType="BIGINT" property="newloancount" />
     <result column="user_order_count" jdbcType="BIGINT" property="userOrderCount" />
     <result column="adopt_count" jdbcType="BIGINT" property="adoptCount" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
@@ -93,7 +94,7 @@
   </select>
 
   <select id="selectByFinanceType" parameterType="com.zhijiansihang.finger.app.vo.UserFinanceDetailSelect" resultMap="BaseResultMapEx">
-    select
+    select (select count(*) from loan_finance  where finance_user_id = ufd.user_id ) newloancount,
     ufd.*,u.logo,u.real_name,u.institution_name,u.nick_name
     from user_finance_detail ufd,user u,user_institution_detail uid
     where ufd.user_id = u.user_id and uid.user_id = u.institution_user_id
