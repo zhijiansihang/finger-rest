@@ -117,7 +117,7 @@ public interface CmsDAO {
             "href_link, is_front_display, is_deleted, location_size, create_time, create_by, ",
             "update_time, update_by",
             "from cms",
-            "where type_code = #{typeCode} and  is_front_display = 1 and (is_deleted =0 or is_deleted is null)",
+            "where type_code = #{typeCode} and  is_front_display = 1 ",
             "order by location_size desc,location_size desc "
     })
     @ResultMap("com.zhijiansihang.finger.app.dao.mysql.mapper.CmsDAO.BaseResultMap")
