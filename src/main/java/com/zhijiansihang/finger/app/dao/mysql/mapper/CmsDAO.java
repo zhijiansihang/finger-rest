@@ -107,7 +107,7 @@ public interface CmsDAO {
     @Select({
             "select count(*)",
             "from cms",
-            "where type_code = #{typeCode} and  is_front_display = 1 and is_deleted =0 "
+            "where type_code = #{typeCode} and  is_front_display = 1"
     })
     int countByTypeCode(@Param("typeCode") Integer typeCode);
 
