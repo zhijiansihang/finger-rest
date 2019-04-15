@@ -83,7 +83,9 @@ public class Page<SELECT, RESULT> implements Serializable {
      * @param currentPage 页码。第一页就是1，第二页就是2
      */
     public void setCurrentPage(int currentPage) {
+        
         this.currentPage = currentPage;
+        rePageCount();
     }
 
     public int getPageCount() {
